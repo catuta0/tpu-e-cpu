@@ -27,8 +27,449 @@ Info: Cell IO_psram_dq[15] not found
 Info: Cell IO_psram_rwds[0] not found
 Info: Cell IO_psram_rwds[1] not found
 Info: Reading constraints...
+Info: Cell we not found
+Info: Cell xwe not found
+Info: Cell start not found
+Info: Cell run not found
+Info: Cell clr not found
+Info: Cell dout_x not found
 Info: Create constant nets...
 Info: Modify LUTs...
 Info: Pack IOBs...
-ERROR: Unconstrained IO:led_n_OBUF_O_5
-0 warnings, 1 error
+Info: Pack I3C IOs...
+Info: Pack MIPI IOs...
+Info: Pack diff IOBs...
+Info: Pack FFs into IO cells...
+Info: Pack IODELAY...
+Info: Pack Input Edge Monitors...
+Info: Pack IO logic...
+Info: Pack DESER16 logic...
+Info: Pack GSR...
+Info: Pack HCLK cells...
+Info: Pack DLLDLYs...
+Info: Pack wide LUTs...
+Info: Packed MUX2_LUT8:16, MUX2_LU7:6, MUX2_LUT6:9, MUX2_LUT5:138
+Info: Pack ALUs...
+Info: Pack SSRAMs...
+Info: Constrained 298 LUTFF pairs.
+Info: Pack PLL...
+Info: Pack ADC...
+Info: Pack BSRAMs...
+Info: Pack DSP...
+Info: Pack INV...
+Info: Pack buffered nets...
+Info: Pack EMCU and UserFlash cells...
+Info: Pack UserFlash cells...
+Info: Pack DQCE cells...
+Info: Pack DCS cells...
+Info: Checksum: 0x5891165c
+
+Info: Device utilisation:
+Info: 	                 VCC:       1/      1   100%
+Info: 	                 IOB:       8/    276     2%
+Info: 	                LUT4:    1950/   8640    22%
+Info: 	              OSER16:       0/     80     0%
+Info: 	              IDES16:       0/     80     0%
+Info: 	            IOLOGICI:       0/    276     0%
+Info: 	            IOLOGICO:       0/    276     0%
+Info: 	           MUX2_LUT5:     308/   4320     7%
+Info: 	           MUX2_LUT6:      85/   2160     3%
+Info: 	           MUX2_LUT7:      38/   1080     3%
+Info: 	           MUX2_LUT8:      16/   1080     1%
+Info: 	                 ALU:     244/   6480     3%
+Info: 	                 GND:       1/      1   100%
+Info: 	                 DFF:     626/   6480     9%
+Info: 	           RAM16SDP4:      32/    270    11%
+Info: 	               BSRAM:       2/     26     7%
+Info: 	              ALU54D:       0/     10     0%
+Info: 	     MULTADDALU18X18:       0/     10     0%
+Info: 	        MULTALU18X18:       0/     10     0%
+Info: 	        MULTALU36X18:       0/     10     0%
+Info: 	           MULT36X36:       0/      5     0%
+Info: 	           MULT18X18:       0/     20     0%
+Info: 	             MULT9X9:       0/     40     0%
+Info: 	              PADD18:       0/     20     0%
+Info: 	               PADD9:       0/     40     0%
+Info: 	                 GSR:       1/      1   100%
+Info: 	                 OSC:       0/      1     0%
+Info: 	                rPLL:       0/      2     0%
+Info: 	           FLASH608K:       0/      1     0%
+Info: 	                BUFG:       0/     22     0%
+Info: 	                DQCE:       0/     24     0%
+Info: 	                 DCS:       0/      8     0%
+Info: 	               DHCEN:       0/     24     0%
+Info: 	              CLKDIV:       0/      8     0%
+Info: 	             CLKDIV2:       0/     16     0%
+Info: 	           MIPI_IBUF:       0/     22     0%
+Info: 	           MIPI_OBUF:       0/     20     0%
+
+Info: Running custom HCLK placer...
+Info: Placed 0 cells based on constraints.
+Info: Creating initial analytic placement for 1183 cells, random placement wirelen = 51763.
+Info:     at initial placer iter 0, wirelen = 1154
+Info:     at initial placer iter 1, wirelen = 1093
+Info:     at initial placer iter 2, wirelen = 1104
+Info:     at initial placer iter 3, wirelen = 1112
+Info: Running main analytical placer, max placement attempts per cell = 1371168.
+Info:     at iteration #1, type ALL: wirelen solved = 1105, spread = 10124, legal = 19371; time = 0.30s
+Info:     at iteration #2, type ALL: wirelen solved = 1051, spread = 8622, legal = 17139; time = 0.23s
+Info:     at iteration #3, type ALL: wirelen solved = 1418, spread = 8061, legal = 17246; time = 0.20s
+Info:     at iteration #4, type ALL: wirelen solved = 1706, spread = 8035, legal = 16441; time = 0.21s
+Info:     at iteration #5, type ALL: wirelen solved = 2145, spread = 8272, legal = 18830; time = 0.57s
+Info:     at iteration #6, type ALL: wirelen solved = 2409, spread = 8710, legal = 17310; time = 0.21s
+Info:     at iteration #7, type ALL: wirelen solved = 2786, spread = 8941, legal = 18389; time = 0.37s
+Info:     at iteration #8, type ALL: wirelen solved = 2983, spread = 8665, legal = 18327; time = 0.31s
+Info:     at iteration #9, type ALL: wirelen solved = 3298, spread = 8891, legal = 17571; time = 0.34s
+Info: HeAP Placer Time: 3.28s
+Info:   of which solving equations: 0.91s
+Info:   of which spreading cells: 0.06s
+Info:   of which strict legalisation: 2.07s
+
+Info: Running simulated annealing placer for refinement.
+Info:   at iteration #1: temp = 0.000000, timing cost = 99, wirelen = 16441
+Info:   at iteration #5: temp = 0.000000, timing cost = 61, wirelen = 11923
+Info:   at iteration #10: temp = 0.000000, timing cost = 46, wirelen = 11001
+Info:   at iteration #15: temp = 0.000000, timing cost = 46, wirelen = 10685
+Info:   at iteration #20: temp = 0.000000, timing cost = 46, wirelen = 10448
+Info:   at iteration #24: temp = 0.000000, timing cost = 46, wirelen = 10370 
+Info: SA placement time 7.33s
+
+Info: Max frequency for clock 'u_cpu.clk': 103.89 MHz (PASS at 27.00 MHz)
+
+Info: Slack histogram:
+Info:  legend: * represents 1 endpoint(s)
+Info:          + represents [1,1) endpoint(s)
+Info: [ 27411,  27868) |*+
+Info: [ 27868,  28325) |**+
+Info: [ 28325,  28782) |***+
+Info: [ 28782,  29239) |*********+
+Info: [ 29239,  29696) |****+
+Info: [ 29696,  30153) |*********+
+Info: [ 30153,  30610) |***********+
+Info: [ 30610,  31067) |************+
+Info: [ 31067,  31524) |***********+
+Info: [ 31524,  31981) |*********************************+
+Info: [ 31981,  32438) |**************+
+Info: [ 32438,  32895) |***********+
+Info: [ 32895,  33352) |******************************+
+Info: [ 33352,  33809) |*********************************************+
+Info: [ 33809,  34266) |************************************+
+Info: [ 34266,  34723) |***********************+
+Info: [ 34723,  35180) |******************************+
+Info: [ 35180,  35637) |*******************************+
+Info: [ 35637,  36094) |**************************************+
+Info: [ 36094,  36551) |************************************************************ 
+Info: Checksum: 0x5983830b
+Info: Routing globals...
+Info:     'u_cpu.clk' net was routed using global resources only.
+Info:     'u_cpu.decoded_imm_j_DFFE_Q_19_D[2]' is routed using segments.
+Info:     'ram.0.1_AD_LUT3_F_I2[2]' is routed using segments.
+Info:     'u_cpu.mem_rdata_q_DFFE_Q_10_D_LUT2_I1_F[6]' is routed using segments.
+Info:     'u_cpu.is_jalr_addi_slti_sltiu_xori_ori_andi_LUT2_I1_F[1]' is routed using segments.
+Info:     'u_cpu.alu_out_q_DFF_Q_15_D_MUX2_LUT5_O_S0[2]' is routed using segments.
+Info:     'u_cpu.instr_add_LUT4_I0_F[3]' is routed using segments.
+Info:     'u_cpu.instr_or_LUT2_I0_F[3]' is routed using segments.
+Info:     'u_cpu.alu_out_q_DFF_Q_10_D_LUT4_F_I3[0]' is routed using segments.
+Info:     'u_cpu.instr_lhu_LUT2_I0_F[0]' is routed using segments.
+Info:     'u_cpu.trap_LUT2_I0_2_F' is routed using segments.
+Info:     'u_cpu.decoder_pseudo_trigger_DFFR_Q_RESET_LUT3_F_I2[1]' is routed using segments.
+Info:     'u_cpu.mem_rdata_q_DFFE_Q_10_D[0]' is routed using segments.
+Info:     'u_cpu.latched_rd[0]' is routed using segments.
+Info:     'u_cpu.latched_rd[3]' is routed using segments.
+Info:     'u_cpu.latched_rd[1]' is routed using segments.
+Info:     'u_cpu.instr_fence_DFFRE_Q_D_LUT4_F_I3[0]' is routed using segments.
+Info:     'u_cpu.instr_fence_DFFRE_Q_D_LUT4_F_I3[2]' is routed using segments.
+Info:     'u_cpu.instr_fence_DFFRE_Q_D_LUT4_F_I3[1]' is routed using segments.
+Info:     'u_cpu.latched_rd[2]' is routed using segments.
+Info:     'u_cpu.cpuregs.0.2_DO[3]' is routed using segments.
+Info:     'u_cpu.latched_store' is routed using segments.
+Info:     'u_cpu.cpuregs.0.2_DO[0]' is routed using segments.
+Info:     'mem_addr_DFFE_Q_9_D_MUX2_LUT5_O_I0_LUT3_F_I2[4]' is routed using segments.
+
+Info: Routing..
+Info: Setting up routing queue.
+Info: Routing 7605 arcs.
+Info:            |   (re-)routed arcs  |   delta    | remaining|       time spent     |
+Info:    IterCnt |  w/ripup   wo/ripup |  w/r  wo/r |      arcs| batch(sec) total(sec)|
+Info:       1000 |       80        887 |   80   887 |      6703|       0.81       0.81|
+Info:       2000 |      101       1687 |   21   800 |      5725|       0.57       1.39|
+Info:       3000 |      107       2527 |    6   840 |      4731|       0.68       2.07|
+Info:       4000 |      138       3327 |   31   800 |      3788|       0.66       2.72|
+Info:       5000 |      183       4125 |   45   798 |      2849|       0.77       3.50|
+Info:       6000 |      256       4903 |   73   778 |      1955|       1.09       4.59|
+Info:       7000 |      364       5660 |  108   757 |      1119|       1.17       5.76|
+Info:       8000 |      547       6381 |  183   721 |       406|       1.68       7.43|
+Info:       8638 |      655       6863 |  108   482 |         0|       1.12       8.55|
+Info: Routing complete.
+Info: Router1 time 8.55s
+Info: Checksum: 0x2a90373f
+
+Info: Critical path report for clock 'u_cpu.clk' (posedge -> posedge):
+Info:       type curr  total name
+Info:   clk-to-q  0.46  0.46 Source u_cpu.pcpi_rs1_DFFE_Q_29.Q
+Info:    routing  0.89  1.35 Net mem_wstrb_DFFE_Q_1_D_LUT4_F_I2_LUT4_F_I2[1] (4,10) -> (4,7)
+Info:                          Sink u_cpu.is_compare_LUT4_I0_F_ALU_SUM_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_SUM_ALU_SUM_CIN_ALU_COUT.I0
+Info:                          Defined in:
+Info:                               /share/gowin/cells_map.v:130.20-130.21
+Info:      logic  0.96  2.31 Source u_cpu.is_compare_LUT4_I0_F_ALU_SUM_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_SUM_ALU_SUM_CIN_ALU_COUT.COUT
+Info:    routing  0.00  2.31 Net u_cpu.is_compare_LUT4_I0_F_ALU_SUM_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_SUM_ALU_SUM_CIN (4,7) -> (4,7)
+Info:                          Sink u_cpu.is_compare_LUT4_I0_F_ALU_SUM_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_SUM_ALU_SUM.CIN
+Info:                          Defined in:
+Info:                               /home/user/tpu-e-cpu/scripts/budgets/build/ext/picorv32.v:1240.30-1240.47
+Info:                               /share/gowin/arith_map.v:57.7-63.5
+Info:                               /share/gowin/cells_sim.v:1033.25-1033.29
+Info:      logic  0.06  2.36 Source u_cpu.is_compare_LUT4_I0_F_ALU_SUM_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_SUM_ALU_SUM.COUT
+Info:    routing  0.00  2.36 Net u_cpu.is_compare_LUT4_I0_F_ALU_SUM_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_SUM_ALU_SUM_COUT (4,7) -> (4,7)
+Info:                          Sink u_cpu.is_compare_LUT4_I0_F_ALU_SUM_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_SUM_ALU_SUM.CIN
+Info:                          Defined in:
+Info:                               /home/user/tpu-e-cpu/scripts/budgets/build/ext/picorv32.v:1240.30-1240.47
+Info:                               /share/gowin/arith_map.v:57.7-63.5
+Info:                               /share/gowin/cells_sim.v:1033.25-1033.29
+Info:      logic  0.06  2.42 Source u_cpu.is_compare_LUT4_I0_F_ALU_SUM_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_SUM_ALU_SUM.COUT
+Info:    routing  0.00  2.42 Net u_cpu.is_compare_LUT4_I0_F_ALU_SUM_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_SUM_ALU_SUM_COUT (4,7) -> (4,7)
+Info:                          Sink u_cpu.is_compare_LUT4_I0_F_ALU_SUM_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_SUM_ALU_SUM.CIN
+Info:                          Defined in:
+Info:                               /home/user/tpu-e-cpu/scripts/budgets/build/ext/picorv32.v:1240.30-1240.47
+Info:                               /share/gowin/arith_map.v:57.7-63.5
+Info:                               /share/gowin/cells_sim.v:1033.25-1033.29
+Info:      logic  0.06  2.48 Source u_cpu.is_compare_LUT4_I0_F_ALU_SUM_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_SUM_ALU_SUM.COUT
+Info:    routing  0.00  2.48 Net u_cpu.is_compare_LUT4_I0_F_ALU_SUM_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_SUM_ALU_SUM_COUT (4,7) -> (5,7)
+Info:                          Sink u_cpu.is_compare_LUT4_I0_F_ALU_SUM_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_SUM_ALU_SUM.CIN
+Info:                          Defined in:
+Info:                               /home/user/tpu-e-cpu/scripts/budgets/build/ext/picorv32.v:1240.30-1240.47
+Info:                               /share/gowin/arith_map.v:57.7-63.5
+Info:                               /share/gowin/cells_sim.v:1033.25-1033.29
+Info:      logic  0.06  2.54 Source u_cpu.is_compare_LUT4_I0_F_ALU_SUM_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_SUM_ALU_SUM.COUT
+Info:    routing  0.00  2.54 Net u_cpu.is_compare_LUT4_I0_F_ALU_SUM_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_SUM_ALU_SUM_COUT (5,7) -> (5,7)
+Info:                          Sink u_cpu.is_compare_LUT4_I0_F_ALU_SUM_CIN_ALU_COUT_CIN_ALU_COUT_SUM_ALU_SUM.CIN
+Info:                          Defined in:
+Info:                               /home/user/tpu-e-cpu/scripts/budgets/build/ext/picorv32.v:1240.30-1240.47
+Info:                               /share/gowin/arith_map.v:57.7-63.5
+Info:                               /share/gowin/cells_sim.v:1033.25-1033.29
+Info:      logic  0.06  2.59 Source u_cpu.is_compare_LUT4_I0_F_ALU_SUM_CIN_ALU_COUT_CIN_ALU_COUT_SUM_ALU_SUM.COUT
+Info:    routing  0.00  2.59 Net u_cpu.is_compare_LUT4_I0_F_ALU_SUM_CIN_ALU_COUT_CIN_ALU_COUT_SUM_ALU_SUM_COUT (5,7) -> (5,7)
+Info:                          Sink u_cpu.is_compare_LUT4_I0_F_ALU_SUM_CIN_ALU_COUT_SUM_ALU_SUM.CIN
+Info:                          Defined in:
+Info:                               /home/user/tpu-e-cpu/scripts/budgets/build/ext/picorv32.v:1240.30-1240.47
+Info:                               /share/gowin/arith_map.v:57.7-63.5
+Info:                               /share/gowin/cells_sim.v:1033.25-1033.29
+Info:      logic  0.06  2.65 Source u_cpu.is_compare_LUT4_I0_F_ALU_SUM_CIN_ALU_COUT_SUM_ALU_SUM.COUT
+Info:    routing  0.00  2.65 Net u_cpu.is_compare_LUT4_I0_F_ALU_SUM_CIN_ALU_COUT_SUM_ALU_SUM_COUT (5,7) -> (5,7)
+Info:                          Sink u_cpu.is_compare_LUT4_I0_F_ALU_SUM_1.CIN
+Info:                          Defined in:
+Info:                               /home/user/tpu-e-cpu/scripts/budgets/build/ext/picorv32.v:1240.30-1240.47
+Info:                               /share/gowin/arith_map.v:57.7-63.5
+Info:                               /share/gowin/cells_sim.v:1033.25-1033.29
+Info:      logic  0.06  2.71 Source u_cpu.is_compare_LUT4_I0_F_ALU_SUM_1.COUT
+Info:    routing  0.00  2.71 Net u_cpu.is_compare_LUT4_I0_F_ALU_SUM_1_COUT (5,7) -> (5,7)
+Info:                          Sink u_cpu.is_compare_LUT4_I0_F_ALU_SUM_1_COUT_ALU_CIN.CIN
+Info:                          Defined in:
+Info:                               /home/user/tpu-e-cpu/scripts/budgets/build/ext/picorv32.v:1240.30-1240.47
+Info:                               /share/gowin/arith_map.v:57.7-63.5
+Info:                               /share/gowin/cells_sim.v:1033.25-1033.29
+Info:      logic  0.06  2.76 Source u_cpu.is_compare_LUT4_I0_F_ALU_SUM_1_COUT_ALU_CIN.COUT
+Info:    routing  0.00  2.76 Net u_cpu.is_compare_LUT4_I0_F_ALU_SUM_1_COUT_ALU_CIN_COUT (5,7) -> (5,7)
+Info:                          Sink u_cpu.is_compare_LUT4_I0_F_ALU_SUM_1_COUT_ALU_CIN_COUT_ALU_CIN.CIN
+Info:                          Defined in:
+Info:                               /home/user/tpu-e-cpu/scripts/budgets/build/ext/picorv32.v:1240.30-1240.47
+Info:                               /share/gowin/arith_map.v:57.7-63.5
+Info:                               /share/gowin/cells_sim.v:1033.25-1033.29
+Info:      logic  0.06  2.82 Source u_cpu.is_compare_LUT4_I0_F_ALU_SUM_1_COUT_ALU_CIN_COUT_ALU_CIN.COUT
+Info:    routing  0.00  2.82 Net u_cpu.is_compare_LUT4_I0_F_ALU_SUM_1_COUT_ALU_CIN_COUT_ALU_CIN_COUT (5,7) -> (6,7)
+Info:                          Sink u_cpu.is_compare_LUT4_I0_F_ALU_SUM_1_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN.CIN
+Info:                          Defined in:
+Info:                               /home/user/tpu-e-cpu/scripts/budgets/build/ext/picorv32.v:1240.30-1240.47
+Info:                               /share/gowin/arith_map.v:57.7-63.5
+Info:                               /share/gowin/cells_sim.v:1033.25-1033.29
+Info:      logic  0.06  2.88 Source u_cpu.is_compare_LUT4_I0_F_ALU_SUM_1_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN.COUT
+Info:    routing  0.00  2.88 Net u_cpu.is_compare_LUT4_I0_F_ALU_SUM_1_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT (6,7) -> (6,7)
+Info:                          Sink u_cpu.is_compare_LUT4_I0_F_ALU_SUM_1_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN.CIN
+Info:                          Defined in:
+Info:                               /home/user/tpu-e-cpu/scripts/budgets/build/ext/picorv32.v:1240.30-1240.47
+Info:                               /share/gowin/arith_map.v:57.7-63.5
+Info:                               /share/gowin/cells_sim.v:1033.25-1033.29
+Info:      logic  0.06  2.93 Source u_cpu.is_compare_LUT4_I0_F_ALU_SUM_1_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN.COUT
+Info:    routing  0.00  2.93 Net u_cpu.is_compare_LUT4_I0_F_ALU_SUM_1_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT (6,7) -> (6,7)
+Info:                          Sink u_cpu.is_compare_LUT4_I0_F_ALU_SUM_1_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN.CIN
+Info:                          Defined in:
+Info:                               /home/user/tpu-e-cpu/scripts/budgets/build/ext/picorv32.v:1240.30-1240.47
+Info:                               /share/gowin/arith_map.v:57.7-63.5
+Info:                               /share/gowin/cells_sim.v:1033.25-1033.29
+Info:      logic  0.06  2.99 Source u_cpu.is_compare_LUT4_I0_F_ALU_SUM_1_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN.COUT
+Info:    routing  0.00  2.99 Net u_cpu.is_compare_LUT4_I0_F_ALU_SUM_1_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT (6,7) -> (6,7)
+Info:                          Sink u_cpu.is_compare_LUT4_I0_F_ALU_SUM_1_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN.CIN
+Info:                          Defined in:
+Info:                               /home/user/tpu-e-cpu/scripts/budgets/build/ext/picorv32.v:1240.30-1240.47
+Info:                               /share/gowin/arith_map.v:57.7-63.5
+Info:                               /share/gowin/cells_sim.v:1033.25-1033.29
+Info:      logic  0.06  3.05 Source u_cpu.is_compare_LUT4_I0_F_ALU_SUM_1_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN.COUT
+Info:    routing  0.00  3.05 Net u_cpu.is_compare_LUT4_I0_F_ALU_SUM_1_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT (6,7) -> (6,7)
+Info:                          Sink u_cpu.is_compare_LUT4_I0_F_ALU_SUM_1_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN.CIN
+Info:                          Defined in:
+Info:                               /home/user/tpu-e-cpu/scripts/budgets/build/ext/picorv32.v:1240.30-1240.47
+Info:                               /share/gowin/arith_map.v:57.7-63.5
+Info:                               /share/gowin/cells_sim.v:1033.25-1033.29
+Info:      logic  0.06  3.11 Source u_cpu.is_compare_LUT4_I0_F_ALU_SUM_1_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN.COUT
+Info:    routing  0.00  3.11 Net u_cpu.is_compare_LUT4_I0_F_ALU_SUM_1_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT (6,7) -> (6,7)
+Info:                          Sink u_cpu.is_compare_LUT4_I0_F_ALU_SUM_1_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN.CIN
+Info:                          Defined in:
+Info:                               /home/user/tpu-e-cpu/scripts/budgets/build/ext/picorv32.v:1240.30-1240.47
+Info:                               /share/gowin/arith_map.v:57.7-63.5
+Info:                               /share/gowin/cells_sim.v:1033.25-1033.29
+Info:      logic  0.06  3.16 Source u_cpu.is_compare_LUT4_I0_F_ALU_SUM_1_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN.COUT
+Info:    routing  0.00  3.16 Net u_cpu.is_compare_LUT4_I0_F_ALU_SUM_1_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT (6,7) -> (7,7)
+Info:                          Sink u_cpu.is_compare_LUT4_I0_F_ALU_SUM_1_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN.CIN
+Info:                          Defined in:
+Info:                               /home/user/tpu-e-cpu/scripts/budgets/build/ext/picorv32.v:1240.30-1240.47
+Info:                               /share/gowin/arith_map.v:57.7-63.5
+Info:                               /share/gowin/cells_sim.v:1033.25-1033.29
+Info:      logic  0.06  3.22 Source u_cpu.is_compare_LUT4_I0_F_ALU_SUM_1_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN.COUT
+Info:    routing  0.00  3.22 Net u_cpu.is_compare_LUT4_I0_F_ALU_SUM_1_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT (7,7) -> (7,7)
+Info:                          Sink u_cpu.is_compare_LUT4_I0_F_ALU_SUM_1_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN.CIN
+Info:                          Defined in:
+Info:                               /home/user/tpu-e-cpu/scripts/budgets/build/ext/picorv32.v:1240.30-1240.47
+Info:                               /share/gowin/arith_map.v:57.7-63.5
+Info:                               /share/gowin/cells_sim.v:1033.25-1033.29
+Info:      logic  0.06  3.28 Source u_cpu.is_compare_LUT4_I0_F_ALU_SUM_1_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN.COUT
+Info:    routing  0.00  3.28 Net u_cpu.is_compare_LUT4_I0_F_ALU_SUM_1_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT (7,7) -> (7,7)
+Info:                          Sink u_cpu.is_compare_LUT4_I0_F_ALU_SUM_1_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN.CIN
+Info:                          Defined in:
+Info:                               /home/user/tpu-e-cpu/scripts/budgets/build/ext/picorv32.v:1240.30-1240.47
+Info:                               /share/gowin/arith_map.v:57.7-63.5
+Info:                               /share/gowin/cells_sim.v:1033.25-1033.29
+Info:      logic  0.06  3.33 Source u_cpu.is_compare_LUT4_I0_F_ALU_SUM_1_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN.COUT
+Info:    routing  0.00  3.33 Net u_cpu.is_compare_LUT4_I0_F_ALU_SUM_1_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT (7,7) -> (7,7)
+Info:                          Sink u_cpu.is_compare_LUT4_I0_F_ALU_SUM_1_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN.CIN
+Info:                          Defined in:
+Info:                               /home/user/tpu-e-cpu/scripts/budgets/build/ext/picorv32.v:1240.30-1240.47
+Info:                               /share/gowin/arith_map.v:57.7-63.5
+Info:                               /share/gowin/cells_sim.v:1033.25-1033.29
+Info:      logic  0.06  3.39 Source u_cpu.is_compare_LUT4_I0_F_ALU_SUM_1_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN.COUT
+Info:    routing  0.00  3.39 Net u_cpu.is_compare_LUT4_I0_F_ALU_SUM_1_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT (7,7) -> (7,7)
+Info:                          Sink u_cpu.is_compare_LUT4_I0_F_ALU_SUM_1_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN.CIN
+Info:                          Defined in:
+Info:                               /home/user/tpu-e-cpu/scripts/budgets/build/ext/picorv32.v:1240.30-1240.47
+Info:                               /share/gowin/arith_map.v:57.7-63.5
+Info:                               /share/gowin/cells_sim.v:1033.25-1033.29
+Info:      logic  0.06  3.45 Source u_cpu.is_compare_LUT4_I0_F_ALU_SUM_1_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN.COUT
+Info:    routing  0.00  3.45 Net u_cpu.is_compare_LUT4_I0_F_ALU_SUM_1_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT (7,7) -> (7,7)
+Info:                          Sink u_cpu.is_compare_LUT4_I0_F_ALU_SUM_1_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN.CIN
+Info:                          Defined in:
+Info:                               /home/user/tpu-e-cpu/scripts/budgets/build/ext/picorv32.v:1240.30-1240.47
+Info:                               /share/gowin/arith_map.v:57.7-63.5
+Info:                               /share/gowin/cells_sim.v:1033.25-1033.29
+Info:      logic  0.06  3.50 Source u_cpu.is_compare_LUT4_I0_F_ALU_SUM_1_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN.COUT
+Info:    routing  0.00  3.50 Net u_cpu.is_compare_LUT4_I0_F_ALU_SUM_1_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT (7,7) -> (8,7)
+Info:                          Sink u_cpu.is_compare_LUT4_I0_F_ALU_SUM_1_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN.CIN
+Info:                          Defined in:
+Info:                               /home/user/tpu-e-cpu/scripts/budgets/build/ext/picorv32.v:1240.30-1240.47
+Info:                               /share/gowin/arith_map.v:57.7-63.5
+Info:                               /share/gowin/cells_sim.v:1033.25-1033.29
+Info:      logic  0.06  3.56 Source u_cpu.is_compare_LUT4_I0_F_ALU_SUM_1_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN.COUT
+Info:    routing  0.00  3.56 Net u_cpu.is_compare_LUT4_I0_F_ALU_SUM_1_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT (8,7) -> (8,7)
+Info:                          Sink u_cpu.is_compare_LUT4_I0_F_ALU_SUM_1_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN.CIN
+Info:                          Defined in:
+Info:                               /home/user/tpu-e-cpu/scripts/budgets/build/ext/picorv32.v:1240.30-1240.47
+Info:                               /share/gowin/arith_map.v:57.7-63.5
+Info:                               /share/gowin/cells_sim.v:1033.25-1033.29
+Info:      logic  0.06  3.62 Source u_cpu.is_compare_LUT4_I0_F_ALU_SUM_1_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN.COUT
+Info:    routing  0.00  3.62 Net u_cpu.is_compare_LUT4_I0_F_ALU_SUM_1_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT (8,7) -> (8,7)
+Info:                          Sink u_cpu.is_compare_LUT4_I0_F_ALU_SUM_1_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN.CIN
+Info:                          Defined in:
+Info:                               /home/user/tpu-e-cpu/scripts/budgets/build/ext/picorv32.v:1240.30-1240.47
+Info:                               /share/gowin/arith_map.v:57.7-63.5
+Info:                               /share/gowin/cells_sim.v:1033.25-1033.29
+Info:      logic  0.06  3.67 Source u_cpu.is_compare_LUT4_I0_F_ALU_SUM_1_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN.COUT
+Info:    routing  0.00  3.67 Net u_cpu.is_compare_LUT4_I0_F_ALU_SUM_1_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT (8,7) -> (8,7)
+Info:                          Sink u_cpu.is_compare_LUT4_I0_F_ALU_SUM_1_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN.CIN
+Info:                          Defined in:
+Info:                               /home/user/tpu-e-cpu/scripts/budgets/build/ext/picorv32.v:1240.30-1240.47
+Info:                               /share/gowin/arith_map.v:57.7-63.5
+Info:                               /share/gowin/cells_sim.v:1033.25-1033.29
+Info:      logic  0.06  3.73 Source u_cpu.is_compare_LUT4_I0_F_ALU_SUM_1_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN.COUT
+Info:    routing  0.00  3.73 Net u_cpu.is_compare_LUT4_I0_F_ALU_SUM_1_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT (8,7) -> (8,7)
+Info:                          Sink u_cpu.is_compare_LUT4_I0_F_ALU_SUM_1_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN.CIN
+Info:                          Defined in:
+Info:                               /home/user/tpu-e-cpu/scripts/budgets/build/ext/picorv32.v:1240.30-1240.47
+Info:                               /share/gowin/arith_map.v:57.7-63.5
+Info:                               /share/gowin/cells_sim.v:1033.25-1033.29
+Info:      logic  0.06  3.79 Source u_cpu.is_compare_LUT4_I0_F_ALU_SUM_1_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN.COUT
+Info:    routing  0.00  3.79 Net u_cpu.is_compare_LUT4_I0_F_ALU_SUM_1_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT (8,7) -> (8,7)
+Info:                          Sink u_cpu.is_compare_LUT4_I0_F_ALU_SUM_1_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN.CIN
+Info:                          Defined in:
+Info:                               /home/user/tpu-e-cpu/scripts/budgets/build/ext/picorv32.v:1240.30-1240.47
+Info:                               /share/gowin/arith_map.v:57.7-63.5
+Info:                               /share/gowin/cells_sim.v:1033.25-1033.29
+Info:      logic  0.06  3.85 Source u_cpu.is_compare_LUT4_I0_F_ALU_SUM_1_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN.COUT
+Info:    routing  0.00  3.85 Net u_cpu.is_compare_LUT4_I0_F_ALU_SUM_1_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT (8,7) -> (9,7)
+Info:                          Sink u_cpu.is_compare_LUT4_I0_F_ALU_SUM_1_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN.CIN
+Info:                          Defined in:
+Info:                               /home/user/tpu-e-cpu/scripts/budgets/build/ext/picorv32.v:1240.30-1240.47
+Info:                               /share/gowin/arith_map.v:57.7-63.5
+Info:                               /share/gowin/cells_sim.v:1033.25-1033.29
+Info:      logic  0.06  3.90 Source u_cpu.is_compare_LUT4_I0_F_ALU_SUM_1_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN.COUT
+Info:    routing  0.00  3.90 Net u_cpu.is_compare_LUT4_I0_F_ALU_SUM_1_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT (9,7) -> (9,7)
+Info:                          Sink u_cpu.is_compare_LUT4_I0_F_ALU_SUM_1_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN.CIN
+Info:                          Defined in:
+Info:                               /home/user/tpu-e-cpu/scripts/budgets/build/ext/picorv32.v:1240.30-1240.47
+Info:                               /share/gowin/arith_map.v:57.7-63.5
+Info:                               /share/gowin/cells_sim.v:1033.25-1033.29
+Info:      logic  0.06  3.96 Source u_cpu.is_compare_LUT4_I0_F_ALU_SUM_1_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN.COUT
+Info:    routing  0.00  3.96 Net u_cpu.is_compare_LUT4_I0_F_ALU_SUM_1_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_TAIL_ALULC (9,7) -> (9,7)
+Info:                          Sink u_cpu.is_compare_LUT4_I0_F_ALU_SUM_1_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_TAIL_ALULC.CIN
+Info:      logic  0.56  4.52 Source u_cpu.is_compare_LUT4_I0_F_ALU_SUM_1_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_TAIL_ALULC.SUM
+Info:    routing  0.89  5.41 Net u_cpu.is_compare_LUT4_I0_F_ALU_SUM_1_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT[5] (9,7) -> (12,7)
+Info:                          Sink u_cpu.is_compare_LUT4_I0_F_ALU_SUM_1_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_SUM_HEAD_ALULC.I0
+Info:                          Defined in:
+Info:                               /share/gowin/cells_map.v:130.20-130.21
+Info:      logic  0.96  6.37 Source u_cpu.is_compare_LUT4_I0_F_ALU_SUM_1_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_SUM_HEAD_ALULC.COUT
+Info:    routing  0.00  6.37 Net u_cpu.is_compare_LUT4_I0_F_ALU_SUM_1_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_SUM_HEAD_ALULC (12,7) -> (12,7)
+Info:                          Sink u_cpu.is_compare_LUT4_I0_F_ALU_SUM_1_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_SUM.CIN
+Info:      logic  0.56  6.93 Source u_cpu.is_compare_LUT4_I0_F_ALU_SUM_1_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_SUM.SUM
+Info:    routing  0.81  7.74 Net u_cpu.is_compare_LUT4_I0_F_ALU_SUM_1_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT[6] (12,7) -> (12,6)
+Info:                          Sink u_cpu.is_slti_blt_slt_LUT3_I0_F_MUX2_LUT7_O.S0
+Info:                          Defined in:
+Info:                               /share/gowin/cells_map.v:130.20-130.21
+Info:      logic  0.18  7.92 Source u_cpu.is_slti_blt_slt_LUT3_I0_F_MUX2_LUT7_O.O
+Info:    routing  0.81  8.72 Net u_cpu.is_slti_blt_slt_LUT3_I0_F[6] (12,6) -> (11,6)
+Info:                          Sink u_cpu.instr_bne_LUT4_I0_F_MUX2_LUT5_I1_O_MUX2_LUT6_I1_O_MUX2_LUT7_I0.S0
+Info:                          Defined in:
+Info:                               /share/gowin/cells_map.v:130.20-130.21
+Info:      logic  0.18  8.90 Source u_cpu.instr_bne_LUT4_I0_F_MUX2_LUT5_I1_O_MUX2_LUT6_I1_O_MUX2_LUT7_I0.O
+Info:    routing  0.81  9.70 Net u_cpu.alu_out_q_DFF_Q_31_D_MUX2_LUT5_O_I0_LUT4_F_I3[4] (11,6) -> (11,5)
+Info:                          Sink u_cpu.latched_store_DFFRE_Q_D_LUT4_F.I3
+Info:                          Defined in:
+Info:                               /share/gowin/cells_map.v:130.20-130.21
+Info:      logic  0.62  10.33 Source u_cpu.latched_store_DFFRE_Q_D_LUT4_F.F
+Info:    routing  0.00  10.33 Net u_cpu.latched_store_DFFRE_Q_D (11,5) -> (11,5)
+Info:                          Sink u_cpu.latched_store_DFFRE_Q.D
+Info:      setup  0.40  10.73 Source u_cpu.latched_store_DFFRE_Q.D
+Info: 6.53 ns logic, 4.20 ns routing
+
+Info: Max frequency for clock 'u_cpu.clk': 93.21 MHz (PASS at 27.00 MHz)
+
+Info: Slack histogram:
+Info:  legend: * represents 1 endpoint(s)
+Info:          + represents [1,1) endpoint(s)
+Info: [ 26309,  26800) |*+
+Info: [ 26800,  27291) |**+
+Info: [ 27291,  27782) |*********+
+Info: [ 27782,  28273) |*******+
+Info: [ 28273,  28764) |*********+
+Info: [ 28764,  29255) |***********+
+Info: [ 29255,  29746) |***+
+Info: [ 29746,  30237) |*+
+Info: [ 30237,  30728) |*+
+Info: [ 30728,  31219) |*+
+Info: [ 31219,  31710) |***+
+Info: [ 31710,  32201) |**+
+Info: [ 32201,  32692) |*********+
+Info: [ 32692,  33183) |************************+
+Info: [ 33183,  33674) |***************************+
+Info: [ 33674,  34165) |************************************************+
+Info: [ 34165,  34656) |************************************************************ 
+Info: [ 34656,  35147) |**********************************************+
+Info: [ 35147,  35638) |***********************+
+Info: [ 35638,  36129) |*************+
+
+Info: Program finished normally.

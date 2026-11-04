@@ -79,3 +79,4 @@ yosys exit=0
 
 ================ sc_nl16_il16_m1 (top=sc_ubench_top -set IL 16 -set AW 8 -set RNG_MODE 1) ================
 yosys exit=0
+# NOTE (systems-engineer): run 1 stopped manually at 03:27Z during sc_nl16_il16_m1 seed 1 (placer > 12 min without log output); continued in ubench_run2.log / ubench_run3.log

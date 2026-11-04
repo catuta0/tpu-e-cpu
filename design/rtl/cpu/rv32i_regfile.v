@@ -33,9 +33,11 @@
 //
 // READ-DURING-WRITE
 //   The core never reads (DECODE) and writes (CLEAR / WRITEBACK) in the same
-//   cycle, so the collision behaviour of the BSRAM is irrelevant. The read
-//   and write are written in SEPARATE always blocks so that Yosys does not
-//   have to build bypass ("transparency") logic around the BSRAM.
+//   cycle, so the collision behaviour of the BSRAM is irrelevant. The
+//   memory attribute no_rw_check tells Yosys so; without it Yosys emulates
+//   read-first behaviour with bypass logic (measured: +72 DFF, ~130 LUT/MUX).
+//   Mapped result (Yosys 0.70): 2 x SDPX9B, READ_MODE 0 (bypass = 1-cycle
+//   latency), CEB = rd_en (output held while rd_en = 0), 0 LUT.
 //
 // x0 HANDLING
 //   This module is a plain RAM: it does NOT know about x0. The core

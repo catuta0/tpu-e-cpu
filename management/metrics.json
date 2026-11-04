@@ -63,6 +63,38 @@
    "label": "CALCULATION",
    "revision": "d05477e",
    "evidence": "logs/smoke/sys_uart.log"
+  },
+  {
+   "name": "cpu_tests_pass",
+   "value": "176/176",
+   "unit": "runs",
+   "label": "SIMULATION",
+   "revision": "494448a",
+   "evidence": "logs/cpu"
+  },
+  {
+   "name": "cpu_cpi_ws0",
+   "value": 4.231,
+   "unit": "cycles/instr",
+   "label": "SIMULATION",
+   "revision": "494448a",
+   "evidence": "logs/cpu"
+  },
+  {
+   "name": "cpu_fmax_worst_seed",
+   "value": 53.26,
+   "unit": "MHz",
+   "label": "SIMULATION",
+   "revision": "494448a",
+   "evidence": "reports/fpga/cpu/cpu_synth_pnr.txt"
+  },
+  {
+   "name": "cpu_core_lut",
+   "value": 831,
+   "unit": "LUT4",
+   "label": "SIMULATION",
+   "revision": "494448a",
+   "evidence": "reports/fpga/cpu/cpu_synth_pnr.txt"
   }
  ]
 }

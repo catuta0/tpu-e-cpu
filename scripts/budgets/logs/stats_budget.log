@@ -1,0 +1,18 @@
+# command: python3 scripts/budgets/stats_budget.py
+1. Wilson 95 % CI, n = 360 (1 image = 0.28 pp)
+   acc = 324/360 = 90.0 %: CI [86.5, 92.7] %, half-width ~ 3.1 pp
+   acc = 335/360 = 93.1 %: CI [89.9, 95.3] %, half-width ~ 2.7 pp
+   acc = 342/360 = 95.0 %: CI [92.2, 96.8] %, half-width ~ 2.3 pp
+2. SC noise bound std(Dp/L) <= sqrt(N_in/L) (independent streams)
+    K     L   layer1 (N_in=64)   layer2 (N_in=16)
+    4    16      2.000              1.000
+    5    32      1.414              0.707
+    6    64      1.000              0.500
+    7   128      0.707              0.354
+    8   256      0.500              0.250
+    9   512      0.354              0.177
+   10  1024      0.250              0.125
+3. post-processing ranges (any legal input, K = 4..10, s = 0..7, int16 bias)
+   acc max = 64*1024 = 65536 -> 17 bits unsigned
+   |D| <= 65536, |B| <= 262144, |Dp| <= 327680 -> 20 bits signed
+   hidden shift exponent s+7-K in [-3, 10]; exact |Dp*2^(s+7)| <= 5368709120 (~2^32.3) -> needs saturation, not a 32-bit product

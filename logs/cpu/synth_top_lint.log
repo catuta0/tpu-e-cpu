@@ -1,0 +1,2 @@
+# cmd: verilator --lint-only -Wall design/rtl/cpu/rv32i_core.v design/rtl/cpu/rv32i_decode.v design/rtl/cpu/rv32i_alu.v design/rtl/cpu/rv32i_regfile.v tests/cpu/cpu_synth_top.v --top-module cpu_synth_top
+LINT_TOP_EXIT=0

@@ -7,10 +7,15 @@
 #           the nextpnr "Device utilisation" lines and "Max frequency" lines.
 #           Results are TOOL ESTIMATES used as budget inputs; they are not
 #           project RTL results and not hardware measurements.
-# Usage   : bash scripts/budgets/run_ubench.sh  > scripts/budgets/logs/ubench.log 2>&1
+# Usage   : bash scripts/budgets/run_ubench.sh [bench ...] > scripts/budgets/logs/<log> 2>&1
+#           (no argument = all benches; each nextpnr run is limited by
+#           PNR_TIMEOUT seconds, default 900; SEEDS default "1 2 3")
 # Outputs : build products only under scripts/budgets/build/ (git-ignorable).
 # =============================================================================
 set -u
+ONLY="$*"                      # optional list of bench names to run
+PNR_TIMEOUT=${PNR_TIMEOUT:-900}
+SEEDS=${SEEDS:-"1 2 3"}
 ROOT=/home/user/tpu-e-cpu
 B=$ROOT/scripts/budgets/build
 U=$ROOT/scripts/budgets/ubench
@@ -18,7 +23,7 @@ source $ROOT/.venv/bin/activate
 mkdir -p $B/ext
 cd $B
 
-echo "# command: bash scripts/budgets/run_ubench.sh"
+echo "# command: PNR_TIMEOUT=$PNR_TIMEOUT SEEDS=\"$SEEDS\" bash scripts/budgets/run_ubench.sh $ONLY"
 echo "# date: $(date -u +%FT%TZ)  revision: $(cd $ROOT && git rev-parse --short HEAD)$(cd $ROOT && git diff --quiet HEAD -- 2>/dev/null || echo -dirty)"
 echo "# yosys: $(yowasp-yosys -V 2>&1 | head -1)"
 echo "# nextpnr: $(yowasp-nextpnr-himbaechel-gowin --version 2>&1 | head -1)"
@@ -56,13 +61,16 @@ run() {   # run <name> <top> <yosys-read-cmds> [chparams]
     local name=$1 top=$2 reads=$3 chp=${4:-}
     echo
     echo "================ $name (top=$top ${chp}) ================"
+    if [ -n "$ONLY" ] && ! echo " $ONLY " | grep -q " $name "; then return; fi
     yowasp-yosys -q -l $B/$name.yosys.log -p "$reads; ${chp:+chparam $chp $top;} synth_gowin -top $top -json $B/$name.json" >/dev/null 2>&1
     echo "yosys exit=$?"
-    for seed in 1 2 3; do
-        yowasp-nextpnr-himbaechel-gowin --json $B/$name.json --write $B/${name}_pnr.json \
+    if [ -n "$ONLY" ] && ! echo " $ONLY " | grep -q " $name "; then echo "(skipped)"; return; fi
+    for seed in $SEEDS; do
+        timeout ${PNR_TIMEOUT} yowasp-nextpnr-himbaechel-gowin --json $B/$name.json --write $B/${name}_pnr.json \
             --device GW1NR-LV9QN88PC6/I5 --vopt family=GW1N-9C --vopt cst=$B/ubench.cst \
             --freq 27 --seed $seed > $B/${name}_s$seed.pnr.log 2>&1
         local rc=$?
+        [ $rc = 124 ] && echo "  seed $seed: nextpnr TIMEOUT after ${PNR_TIMEOUT} s (no result)"
         if [ $seed = 1 ]; then
             grep -E "^Info:[[:space:]]+(LUT4|ALU|DFF|RAM16SDP4|BSRAM|MUX2_LUT5|MUX2_LUT6|MUX2_LUT7|MUX2_LUT8|IOB|MULT18X18|MULT9X9):" $B/${name}_s1.pnr.log | sed 's/^Info:[[:space:]]*/  /'
         fi

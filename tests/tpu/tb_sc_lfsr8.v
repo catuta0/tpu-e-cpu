@@ -46,9 +46,9 @@ module tb_sc_lfsr8;
     wire [15:0] st_x, st_w;
     wire [7:0]  r_x, r_w;
 
-    sc_lfsr8 #(.SEED(16'hACE1)) dut_x (.clk(clk), .rst(rst), .load(load), .adv(adv),
+    sc_lfsr8 #(.SEED(32'h0000_ACE1)) dut_x (.clk(clk), .rst(rst), .load(load), .adv(adv),
                                        .state(st_x), .r(r_x));
-    sc_lfsr8 #(.SEED(16'h7A5C)) dut_w (.clk(clk), .rst(rst), .load(load), .adv(adv),
+    sc_lfsr8 #(.SEED(32'h0000_7A5C)) dut_w (.clk(clk), .rst(rst), .load(load), .adv(adv),
                                        .state(st_w), .r(r_w));
 
     // ---- independent behavioural reference: ONE step of spec 5.3 -------------

@@ -4256,6 +4256,6 @@ Found and reported 0 problems.
 3.52. Executing JSON backend.
 
 Warnings: 4 unique messages, 4 total
-End of script. Logfile hash: be9b181524, time: 6.28s, user: 6.28s, system: 0.00s
+End of script. Logfile hash: be9b181524, time: 6.69s, user: 6.69s, system: 0.00s
 Yosys 0.70 (git sha1 28ba3cb92, Release, Clang /workspace/YoWASP/yosys/wasi-sdk-33.0-x86_64-linux/share/cmake/../..//bin/clang++ 22.1.0)
-Time spent: 31% 1x abc9_exe (1 sec), 11% 14x techmap (0 sec), ...
+Time spent: 30% 1x abc9_exe (2 sec), 10% 14x techmap (0 sec), ...

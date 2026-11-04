@@ -1,0 +1,3 @@
+# cmd: gowin_pack -d GW1N-9C -o sim/cpu/build/cpu_synth_top.fs sim/cpu/build/cpu_synth_top_pnr_s1.json
+PACK_EXIT=0
+55d639cedfb2b7821fa6cc9ad3614229f3a5d8ffe3e5e4c4bcbfbf3393688259  sim/cpu/build/cpu_synth_top.fs

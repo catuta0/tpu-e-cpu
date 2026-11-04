@@ -21,15 +21,23 @@
 //   ------+--------------------------------+---------------------------------
 //   0000  | a + b                          | ADD ADDI, addresses, targets
 //   1000  | a - b                          | SUB, branch compare
-//   x001  | a << b[4:0]                    | SLL SLLI
+//   x001  | a  (pass-through, see SHIFTS)  | SLL SLLI
 //   x010  | (signed a < signed b) ? 1 : 0  | SLT SLTI
 //   x011  | (a < b unsigned) ? 1 : 0       | SLTU SLTIU
 //   x100  | a ^ b                          | XOR XORI
-//   0101  | a >> b[4:0] (logical)          | SRL SRLI
-//   1101  | a >>> b[4:0] (arithmetic)      | SRA SRAI
+//   x101  | a  (pass-through, see SHIFTS)  | SRL SRLI SRA SRAI
 //   x110  | a | b                          | OR ORI
 //   x111  | a & b                          | AND ANDI
 //   (x = don't care; the decoder only produces op[3]=1 for SUB and SRA.)
+//
+// SHIFTS (area decision, RTL-CPU)
+//   This ALU contains NO barrel shifter. For SLL/SRL/SRA it passes operand A
+//   through; the core loads it into alu_q and shifts it iteratively in its
+//   SHIFT state (4 bits per cycle while >= 4 remain, then 1 bit per cycle,
+//   like PicoRV32's TWO_STAGE_SHIFT option). Measured during RTL-CPU with
+//   Yosys 0.70 synth_gowin: a 33-bit 5-level barrel shifter alone maps to
+//   ~283 LUT + 164 MUX2_LUTx cells and the ALU with it to ~1000 LUT/MUX
+//   cells; the iterative shifter needs ~3 LUT per bit in the core.
 //
 // FLAG OUTPUTS (valid for any op, but only meaningful when the adder
 // subtracts, i.e. op = 1000 SUB, x010 SLT, x011 SLTU)
@@ -41,15 +49,14 @@
 //   * ONE adder for add and subtract: a + (b ^ {32{sub}}) + sub. The carry-in
 //     is injected through an extra LSB ({a,1} + {b',sub}) so that Yosys maps
 //     the whole thing onto a single 33-bit Gowin ALU carry chain.
-//   * ONE right shifter for SRL/SRA/SLL: a left shift is a right shift of the
-//     bit-reversed operand, reversed again. This saves a second 5-level
-//     barrel shifter (~160 LUT4) at the cost of two 2:1 reversal muxes.
+//   * No shifter (see SHIFTS).
 //   * Unsigned less-than = NOT carry-out of a - b; signed less-than corrects
 //     it with the operand sign bits (no second comparator).
 //
 // TIMING
 //   Combinational, no state. In the core the worst path is
-//   BSRAM output (rs1/rs2) -> operand mux -> this ALU -> alu_q / FSM.
+//   BSRAM output (rs1/rs2) -> operand mux -> this ALU (33-bit carry chain)
+//   -> alu_q / FSM.
 //
 // REQUIREMENT REFERENCES
 //   ARCHITECTURE.md section 6 (RV32I base ISA); RISC-V Unprivileged ISA v2.1,
@@ -58,7 +65,7 @@
 
 module rv32i_alu (
     input  wire [31:0] a,       // operand A (rs1, pc or 0)
-    input  wire [31:0] b,       // operand B (rs2 or immediate)
+    input  wire [31:0] b,       // operand B (rs2 or immediate); unused for shifts
     input  wire [3:0]  op,      // operation, see table in the header
     output reg  [31:0] result,  // operation result
     output wire        eq,      // a == b
@@ -93,40 +100,15 @@ module rv32i_alu (
     wire [31:0] x_xor = a ^ b;
     assign eq = (x_xor == 32'd0);       // shared with XOR: equality = no bit differs
 
-    // ---- Shared barrel shifter -------------------------------------------------
-    // shl = 1 for SLL (funct3 001). For a left shift the operand is bit-reversed,
-    // shifted right logically and reversed back.
-    wire shl = (op[2:0] == 3'b001);
-
-    // Bit reversal of a (combinational wiring only).
-    reg [31:0] a_rev;
-    integer k;
-    always @(*) begin
-        for (k = 0; k < 32; k = k + 1) a_rev[k] = a[31-k];
-    end
-
-    wire [31:0] sh_in   = shl ? a_rev : a;                 // operand to shift right
-    wire        sh_fill = (op == 4'b1101) & a[31];         // SRA: replicate sign
-    // 33-bit arithmetic right shift: the fill bit on top is copied in.
-    wire [32:0] sh_ext  = {sh_fill, sh_in};
-    wire [32:0] sh_out  = $signed(sh_ext) >>> b[4:0];      // only shamt = b[4:0] used
-    wire [31:0] shr     = sh_out[31:0];                    // SRL / SRA result
-
-    // Reverse back for SLL.
-    reg [31:0] shr_rev;
-    always @(*) begin
-        for (k = 0; k < 32; k = k + 1) shr_rev[k] = shr[31-k];
-    end
-
     // ---- Result multiplexer (selected by funct3 = op[2:0]) ------------------------
     always @(*) begin
         case (op[2:0])
             3'b000:  result = sum;                  // ADD / SUB
-            3'b001:  result = shr_rev;              // SLL
+            3'b001:  result = a;                    // SLL: operand to the core shifter
             3'b010:  result = {31'd0, lt};          // SLT
             3'b011:  result = {31'd0, ltu};         // SLTU
             3'b100:  result = x_xor;                // XOR
-            3'b101:  result = shr;                  // SRL / SRA
+            3'b101:  result = a;                    // SRL/SRA: operand to the core shifter
             3'b110:  result = a | b;                // OR
             default: result = a & b;                // AND (3'b111)
         endcase
@@ -135,9 +117,8 @@ module rv32i_alu (
     // Intentionally unused bits, collected in a wire whose name matches
     // the default --unused-regexp "*unused*" of the Verilator linter (an idiom, no
     // lint_off pragma needed):
-    //   sum34[0]   : the constant LSB of the carry-in trick (always 1 or 0^1)
-    //   sh_out[32] : the copy of the fill bit above the shifted word
-    wire alu_unused = &{1'b0, sum34[0], sh_out[32]};
+    //   sum34[0]   : the LSB of the carry-in trick (carries no result)
+    wire alu_unused = &{1'b0, sum34[0]};
 
 endmodule
 

@@ -111,13 +111,13 @@ Info:     at initial placer iter 1, wirelen = 1777
 Info:     at initial placer iter 2, wirelen = 1776
 Info:     at initial placer iter 3, wirelen = 1777
 Info: Running main analytical placer, max placement attempts per cell = 18522741.
-Info:     at iteration #1, type ALL: wirelen solved = 1776, spread = 40906, legal = 93334; time = 22.46s
-Info:     at iteration #2, type ALL: wirelen solved = 4283, spread = 25034, legal = 70283; time = 12.11s
-Info:     at iteration #3, type ALL: wirelen solved = 7169, spread = 22739, legal = 65131; time = 10.21s
-Info:     at iteration #4, type ALL: wirelen solved = 8715, spread = 20362, legal = 52173; time = 9.44s
-Info:     at iteration #5, type ALL: wirelen solved = 9924, spread = 19635, legal = 50667; time = 5.69s
-Info:     at iteration #6, type ALL: wirelen solved = 11132, spread = 20689, legal = 43105; time = 3.13s
-Info:     at iteration #7, type ALL: wirelen solved = 11613, spread = 22249, legal = 43100; time = 2.97s
-Info:     at iteration #8, type ALL: wirelen solved = 11818, spread = 23505, legal = 38769; time = 3.42s
-Info:     at iteration #9, type ALL: wirelen solved = 12408, spread = 22713, legal = 36566; time = 3.00s
-Info:     at iteration #10, type ALL: wirelen solved = 12344, spread = 22829, legal = 35294; time = 3.46s
+Info:     at iteration #1, type ALL: wirelen solved = 1776, spread = 40906, legal = 93334; time = 22.67s
+Info:     at iteration #2, type ALL: wirelen solved = 4283, spread = 25034, legal = 70283; time = 11.92s
+Info:     at iteration #3, type ALL: wirelen solved = 7169, spread = 22739, legal = 65131; time = 10.61s
+Info:     at iteration #4, type ALL: wirelen solved = 8715, spread = 20362, legal = 52173; time = 9.66s
+Info:     at iteration #5, type ALL: wirelen solved = 9924, spread = 19635, legal = 50667; time = 5.51s
+Info:     at iteration #6, type ALL: wirelen solved = 11132, spread = 20689, legal = 43105; time = 3.26s
+Info:     at iteration #7, type ALL: wirelen solved = 11613, spread = 22249, legal = 43100; time = 3.00s
+Info:     at iteration #8, type ALL: wirelen solved = 11818, spread = 23505, legal = 38769; time = 3.39s
+Info:     at iteration #9, type ALL: wirelen solved = 12408, spread = 22713, legal = 36566; time = 3.11s
+Info:     at iteration #10, type ALL: wirelen solved = 12344, spread = 22829, legal = 35294; time = 3.64s

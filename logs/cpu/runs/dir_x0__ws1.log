@@ -11,8 +11,8 @@ PASS: UART byte count : got 0x00000000 expected 0x00000000
 PASS: UART bytes equal : got 0x00000001 expected 0x00000001
 PASS: signature 0x0F00..0x0F7C (32 words) equal : got 0x00000001 expected 0x00000001
 PASS: bus-protocol violations : got 0x00000000 expected 0x00000000
-INFO: cycles=341 instret=61 fetch=61 load=4 store=35 wait_cycles=101
-RESULT name=dir_x0 ws=1 rand=0 status=PASS cycles=341 instret=61 cpi=5.590 viol=0
+INFO: cycles=344 instret=61 fetch=61 load=4 store=35 wait_cycles=101
+RESULT name=dir_x0 ws=1 rand=0 status=PASS cycles=344 instret=61 cpi=5.639 viol=0
 TEST PASSED
-tests/cpu/tb_rv32i_core.v:488: $finish called at 3806000 (1ps)
+tests/cpu/tb_rv32i_core.v:488: $finish called at 3836000 (1ps)
 VVP_EXIT=0

@@ -1,0 +1,483 @@
+# cmd: yowasp-nextpnr-himbaechel-gowin --json sim/cpu/build/cpu_synth_top.json --write sim/cpu/build/cpu_synth_top_pnr_s3.json --device GW1NR-LV9QN88PC6/I5 --vopt family=GW1N-9C --vopt cst=design/constraints/tangnano9k.cst --freq 27 --report sim/cpu/build/cpu_synth_top_report_s3.json --seed 3 --threads 1
+Info: Using uarch 'gowin' for device 'GW1NR-LV9QN88PC6/I5'
+
+Info: Cell O_psram_ck[0] not found
+Info: Cell O_psram_ck[1] not found
+Info: Cell O_psram_ck_n[0] not found
+Info: Cell O_psram_ck_n[1] not found
+Info: Cell O_psram_cs_n[0] not found
+Info: Cell O_psram_cs_n[1] not found
+Info: Cell O_psram_reset_n[0] not found
+Info: Cell O_psram_reset_n[1] not found
+Info: Cell IO_psram_dq[0] not found
+Info: Cell IO_psram_dq[1] not found
+Info: Cell IO_psram_dq[2] not found
+Info: Cell IO_psram_dq[3] not found
+Info: Cell IO_psram_dq[4] not found
+Info: Cell IO_psram_dq[5] not found
+Info: Cell IO_psram_dq[6] not found
+Info: Cell IO_psram_dq[7] not found
+Info: Cell IO_psram_dq[8] not found
+Info: Cell IO_psram_dq[9] not found
+Info: Cell IO_psram_dq[10] not found
+Info: Cell IO_psram_dq[11] not found
+Info: Cell IO_psram_dq[12] not found
+Info: Cell IO_psram_dq[13] not found
+Info: Cell IO_psram_dq[14] not found
+Info: Cell IO_psram_dq[15] not found
+Info: Cell IO_psram_rwds[0] not found
+Info: Cell IO_psram_rwds[1] not found
+Info: Reading constraints...
+Info: Cell btn_s2_n not found
+Info: Cell btn_s2_n not found
+Info: Cell uart_tx not found
+Info: Cell uart_tx not found
+Info: Cell uart_rx not found
+Info: Cell uart_rx not found
+Info: Create constant nets...
+Info: Modify LUTs...
+Info: Pack IOBs...
+Info: Pack I3C IOs...
+Info: Pack MIPI IOs...
+Info: Pack diff IOBs...
+Info: Pack FFs into IO cells...
+Info: Pack IODELAY...
+Info: Pack Input Edge Monitors...
+Info: Pack IO logic...
+Info: Pack DESER16 logic...
+Info: Pack GSR...
+Info: Pack HCLK cells...
+Info: Pack DLLDLYs...
+Info: Pack wide LUTs...
+Info: Packed MUX2_LUT8:0, MUX2_LU7:0, MUX2_LUT6:0, MUX2_LUT5:0
+Info: Pack ALUs...
+Info: Pack SSRAMs...
+Info: Constrained 92 LUTFF pairs.
+Info: Pack PLL...
+Info: Pack ADC...
+Info: Pack BSRAMs...
+Info: Pack DSP...
+Info: Pack INV...
+Info: Pack buffered nets...
+Info: Pack EMCU and UserFlash cells...
+Info: Pack UserFlash cells...
+Info: Pack DQCE cells...
+Info: Pack DCS cells...
+Info: Checksum: 0x04e4bb87
+
+Info: Device utilisation:
+Info: 	                 VCC:       1/      1   100%
+Info: 	                 IOB:       8/    276     2%
+Info: 	                LUT4:     957/   8640    11%
+Info: 	              OSER16:       0/     80     0%
+Info: 	              IDES16:       0/     80     0%
+Info: 	            IOLOGICI:       0/    276     0%
+Info: 	            IOLOGICO:       0/    276     0%
+Info: 	           MUX2_LUT5:       0/   4320     0%
+Info: 	           MUX2_LUT6:       0/   2160     0%
+Info: 	           MUX2_LUT7:       0/   1080     0%
+Info: 	           MUX2_LUT8:       0/   1080     0%
+Info: 	                 ALU:      80/   6480     1%
+Info: 	                 GND:       1/      1   100%
+Info: 	                 DFF:     126/   6480     1%
+Info: 	           RAM16SDP4:       0/    270     0%
+Info: 	               BSRAM:       4/     26    15%
+Info: 	              ALU54D:       0/     10     0%
+Info: 	     MULTADDALU18X18:       0/     10     0%
+Info: 	        MULTALU18X18:       0/     10     0%
+Info: 	        MULTALU36X18:       0/     10     0%
+Info: 	           MULT36X36:       0/      5     0%
+Info: 	           MULT18X18:       0/     20     0%
+Info: 	             MULT9X9:       0/     40     0%
+Info: 	              PADD18:       0/     20     0%
+Info: 	               PADD9:       0/     40     0%
+Info: 	                 GSR:       1/      1   100%
+Info: 	                 OSC:       0/      1     0%
+Info: 	                rPLL:       0/      2     0%
+Info: 	           FLASH608K:       0/      1     0%
+Info: 	                BUFG:       0/     22     0%
+Info: 	                DQCE:       0/     24     0%
+Info: 	                 DCS:       0/      8     0%
+Info: 	               DHCEN:       0/     24     0%
+Info: 	              CLKDIV:       0/      8     0%
+Info: 	             CLKDIV2:       0/     16     0%
+Info: 	           MIPI_IBUF:       0/     22     0%
+Info: 	           MIPI_OBUF:       0/     20     0%
+
+Info: Running custom HCLK placer...
+Info: Placed 0 cells based on constraints.
+Info: Creating initial analytic placement for 919 cells, random placement wirelen = 35971.
+Info:     at initial placer iter 0, wirelen = 423
+Info:     at initial placer iter 1, wirelen = 569
+Info:     at initial placer iter 2, wirelen = 558
+Info:     at initial placer iter 3, wirelen = 555
+Info: Running main analytical placer, max placement attempts per cell = 173460.
+Info:     at iteration #1, type ALL: wirelen solved = 560, spread = 7297, legal = 7348; time = 0.03s
+Info:     at iteration #2, type ALL: wirelen solved = 620, spread = 5586, legal = 6695; time = 0.03s
+Info:     at iteration #3, type ALL: wirelen solved = 911, spread = 5611, legal = 6557; time = 0.03s
+Info:     at iteration #4, type ALL: wirelen solved = 967, spread = 5308, legal = 6120; time = 0.03s
+Info:     at iteration #5, type ALL: wirelen solved = 1186, spread = 5809, legal = 5781; time = 0.03s
+Info:     at iteration #6, type ALL: wirelen solved = 1705, spread = 5290, legal = 5598; time = 0.03s
+Info:     at iteration #7, type ALL: wirelen solved = 1923, spread = 5426, legal = 5650; time = 0.03s
+Info:     at iteration #8, type ALL: wirelen solved = 2149, spread = 5012, legal = 5518; time = 0.03s
+Info:     at iteration #9, type ALL: wirelen solved = 2169, spread = 5333, legal = 5758; time = 0.03s
+Info:     at iteration #10, type ALL: wirelen solved = 2425, spread = 5113, legal = 5400; time = 0.03s
+Info:     at iteration #11, type ALL: wirelen solved = 2480, spread = 5079, legal = 5546; time = 0.03s
+Info:     at iteration #12, type ALL: wirelen solved = 2625, spread = 4949, legal = 5585; time = 0.03s
+Info:     at iteration #13, type ALL: wirelen solved = 2764, spread = 5202, legal = 5083; time = 0.04s
+Info:     at iteration #14, type ALL: wirelen solved = 2986, spread = 5274, legal = 5494; time = 0.03s
+Info:     at iteration #15, type ALL: wirelen solved = 3118, spread = 5086, legal = 5772; time = 0.03s
+Info:     at iteration #16, type ALL: wirelen solved = 3174, spread = 5006, legal = 5183; time = 0.03s
+Info:     at iteration #17, type ALL: wirelen solved = 3162, spread = 5015, legal = 5540; time = 0.05s
+Info:     at iteration #18, type ALL: wirelen solved = 3238, spread = 5225, legal = 5410; time = 0.04s
+Info: HeAP Placer Time: 0.82s
+Info:   of which solving equations: 0.58s
+Info:   of which spreading cells: 0.05s
+Info:   of which strict legalisation: 0.05s
+
+Info: Running simulated annealing placer for refinement.
+Info:   at iteration #1: temp = 0.000000, timing cost = 36, wirelen = 5083
+Info:   at iteration #5: temp = 0.000000, timing cost = 14, wirelen = 4406
+Info:   at iteration #10: temp = 0.000000, timing cost = 13, wirelen = 4233
+Info:   at iteration #15: temp = 0.000000, timing cost = 13, wirelen = 4142
+Info:   at iteration #16: temp = 0.000000, timing cost = 13, wirelen = 4136 
+Info: SA placement time 0.86s
+
+Info: Max frequency for clock 'u_core.clk': 69.42 MHz (PASS at 27.00 MHz)
+
+Info: Slack histogram:
+Info:  legend: * represents 1 endpoint(s)
+Info:          + represents [1,1) endpoint(s)
+Info: [ 22632,  23318) |***** 
+Info: [ 23318,  24004) | 
+Info: [ 24004,  24690) | 
+Info: [ 24690,  25376) |** 
+Info: [ 25376,  26062) | 
+Info: [ 26062,  26748) |* 
+Info: [ 26748,  27434) |* 
+Info: [ 27434,  28120) | 
+Info: [ 28120,  28806) | 
+Info: [ 28806,  29492) | 
+Info: [ 29492,  30178) |* 
+Info: [ 30178,  30864) |*********** 
+Info: [ 30864,  31550) |********************** 
+Info: [ 31550,  32236) |***************** 
+Info: [ 32236,  32922) |*************************************** 
+Info: [ 32922,  33608) |********************************************************** 
+Info: [ 33608,  34294) |*************** 
+Info: [ 34294,  34980) |******************************** 
+Info: [ 34980,  35666) |****************************************** 
+Info: [ 35666,  36352) |************************ 
+Info: Checksum: 0x91bf25ae
+Info: Routing globals...
+Info:     'u_core.clk' net was routed using global resources only.
+Info:     'ready_q_LUT4_I1_F_LUT2_I1_F' is routed using segments.
+Info:     'halted_LUT2_I0_F_LUT4_I2_F_LUT3_F_I2_LUT2_F_I1[0]' is routed using segments.
+Info:     'halted_LUT2_I0_F_LUT4_I2_F_LUT3_F_I2[1]' is routed using segments.
+Info:     'u_core.alu_q_DFFRE_Q_27_D_LUT3_F_I2_LUT3_F_I2_ALU_SUM_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_I0_LUT3_I0_F[1]' is routed using segments.
+Info:     'u_core.alu_q_DFFRE_Q_27_D_LUT3_F_I2_LUT3_F_I2[0]' is routed using segments.
+Info:     'halted_LUT2_I0_F_LUT4_I2_F_LUT3_F_I2_LUT4_I3_I2_LUT4_I3_1_F[3]' is routed using segments.
+Info:     'u_core.alu_q_DFFRE_Q_27_D_LUT3_F_I2_LUT3_F_I2_ALU_SUM_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_SUM_LUT4_F_I3_LUT4_F_I3[1]' is routed using segments.
+Info:     'ready_q_LUT2_I1_F[1]' is routed using segments.
+Info:     'halted_LUT2_I0_F_LUT4_I2_I3_LUT4_F_I0_LUT2_I1_F[1]' is routed using segments.
+
+Info: Routing..
+Info: Setting up routing queue.
+Info: Routing 3553 arcs.
+Info:            |   (re-)routed arcs  |   delta    | remaining|       time spent     |
+Info:    IterCnt |  w/ripup   wo/ripup |  w/r  wo/r |      arcs| batch(sec) total(sec)|
+Info:       1000 |       55        883 |   55   883 |      2624|       0.69       0.69|
+Info:       2000 |       70       1863 |   15   980 |      1643|       0.61       1.30|
+Info:       3000 |      142       2785 |   72   922 |       742|       0.87       2.17|
+Info:       4000 |      330       3595 |  188   810 |        48|       1.39       3.55|
+Info:       4065 |      340       3651 |   10    56 |         0|       0.10       3.65|
+Info: Routing complete.
+Info: Router1 time 3.65s
+Info: Checksum: 0x880ef286
+
+Info: Critical path report for clock 'u_core.clk' (posedge -> posedge):
+Info:       type curr  total name
+Info:   clk-to-q  3.46  3.46 Source u_core.u_regfile.bank2.0.0.DO0
+Info:    routing  0.89  4.35 Net mem_wdata[0] (4,9) -> (3,8)
+Info:                          Sink halted_LUT2_I0_F_LUT4_I2_F_LUT3_F_I2_LUT4_I3_I2_LUT4_I0_F_LUT4_F.I0
+Info:                          Defined in:
+Info:                               design/rtl/cpu/rv32i_core.v:268.24-268.29
+Info:      logic  1.03  5.38 Source halted_LUT2_I0_F_LUT4_I2_F_LUT3_F_I2_LUT4_I3_I2_LUT4_I0_F_LUT4_F.F
+Info:    routing  0.41  5.79 Net halted_LUT2_I0_F_LUT4_I2_F_LUT3_F_I2_LUT4_I3_I2_LUT4_I0_F[0] (3,8) -> (3,7)
+Info:                          Sink u_core.alu_q_DFFRE_Q_27_D_LUT3_F_I2_LUT3_F_I2_ALU_SUM_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_I1_LUT4_F.I1
+Info:                          Defined in:
+Info:                               /share/gowin/cells_map.v:130.20-130.21
+Info:      logic  1.10  6.89 Source u_core.alu_q_DFFRE_Q_27_D_LUT3_F_I2_LUT3_F_I2_ALU_SUM_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_I1_LUT4_F.F
+Info:    routing  0.81  7.70 Net u_core.alu_q_DFFRE_Q_27_D_LUT3_F_I2_LUT3_F_I2_ALU_SUM_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_I1 (3,7) -> (3,5)
+Info:                          Sink u_core.alu_q_DFFRE_Q_27_D_LUT3_F_I2_LUT3_F_I2_ALU_SUM_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT.I1
+Info:      logic  1.04  8.74 Source u_core.alu_q_DFFRE_Q_27_D_LUT3_F_I2_LUT3_F_I2_ALU_SUM_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT.COUT
+Info:    routing  0.00  8.74 Net u_core.alu_q_DFFRE_Q_27_D_LUT3_F_I2_LUT3_F_I2_ALU_SUM_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_CIN (3,5) -> (3,5)
+Info:                          Sink u_core.alu_q_DFFRE_Q_27_D_LUT3_F_I2_LUT3_F_I2_ALU_SUM_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT.CIN
+Info:                          Defined in:
+Info:                               design/rtl/cpu/rv32i_alu.v:88.25-88.59
+Info:                               /share/gowin/arith_map.v:57.7-63.5
+Info:                               /share/gowin/cells_sim.v:1033.25-1033.29
+Info:      logic  0.06  8.80 Source u_core.alu_q_DFFRE_Q_27_D_LUT3_F_I2_LUT3_F_I2_ALU_SUM_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT.COUT
+Info:    routing  0.00  8.80 Net u_core.alu_q_DFFRE_Q_27_D_LUT3_F_I2_LUT3_F_I2_ALU_SUM_CIN_ALU_COUT_CIN_ALU_COUT_CIN (3,5) -> (3,5)
+Info:                          Sink u_core.alu_q_DFFRE_Q_27_D_LUT3_F_I2_LUT3_F_I2_ALU_SUM_CIN_ALU_COUT_CIN_ALU_COUT.CIN
+Info:                          Defined in:
+Info:                               design/rtl/cpu/rv32i_alu.v:88.25-88.59
+Info:                               /share/gowin/arith_map.v:57.7-63.5
+Info:                               /share/gowin/cells_sim.v:1033.25-1033.29
+Info:      logic  0.06  8.85 Source u_core.alu_q_DFFRE_Q_27_D_LUT3_F_I2_LUT3_F_I2_ALU_SUM_CIN_ALU_COUT_CIN_ALU_COUT.COUT
+Info:    routing  0.00  8.85 Net u_core.alu_q_DFFRE_Q_27_D_LUT3_F_I2_LUT3_F_I2_ALU_SUM_CIN_ALU_COUT_CIN (3,5) -> (3,5)
+Info:                          Sink u_core.alu_q_DFFRE_Q_27_D_LUT3_F_I2_LUT3_F_I2_ALU_SUM_CIN_ALU_COUT.CIN
+Info:                          Defined in:
+Info:                               design/rtl/cpu/rv32i_alu.v:88.25-88.59
+Info:                               /share/gowin/arith_map.v:57.7-63.5
+Info:                               /share/gowin/cells_sim.v:1033.25-1033.29
+Info:      logic  0.06  8.91 Source u_core.alu_q_DFFRE_Q_27_D_LUT3_F_I2_LUT3_F_I2_ALU_SUM_CIN_ALU_COUT.COUT
+Info:    routing  0.00  8.91 Net u_core.alu_q_DFFRE_Q_27_D_LUT3_F_I2_LUT3_F_I2_ALU_SUM_CIN (3,5) -> (4,5)
+Info:                          Sink u_core.alu_q_DFFRE_Q_27_D_LUT3_F_I2_LUT3_F_I2_ALU_SUM.CIN
+Info:                          Defined in:
+Info:                               design/rtl/cpu/rv32i_alu.v:88.25-88.59
+Info:                               /share/gowin/arith_map.v:57.7-63.5
+Info:                               /share/gowin/cells_sim.v:1033.25-1033.29
+Info:      logic  0.06  8.97 Source u_core.alu_q_DFFRE_Q_27_D_LUT3_F_I2_LUT3_F_I2_ALU_SUM.COUT
+Info:    routing  0.00  8.97 Net u_core.alu_q_DFFRE_Q_27_D_LUT3_F_I2_LUT3_F_I2_ALU_SUM_COUT (4,5) -> (4,5)
+Info:                          Sink u_core.alu_q_DFFRE_Q_27_D_LUT3_F_I2_LUT3_F_I2_ALU_SUM_COUT_ALU_CIN.CIN
+Info:                          Defined in:
+Info:                               design/rtl/cpu/rv32i_alu.v:88.25-88.59
+Info:                               /share/gowin/arith_map.v:57.7-63.5
+Info:                               /share/gowin/cells_sim.v:1033.25-1033.29
+Info:      logic  0.06  9.03 Source u_core.alu_q_DFFRE_Q_27_D_LUT3_F_I2_LUT3_F_I2_ALU_SUM_COUT_ALU_CIN.COUT
+Info:    routing  0.00  9.03 Net u_core.alu_q_DFFRE_Q_27_D_LUT3_F_I2_LUT3_F_I2_ALU_SUM_COUT_ALU_CIN_COUT (4,5) -> (4,5)
+Info:                          Sink u_core.alu_q_DFFRE_Q_27_D_LUT3_F_I2_LUT3_F_I2_ALU_SUM_COUT_ALU_CIN_COUT_ALU_CIN.CIN
+Info:                          Defined in:
+Info:                               design/rtl/cpu/rv32i_alu.v:88.25-88.59
+Info:                               /share/gowin/arith_map.v:57.7-63.5
+Info:                               /share/gowin/cells_sim.v:1033.25-1033.29
+Info:      logic  0.06  9.08 Source u_core.alu_q_DFFRE_Q_27_D_LUT3_F_I2_LUT3_F_I2_ALU_SUM_COUT_ALU_CIN_COUT_ALU_CIN.COUT
+Info:    routing  0.00  9.08 Net u_core.alu_q_DFFRE_Q_27_D_LUT3_F_I2_LUT3_F_I2_ALU_SUM_COUT_ALU_CIN_COUT_ALU_CIN_COUT (4,5) -> (4,5)
+Info:                          Sink u_core.alu_q_DFFRE_Q_27_D_LUT3_F_I2_LUT3_F_I2_ALU_SUM_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN.CIN
+Info:                          Defined in:
+Info:                               design/rtl/cpu/rv32i_alu.v:88.25-88.59
+Info:                               /share/gowin/arith_map.v:57.7-63.5
+Info:                               /share/gowin/cells_sim.v:1033.25-1033.29
+Info:      logic  0.06  9.14 Source u_core.alu_q_DFFRE_Q_27_D_LUT3_F_I2_LUT3_F_I2_ALU_SUM_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN.COUT
+Info:    routing  0.00  9.14 Net u_core.alu_q_DFFRE_Q_27_D_LUT3_F_I2_LUT3_F_I2_ALU_SUM_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT (4,5) -> (4,5)
+Info:                          Sink u_core.alu_q_DFFRE_Q_27_D_LUT3_F_I2_LUT3_F_I2_ALU_SUM_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN.CIN
+Info:                          Defined in:
+Info:                               design/rtl/cpu/rv32i_alu.v:88.25-88.59
+Info:                               /share/gowin/arith_map.v:57.7-63.5
+Info:                               /share/gowin/cells_sim.v:1033.25-1033.29
+Info:      logic  0.06  9.20 Source u_core.alu_q_DFFRE_Q_27_D_LUT3_F_I2_LUT3_F_I2_ALU_SUM_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN.COUT
+Info:    routing  0.00  9.20 Net u_core.alu_q_DFFRE_Q_27_D_LUT3_F_I2_LUT3_F_I2_ALU_SUM_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT (4,5) -> (4,5)
+Info:                          Sink u_core.alu_q_DFFRE_Q_27_D_LUT3_F_I2_LUT3_F_I2_ALU_SUM_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN.CIN
+Info:                          Defined in:
+Info:                               design/rtl/cpu/rv32i_alu.v:88.25-88.59
+Info:                               /share/gowin/arith_map.v:57.7-63.5
+Info:                               /share/gowin/cells_sim.v:1033.25-1033.29
+Info:      logic  0.06  9.25 Source u_core.alu_q_DFFRE_Q_27_D_LUT3_F_I2_LUT3_F_I2_ALU_SUM_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN.COUT
+Info:    routing  0.00  9.25 Net u_core.alu_q_DFFRE_Q_27_D_LUT3_F_I2_LUT3_F_I2_ALU_SUM_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT (4,5) -> (5,5)
+Info:                          Sink u_core.alu_q_DFFRE_Q_27_D_LUT3_F_I2_LUT3_F_I2_ALU_SUM_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN.CIN
+Info:                          Defined in:
+Info:                               design/rtl/cpu/rv32i_alu.v:88.25-88.59
+Info:                               /share/gowin/arith_map.v:57.7-63.5
+Info:                               /share/gowin/cells_sim.v:1033.25-1033.29
+Info:      logic  0.06  9.31 Source u_core.alu_q_DFFRE_Q_27_D_LUT3_F_I2_LUT3_F_I2_ALU_SUM_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN.COUT
+Info:    routing  0.00  9.31 Net u_core.alu_q_DFFRE_Q_27_D_LUT3_F_I2_LUT3_F_I2_ALU_SUM_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT (5,5) -> (5,5)
+Info:                          Sink u_core.alu_q_DFFRE_Q_27_D_LUT3_F_I2_LUT3_F_I2_ALU_SUM_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN.CIN
+Info:                          Defined in:
+Info:                               design/rtl/cpu/rv32i_alu.v:88.25-88.59
+Info:                               /share/gowin/arith_map.v:57.7-63.5
+Info:                               /share/gowin/cells_sim.v:1033.25-1033.29
+Info:      logic  0.06  9.37 Source u_core.alu_q_DFFRE_Q_27_D_LUT3_F_I2_LUT3_F_I2_ALU_SUM_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN.COUT
+Info:    routing  0.00  9.37 Net u_core.alu_q_DFFRE_Q_27_D_LUT3_F_I2_LUT3_F_I2_ALU_SUM_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT (5,5) -> (5,5)
+Info:                          Sink u_core.alu_q_DFFRE_Q_27_D_LUT3_F_I2_LUT3_F_I2_ALU_SUM_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN.CIN
+Info:                          Defined in:
+Info:                               design/rtl/cpu/rv32i_alu.v:88.25-88.59
+Info:                               /share/gowin/arith_map.v:57.7-63.5
+Info:                               /share/gowin/cells_sim.v:1033.25-1033.29
+Info:      logic  0.06  9.43 Source u_core.alu_q_DFFRE_Q_27_D_LUT3_F_I2_LUT3_F_I2_ALU_SUM_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN.COUT
+Info:    routing  0.00  9.43 Net u_core.alu_q_DFFRE_Q_27_D_LUT3_F_I2_LUT3_F_I2_ALU_SUM_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT (5,5) -> (5,5)
+Info:                          Sink u_core.alu_q_DFFRE_Q_27_D_LUT3_F_I2_LUT3_F_I2_ALU_SUM_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN.CIN
+Info:                          Defined in:
+Info:                               design/rtl/cpu/rv32i_alu.v:88.25-88.59
+Info:                               /share/gowin/arith_map.v:57.7-63.5
+Info:                               /share/gowin/cells_sim.v:1033.25-1033.29
+Info:      logic  0.06  9.48 Source u_core.alu_q_DFFRE_Q_27_D_LUT3_F_I2_LUT3_F_I2_ALU_SUM_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN.COUT
+Info:    routing  0.00  9.48 Net u_core.alu_q_DFFRE_Q_27_D_LUT3_F_I2_LUT3_F_I2_ALU_SUM_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT (5,5) -> (5,5)
+Info:                          Sink u_core.alu_q_DFFRE_Q_27_D_LUT3_F_I2_LUT3_F_I2_ALU_SUM_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN.CIN
+Info:                          Defined in:
+Info:                               design/rtl/cpu/rv32i_alu.v:88.25-88.59
+Info:                               /share/gowin/arith_map.v:57.7-63.5
+Info:                               /share/gowin/cells_sim.v:1033.25-1033.29
+Info:      logic  0.06  9.54 Source u_core.alu_q_DFFRE_Q_27_D_LUT3_F_I2_LUT3_F_I2_ALU_SUM_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN.COUT
+Info:    routing  0.00  9.54 Net u_core.alu_q_DFFRE_Q_27_D_LUT3_F_I2_LUT3_F_I2_ALU_SUM_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT (5,5) -> (5,5)
+Info:                          Sink u_core.alu_q_DFFRE_Q_27_D_LUT3_F_I2_LUT3_F_I2_ALU_SUM_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN.CIN
+Info:                          Defined in:
+Info:                               design/rtl/cpu/rv32i_alu.v:88.25-88.59
+Info:                               /share/gowin/arith_map.v:57.7-63.5
+Info:                               /share/gowin/cells_sim.v:1033.25-1033.29
+Info:      logic  0.06  9.60 Source u_core.alu_q_DFFRE_Q_27_D_LUT3_F_I2_LUT3_F_I2_ALU_SUM_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN.COUT
+Info:    routing  0.00  9.60 Net u_core.alu_q_DFFRE_Q_27_D_LUT3_F_I2_LUT3_F_I2_ALU_SUM_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT (5,5) -> (6,5)
+Info:                          Sink u_core.alu_q_DFFRE_Q_27_D_LUT3_F_I2_LUT3_F_I2_ALU_SUM_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN.CIN
+Info:                          Defined in:
+Info:                               design/rtl/cpu/rv32i_alu.v:88.25-88.59
+Info:                               /share/gowin/arith_map.v:57.7-63.5
+Info:                               /share/gowin/cells_sim.v:1033.25-1033.29
+Info:      logic  0.06  9.65 Source u_core.alu_q_DFFRE_Q_27_D_LUT3_F_I2_LUT3_F_I2_ALU_SUM_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN.COUT
+Info:    routing  0.00  9.65 Net u_core.alu_q_DFFRE_Q_27_D_LUT3_F_I2_LUT3_F_I2_ALU_SUM_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT (6,5) -> (6,5)
+Info:                          Sink u_core.alu_q_DFFRE_Q_27_D_LUT3_F_I2_LUT3_F_I2_ALU_SUM_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN.CIN
+Info:                          Defined in:
+Info:                               design/rtl/cpu/rv32i_alu.v:88.25-88.59
+Info:                               /share/gowin/arith_map.v:57.7-63.5
+Info:                               /share/gowin/cells_sim.v:1033.25-1033.29
+Info:      logic  0.06  9.71 Source u_core.alu_q_DFFRE_Q_27_D_LUT3_F_I2_LUT3_F_I2_ALU_SUM_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN.COUT
+Info:    routing  0.00  9.71 Net u_core.alu_q_DFFRE_Q_27_D_LUT3_F_I2_LUT3_F_I2_ALU_SUM_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT (6,5) -> (6,5)
+Info:                          Sink u_core.alu_q_DFFRE_Q_27_D_LUT3_F_I2_LUT3_F_I2_ALU_SUM_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN.CIN
+Info:                          Defined in:
+Info:                               design/rtl/cpu/rv32i_alu.v:88.25-88.59
+Info:                               /share/gowin/arith_map.v:57.7-63.5
+Info:                               /share/gowin/cells_sim.v:1033.25-1033.29
+Info:      logic  0.06  9.77 Source u_core.alu_q_DFFRE_Q_27_D_LUT3_F_I2_LUT3_F_I2_ALU_SUM_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN.COUT
+Info:    routing  0.00  9.77 Net u_core.alu_q_DFFRE_Q_27_D_LUT3_F_I2_LUT3_F_I2_ALU_SUM_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT (6,5) -> (6,5)
+Info:                          Sink u_core.alu_q_DFFRE_Q_27_D_LUT3_F_I2_LUT3_F_I2_ALU_SUM_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN.CIN
+Info:                          Defined in:
+Info:                               design/rtl/cpu/rv32i_alu.v:88.25-88.59
+Info:                               /share/gowin/arith_map.v:57.7-63.5
+Info:                               /share/gowin/cells_sim.v:1033.25-1033.29
+Info:      logic  0.06  9.82 Source u_core.alu_q_DFFRE_Q_27_D_LUT3_F_I2_LUT3_F_I2_ALU_SUM_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN.COUT
+Info:    routing  0.00  9.82 Net u_core.alu_q_DFFRE_Q_27_D_LUT3_F_I2_LUT3_F_I2_ALU_SUM_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT (6,5) -> (6,5)
+Info:                          Sink u_core.alu_q_DFFRE_Q_27_D_LUT3_F_I2_LUT3_F_I2_ALU_SUM_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN.CIN
+Info:                          Defined in:
+Info:                               design/rtl/cpu/rv32i_alu.v:88.25-88.59
+Info:                               /share/gowin/arith_map.v:57.7-63.5
+Info:                               /share/gowin/cells_sim.v:1033.25-1033.29
+Info:      logic  0.06  9.88 Source u_core.alu_q_DFFRE_Q_27_D_LUT3_F_I2_LUT3_F_I2_ALU_SUM_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN.COUT
+Info:    routing  0.00  9.88 Net u_core.alu_q_DFFRE_Q_27_D_LUT3_F_I2_LUT3_F_I2_ALU_SUM_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT (6,5) -> (6,5)
+Info:                          Sink u_core.alu_q_DFFRE_Q_27_D_LUT3_F_I2_LUT3_F_I2_ALU_SUM_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN.CIN
+Info:                          Defined in:
+Info:                               design/rtl/cpu/rv32i_alu.v:88.25-88.59
+Info:                               /share/gowin/arith_map.v:57.7-63.5
+Info:                               /share/gowin/cells_sim.v:1033.25-1033.29
+Info:      logic  0.06  9.94 Source u_core.alu_q_DFFRE_Q_27_D_LUT3_F_I2_LUT3_F_I2_ALU_SUM_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN.COUT
+Info:    routing  0.00  9.94 Net u_core.alu_q_DFFRE_Q_27_D_LUT3_F_I2_LUT3_F_I2_ALU_SUM_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT (6,5) -> (7,5)
+Info:                          Sink u_core.alu_q_DFFRE_Q_27_D_LUT3_F_I2_LUT3_F_I2_ALU_SUM_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN.CIN
+Info:                          Defined in:
+Info:                               design/rtl/cpu/rv32i_alu.v:88.25-88.59
+Info:                               /share/gowin/arith_map.v:57.7-63.5
+Info:                               /share/gowin/cells_sim.v:1033.25-1033.29
+Info:      logic  0.06  9.99 Source u_core.alu_q_DFFRE_Q_27_D_LUT3_F_I2_LUT3_F_I2_ALU_SUM_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN.COUT
+Info:    routing  0.00  9.99 Net u_core.alu_q_DFFRE_Q_27_D_LUT3_F_I2_LUT3_F_I2_ALU_SUM_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT (7,5) -> (7,5)
+Info:                          Sink u_core.alu_q_DFFRE_Q_27_D_LUT3_F_I2_LUT3_F_I2_ALU_SUM_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN.CIN
+Info:                          Defined in:
+Info:                               design/rtl/cpu/rv32i_alu.v:88.25-88.59
+Info:                               /share/gowin/arith_map.v:57.7-63.5
+Info:                               /share/gowin/cells_sim.v:1033.25-1033.29
+Info:      logic  0.06  10.05 Source u_core.alu_q_DFFRE_Q_27_D_LUT3_F_I2_LUT3_F_I2_ALU_SUM_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN.COUT
+Info:    routing  0.00  10.05 Net u_core.alu_q_DFFRE_Q_27_D_LUT3_F_I2_LUT3_F_I2_ALU_SUM_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT (7,5) -> (7,5)
+Info:                          Sink u_core.alu_q_DFFRE_Q_27_D_LUT3_F_I2_LUT3_F_I2_ALU_SUM_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN.CIN
+Info:                          Defined in:
+Info:                               design/rtl/cpu/rv32i_alu.v:88.25-88.59
+Info:                               /share/gowin/arith_map.v:57.7-63.5
+Info:                               /share/gowin/cells_sim.v:1033.25-1033.29
+Info:      logic  0.06  10.11 Source u_core.alu_q_DFFRE_Q_27_D_LUT3_F_I2_LUT3_F_I2_ALU_SUM_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN.COUT
+Info:    routing  0.00  10.11 Net u_core.alu_q_DFFRE_Q_27_D_LUT3_F_I2_LUT3_F_I2_ALU_SUM_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT (7,5) -> (7,5)
+Info:                          Sink u_core.alu_q_DFFRE_Q_27_D_LUT3_F_I2_LUT3_F_I2_ALU_SUM_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN.CIN
+Info:                          Defined in:
+Info:                               design/rtl/cpu/rv32i_alu.v:88.25-88.59
+Info:                               /share/gowin/arith_map.v:57.7-63.5
+Info:                               /share/gowin/cells_sim.v:1033.25-1033.29
+Info:      logic  0.06  10.17 Source u_core.alu_q_DFFRE_Q_27_D_LUT3_F_I2_LUT3_F_I2_ALU_SUM_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN.COUT
+Info:    routing  0.00  10.17 Net u_core.alu_q_DFFRE_Q_27_D_LUT3_F_I2_LUT3_F_I2_ALU_SUM_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT (7,5) -> (7,5)
+Info:                          Sink u_core.alu_q_DFFRE_Q_27_D_LUT3_F_I2_LUT3_F_I2_ALU_SUM_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN.CIN
+Info:                          Defined in:
+Info:                               design/rtl/cpu/rv32i_alu.v:88.25-88.59
+Info:                               /share/gowin/arith_map.v:57.7-63.5
+Info:                               /share/gowin/cells_sim.v:1033.25-1033.29
+Info:      logic  0.06  10.22 Source u_core.alu_q_DFFRE_Q_27_D_LUT3_F_I2_LUT3_F_I2_ALU_SUM_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN.COUT
+Info:    routing  0.00  10.22 Net u_core.alu_q_DFFRE_Q_27_D_LUT3_F_I2_LUT3_F_I2_ALU_SUM_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT (7,5) -> (7,5)
+Info:                          Sink u_core.alu_q_DFFRE_Q_27_D_LUT3_F_I2_LUT3_F_I2_ALU_SUM_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN.CIN
+Info:                          Defined in:
+Info:                               design/rtl/cpu/rv32i_alu.v:88.25-88.59
+Info:                               /share/gowin/arith_map.v:57.7-63.5
+Info:                               /share/gowin/cells_sim.v:1033.25-1033.29
+Info:      logic  0.06  10.28 Source u_core.alu_q_DFFRE_Q_27_D_LUT3_F_I2_LUT3_F_I2_ALU_SUM_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN.COUT
+Info:    routing  0.00  10.28 Net u_core.alu_q_DFFRE_Q_27_D_LUT3_F_I2_LUT3_F_I2_ALU_SUM_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT (7,5) -> (8,5)
+Info:                          Sink u_core.alu_q_DFFRE_Q_27_D_LUT3_F_I2_LUT3_F_I2_ALU_SUM_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN.CIN
+Info:                          Defined in:
+Info:                               design/rtl/cpu/rv32i_alu.v:88.25-88.59
+Info:                               /share/gowin/arith_map.v:57.7-63.5
+Info:                               /share/gowin/cells_sim.v:1033.25-1033.29
+Info:      logic  0.06  10.34 Source u_core.alu_q_DFFRE_Q_27_D_LUT3_F_I2_LUT3_F_I2_ALU_SUM_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN.COUT
+Info:    routing  0.00  10.34 Net u_core.alu_q_DFFRE_Q_27_D_LUT3_F_I2_LUT3_F_I2_ALU_SUM_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT (8,5) -> (8,5)
+Info:                          Sink u_core.alu_q_DFFRE_Q_27_D_LUT3_F_I2_LUT3_F_I2_ALU_SUM_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN.CIN
+Info:                          Defined in:
+Info:                               design/rtl/cpu/rv32i_alu.v:88.25-88.59
+Info:                               /share/gowin/arith_map.v:57.7-63.5
+Info:                               /share/gowin/cells_sim.v:1033.25-1033.29
+Info:      logic  0.06  10.39 Source u_core.alu_q_DFFRE_Q_27_D_LUT3_F_I2_LUT3_F_I2_ALU_SUM_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN.COUT
+Info:    routing  0.00  10.39 Net u_core.alu_q_DFFRE_Q_27_D_LUT3_F_I2_LUT3_F_I2_ALU_SUM_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT (8,5) -> (8,5)
+Info:                          Sink u_core.alu_q_DFFRE_Q_27_D_LUT3_F_I2_LUT3_F_I2_ALU_SUM_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN.CIN
+Info:                          Defined in:
+Info:                               design/rtl/cpu/rv32i_alu.v:88.25-88.59
+Info:                               /share/gowin/arith_map.v:57.7-63.5
+Info:                               /share/gowin/cells_sim.v:1033.25-1033.29
+Info:      logic  0.06  10.45 Source u_core.alu_q_DFFRE_Q_27_D_LUT3_F_I2_LUT3_F_I2_ALU_SUM_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN.COUT
+Info:    routing  0.00  10.45 Net u_core.alu_q_DFFRE_Q_27_D_LUT3_F_I2_LUT3_F_I2_ALU_SUM_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT (8,5) -> (8,5)
+Info:                          Sink u_core.alu_q_DFFRE_Q_27_D_LUT3_F_I2_LUT3_F_I2_ALU_SUM_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN.CIN
+Info:                          Defined in:
+Info:                               design/rtl/cpu/rv32i_alu.v:88.25-88.59
+Info:                               /share/gowin/arith_map.v:57.7-63.5
+Info:                               /share/gowin/cells_sim.v:1033.25-1033.29
+Info:      logic  0.56  11.01 Source u_core.alu_q_DFFRE_Q_27_D_LUT3_F_I2_LUT3_F_I2_ALU_SUM_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN.SUM
+Info:    routing  0.33  11.34 Net u_core.alu_q_DFFRE_Q_27_D_LUT3_F_I2_LUT3_F_I2_ALU_SUM_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_SUM[3] (8,5) -> (8,5)
+Info:                          Sink u_core.shamt_q_DFFRE_Q_4_D_LUT3_F_I2_LUT4_I2_F_LUT4_I3_F_LUT4_F.I3
+Info:                          Defined in:
+Info:                               /share/gowin/cells_map.v:130.20-130.21
+Info:      logic  0.62  11.97 Source u_core.shamt_q_DFFRE_Q_4_D_LUT3_F_I2_LUT4_I2_F_LUT4_I3_F_LUT4_F.F
+Info:    routing  0.41  12.38 Net u_core.shamt_q_DFFRE_Q_4_D_LUT3_F_I2_LUT4_I2_F_LUT4_I3_F[3] (8,5) -> (7,5)
+Info:                          Sink u_core.alu_q_DFFRE_Q_31_D_LUT4_F_I3_LUT4_F.I3
+Info:                          Defined in:
+Info:                               /share/gowin/cells_map.v:130.20-130.21
+Info:      logic  0.62  13.00 Source u_core.alu_q_DFFRE_Q_31_D_LUT4_F_I3_LUT4_F.F
+Info:    routing  2.08  15.08 Net u_core.alu_q_DFFRE_Q_31_D_LUT4_F_I2[3] (7,5) -> (4,10)
+Info:                          Sink halted_LUT2_I0_F_LUT4_I2_F_LUT4_F.I3
+Info:                          Defined in:
+Info:                               /share/gowin/cells_map.v:130.20-130.21
+Info:      logic  0.62  15.71 Source halted_LUT2_I0_F_LUT4_I2_F_LUT4_F.F
+Info:    routing  0.89  16.60 Net halted_LUT2_I0_F_LUT4_I2_F[2] (4,10) -> (3,12)
+Info:                          Sink trap_cause_DFFRE_Q_CE_LUT4_F.I2
+Info:                          Defined in:
+Info:                               /share/gowin/cells_map.v:130.20-130.21
+Info:      logic  0.82  17.42 Source trap_cause_DFFRE_Q_CE_LUT4_F.F
+Info:    routing  0.48  17.90 Net trap_cause_DFFRE_Q_CE (3,12) -> (3,11)
+Info:                          Sink trap_cause_DFFRE_Q_1.CE
+Info:      setup  0.04  17.94 Source trap_cause_DFFRE_Q_1.CE
+Info: 11.65 ns logic, 6.30 ns routing
+
+Info: Max frequency for clock 'u_core.clk': 55.74 MHz (PASS at 27.00 MHz)
+
+Info: Slack histogram:
+Info:  legend: * represents 1 endpoint(s)
+Info:          + represents [1,1) endpoint(s)
+Info: [ 19095,  19944) |****+
+Info: [ 19944,  20793) | 
+Info: [ 20793,  21642) | 
+Info: [ 21642,  22491) | 
+Info: [ 22491,  23340) |+
+Info: [ 23340,  24189) |*+
+Info: [ 24189,  25038) |+
+Info: [ 25038,  25887) | 
+Info: [ 25887,  26736) | 
+Info: [ 26736,  27585) |********+
+Info: [ 27585,  28434) |*******+
+Info: [ 28434,  29283) |*******************+
+Info: [ 29283,  30132) |********************+
+Info: [ 30132,  30981) |***********+
+Info: [ 30981,  31830) |*****+
+Info: [ 31830,  32679) |**********+
+Info: [ 32679,  33528) |**************+
+Info: [ 33528,  34377) |*********************************+
+Info: [ 34377,  35226) |************************************************************ 
+Info: [ 35226,  36075) |**************+
+
+Info: Program finished normally.
+PNR_EXIT=0

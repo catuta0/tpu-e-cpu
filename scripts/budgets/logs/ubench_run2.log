@@ -1,0 +1,36 @@
+# command: PNR_TIMEOUT=900 SEEDS="1 2 3" bash scripts/budgets/run_ubench.sh cpu_proxy
+# date: 2026-11-04T03:27:25Z  revision: 494448a-dirty
+# yosys: Yosys 0.70 (git sha1 28ba3cb92, Release, Clang /workspace/YoWASP/yosys/wasi-sdk-33.0-x86_64-linux/share/cmake/../..//bin/clang++ 22.1.0)
+# nextpnr: "yowasp-nextpnr-himbaechel-gowin" -- Next Generation Place and Route (Version nextpnr-0.11.1)
+# apycula: Version: 0.32
+# picorv32.v: https://raw.githubusercontent.com/YosysHQ/picorv32/main/picorv32.v sha256=0836050971b3c6cdd28ac3b1e5719a67fb645161912bef1e472e63995ceb0622
+
+================ sc_nl16_il8_m0 (top=sc_ubench_top -set RNG_MODE 0) ================
+
+================ sc_nl16_il8_m1 (top=sc_ubench_top -set RNG_MODE 1) ================
+
+================ sc_nl16_il8_m2 (top=sc_ubench_top -set RNG_MODE 2) ================
+
+================ sc_nl16_il4_m1 (top=sc_ubench_top -set IL 4 -set AW 6 -set RNG_MODE 1) ================
+
+================ sc_nl16_il16_m1 (top=sc_ubench_top -set IL 16 -set AW 8 -set RNG_MODE 1) ================
+
+================ cpu_proxy (top=cpu_proxy_top ) ================
+yosys exit=0
+  IOB:       8/    276     2%
+  LUT4:    1950/   8640    22%
+  MUX2_LUT5:     308/   4320     7%
+  MUX2_LUT6:      85/   2160     3%
+  MUX2_LUT7:      38/   1080     3%
+  MUX2_LUT8:      16/   1080     1%
+  ALU:     244/   6480     3%
+  DFF:     626/   6480     9%
+  RAM16SDP4:      32/    270    11%
+  BSRAM:       2/     26     7%
+  MULT18X18:       0/     20     0%
+  MULT9X9:       0/     40     0%
+  seed 1 nextpnr exit=0 :: Max frequency for clock 'u_cpu.clk': 91.32 MHz (PASS at 27.00 MHz)
+  seed 2 nextpnr exit=0 :: Max frequency for clock 'u_cpu.clk': 93.21 MHz (PASS at 27.00 MHz)
+  seed 3 nextpnr exit=0 :: Max frequency for clock 'u_cpu.clk': 94.46 MHz (PASS at 27.00 MHz)
+
+# done

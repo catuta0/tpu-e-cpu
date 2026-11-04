@@ -71,3 +71,22 @@ description: Workflow for RTL simulation, lint, synthesis and place-and-route of
   the INJECT_FAULT negative run. Verilator TB lint needs `--timing`; it flags
   blocking clock generators (use `always #(T) clk <= ~clk;`) and 32-bit
   integer localparams passed to narrower task args (declare `localparam [W-1:0]`).
+- (RTL-CPU) **Small inferred BSRAM (e.g. a 32x32 register file):** add
+  `(* ram_style = "block", no_rw_check *)` on the memory. `ram_style` alone maps to
+  SDPX9B but Yosys then emulates read-first collision behaviour (+72 DFF, ~130 LUT/MUX
+  for a 2-read-port regfile); `no_rw_check` removes it (only valid if read and write of
+  the same address never happen in the same cycle). Read with `if (en) q <= mem[a];`
+  maps to CEB (output held). Without `ram_style`, Yosys picks LUT RAM for <= 1 kbit.
+- (RTL-CPU) **`synth_gowin -nowidelut` was clearly smaller for mux-heavy datapaths**:
+  rv32i_core 831 LUT + 0 MUX2 vs 1103 LUT + 473 MUX2_LUT5..8 with the default; routed
+  Fmax was similar. Compare both for every new block.
+- (RTL-CPU) A 33-bit 5-level barrel shifter costs ~283 LUT + 164 MUX2 cells (default
+  mapping). The CPU uses an iterative 4/1-bit shifter instead.
+- (RTL-CPU) `synth_gowin -noflatten` inserts IBUF/OBUF on sub-module ports, so nextpnr
+  fails ("Unconstrained IO: u_core.u_regfile..."). Use it only for per-module stats; for
+  out-of-context counts use `-noiopads`.
+- (RTL-CPU) Verilator treats a `//` comment whose first word is "Verilator" as a
+  pragma (syntax error). Don't start comments with that word.
+- (RTL-CPU) No behavioural BSRAM model ships with yowasp-yosys (`cells_xtra_gw1n.v`
+  SDPX9B/SPX9 are black-box stubs), so gate-level simulation of BSRAM designs needs a
+  hand-written model.

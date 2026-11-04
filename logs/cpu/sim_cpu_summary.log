@@ -1,38 +1,38 @@
-# RTL-CPU simulation regression  2026-11-04T03:25:05+00:00  revision 309ecaf-dirty
+# RTL-CPU simulation regression  2026-11-04T03:35:12+00:00  revision 494448a-dirty
 # tests: sim/data/cpu_tests/index.txt (44 tests)  configs: ws0 ws1 ws3 rand
 # tool: Icarus Verilog version 12.0 (stable) ()
 # columns: test, status per config, ws0 cycles, instret, CPI(ws0)
 PASS dir_lui_auipc              ws0=PASS ws1=PASS ws3=PASS rand=PASS cycles=219 instret=58 cpi_ws0=3.776
 PASS dir_alu_imm                ws0=PASS ws1=PASS ws3=PASS rand=PASS cycles=247 instret=62 cpi_ws0=3.984
 PASS dir_alu_reg                ws0=PASS ws1=PASS ws3=PASS rand=PASS cycles=284 instret=72 cpi_ws0=3.944
-PASS dir_shifts                 ws0=PASS ws1=PASS ws3=PASS rand=PASS cycles=278 instret=70 cpi_ws0=3.971
-PASS dir_branches               ws0=PASS ws1=PASS ws3=PASS rand=PASS cycles=647 instret=174 cpi_ws0=3.718
+PASS dir_shifts                 ws0=PASS ws1=PASS ws3=PASS rand=PASS cycles=358 instret=70 cpi_ws0=5.114
+PASS dir_branches               ws0=PASS ws1=PASS ws3=PASS rand=PASS cycles=663 instret=174 cpi_ws0=3.810
 PASS dir_jumps                  ws0=PASS ws1=PASS ws3=PASS rand=PASS cycles=264 instret=69 cpi_ws0=3.826
 PASS dir_loads                  ws0=PASS ws1=PASS ws3=PASS rand=PASS cycles=276 instret=64 cpi_ws0=4.312
 PASS dir_stores                 ws0=PASS ws1=PASS ws3=PASS rand=PASS cycles=331 instret=79 cpi_ws0=4.190
-PASS dir_x0                     ws0=PASS ws1=PASS ws3=PASS rand=PASS cycles=241 instret=61 cpi_ws0=3.951
+PASS dir_x0                     ws0=PASS ws1=PASS ws3=PASS rand=PASS cycles=244 instret=61 cpi_ws0=4.000
 PASS dir_fence_nop              ws0=PASS ws1=PASS ws3=PASS rand=PASS cycles=196 instret=50 cpi_ws0=3.920
 PASS dir_mmio                   ws0=PASS ws1=PASS ws3=PASS rand=PASS cycles=185 instret=46 cpi_ws0=4.022
-PASS rand_00                    ws0=PASS ws1=PASS ws3=PASS rand=PASS cycles=886 instret=232 cpi_ws0=3.819
-PASS rand_01                    ws0=PASS ws1=PASS ws3=PASS rand=PASS cycles=1009 instret=259 cpi_ws0=3.896
-PASS rand_02                    ws0=PASS ws1=PASS ws3=PASS rand=PASS cycles=1037 instret=269 cpi_ws0=3.855
-PASS rand_03                    ws0=PASS ws1=PASS ws3=PASS rand=PASS cycles=1013 instret=261 cpi_ws0=3.881
-PASS rand_04                    ws0=PASS ws1=PASS ws3=PASS rand=PASS cycles=988 instret=259 cpi_ws0=3.815
-PASS rand_05                    ws0=PASS ws1=PASS ws3=PASS rand=PASS cycles=1074 instret=278 cpi_ws0=3.863
-PASS rand_06                    ws0=PASS ws1=PASS ws3=PASS rand=PASS cycles=997 instret=260 cpi_ws0=3.835
-PASS rand_07                    ws0=PASS ws1=PASS ws3=PASS rand=PASS cycles=1077 instret=274 cpi_ws0=3.931
-PASS rand_08                    ws0=PASS ws1=PASS ws3=PASS rand=PASS cycles=1055 instret=272 cpi_ws0=3.879
-PASS rand_09                    ws0=PASS ws1=PASS ws3=PASS rand=PASS cycles=1020 instret=263 cpi_ws0=3.878
-PASS rand_10                    ws0=PASS ws1=PASS ws3=PASS rand=PASS cycles=1074 instret=274 cpi_ws0=3.920
-PASS rand_11                    ws0=PASS ws1=PASS ws3=PASS rand=PASS cycles=1094 instret=279 cpi_ws0=3.921
-PASS rand_12                    ws0=PASS ws1=PASS ws3=PASS rand=PASS cycles=1008 instret=261 cpi_ws0=3.862
-PASS rand_13                    ws0=PASS ws1=PASS ws3=PASS rand=PASS cycles=1089 instret=277 cpi_ws0=3.931
-PASS rand_14                    ws0=PASS ws1=PASS ws3=PASS rand=PASS cycles=1025 instret=264 cpi_ws0=3.883
-PASS rand_15                    ws0=PASS ws1=PASS ws3=PASS rand=PASS cycles=1031 instret=266 cpi_ws0=3.876
-PASS rand_16                    ws0=PASS ws1=PASS ws3=PASS rand=PASS cycles=1027 instret=266 cpi_ws0=3.861
-PASS rand_17                    ws0=PASS ws1=PASS ws3=PASS rand=PASS cycles=954 instret=249 cpi_ws0=3.831
-PASS rand_18                    ws0=PASS ws1=PASS ws3=PASS rand=PASS cycles=970 instret=249 cpi_ws0=3.896
-PASS rand_19                    ws0=PASS ws1=PASS ws3=PASS rand=PASS cycles=1113 instret=288 cpi_ws0=3.865
+PASS rand_00                    ws0=PASS ws1=PASS ws3=PASS rand=PASS cycles=977 instret=232 cpi_ws0=4.211
+PASS rand_01                    ws0=PASS ws1=PASS ws3=PASS rand=PASS cycles=1086 instret=259 cpi_ws0=4.193
+PASS rand_02                    ws0=PASS ws1=PASS ws3=PASS rand=PASS cycles=1210 instret=269 cpi_ws0=4.498
+PASS rand_03                    ws0=PASS ws1=PASS ws3=PASS rand=PASS cycles=1085 instret=261 cpi_ws0=4.157
+PASS rand_04                    ws0=PASS ws1=PASS ws3=PASS rand=PASS cycles=1097 instret=259 cpi_ws0=4.236
+PASS rand_05                    ws0=PASS ws1=PASS ws3=PASS rand=PASS cycles=1250 instret=278 cpi_ws0=4.496
+PASS rand_06                    ws0=PASS ws1=PASS ws3=PASS rand=PASS cycles=1033 instret=260 cpi_ws0=3.973
+PASS rand_07                    ws0=PASS ws1=PASS ws3=PASS rand=PASS cycles=1181 instret=274 cpi_ws0=4.310
+PASS rand_08                    ws0=PASS ws1=PASS ws3=PASS rand=PASS cycles=1158 instret=272 cpi_ws0=4.257
+PASS rand_09                    ws0=PASS ws1=PASS ws3=PASS rand=PASS cycles=1102 instret=263 cpi_ws0=4.190
+PASS rand_10                    ws0=PASS ws1=PASS ws3=PASS rand=PASS cycles=1181 instret=274 cpi_ws0=4.310
+PASS rand_11                    ws0=PASS ws1=PASS ws3=PASS rand=PASS cycles=1224 instret=279 cpi_ws0=4.387
+PASS rand_12                    ws0=PASS ws1=PASS ws3=PASS rand=PASS cycles=1134 instret=261 cpi_ws0=4.345
+PASS rand_13                    ws0=PASS ws1=PASS ws3=PASS rand=PASS cycles=1187 instret=277 cpi_ws0=4.285
+PASS rand_14                    ws0=PASS ws1=PASS ws3=PASS rand=PASS cycles=1121 instret=264 cpi_ws0=4.246
+PASS rand_15                    ws0=PASS ws1=PASS ws3=PASS rand=PASS cycles=1112 instret=266 cpi_ws0=4.180
+PASS rand_16                    ws0=PASS ws1=PASS ws3=PASS rand=PASS cycles=1179 instret=266 cpi_ws0=4.432
+PASS rand_17                    ws0=PASS ws1=PASS ws3=PASS rand=PASS cycles=1053 instret=249 cpi_ws0=4.229
+PASS rand_18                    ws0=PASS ws1=PASS ws3=PASS rand=PASS cycles=1099 instret=249 cpi_ws0=4.414
+PASS rand_19                    ws0=PASS ws1=PASS ws3=PASS rand=PASS cycles=1229 instret=288 cpi_ws0=4.267
 PASS trap_ecall                 ws0=PASS ws1=PASS ws3=PASS rand=PASS cycles=171 instret=43 cpi_ws0=3.977
 PASS trap_ebreak                ws0=PASS ws1=PASS ws3=PASS rand=PASS cycles=171 instret=43 cpi_ws0=3.977
 PASS trap_illegal_zero          ws0=PASS ws1=PASS ws3=PASS rand=PASS cycles=171 instret=43 cpi_ws0=3.977
@@ -48,5 +48,5 @@ PASS trap_misaligned_jal        ws0=PASS ws1=PASS ws3=PASS rand=PASS cycles=172 
 PASS trap_misaligned_branch     ws0=PASS ws1=PASS ws3=PASS rand=PASS cycles=175 instret=44 cpi_ws0=3.977
 # negative checks: sig fault -> TEST FAILED (1 failing checks) VVP_EXIT=1; proto fault -> TEST FAILED (1 failing checks) VVP_EXIT=1 (both failed as required: OK)
 # runs: 176 / 176 PASS
-# aggregate CPI at 0 wait states: 25950 cycles / 6667 instructions = 3.892
+# aggregate CPI at 0 wait states: 28206 cycles / 6667 instructions = 4.231
 SIM_CPU: ALL PASSED

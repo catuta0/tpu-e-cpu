@@ -16,7 +16,8 @@
 //
 // SUB-MODULES
 //   rv32i_decode  (rv32i_decode.v)  combinational decoder of `ir`
-//   rv32i_alu     (rv32i_alu.v)     combinational ALU (one adder, one shifter)
+//   rv32i_alu     (rv32i_alu.v)     combinational ALU (one adder, no shifter;
+//                                   shifts are iterated in the SHIFT state)
 //   rv32i_regfile (rv32i_regfile.v) 32x32 register file in 2 BSRAM blocks,
 //                                   synchronous read, 1-cycle latency
 //
@@ -82,7 +83,14 @@
 //   +---------+   (taken target bit 1 set ------------------------> HALT 4)
 //       |   |---- LOAD/STORE: alu_q <= rs1+imm; misaligned -------> HALT 5/6
 //       |   |                                     else --> MEM
-//       |   +---- OP, OP-IMM, JALR: alu_q <= result ---------+
+//       |   |---- SLL/SRL/SRA(I): alu_q <= rs1, shamt_q <= amount
+//       |   |         amount 0 --------------------------------+
+//       |   |         else --> SHIFT                           |
+//       |   +---- other OP, OP-IMM, JALR: alu_q <= result -----+
+//       |                                                      |
+//       |   +-------+ alu_q shifted by 4 (shamt_q >= 4) or 1;  |
+//       |   | SHIFT |<-+ shamt_q -= step; stay while > 0 ------+ (0 -> WB)
+//       |   +-------+--+                                       |
 //       v                                                    |
 //   +-----+ !mem_ready (wait)  mem_valid=1 mem_addr=alu_q     |
 //   | MEM |<---+               on mem_ready: LOAD alu_q <= load data -> WB
@@ -101,7 +109,8 @@
 // in the first mem_valid cycle; add the slave wait states of every access)
 //   LUI AUIPC JAL FENCE : FETCH DECODE WB                  = 3
 //   BRANCH (any outcome): FETCH DECODE EXECUTE             = 3
-//   OP OP-IMM JALR      : FETCH DECODE EXECUTE WB          = 4
+//   OP OP-IMM JALR      : FETCH DECODE EXECUTE WB          = 4  (non-shift)
+//   SLL/SRL/SRA(I) by n : 4 + floor(n/4) + (n mod 4)         = 4 .. 14
 //   STORE               : FETCH DECODE EXECUTE MEM         = 4
 //   LOAD                : FETCH DECODE EXECUTE MEM WB      = 5
 //   After reset: 32 CLEAR cycles before the first FETCH.
@@ -115,10 +124,12 @@
 //                  the register-file write address needs no extra mux.
 //   alu_q   [31:0] the one temporary register: branch/JAL target or AUIPC/LUI
 //                  value (DECODE), ALU result or memory address (EXECUTE),
-//                  load data (MEM). It feeds rd in WB, mem_addr in MEM and
+//                  load data (MEM), shifted operand (SHIFT). It feeds rd in
+//                  WB, mem_addr in MEM and
 //                  the jump target in WB/EXECUTE.
 //   rs1_q, rs2_q   register-file read data (BSRAM output registers, held
 //                  from the DECODE edge until the next DECODE).
+//   shamt_q [4:0]  remaining shift amount in the SHIFT state.
 //   state, trap_q, retire_q
 //
 // DESIGN DECISIONS (area / timing)
@@ -131,10 +142,14 @@
 //     30-bit incrementer (needed in the same cycle as the ALU for JAL/JALR
 //     links, branches and stores).
 //   * Store data replicated to all lanes instead of shifted (no barrel mux).
+//   * No barrel shifter: shifts are done in alu_q by 4 or 1 bit per cycle
+//     (SHIFT state). A Yosys/Gowin barrel shifter costs ~450 LUT/MUX cells
+//     (measured, see rv32i_alu.v); the iterative one ~3 LUT per bit, at the
+//     price of up to 10 extra cycles per shift instruction.
 //
 // TIMING (27 MHz, 37.0 ns period)
 //   Longest paths (by construction): rs1/rs2 BSRAM output -> operand-B mux
-//   -> ALU (33-bit carry chain or 5-level shifter) -> alu_q / misalignment
+//   -> ALU (33-bit carry chain) -> alu_q / misalignment
 //   check -> state; ir -> immediate mux -> ALU -> alu_q. The memory bus
 //   outputs are driven by registers through one 2:1 mux (mem_addr) or
 //   directly (wdata lanes, wstrb from alu_q[1:0] and funct3).
@@ -186,6 +201,7 @@ module rv32i_core (
     localparam [2:0] S_MEM    = 3'd4;   // load / store bus access
     localparam [2:0] S_WB     = 3'd5;   // register write, pc update
     localparam [2:0] S_HALT   = 3'd6;   // trapped, terminal until reset
+    localparam [2:0] S_SHIFT  = 3'd7;   // iterative shift of alu_q
 
     // Trap cause codes (INTERFACES.json "cpu.traps").
     localparam [3:0] T_NONE   = 4'd0;
@@ -205,6 +221,7 @@ module rv32i_core (
     reg [31:0] alu_q;       // temporary: target / result / address / load data
     reg [3:0]  trap_q;      // trap cause (0 until a trap)
     reg        retire_q;    // registered retire pulse
+    reg [4:0]  shamt_q;     // remaining shift amount (SHIFT state)
 
     // =========================================================================
     // Decoder (combinational, from ir)
@@ -371,6 +388,25 @@ module rv32i_core (
     };
 
     // =========================================================================
+    // Iterative shifter (EXECUTE loads alu_q, SHIFT steps it)
+    // =========================================================================
+    // Shift instructions are OP / OP-IMM with funct3 = 001 (SLL) or 101
+    // (SRL/SRA); in EXECUTE the ALU passes rs1 through (rv32i_alu.v) and the
+    // amount is operand B [4:0] (imm[4:0] = shamt for the I-form, rs2[4:0]
+    // for the R-form; the upper bits are ignored as RV32I requires).
+    wire       is_shift  = (d_funct3[1:0] == 2'b01) & ~d_branch & ~d_load & ~d_store & ~is_jump;
+    wire [4:0] shamt_new = alu_b[4:0];
+    // Direction: funct3[2] = 0 left (SLL), 1 right. SRA: instr[30] = 1, the
+    // vacated bits get the sign bit.
+    wire       sh_right  = d_funct3[2];
+    wire       sh_fill   = ir[30] & alu_q[31];
+    wire       sh_by4    = (shamt_q[4:2] != 3'b000);           // >= 4 remaining
+    wire [31:0] sh_step  = sh_right ?
+                           (sh_by4 ? {{4{sh_fill}}, alu_q[31:4]} : {sh_fill, alu_q[31:1]}) :
+                           (sh_by4 ? {alu_q[27:0], 4'b0000}      : {alu_q[30:0], 1'b0});
+    wire [4:0] shamt_nxt = shamt_q - (sh_by4 ? 5'd4 : 5'd1);
+
+    // =========================================================================
     // Bus outputs (combinational from registers; stable while waiting)
     // =========================================================================
     wire in_fetch = (state == S_FETCH);
@@ -392,6 +428,7 @@ module rv32i_core (
             alu_q    <= 32'd0;
             trap_q   <= T_NONE;
             retire_q <= 1'b0;
+            shamt_q  <= 5'd0;
         end else begin
             retire_q <= 1'b0;           // default: no retire this cycle
             case (state)
@@ -448,10 +485,22 @@ module rv32i_core (
                         end else begin
                             state  <= S_MEM;
                         end
+                    end else if (is_shift) begin
+                        alu_q   <= alu_y;            // = rs1 (ALU pass-through)
+                        shamt_q <= shamt_new;
+                        state   <= (shamt_new == 5'd0) ? S_WB : S_SHIFT;
                     end else begin
                         alu_q <= alu_y;              // OP / OP-IMM result, JALR target
                         state <= S_WB;
                     end
+                end
+                // -------------------------------------------------------------
+                // SHIFT: one step of 4 or 1 bit(s) per cycle until done.
+                S_SHIFT: begin
+                    alu_q   <= sh_step;
+                    shamt_q <= shamt_nxt;
+                    if (shamt_nxt == 5'd0)
+                        state <= S_WB;
                 end
                 // -------------------------------------------------------------
                 // MEM: one load or store transaction at alu_q.
@@ -481,7 +530,8 @@ module rv32i_core (
                     end
                 end
                 // -------------------------------------------------------------
-                // HALT (and any unused encoding): stay, no bus activity.
+                // HALT (S_HALT; all 8 encodings are used, so default = HALT):
+                // stay, no bus activity.
                 default: begin
                     state <= S_HALT;
                 end

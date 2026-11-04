@@ -108,6 +108,7 @@ module tb_sc_postproc;
         input integer acc;
         input integer bias;
         reg signed [63:0] L, nin, D, B, Dp, u, h, bt;
+        integer idx_i;
         begin
             L   = 64'sd1 <<< k;
             nin = layer2 ? 64'sd16 : 64'sd64;
@@ -124,17 +125,18 @@ module tb_sc_postproc;
             if (u == 128) cov_u128 = cov_u128 + 1;
             if (u == 0)   cov_u0   = cov_u0 + 1;
             q_dp[wr_ptr % QN]   = Dp;
-            q_code[wr_ptr % QN] = 128 + h;
-            q_idx[wr_ptr % QN]  = wr_ptr % 16;
+            q_code[wr_ptr % QN] = 8'd128 + h[7:0];
+            idx_i = wr_ptr % 16;
+            q_idx[wr_ptr % QN]  = idx_i[3:0];
             q_l2[wr_ptr % QN]   = layer2;
             // drive
             in_valid  <= 1'b1;
             in_layer2 <= layer2;
-            in_idx    <= wr_ptr % 16;
-            in_k      <= k;
-            in_s      <= s;
-            in_acc    <= acc;
-            in_bias   <= bias;
+            in_idx    <= idx_i[3:0];
+            in_k      <= k[3:0];
+            in_s      <= s[2:0];
+            in_acc    <= acc[AW-1:0];
+            in_bias   <= bias[15:0];
             wr_ptr = wr_ptr + 1;
             @(posedge clk);
             in_valid  <= 1'b0;
@@ -189,7 +191,7 @@ module tb_sc_postproc;
         for (l2 = 0; l2 < 2; l2 = l2 + 1)
             for (k = 4; k <= 10; k = k + 1)
                 for (s = 0; s <= 7; s = s + 1) begin
-                    nin = l2 ? 16 : 64;
+                    nin = (l2 != 0) ? 16 : 64;
                     L   = 1 << k;
                     acc_list[0] = 0;               acc_list[1] = 1;
                     acc_list[2] = nin * L / 2 - 1; acc_list[3] = nin * L / 2;
@@ -210,7 +212,7 @@ module tb_sc_postproc;
         for (l2 = 0; l2 < 2; l2 = l2 + 1)
             for (k = 4; k <= 10; k = k + 1)
                 for (s = 0; s <= 7; s = s + 1) begin
-                    nin  = l2 ? 16 : 64;
+                    nin  = (l2 != 0) ? 16 : 64;
                     L    = 1 << k;
                     acc0 = nin * L / 2;           // Dp = 0
                     thr  = (L >> s) / 2;          // acc offset giving Dp ~ L/2^s
@@ -230,7 +232,7 @@ module tb_sc_postproc;
             l2  = $unsigned($random(seed)) % 2;
             k   = 4 + $unsigned($random(seed)) % 7;
             s   = $unsigned($random(seed)) % 8;
-            nin = l2 ? 16 : 64;
+            nin = (l2 != 0) ? 16 : 64;
             L   = 1 << k;
             a   = $unsigned($random(seed)) % (nin * L + 1);
             b   = ($unsigned($random(seed)) % 65536) - 32768;
