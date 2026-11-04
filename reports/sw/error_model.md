@@ -78,8 +78,8 @@ Selected rows (full table in `accuracy.json`; values are RMS of e in bipolar uni
 | 8 | 2 | 0.353 | 0.499 | 0.483 | 0.483 | 0.198 | 0.195 | 0.199 |
 | 10 | 2 | 0.209 | 0.242 | 0.241 | 0.241 | 0.094 | 0.094 | 0.097 |
 
-Agreement (ensemble / eq. (2)), all 42 layer-K-mode combinations: within 0.82–1.13 except mode 0
-layer 1 at K = 10 (0.74) and mode 0 layer 2 at K = 10 (0.82) (`ensemble_ratio` in the JSON).
+Agreement (ensemble / eq. (2)), all 42 layer-K-mode combinations: ratio within 0.82–1.13 except
+mode 0, layer 1, K = 10 (0.74) (`ensemble_ratio` in the JSON).
 Equation (2) therefore predicts the expected error well; the measured error tends to fall
 *below* the prediction at the largest K in modes 0/1. Hypothesis (not verified): a layer uses up to
 8·L = 8192 consecutive states of a 65535-state m-sequence, i.e. sampling without replacement, which
@@ -98,6 +98,6 @@ few degrees of freedom. This explains the non-monotonic mode-0 accuracy versus K
   X/W the lag is 26829 cycles (> 10240 = cycles of a K = 10 inference: no overlap). In mode 2 the
   smallest lags are 321 (X0–W3), 541 (X4–X6), 1467 (W0–W2) cycles, i.e. inside one layer from K = 6
   on; such pairs re-use the same random number at two different cycles of the same accumulation
-  (CALCULATION, `accuracy.json` key `lfsr_lags`). The ensemble agreement for mode 2 (0.89–1.04)
+  (CALCULATION, `accuracy.json` key `lfsr_lags`). The ensemble agreement for mode 2 (0.89–1.06)
   suggests the effect is small for this workload.
 * The model is per layer; it does not propagate layer-1 errors through the clipped ReLU.
