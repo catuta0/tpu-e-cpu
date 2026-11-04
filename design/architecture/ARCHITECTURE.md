@@ -199,3 +199,15 @@ unused in rev A). Pin numbers: `design/constraints/tangnano9k.cst` (sourced).
   |Dp * 2^(s+7)| < 2^34); the RTL documents its chosen widths.
 - Margins: "with margin" means each FPGA resource <= 85 % of the device total and
   post-route Fmax >= 29.7 MHz (27 MHz + 10 %) on the worst of 3 seeds.
+
+## 11. Rev B (2026-11-04, ADR-008) — supersedes the seed values and default mode above
+- Default RNG_MODE = 2 (INDEPENDENT).
+- Phase-spaced seeds. Let S(n) be the state of the LFSR started at 0xACE1 after n
+  single steps. Modes 0/1: seed_x = S(0) = 0xACE1, seed_w = S(32768) = 0xF9DE.
+  Mode 2: seed_x_i = S(4096 i) = 0xACE1, 0x357B, 0x6F4D, 0xEAD3, 0x0348, 0x70BC,
+  0xB617, 0xC223; seed_w_i = S(32768 + 4096 i) = 0xF9DE, 0x71EC, 0xAA39, 0x520B,
+  0x9DB1, 0xF251, 0x5D8E, 0x91AB. Because 4096 is a multiple of 8, any two of the
+  16 LFSRs are >= 512 stream cycles apart on the common sequence, and X_i vs W_i
+  (the operands that are multiplied together) are 4096 stream cycles apart — more
+  than one full inference at K <= 8 (2560 stream cycles).
+- PARAMS.version = 0x02.

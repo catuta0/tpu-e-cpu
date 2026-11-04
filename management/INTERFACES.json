@@ -1,60 +1,171 @@
 {
-  "revision": "A",
-  "status": "FROZEN at G1 (2026-11-04)",
+  "revision": "B",
+  "status": "FROZEN rev B (2026-11-04, ADR-008); rev A superseded",
   "spec": "design/architecture/ARCHITECTURE.md",
-  "clock": {"name": "clk", "freq_hz": 27000000, "source": "Tang Nano 9K 27 MHz oscillator", "label": "SOURCE (see SOURCES.md)"},
-  "reset": {"board_input": "btn_rst_n (S1, active-low)", "internal": "rst, synchronous, active-high, 2-FF synchroniser"},
+  "clock": {
+    "name": "clk",
+    "freq_hz": 27000000,
+    "source": "Tang Nano 9K 27 MHz oscillator",
+    "label": "SOURCE (see SOURCES.md)"
+  },
+  "reset": {
+    "board_input": "btn_rst_n (S1, active-low)",
+    "internal": "rst, synchronous, active-high, 2-FF synchroniser"
+  },
   "top_ports": {
-    "clk": {"dir": "in", "width": 1},
-    "btn_rst_n": {"dir": "in", "width": 1},
-    "led_n": {"dir": "out", "width": 6, "polarity": "active-low"},
-    "uart_tx": {"dir": "out", "width": 1},
-    "uart_rx": {"dir": "in", "width": 1, "note": "unused in rev A"}
+    "clk": {
+      "dir": "in",
+      "width": 1
+    },
+    "btn_rst_n": {
+      "dir": "in",
+      "width": 1
+    },
+    "led_n": {
+      "dir": "out",
+      "width": 6,
+      "polarity": "active-low"
+    },
+    "uart_tx": {
+      "dir": "out",
+      "width": 1
+    },
+    "uart_rx": {
+      "dir": "in",
+      "width": 1,
+      "note": "unused in rev A"
+    }
   },
   "bus": {
     "type": "native valid/ready (PicoRV32-style)",
     "signals": {
-      "mem_valid": {"dir": "cpu->slave", "width": 1},
-      "mem_instr": {"dir": "cpu->slave", "width": 1},
-      "mem_addr":  {"dir": "cpu->slave", "width": 32},
-      "mem_wdata": {"dir": "cpu->slave", "width": 32},
-      "mem_wstrb": {"dir": "cpu->slave", "width": 4, "note": "0000 = read"},
-      "mem_ready": {"dir": "slave->cpu", "width": 1, "note": "one-cycle completion pulse, only while mem_valid"},
-      "mem_rdata": {"dir": "slave->cpu", "width": 32, "note": "valid when mem_ready"}
+      "mem_valid": {
+        "dir": "cpu->slave",
+        "width": 1
+      },
+      "mem_instr": {
+        "dir": "cpu->slave",
+        "width": 1
+      },
+      "mem_addr": {
+        "dir": "cpu->slave",
+        "width": 32
+      },
+      "mem_wdata": {
+        "dir": "cpu->slave",
+        "width": 32
+      },
+      "mem_wstrb": {
+        "dir": "cpu->slave",
+        "width": 4,
+        "note": "0000 = read"
+      },
+      "mem_ready": {
+        "dir": "slave->cpu",
+        "width": 1,
+        "note": "one-cycle completion pulse, only while mem_valid"
+      },
+      "mem_rdata": {
+        "dir": "slave->cpu",
+        "width": 32,
+        "note": "valid when mem_ready"
+      }
     },
     "endianness": "little",
     "unmapped": "read 0, write ignored, mem_ready returned, sticky bus_err"
   },
   "memory_map": {
-    "RAM":    {"base": "0x00000000", "size": 4096, "init": "INIT_FILE (prog.hex, 1024 x 32-bit)"},
-    "PERIPH": {"base": "0x10000000", "size": 32},
-    "TPU":    {"base": "0x20000000", "size": 4096},
+    "RAM": {
+      "base": "0x00000000",
+      "size": 4096,
+      "init": "INIT_FILE (prog.hex, 1024 x 32-bit)"
+    },
+    "PERIPH": {
+      "base": "0x10000000",
+      "size": 32
+    },
+    "TPU": {
+      "base": "0x20000000",
+      "size": 4096
+    },
     "decode": "addr[31:28]"
   },
   "periph_regs": {
-    "LED":         {"offset": "0x00", "access": "RW", "bits": "[5:0] 1=lit"},
-    "UART_TX":     {"offset": "0x04", "access": "W",  "bits": "[7:0] byte, ignored if busy"},
-    "UART_STATUS": {"offset": "0x08", "access": "R",  "bits": "[0] tx_busy"},
-    "CYCLE":       {"offset": "0x0C", "access": "R",  "bits": "[31:0] cycles since reset"},
-    "TOHOST":      {"offset": "0x10", "access": "RW", "bits": "[31:0] TB mailbox, 1=pass"}
+    "LED": {
+      "offset": "0x00",
+      "access": "RW",
+      "bits": "[5:0] 1=lit"
+    },
+    "UART_TX": {
+      "offset": "0x04",
+      "access": "W",
+      "bits": "[7:0] byte, ignored if busy"
+    },
+    "UART_STATUS": {
+      "offset": "0x08",
+      "access": "R",
+      "bits": "[0] tx_busy"
+    },
+    "CYCLE": {
+      "offset": "0x0C",
+      "access": "R",
+      "bits": "[31:0] cycles since reset"
+    },
+    "TOHOST": {
+      "offset": "0x10",
+      "access": "RW",
+      "bits": "[31:0] TB mailbox, 1=pass"
+    }
   },
-  "uart": {"baud": 115200, "format": "8N1", "divider_clocks_per_bit": 234},
+  "uart": {
+    "baud": 115200,
+    "format": "8N1",
+    "divider_clocks_per_bit": 234
+  },
   "tpu": {
-    "geometry": {"NL": 16, "IL": 8},
-    "network": {"layers": [64, 16, 10], "tiles": [8, 2], "hidden_activation": "clipped ReLU", "output": "argmax over lanes 0..9, ties->lowest"},
-    "code": {"width": 8, "value": "v(c) = (c-128)/128"},
+    "geometry": {
+      "NL": 16,
+      "IL": 8
+    },
+    "network": {
+      "layers": [
+        64,
+        16,
+        10
+      ],
+      "tiles": [
+        8,
+        2
+      ],
+      "hidden_activation": "clipped ReLU",
+      "output": "argmax over lanes 0..9, ties->lowest"
+    },
+    "code": {
+      "width": 8,
+      "value": "v(c) = (c-128)/128"
+    },
     "sng": "bit = (r < c), r 8-bit",
     "mult": "XNOR (bipolar)",
     "accumulate": "APC: acc_j += popcount over IL lanes per stream cycle",
     "lfsr": {
-      "width": 16, "polynomial": "x^16+x^14+x^13+x^11+1",
+      "width": 16,
+      "polynomial": "x^16+x^14+x^13+x^11+1",
       "step": "fb = s[15]^s[13]^s[12]^s[10]; s = ((s<<1)|fb) & 0xFFFF",
-      "steps_per_stream_cycle": 8, "r": "low byte of state after the 8 steps",
-      "seed_x": "0xACE1", "seed_w": "0x7A5C",
-      "seed_x_i_mode2": "(0xACE1 + 0x3C5A*i) mod 65536", "seed_w_i_mode2": "(0x7A5C + 0x2B67*i) mod 65536",
-      "reload": "on START only; advance only in stream cycles"
+      "steps_per_stream_cycle": 8,
+      "r": "low byte of state after the 8 steps",
+      "seed_x": "0xACE1 (=S(0))",
+      "seed_w": "0xF9DE (=S(32768))",
+      "seed_x_i_mode2": "S(4096*i): 0xACE1,0x357B,0x6F4D,0xEAD3,0x0348,0x70BC,0xB617,0xC223",
+      "seed_w_i_mode2": "S(32768+4096*i): 0xF9DE,0x71EC,0xAA39,0x520B,0x9DB1,0xF251,0x5D8E,0x91AB",
+      "reload": "on START only; advance only in stream cycles",
+      "seed_rule": "phase-spaced: S(n) = state of the LFSR started at 0xACE1 after n single steps",
+      "min_lag_stream_cycles": 512
     },
-    "rng_modes": {"0": "SHARED", "1": "ROTATE: lane i uses rotl8(r, i) for x and w", "2": "INDEPENDENT: per input-lane LFSR pairs"},
+    "rng_modes": {
+      "0": "SHARED",
+      "1": "ROTATE: lane i uses rotl8(r, i) for x and w",
+      "2": "INDEPENDENT: per input-lane LFSR pairs"
+    },
     "postproc": {
       "D": "2*acc - N_in*L",
       "B": "floor(bias * 2^K / 128)",
@@ -63,29 +174,95 @@
       "score": "Dp sign-extended to 32 bits"
     },
     "regs": {
-      "CTRL":   {"offset": "0x000", "access": "W",  "bits": "[0] START"},
-      "STATUS": {"offset": "0x004", "access": "R",  "bits": "[0] BUSY [1] DONE"},
-      "CONFIG": {"offset": "0x008", "access": "RW", "bits": "[3:0] LOG2_L (reset 8, clamp 4..10) [6:4] ACT_SHIFT (reset 0)"},
-      "RESULT": {"offset": "0x00C", "access": "R",  "bits": "[3:0] class"},
-      "CYCLES": {"offset": "0x010", "access": "R",  "bits": "[31:0]"},
-      "PARAMS": {"offset": "0x014", "access": "R",  "bits": "[7:0] NL [15:8] IL [17:16] RNG_MODE [31:24] version=0x01"},
-      "INPUT":  {"offset": "0x040", "size": 64, "access": "RW", "packing": "4 codes/word little-endian"},
-      "SCORE":  {"offset": "0x080", "size": 64, "access": "R",  "packing": "16 x int32"},
-      "HIDDEN": {"offset": "0x0C0", "size": 16, "access": "R",  "packing": "4 codes/word"},
-      "BIAS":   {"offset": "0x100", "size": 128, "access": "RW", "packing": "32 words, [15:0] int16, index = 16*(layer-1)+j"},
-      "WEIGHT": {"offset": "0x800", "size": 2048, "access": "RW", "layout": "addr = base_l + (floor(i/IL)*NL + j)*IL + (i mod IL); base_1=0, base_2=1024"}
+      "CTRL": {
+        "offset": "0x000",
+        "access": "W",
+        "bits": "[0] START"
+      },
+      "STATUS": {
+        "offset": "0x004",
+        "access": "R",
+        "bits": "[0] BUSY [1] DONE"
+      },
+      "CONFIG": {
+        "offset": "0x008",
+        "access": "RW",
+        "bits": "[3:0] LOG2_L (reset 8, clamp 4..10) [6:4] ACT_SHIFT (reset 0)"
+      },
+      "RESULT": {
+        "offset": "0x00C",
+        "access": "R",
+        "bits": "[3:0] class"
+      },
+      "CYCLES": {
+        "offset": "0x010",
+        "access": "R",
+        "bits": "[31:0]"
+      },
+      "PARAMS": {
+        "offset": "0x014",
+        "access": "R",
+        "bits": "[7:0] NL [15:8] IL [17:16] RNG_MODE [31:24] version=0x02"
+      },
+      "INPUT": {
+        "offset": "0x040",
+        "size": 64,
+        "access": "RW",
+        "packing": "4 codes/word little-endian"
+      },
+      "SCORE": {
+        "offset": "0x080",
+        "size": 64,
+        "access": "R",
+        "packing": "16 x int32"
+      },
+      "HIDDEN": {
+        "offset": "0x0C0",
+        "size": 16,
+        "access": "R",
+        "packing": "4 codes/word"
+      },
+      "BIAS": {
+        "offset": "0x100",
+        "size": 128,
+        "access": "RW",
+        "packing": "32 words, [15:0] int16, index = 16*(layer-1)+j"
+      },
+      "WEIGHT": {
+        "offset": "0x800",
+        "size": 2048,
+        "access": "RW",
+        "layout": "addr = base_l + (floor(i/IL)*NL + j)*IL + (i mod IL); base_1=0, base_2=1024"
+      }
     },
-    "busy_writes": "CPU writes to INPUT/BIAS/WEIGHT/CONFIG while BUSY are ignored"
+    "busy_writes": "CPU writes to INPUT/BIAS/WEIGHT/CONFIG while BUSY are ignored",
+    "rng_mode_default": 2
   },
   "init_files": {
-    "weights.hex": "512 x 32-bit", "bias.hex": "32 x 16-bit", "input.hex": "16 x 32-bit", "prog.hex": "1024 x 32-bit",
+    "weights.hex": "512 x 32-bit",
+    "bias.hex": "32 x 16-bit",
+    "input.hex": "16 x 32-bit",
+    "prog.hex": "1024 x 32-bit",
     "location": "sim/data/"
   },
   "cpu": {
     "isa": "RV32I (37 base instr + FENCE as NOP)",
-    "traps": {"0": "none", "1": "ecall", "2": "ebreak", "3": "illegal", "4": "misaligned fetch", "5": "misaligned load", "6": "misaligned store"},
+    "traps": {
+      "0": "none",
+      "1": "ecall",
+      "2": "ebreak",
+      "3": "illegal",
+      "4": "misaligned fetch",
+      "5": "misaligned load",
+      "6": "misaligned store"
+    },
     "trap_behaviour": "halt (halted=1, trap_cause set)",
     "reset_pc": "0x00000000",
-    "debug_ports": ["halted", "trap_cause[3:0]", "dbg_pc[31:0]", "retire"]
+    "debug_ports": [
+      "halted",
+      "trap_cause[3:0]",
+      "dbg_pc[31:0]",
+      "retire"
+    ]
   }
 }

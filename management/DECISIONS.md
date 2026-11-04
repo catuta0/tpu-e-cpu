@@ -74,3 +74,18 @@ were notified.
   remains infeasible; IL=16 (94.5 % LUT, CALCULATION) is kept only as a reported
   variant that does not fit.
 - Build products under scripts/budgets/build/ are untracked (70 MB).
+
+## ADR-008 — Rev B: RNG mode 2 default + phase-spaced seeds (cross-discipline iteration)
+Evidence that forced the change:
+- software-engineer SW-01a (reports/sw/accuracy.json, SIMULATION, 360 test images):
+  K=8 accuracy mode 0 65.6 %, mode 1 91.1 %, mode 2 94.4 % vs expected-value 95.0 %;
+  mode-2 LFSRs X0 and W3 only 321 stream cycles apart (seed formula of rev A).
+- systems-engineer REQ-01: cross-lane correlation 1.0 / 0.52 / 0.053 for modes 0/1/2.
+- fpga-engineer RTL-TPU (reports/fpga/tpu/variants.md): mode 2 costs only +125 LUT4,
+  +224 DFF over mode 1, Fmax unchanged within seed noise.
+Decision: default RNG_MODE 2; seeds re-derived as maximally phase-spaced points of
+the common m-sequence (spacing 4096 steps = 512 stream cycles; optimal for 16
+LFSRs of one polynomial). Rejected: different polynomials per lane (more
+verification effort, rev C candidate); double-buffered weight tiles (OD-3, latency
+only, rev C candidate).
+Re-run required: golden vectors + accuracy (software), TPU regression (fpga).
