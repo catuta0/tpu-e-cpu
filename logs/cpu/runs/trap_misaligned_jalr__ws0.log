@@ -14,5 +14,5 @@ PASS: bus-protocol violations : got 0x00000000 expected 0x00000000
 INFO: cycles=180 instret=45 fetch=46 load=1 store=33 wait_cycles=0
 RESULT name=trap_misaligned_jalr ws=0 rand=0 status=PASS cycles=180 instret=45 cpi=4.000 viol=0
 TEST PASSED
-tests/cpu/tb_rv32i_core.v:468: $finish called at 2196000 (1ps)
+tests/cpu/tb_rv32i_core.v:488: $finish called at 2196000 (1ps)
 VVP_EXIT=0

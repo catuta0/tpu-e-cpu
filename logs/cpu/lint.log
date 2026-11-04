@@ -1,41 +1,6 @@
-# 2026-11-04T03:24:16+00:00 revision d05477e-dirty
+# 2026-11-04T03:25:04+00:00 revision 309ecaf-dirty
 # Verilator 5.020 2024-01-01 rev (Debian 5.020-1)
 # cmd: verilator --lint-only -Wall design/rtl/cpu/rv32i_core.v design/rtl/cpu/rv32i_decode.v design/rtl/cpu/rv32i_alu.v design/rtl/cpu/rv32i_regfile.v --top-module rv32i_core
 LINT_RTL_EXIT=0
 # cmd: verilator --lint-only -Wall --timing design/rtl/cpu/rv32i_core.v design/rtl/cpu/rv32i_decode.v design/rtl/cpu/rv32i_alu.v design/rtl/cpu/rv32i_regfile.v tests/cpu/tb_rv32i_core.v --top-module tb_rv32i_core
-%Warning-WIDTHEXPAND: tests/cpu/tb_rv32i_core.v:165:62: Operator OR expects 32 bits on the RHS, but RHS's SEL generates 16 bits.
-                                                      : ... note: In instance 'tb_rv32i_core'
-  165 |     assign mem_rdata = mem_ready ? rd_value : (32'hBAD0_0000 | cyc[15:0]);
-      |                                                              ^
-                      ... For warning description see https://verilator.org/warn/WIDTHEXPAND?v=5.020
-                      ... Use "/* verilator lint_off WIDTHEXPAND */" and lint_on around source to disable this message.
-%Warning-WIDTHTRUNC: tests/cpu/tb_rv32i_core.v:202:39: Operator ASSIGNDLY expects 6 bits on the Assign RHS, but Assign RHS's AND generates 32 bits.
-                                                     : ... note: In instance 'tb_rv32i_core'
-  202 |                                   led <= merge({26'd0, led}, mem_wdata, mem_wstrb) & 32'h3F;
-      |                                       ^~
-%Warning-WIDTHTRUNC: tests/cpu/tb_rv32i_core.v:420:27: Logical operator LOGNOT expects 1 bit on the LHS, but LHS's VARREF 'timeout' generates 32 bits.
-                                                     : ... note: In instance 'tb_rv32i_core'
-  420 |         while (!freeze && !timeout) begin
-      |                           ^
-%Warning-WIDTHTRUNC: tests/cpu/tb_rv32i_core.v:429:9: Logical operator IF expects 1 bit on the If, but If's VARREF 'timeout' generates 32 bits.
-                                                    : ... note: In instance 'tb_rv32i_core'
-  429 |         if (timeout) begin
-      |         ^~
-%Warning-UNUSEDSIGNAL: tests/cpu/tb_rv32i_core.v:151:15: Bits of signal are not used: 'rnd'[31:3]
-                                                       : ... note: In instance 'tb_rv32i_core'
-  151 |     integer   rnd;
-      |               ^~~
-%Warning-UNUSEDSIGNAL: tests/cpu/tb_rv32i_core.v:258:16: Bits of signal are not used: 'last_ir'[31:14,11:7]
-                                                       : ... note: In instance 'tb_rv32i_core'
-  258 |     reg [31:0] last_ir;             
-      |                ^~~~~~~
-%Warning-BLKSEQ: tests/cpu/tb_rv32i_core.v:183:17: Blocking assignment '=' in sequential logic process
-                                                 : ... Suggest using delayed assignment '<='
-  183 |             rnd = $random(seed);
-      |                 ^
-%Warning-BLKSEQ: tests/cpu/tb_rv32i_core.v:271:20: Blocking assignment '=' in sequential logic process
-                                                 : ... Suggest using delayed assignment '<='
-  271 |             n_viol = n_viol + 1;
-      |                    ^
-%Error: Exiting due to 8 warning(s)
-LINT_TB_EXIT=1
+LINT_TB_EXIT=0

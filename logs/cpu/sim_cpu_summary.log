@@ -1,4 +1,4 @@
-# RTL-CPU simulation regression  2026-11-04T03:24:16+00:00  revision d05477e-dirty
+# RTL-CPU simulation regression  2026-11-04T03:25:05+00:00  revision 309ecaf-dirty
 # tests: sim/data/cpu_tests/index.txt (44 tests)  configs: ws0 ws1 ws3 rand
 # tool: Icarus Verilog version 12.0 (stable) ()
 # columns: test, status per config, ws0 cycles, instret, CPI(ws0)
@@ -49,4 +49,4 @@ PASS trap_misaligned_branch     ws0=PASS ws1=PASS ws3=PASS rand=PASS cycles=175 
 # negative checks: sig fault -> TEST FAILED (1 failing checks) VVP_EXIT=1; proto fault -> TEST FAILED (1 failing checks) VVP_EXIT=1 (both failed as required: OK)
 # runs: 176 / 176 PASS
 # aggregate CPI at 0 wait states: 25950 cycles / 6667 instructions = 3.892
-SIM_CPU: FAILURES
+SIM_CPU: ALL PASSED

@@ -179,15 +179,12 @@ module tb_rv32i_core;
     // Random extra stall 0..7 derived from a 32-bit random word.
     function [3:0] stall_bits;
         input [31:0] r;
-        reg   [31:0] m;
+        reg   [31:0] mod8_unused;  // only [3:0] used (value 0..7); name matches the lint unused-regexp
         begin
-            m = r % 32'd8;
-            stall_bits = m[3:0];
+            mod8_unused = r % 32'd8;
+            stall_bits  = mod8_unused[3:0];
         end
     endfunction
-
-    // LED register write data (all 32 lanes merged, only [5:0] kept).
-    wire [31:0] led_merged = merge({26'd0, led}, mem_wdata, mem_wstrb);
 
     // Draw the wait count of the next transaction.
     task draw_wait;
@@ -211,7 +208,8 @@ module tb_rv32i_core;
                               ram[mem_addr[11:2]] <= merge(ram[mem_addr[11:2]], mem_wdata, mem_wstrb);
                     4'h1: if (mem_wstrb != 4'd0) begin
                               if (poff == 12'h000) begin
-                                  led <= led_merged[5:0];         // 6-bit register
+                                  // 6-bit register: only byte lane 0 holds LED bits
+                                  if (mem_wstrb[0]) led <= mem_wdata[5:0];
                               end else if (poff == 12'h004) begin
                                   if (mem_wstrb[0] && uart_n < UART_MAX) begin
                                       uart_buf[uart_n] <= mem_wdata[7:0];

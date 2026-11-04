@@ -24,6 +24,6 @@ FAIL: bus-protocol violations : got 0x0000006c expected 0x00000000
 INFO: cycles=391 instret=72 fetch=72 load=1 store=34 wait_cycles=108
 RESULT name=dir_alu_reg ws=1 rand=0 status=FAIL cycles=391 instret=72 cpi=5.431 viol=108
 TEST FAILED (1 failing checks)
-FATAL: tests/cpu/tb_rv32i_core.v:471: 
+FATAL: tests/cpu/tb_rv32i_core.v:491: 
        Time: 4306000  Scope: tb_rv32i_core
 VVP_EXIT=1

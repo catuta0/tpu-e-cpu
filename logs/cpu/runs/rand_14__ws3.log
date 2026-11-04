@@ -14,5 +14,5 @@ PASS: bus-protocol violations : got 0x00000000 expected 0x00000000
 INFO: cycles=2024 instret=264 fetch=264 load=23 store=46 wait_cycles=1000
 RESULT name=rand_14 ws=3 rand=0 status=PASS cycles=2024 instret=264 cpi=7.667 viol=0
 TEST PASSED
-tests/cpu/tb_rv32i_core.v:468: $finish called at 20636000 (1ps)
+tests/cpu/tb_rv32i_core.v:488: $finish called at 20636000 (1ps)
 VVP_EXIT=0
