@@ -151,6 +151,8 @@ out.write_text("".join(f"{x & 0xFFFFFFFF:08x}\n" for x in w))
 print(f"EXPECTED RESULT={res} LED={led} TOHOST={tohost} K={K} UART={[hex(u) for u in uart]}")
 print(f"EXPECTED HIDDEN={[hex(x) for x in hid]}")
 print(f"EXPECTED SCORE={[x - (1 << 32) if x >> 31 else x for x in sc]}")
+params = e.get("params_expected", "0x02020810") if j.exists() else "0x02020810"
+print(f"PARAMS_EXPECTED={int(params, 16):08x}")
 print(f"wrote {out}")
 print("EXPECTATION_OK")
 PY
@@ -218,7 +220,8 @@ must_pass "$LOG/cpu/dir_mmio.log" "tb_soc dir_mmio"
 # ---------------------------------------------------------------- 6. BFM
 step "6. tb_soc_bfm: directed fabric tests inside soc_top"
 L="$LOG/tb_soc_bfm.log"
-run_sim "$L" $SOC_RTL tests/soc/tb_soc_bfm.v --
+PEXP="$(sed -n 's/^PARAMS_EXPECTED=//p' "$LOG/expected.log")"
+run_sim "$L" -P "tb_soc_bfm.EXP_PARAMS=32'h$PEXP" $SOC_RTL tests/soc/tb_soc_bfm.v --
 grep -E '^(PASS|FAIL|TEST)' "$L"
 must_pass "$L" "tb_soc_bfm"
 

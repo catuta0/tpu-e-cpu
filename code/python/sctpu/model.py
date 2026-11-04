@@ -1,25 +1,37 @@
-"""Bit-exact golden model of one SC-TPU inference (tasks SW-01a, SW-02).
+"""Bit-exact golden model of one SC-TPU inference (tasks SW-01a, SW-02, SW-03).
 
 Normative source: ``design/architecture/ARCHITECTURE.md`` section 5 plus the
-rev B amendment in section 11 (ADR-008, FROZEN at git 4e5c35a) and the
-machine-readable twin ``management/INTERFACES.json`` (revision "B", key
-``tpu``). Sections 5.2, 5.3 and 5.5 are marked [BIT-EXACT]: the RTL must
-reproduce every HIDDEN, SCORE and RESULT value produced by this module.
+rev B amendment in section 11 (ADR-008) and the rev C seed revision (ADR-009,
+task SW-03; spec text handed to the manager in
+``management/handoffs/software-engineer/SW-03.md``) and the machine-readable
+twin ``management/INTERFACES.json`` (key ``tpu``). Sections 5.2, 5.3 and 5.5
+are marked [BIT-EXACT]: the RTL must reproduce every HIDDEN, SCORE and RESULT
+value produced by this module.
 
-Spec revisions (``spec_rev`` argument, default ``DEFAULT_SPEC_REV = "B"``)
+Spec revisions (``spec_rev`` argument, default ``DEFAULT_SPEC_REV = "C"``)
 -------------------------------------------------------------------------
-Rev B changes ONLY the LFSR seeds and the default RNG_MODE (2); the datapath,
-the post-processing and the layout are identical to rev A.
+Revs B and C change ONLY the LFSR seeds, the default RNG_MODE (2) and the
+PARAMS version; the datapath, the post-processing and the layout are
+identical to rev A.
 
-* ``"B"`` (current, ARCHITECTURE.md 11): phase-spaced seeds. With S(n) = state
-  of the LFSR started at 0xACE1 after n single steps: modes 0/1 seed_x = S(0),
-  seed_w = S(32768); mode 2 seed_x_i = S(4096 i), seed_w_i = S(32768 + 4096 i).
-  The seeds are COMPUTED from that rule at import time (``_revb_seeds``) and
-  asserted equal to the hex table of section 11 (``REVB_SEED_X_TABLE``,
-  ``REVB_SEED_W_TABLE``), so a typo in either place is caught.
+* ``"C"`` (current, ADR-009, SW-03): selected on VALIDATION data by the
+  pre-registered protocol (``sctpu.seed_select``, candidate C0). Mode 2 uses
+  the rev A per-lane seeds seed_x_i = (0xACE1 + 0x3C5A i) mod 2^16,
+  seed_w_i = (0x7A5C + 0x2B67 i) mod 2^16 (no two lanes' (r_x, r_w) pair
+  streams are translates; minimum pairwise lag 321 stream cycles); modes 0/1
+  keep the rev B pair seed_x = S(0) = 0xACE1, seed_w = S(32768) = 0xF9DE.
+  RNG_MODE 2 default, PARAMS.version 0x03. The table ``REVC_SEED_*_TABLE`` is
+  asserted equal to the rule at import time.
+* ``"B"`` (superseded by C, ARCHITECTURE.md 11): phase-spaced seeds. With S(n)
+  = state of the LFSR started at 0xACE1 after n single steps: modes 0/1
+  seed_x = S(0), seed_w = S(32768); mode 2 seed_x_i = S(4096 i), seed_w_i =
+  S(32768 + 4096 i). The seeds are COMPUTED from that rule at import time
+  (``_revb_seeds``) and asserted equal to the hex table of section 11
+  (``REVB_SEED_X_TABLE``, ``REVB_SEED_W_TABLE``). Defect (SW-02, ADR-009):
+  every lane's pair stream is a 512-cycle translate of its neighbour's.
 * ``"A"`` (superseded, ARCHITECTURE.md 5.3): seed_x = 0xACE1, seed_w = 0x7A5C;
   mode 2 seed_x_i = 0xACE1 + 0x3C5A i, seed_w_i = 0x7A5C + 0x2B67 i (mod 2^16).
-  Kept only so that the rev A vs rev B comparison (SW-02) can be reproduced.
+  Rev C mode 2 = rev A mode 2 (bit-identical streams); rev C modes 0/1 = rev B.
 
 What is modelled
 ----------------
@@ -104,10 +116,10 @@ K_MIN, K_MAX = 4, 10  #: hardware clamp of CONFIG.LOG2_L (5.3)
 S_MIN, S_MAX = 0, 7  #: CONFIG.ACT_SHIFT range (3 bits, 5.4)
 RNG_MODES = (0, 1, 2)  #: 0 SHARED, 1 ROTATE, 2 INDEPENDENT (5.3)
 
-SPEC_REVS = ("A", "B")  #: supported spec revisions of the seed rule
-DEFAULT_SPEC_REV = "B"  #: current frozen revision (INTERFACES.json "revision": "B", ADR-008)
-DEFAULT_RNG_MODE = 2  #: rev B default RNG_MODE = INDEPENDENT (ARCHITECTURE.md 11)
-PARAMS_VERSION = {"A": 0x01, "B": 0x02}  #: PARAMS[31:24] per revision (5.4, 11)
+SPEC_REVS = ("A", "B", "C")  #: supported spec revisions of the seed rule
+DEFAULT_SPEC_REV = "C"  #: current revision (ADR-009 / SW-03 rev C; rev B kept selectable)
+DEFAULT_RNG_MODE = 2  #: rev B/C default RNG_MODE = INDEPENDENT (ARCHITECTURE.md 11, ADR-009)
+PARAMS_VERSION = {"A": 0x01, "B": 0x02, "C": 0x03}  #: PARAMS[31:24] per revision (5.4, 11, rev C)
 
 # --- rev B seeds (ARCHITECTURE.md 11) ---------------------------------------
 LFSR_ORIGIN = 0xACE1  #: S(0): the reference point of the phase-spaced seed rule
@@ -125,6 +137,16 @@ SEED_X_REVA = 0xACE1  #: rev A LFSR_X seed
 SEED_W_REVA = 0x7A5C  #: rev A LFSR_W seed
 SEED_X_STEP = 0x3C5A  #: rev A mode-2 seed increment for LFSR_X_i
 SEED_W_STEP = 0x2B67  #: rev A mode-2 seed increment for LFSR_W_i
+
+# --- rev C seeds (ADR-009, SW-03 selection = candidate C0) --------------------
+#: Rev C mode-2 X seeds (= rev A rule (0xACE1 + 0x3C5A i) mod 2^16; checked at import).
+REVC_SEED_X_TABLE = (0xACE1, 0xE93B, 0x2595, 0x61EF, 0x9E49, 0xDAA3, 0x16FD, 0x5357)
+#: Rev C mode-2 W seeds (= rev A rule (0x7A5C + 0x2B67 i) mod 2^16; checked at import).
+REVC_SEED_W_TABLE = (0x7A5C, 0xA5C3, 0xD12A, 0xFC91, 0x27F8, 0x535F, 0x7EC6, 0xAA2D)
+#: Rev C modes 0/1 seed pair (unchanged from rev B: S(0), S(32768)).
+REVC_SEED_X01, REVC_SEED_W01 = 0xACE1, 0xF9DE
+#: Minimum pairwise stream-cycle lag of the 16 rev C mode-2 LFSRs (X0-W3, CALCULATION).
+REVC_MIN_LAG_CYCLES = 321
 
 
 # ---------------------------------------------------------------------------
@@ -178,6 +200,8 @@ def lane_seeds(mode: int, spec_rev: str = DEFAULT_SPEC_REV) -> tuple[list[int], 
       mode 2 seed_x_i = S(4096 i), seed_w_i = S(32768 + 4096 i).
     * rev A (5.3, superseded): modes 0/1 [0xACE1], [0x7A5C]; mode 2
       seed_x_i = (0xACE1 + 0x3C5A*i) mod 2^16, seed_w_i = (0x7A5C + 0x2B67*i) mod 2^16.
+    * rev C (ADR-009, current): modes 0/1 as rev B [0xACE1], [0xF9DE]; mode 2
+      as rev A (the C0 candidate selected on validation data, SW-03).
 
     A zero seed would lock the LFSR; ``lfsr.LFSR16`` rejects it and the unit
     tests check none occurs.
@@ -185,6 +209,10 @@ def lane_seeds(mode: int, spec_rev: str = DEFAULT_SPEC_REV) -> tuple[list[int], 
     check_spec_rev(spec_rev)
     if mode not in RNG_MODES:
         raise ValueError(f"RNG_MODE={mode}")
+    if spec_rev == "C":
+        if mode in (0, 1):
+            return [REVC_SEED_X01], [REVC_SEED_W01]
+        return list(REVC_SEED_X_TABLE), list(REVC_SEED_W_TABLE)
     if spec_rev == "B":
         if mode in (0, 1):
             return [REVB_SEEDS_X[0]], [REVB_SEEDS_W[0]]
@@ -196,7 +224,7 @@ def lane_seeds(mode: int, spec_rev: str = DEFAULT_SPEC_REV) -> tuple[list[int], 
 
 
 def params_word(mode: int, spec_rev: str = DEFAULT_SPEC_REV) -> int:
-    """PARAMS register value {version, RNG_MODE, IL, NL} (5.4; version 0x02 in rev B, 11)."""
+    """PARAMS register value {version, RNG_MODE, IL, NL} (5.4; version 0x02 rev B, 0x03 rev C)."""
     check_spec_rev(spec_rev)
     return (PARAMS_VERSION[spec_rev] << 24) | ((mode & 3) << 16) | (IL << 8) | NL
 
@@ -370,7 +398,7 @@ def sc_inference_reference(inputs: Sequence[int], weight_ram: Sequence[int],
     Every statement maps to a line of 5.3. LFSRs are advanced with 8 calls of
     the single-step function ``lfsr.step`` per stream cycle (not with the
     leap-forward masks) so that this path is independent of the fast path.
-    ``spec_rev`` selects the seed rule (default rev B, see module docstring).
+    ``spec_rev`` selects the seed rule (default rev C, see module docstring).
     """
     check_k_s_mode(K, s, mode)
     check_spec_rev(spec_rev)
@@ -525,8 +553,21 @@ def _revb_seeds() -> tuple[tuple[int, ...], tuple[int, ...]]:
 
 #: rev B seeds, computed programmatically and asserted equal to the spec table.
 REVB_SEEDS_X, REVB_SEEDS_W = _revb_seeds()
-SEED_X = REVB_SEEDS_X[0]  #: current (rev B) LFSR_X seed, modes 0/1 = 0xACE1
-SEED_W = REVB_SEEDS_W[0]  #: current (rev B) LFSR_W seed, modes 0/1 = 0xF9DE
+SEED_X = REVB_SEEDS_X[0]  #: rev B LFSR_X seed, modes 0/1 = 0xACE1 (also rev C)
+SEED_W = REVB_SEEDS_W[0]  #: rev B LFSR_W seed, modes 0/1 = 0xF9DE (also rev C)
+
+
+def _check_revc_seeds() -> None:
+    """Assert the rev C tables against their rule (rev A formula for mode 2, rev B pair for 0/1)."""
+    rx = tuple((SEED_X_REVA + SEED_X_STEP * i) & 0xFFFF for i in range(IL))
+    rw = tuple((SEED_W_REVA + SEED_W_STEP * i) & 0xFFFF for i in range(IL))
+    if rx != REVC_SEED_X_TABLE or rw != REVC_SEED_W_TABLE:
+        raise AssertionError("rev C mode-2 seed table differs from its rule")
+    if (REVC_SEED_X01, REVC_SEED_W01) != (REVB_SEEDS_X[0], REVB_SEEDS_W[0]):
+        raise AssertionError("rev C modes 0/1 seeds differ from rev B S(0), S(32768)")
+
+
+_check_revc_seeds()
 
 
 def rng_streams(mode: int, n_cycles: int, start_offset: int = 0,
@@ -543,7 +584,7 @@ def rng_streams(mode: int, n_cycles: int, start_offset: int = 0,
     seed is first advanced by that many single steps, which keeps all relative
     phases between the LFSRs and emulates a different, equally valid random
     realisation. The hardware model always uses ``start_offset = 0``.
-    ``spec_rev`` selects the seed rule (default rev B).
+    ``spec_rev`` selects the seed rule (default rev C).
 
     ``seeds`` is ANALYSIS-ONLY (not part of any spec revision): an explicit
     ``(seeds_x, seeds_w)`` pair of lists that replaces ``lane_seeds`` — used
@@ -621,7 +662,7 @@ class SCEngine:
                  spec_rev: str = DEFAULT_SPEC_REV, seeds: Optional[tuple] = None) -> None:
         """Build the tables; ``start_offset`` != 0 is analysis-only (see rng_streams).
 
-        ``spec_rev`` selects the seed rule (default rev B, ARCHITECTURE.md 11);
+        ``spec_rev`` selects the seed rule (default rev C, ADR-009);
         ``seeds`` is an analysis-only explicit seed set (see rng_streams).
         """
         check_k_s_mode(K, 0, mode)

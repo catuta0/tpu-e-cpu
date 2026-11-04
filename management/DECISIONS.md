@@ -103,3 +103,18 @@ Decision: rev C seeds chosen by a protocol fixed in advance (SW-03): candidates
 C0..C4 on the 288-image validation subset only; select the highest worst-case
 deployed accuracy over K in {8,9,10}; test split evaluated only afterwards.
 Rev B is kept in the record as a negative result (also reported in the article).
+
+## ADR-010 — Rev C adopted (closes ADR-003, ADR-008, ADR-009)
+Selection by the pre-registered protocol (SW-03, 288 validation images, test split
+not loaded): worst-case deployed accuracy over K=8..10: C0 (rev A mode-2 seeds)
+98.96 %, C3 98.26 %, C4 97.22 %, C2 95.83 %, C1 (rev B) 95.14 % (SIMULATION).
+C0 vs C3 is not significant (2 images); C0 kept because it also has the longest
+verification history (RTL bit-exact since rev A). Caveat recorded: the deployed
+weights saw the validation images in training, so absolute validation numbers are
+optimistic; only the ranking is used.
+Decisions: D-A accept C0; D-B keep the modes 0/1 pair 0xACE1/0xF9DE (fails R2 at
+half-period, no measurable effect; modes 0/1 are non-default study modes); D-C R1+R2
+are the documented seed rules. Test split afterwards (SIMULATION, n=360): mode 2
+deployed K8/K9/K10 = 94.4/94.4/95.3 %, ensemble means 92.8/94.4/94.8 % vs EV 95.0 %.
+Net effect of the B->C iteration: the RTL default seeds return to the rev A values,
+now justified by an explicit rule and validation evidence instead of by accident.

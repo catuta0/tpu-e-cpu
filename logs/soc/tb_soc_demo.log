@@ -1,4 +1,4 @@
-# input revision: 4060bd9-dirty
+# input revision: ba9dfb9-dirty
 # cmd: iverilog -g2005 -Wall design/rtl/cpu/rv32i_core.v design/rtl/cpu/rv32i_decode.v design/rtl/cpu/rv32i_alu.v design/rtl/cpu/rv32i_regfile.v design/rtl/tpu/sc_lfsr8.v design/rtl/tpu/sc_rng.v design/rtl/tpu/sc_lane_array.v design/rtl/tpu/sc_postproc.v design/rtl/tpu/sc_tpu_ctrl.v design/rtl/tpu/sc_tpu.v design/rtl/soc/soc_bus.v design/rtl/soc/soc_ram.v design/rtl/soc/soc_periph.v design/rtl/soc/soc_top.v tests/soc/tb_soc.v -o sim/soc/build/tb_soc_demo.vvp && vvp -n sim/soc/build/tb_soc_demo.vvp +MODE=demo +EXP=sim/soc/build/soc_expected.hex
 INFO: tb_soc MODE=demo PROG_HEX=sim/data/soc_demo_prog.hex UART_DIV(DUT)=234 expected divider 234
 PASS: R1 power-up reset: rst released on rising edge 2 after configuration
@@ -26,4 +26,4 @@ bbb6912f44f0218631107a9fa5d2dbae703249ee94a46db9568023c87e402411  sim/data/soc_d
 b743fe71eb3d379fa4d628ad1a8fad90c5c0855432f8e771080d32f4932c51c8  sim/data/weights.hex
 1d1e138fd2653fcff598d8af0cc0264c2b78c62eee5bff3e7a761632c1a1da83  sim/data/bias.hex
 4eeb1ae6d1c50515e5e891aa1ad266fac55678edbbf95a477ff90a2b992c1c9a  sim/data/input.hex
-8d8aa0ee05cf684d2559aed1ca5718f9fd7260c9be49e5939ffe0cf891b1e721  sim/data/soc_expected.json
+fabe61ca68f5a2b07354f8b8454314db8541aef13a1acacc4a2dc85739c29060  sim/data/soc_expected.json

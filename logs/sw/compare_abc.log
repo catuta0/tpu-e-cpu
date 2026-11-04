@@ -1,0 +1,71 @@
+# compare_abc.py rev=ba9dfb9-dirty numpy=2.5.4 (SW-03 step 3, TEST split)
+# variant qat_noise s=0 n_test=360; NOT retrained; offsets [55745, 41743, 33497, 17681, 20174, 2686, 4931, 1084, 11486, 53297, 42559, 59817, 33005, 39756, 63617, 47807, 41436, 35626, 36694, 61280]
+rev A mode 0 K= 4 hw=0.5861 ens=0.3994+-0.1662 ident=None rms1 ens/eq2=1.015
+rev A mode 0 K= 5 hw=0.4139 ens=0.5450+-0.1877 ident=None rms1 ens/eq2=0.985
+rev A mode 0 K= 6 hw=0.6528 ens=0.6628+-0.1748 ident=None rms1 ens/eq2=1.032
+rev A mode 0 K= 7 hw=0.4972 ens=0.8153+-0.1343 ident=None rms1 ens/eq2=1.039
+rev A mode 0 K= 8 hw=0.6556 ens=0.9014+-0.0565 ident=None rms1 ens/eq2=1.021
+rev A mode 0 K= 9 hw=0.8861 ens=0.9358+-0.0115 ident=None rms1 ens/eq2=0.861
+rev A mode 0 K=10 hw=0.9444 ens=0.9454+-0.0078 ident=None rms1 ens/eq2=0.744
+rev A mode 1 K= 4 hw=0.6361 ens=0.5747+-0.1084 ident=None rms1 ens/eq2=0.944
+rev A mode 1 K= 5 hw=0.6639 ens=0.6942+-0.0985 ident=None rms1 ens/eq2=0.998
+rev A mode 1 K= 6 hw=0.8417 ens=0.8592+-0.0533 ident=None rms1 ens/eq2=0.891
+rev A mode 1 K= 7 hw=0.9222 ens=0.8983+-0.0244 ident=None rms1 ens/eq2=0.977
+rev A mode 1 K= 8 hw=0.9111 ens=0.9349+-0.0176 ident=None rms1 ens/eq2=0.901
+rev A mode 1 K= 9 hw=0.9472 ens=0.9449+-0.0087 ident=None rms1 ens/eq2=0.825
+rev A mode 1 K=10 hw=0.9472 ens=0.9508+-0.0066 ident=None rms1 ens/eq2=0.845
+rev A mode 2 K= 4 hw=0.4528 ens=0.6031+-0.1310 ident=0 rms1 ens/eq2=0.931
+rev A mode 2 K= 5 hw=0.7528 ens=0.7096+-0.1022 ident=0 rms1 ens/eq2=1.016
+rev A mode 2 K= 6 hw=0.8917 ens=0.8304+-0.0523 ident=0 rms1 ens/eq2=1.015
+rev A mode 2 K= 7 hw=0.8889 ens=0.9069+-0.0173 ident=0 rms1 ens/eq2=0.979
+rev A mode 2 K= 8 hw=0.9444 ens=0.9282+-0.0143 ident=0 rms1 ens/eq2=1.012
+rev A mode 2 K= 9 hw=0.9444 ens=0.9440+-0.0053 ident=0 rms1 ens/eq2=0.896
+rev A mode 2 K=10 hw=0.9528 ens=0.9479+-0.0052 ident=0 rms1 ens/eq2=0.983
+rev B mode 0 K= 4 hw=0.4833 ens=0.4022+-0.1748 ident=None rms1 ens/eq2=1.002
+rev B mode 0 K= 5 hw=0.4083 ens=0.5212+-0.2037 ident=None rms1 ens/eq2=0.992
+rev B mode 0 K= 6 hw=0.6167 ens=0.7122+-0.1604 ident=None rms1 ens/eq2=0.907
+rev B mode 0 K= 7 hw=0.8972 ens=0.8754+-0.0492 ident=None rms1 ens/eq2=0.773
+rev B mode 0 K= 8 hw=0.8194 ens=0.9072+-0.0442 ident=None rms1 ens/eq2=0.883
+rev B mode 0 K= 9 hw=0.9000 ens=0.9353+-0.0114 ident=None rms1 ens/eq2=0.827
+rev B mode 0 K=10 hw=0.9417 ens=0.9451+-0.0067 ident=None rms1 ens/eq2=0.905
+rev B mode 1 K= 4 hw=0.6083 ens=0.5558+-0.1336 ident=None rms1 ens/eq2=0.956
+rev B mode 1 K= 5 hw=0.7722 ens=0.7182+-0.1073 ident=None rms1 ens/eq2=1.010
+rev B mode 1 K= 6 hw=0.8167 ens=0.8368+-0.0422 ident=None rms1 ens/eq2=0.954
+rev B mode 1 K= 7 hw=0.9000 ens=0.8985+-0.0229 ident=None rms1 ens/eq2=0.964
+rev B mode 1 K= 8 hw=0.8917 ens=0.9283+-0.0132 ident=None rms1 ens/eq2=0.925
+rev B mode 1 K= 9 hw=0.9444 ens=0.9431+-0.0080 ident=None rms1 ens/eq2=0.842
+rev B mode 1 K=10 hw=0.9500 ens=0.9529+-0.0054 ident=None rms1 ens/eq2=0.805
+rev B mode 2 K= 4 hw=0.5278 ens=0.5932+-0.1048 ident=0 rms1 ens/eq2=0.943
+rev B mode 2 K= 5 hw=0.7000 ens=0.7336+-0.0862 ident=0 rms1 ens/eq2=0.910
+rev B mode 2 K= 6 hw=0.8306 ens=0.8453+-0.0567 ident=14 rms1 ens/eq2=0.906
+rev B mode 2 K= 7 hw=0.8861 ens=0.9168+-0.0232 ident=54 rms1 ens/eq2=0.906
+rev B mode 2 K= 8 hw=0.9389 ens=0.9328+-0.0152 ident=120 rms1 ens/eq2=1.063
+rev B mode 2 K= 9 hw=0.8972 ens=0.9396+-0.0118 ident=196 rms1 ens/eq2=1.301
+rev B mode 2 K=10 hw=0.9472 ens=0.9419+-0.0113 ident=100 rms1 ens/eq2=1.551
+rev C mode 0 K= 4 hw=0.4833 ens=0.4022+-0.1748 ident=None rms1 ens/eq2=1.002
+rev C mode 0 K= 5 hw=0.4083 ens=0.5212+-0.2037 ident=None rms1 ens/eq2=0.992
+rev C mode 0 K= 6 hw=0.6167 ens=0.7122+-0.1604 ident=None rms1 ens/eq2=0.907
+rev C mode 0 K= 7 hw=0.8972 ens=0.8754+-0.0492 ident=None rms1 ens/eq2=0.773
+rev C mode 0 K= 8 hw=0.8194 ens=0.9072+-0.0442 ident=None rms1 ens/eq2=0.883
+rev C mode 0 K= 9 hw=0.9000 ens=0.9353+-0.0114 ident=None rms1 ens/eq2=0.827
+rev C mode 0 K=10 hw=0.9417 ens=0.9451+-0.0067 ident=None rms1 ens/eq2=0.905
+rev C mode 1 K= 4 hw=0.6083 ens=0.5558+-0.1336 ident=None rms1 ens/eq2=0.956
+rev C mode 1 K= 5 hw=0.7722 ens=0.7182+-0.1073 ident=None rms1 ens/eq2=1.010
+rev C mode 1 K= 6 hw=0.8167 ens=0.8368+-0.0422 ident=None rms1 ens/eq2=0.954
+rev C mode 1 K= 7 hw=0.9000 ens=0.8985+-0.0229 ident=None rms1 ens/eq2=0.964
+rev C mode 1 K= 8 hw=0.8917 ens=0.9283+-0.0132 ident=None rms1 ens/eq2=0.925
+rev C mode 1 K= 9 hw=0.9444 ens=0.9431+-0.0080 ident=None rms1 ens/eq2=0.842
+rev C mode 1 K=10 hw=0.9500 ens=0.9529+-0.0054 ident=None rms1 ens/eq2=0.805
+rev C mode 2 K= 4 hw=0.4528 ens=0.6031+-0.1310 ident=0 rms1 ens/eq2=0.931
+rev C mode 2 K= 5 hw=0.7528 ens=0.7096+-0.1022 ident=0 rms1 ens/eq2=1.016
+rev C mode 2 K= 6 hw=0.8917 ens=0.8304+-0.0523 ident=0 rms1 ens/eq2=1.015
+rev C mode 2 K= 7 hw=0.8889 ens=0.9069+-0.0173 ident=0 rms1 ens/eq2=0.979
+rev C mode 2 K= 8 hw=0.9444 ens=0.9282+-0.0143 ident=0 rms1 ens/eq2=1.012
+rev C mode 2 K= 9 hw=0.9444 ens=0.9440+-0.0053 ident=0 rms1 ens/eq2=0.896
+rev C mode 2 K=10 hw=0.9528 ens=0.9479+-0.0052 ident=0 rms1 ens/eq2=0.983
+# wrote reports/sw/revABC_comparison.json/.md and fig_revABC_accuracy_vs_K.pdf (172.0 s)
+
+real	2m53.085s
+user	2m41.569s
+sys	0m10.164s
+EXIT=0

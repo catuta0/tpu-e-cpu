@@ -1,0 +1,6 @@
+SDP     u_tpu.wram.0.0                                                                             non-zero INIT_RAM_xx params: 40
+SP      u_ram.mem.0.1                                                                              non-zero INIT_RAM_xx params: 2
+SP      u_ram.mem.0.0                                                                              non-zero INIT_RAM_xx params: 2
+SDP     u_cpu.u_regfile.bank2.0.0                                                                  non-zero INIT_RAM_xx params: 0
+SDP     u_cpu.u_regfile.bank1.0.0                                                                  non-zero INIT_RAM_xx params: 0
+BSRAM cells 5, with non-zero init 3

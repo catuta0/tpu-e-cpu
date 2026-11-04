@@ -1,7 +1,5 @@
-# command: cd code/python && ../../.venv/bin/python -m sctpu.gen_hex   (default --spec-rev B, out sim/data)
-# date: 2026-11-04T06:18:48+00:00  python: Python 3.13.18  numpy: 2.5.4
-# gen_hex.py rev=4060bd9-dirty spec_rev=B out=/home/user/tpu-e-cpu/sim/data variant=qat_noise s=0 test images=360
-# seeds modes 0/1: X ace1 W f9de; mode 2: X ace1 357b 6f4d ead3 0348 70bc b617 c223 / W f9de 71ec aa39 520b 9db1 f251 5d8e 91ab
+# gen_hex.py rev=ba9dfb9-dirty spec_rev=C out=/home/user/tpu-e-cpu/sim/data variant=qat_noise s=0 test images=360
+# seeds modes 0/1: X ace1 W f9de; mode 2: X ace1 e93b 2595 61ef 9e49 daa3 16fd 5357 / W 7a5c a5c3 d12a fc91 27f8 535f 7ec6 aa2d
 input.hex = test position 0 = load_digits row 1496, label 7
 tpu_vectors_mode0.txt: 360 vectors; reference cross-check 24 vectors, 0 mismatching fields
 tpu_vectors_mode1.txt: 360 vectors; reference cross-check 24 vectors, 0 mismatching fields
@@ -13,6 +11,10 @@ tpu_vectors_corner_mode1.txt: 51 vectors; reference cross-check 51 vectors, 0 mi
 tpu_vectors_corner_mode2.txt: 51 vectors; reference cross-check 51 vectors, 0 mismatching fields
 CROSSCHECK TOTAL: 593 vectors x 33 fields, mismatches = 0
 corner-case sanity assertions: PASS (pset1 hidden=255, pset5 full tie->0, pset6 tie 3/7->3)
-soc_expected.json: K=8 s=0 mode=2 rev B: RESULT=7 (label 7, EV 7), SCORE[0..9]=[-424, -264, -940, -364, -22, -108, -904, 1304, -214, -10], reference mismatches = 0
+soc_expected.json: K=8 s=0 mode=2 rev C: RESULT=7 (label 7, EV 7), SCORE[0..9]=[-696, -320, -1020, -166, -268, -618, -1442, 948, 238, 528], reference mismatches = 0
 FINAL MISMATCH COUNT (vectors + soc_expected): 0
+
+real	1m5.401s
+user	1m4.970s
+sys	0m0.374s
 EXIT=0

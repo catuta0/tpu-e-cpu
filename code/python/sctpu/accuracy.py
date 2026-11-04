@@ -1,7 +1,10 @@
-"""Accuracy and stochastic-error study of the SC-TPU (tasks SW-01a, SW-02).
+"""Accuracy and stochastic-error study of the SC-TPU (tasks SW-01a, SW-02, SW-03).
 
+SW-03: default ``--spec-rev C`` (ADR-009) writes ``accuracy_revC.json`` and
+the un-suffixed figures; the rev B figures of SW-02 were kept as
+``fig_*_revB.pdf``. Re-runs of A/B write ``*_rev<X>_rerun.*``.
 SW-02: the study is parametrised by the LFSR seed rule (``--spec-rev``,
-default ``B`` = ARCHITECTURE.md section 11) and the ensemble size
+then default ``B`` = ARCHITECTURE.md section 11) and the ensemble size
 (``--ensemble-size``, default 20 >= REQ-AI-006). The network is NOT retrained:
 the weights are those of ``sim/data/model_params.json`` / ``trained_models.json``.
 Rev B output: ``reports/sw/accuracy_revB.json`` and the figures
@@ -290,8 +293,13 @@ def main(argv=None) -> int:
     ap.add_argument("--ensemble-size", type=int, default=ENSEMBLE_SIZE)
     args = ap.parse_args(argv)
     spec_rev, n_ens = args.spec_rev, args.ensemble_size
-    suffix = "" if spec_rev == M.DEFAULT_SPEC_REV else "_revA_rerun"
-    out_json = REPORT_DIR / ("accuracy_revB.json" if spec_rev == "B" else "accuracy_revA_rerun.json")
+    # Output names never overwrite an earlier revision's results: the current
+    # default (rev C) owns the un-suffixed figure names and accuracy_revC.json;
+    # re-runs of superseded revisions get a "_rerun" suffix (SW-02 rev B and
+    # SW-01a rev A originals: accuracy_revB.json, accuracy_revA.json, *_revB.pdf, *_revA.pdf).
+    suffix = "" if spec_rev == M.DEFAULT_SPEC_REV else f"_rev{spec_rev}_rerun"
+    out_json = REPORT_DIR / (f"accuracy_rev{spec_rev}.json" if spec_rev == M.DEFAULT_SPEC_REV
+                             else f"accuracy_rev{spec_rev}_rerun.json")
     t0 = time.time()
     rev = T.git_rev()
     print(f"# accuracy.py rev={rev} numpy={np.__version__} spec_rev={spec_rev} ensemble_size={n_ens} "
@@ -312,16 +320,18 @@ def main(argv=None) -> int:
                       f"--ensemble-size {n_ens}",
            "git_rev": rev,
            "spec_rev": spec_rev,
-           "spec": ("ARCHITECTURE.md section 5 with the rev B phase-spaced seeds of section 11 (ADR-008), "
-                    "INTERFACES.json revision B (git 4e5c35a)") if spec_rev == "B" else
-                   "ARCHITECTURE.md section 5 rev A seeds (superseded; re-run for comparison)",
+           "spec": {"C": "ARCHITECTURE.md section 5 with the rev C seeds of ADR-009 (SW-03: mode 2 = rev A "
+                         "per-lane seeds, modes 0/1 = rev B pair, selected on validation data)",
+                    "B": "ARCHITECTURE.md section 5 with the rev B phase-spaced seeds of section 11 (ADR-008), "
+                         "INTERFACES.json revision B (git 4e5c35a); superseded by rev C",
+                    "A": "ARCHITECTURE.md section 5 rev A seeds (superseded; re-run for comparison)"}[spec_rev],
            "seeds": {"modes01_x": f"0x{M.lane_seeds(0, spec_rev)[0][0]:04x}",
                      "modes01_w": f"0x{M.lane_seeds(0, spec_rev)[1][0]:04x}",
                      "mode2_x": [f"0x{v:04x}" for v in M.lane_seeds(2, spec_rev)[0]],
                      "mode2_w": [f"0x{v:04x}" for v in M.lane_seeds(2, spec_rev)[1]]},
            "retrained": False,
            "weights_source": "sim/data/model_params.json (selected) and reports/sw/trained_models.json "
-                             "(all variants), trained in SW-01a; unchanged in SW-02",
+                             "(all variants), trained in SW-01a; unchanged in SW-02 and SW-03",
            "rng_seeds_of_study": None,
            "dataset": sel["dataset"], "split": sel["split"], "training_seeds": sel["seeds"],
            "n_test": int(len(te)), "selected_variant": sel["variant"],

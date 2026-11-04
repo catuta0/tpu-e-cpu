@@ -1,0 +1,13 @@
+# SW-03 mutation check of the new rev C / seed-selection tests (2026-11-04T06:54:23+00:00, git ba9dfb9-dirty)
+# each mutant applied to a scratch copy of code/python + sim/data + reports/sw; pytest -x tests/test_model.py tests/test_seed_select.py; a mutant is DETECTED if any test fails/errors
+MUTANT 1 revC W table typo: DETECTED (1 error in 0.12s)
+MUTANT 2 revC mode2 returns revB: DETECTED (1 failed, 5 passed in 0.57s)
+MUTANT 3 translate rule never fires: DETECTED (1 failed, 7 passed in 0.64s)
+MUTANT 4 R2 margin 1: DETECTED (1 failed, 48 passed in 26.43s)
+MUTANT 5 stated min lag 512: DETECTED (1 failed, 8 passed in 1.24s)
+MUTANT 6 revC modes01 = revA pair: DETECTED (1 failed, 5 passed in 0.61s)
+MUTANT 7 PARAMS version C=2: DETECTED (1 failed, 5 passed in 0.61s)
+MUTANT 8 vector file score corrupted: DETECTED (1 failed, 44 passed in 21.14s)
+MUTANT 9 trace header says B: DETECTED (1 failed, 45 passed in 23.86s)
+MUTANT 10 window model sign flip: DETECTED (1 failed, 47 passed in 22.70s)
+MUTANT 11 selection picks min: DETECTED (1 failed, 51 passed in 27.69s)

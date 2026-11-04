@@ -1,4 +1,4 @@
-# input revision: 4060bd9-dirty
+# input revision: ba9dfb9-dirty
 # cmd: iverilog -g2005 -Wall -DINJECT_FAULT design/rtl/cpu/rv32i_core.v design/rtl/cpu/rv32i_decode.v design/rtl/cpu/rv32i_alu.v design/rtl/cpu/rv32i_regfile.v design/rtl/tpu/sc_lfsr8.v design/rtl/tpu/sc_rng.v design/rtl/tpu/sc_lane_array.v design/rtl/tpu/sc_postproc.v design/rtl/tpu/sc_tpu_ctrl.v design/rtl/tpu/sc_tpu.v design/rtl/soc/soc_bus.v design/rtl/soc/soc_ram.v design/rtl/soc/soc_periph.v design/rtl/soc/soc_top.v tests/soc/tb_soc_bfm.v -o sim/soc/build/neg_tb_soc_bfm_inject_fault.vvp && vvp -n sim/soc/build/neg_tb_soc_bfm_inject_fault.vvp 
 PASS: T1 reset values: LED/UART_STATUS/TOHOST = 0, TPU STATUS/RESULT/CYCLES = 0, CONFIG = 0x08, PARAMS = 0x02020810, led_n = 6'b111111
 FAIL: T2 LED 0x00000000: led_n = 6'b111111, expected 6'b000000
@@ -19,6 +19,6 @@ PASS: T9 UART bytes 0x00 0x55 0xA5 0xFF decoded on the pin (real-time 115200 8N1
 PASS: T10 4753 BFM accesses, max latency 3 cycles (<= 4), ready protocol clean
 errors=4
 TEST FAILED
-FATAL: tests/soc/tb_soc_bfm.v:367: tb_soc_bfm failed
+FATAL: tests/soc/tb_soc_bfm.v:371: tb_soc_bfm failed
        Time: 424140657  Scope: tb_soc_bfm
 SIM_EXIT=1

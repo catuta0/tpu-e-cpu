@@ -1,0 +1,48 @@
+# seed_select.py rev=ba9dfb9-dirty numpy=2.5.4 (SW-03 step 1, VALIDATION ONLY)
+# validation images: 288 (val_idx of train.load_split: split seed 0, val seed 0); test images NOT loaded; variant qat_noise s=0
+# ensemble offsets (default_rng(0), 20): [55745, 41743, 33497, 17681, 20174, 2686, 4931, 1084, 11486, 53297, 42559, 59817, 33005, 39756, 63617, 47807, 41436, 35626, 36694, 61280]
+# progression-family scan: {'n_feasible': 65288, 'best_lambda8_then_lambda1': [32760, 4095, 1], 'best_lambda1_then_lambda8': [4095, 3585, 511]}
+C0: rev A: X_i = 0xACE1 + 0x3C5A*i, W_i = 0x7A5C + 0x2B67*i (mod 2^16)
+    R1 OK (0 pairs), R2 OK (0), lambda8=321 lambda1=69
+    K= 8 deployed 285/288 = 98.96 %  ensemble 97.38 +- 1.07 %  ident_pairs=0 rms1 ratio=1.010
+    K= 9 deployed 285/288 = 98.96 %  ensemble 99.05 +- 0.37 %  ident_pairs=0 rms1 ratio=0.893
+    K=10 deployed 286/288 = 99.31 %  ensemble 99.22 +- 0.53 %  ident_pairs=0 rms1 ratio=0.980
+C1: rev B: X_i = S(4096 i), W_i = S(32768 + 4096 i)
+    R1 VIOLATED (28 pairs), R2 VIOLATED (64), lambda8=512 lambda1=511
+    K= 8 deployed 279/288 = 96.88 %  ensemble 97.15 +- 1.85 %  ident_pairs=120 rms1 ratio=1.066
+    K= 9 deployed 274/288 = 95.14 %  ensemble 98.30 +- 1.43 %  ident_pairs=196 rms1 ratio=1.294
+    K=10 deployed 282/288 = 97.92 %  ensemble 98.42 +- 1.24 %  ident_pairs=100 rms1 ratio=1.549
+C2: rev B X, W lanes reversed: X_i = S(4096 i), W_i = S(32768 + 4096 (7 - i))
+    R1 OK (0 pairs), R2 VIOLATED (4), lambda8=512 lambda1=511
+    K= 8 deployed 276/288 = 95.83 %  ensemble 97.40 +- 1.29 %  ident_pairs=0 rms1 ratio=0.993
+    K= 9 deployed 282/288 = 97.92 %  ensemble 98.84 +- 0.61 %  ident_pairs=0 rms1 ratio=0.945
+    K=10 deployed 283/288 = 98.26 %  ensemble 99.06 +- 0.54 %  ident_pairs=0 rms1 ratio=1.066
+C3: X_i = S(32760 i), W_i = S(32760 (15 - i)) (mod 65535): equal spacing 4095 in stream cycles (max lambda8)
+    R1 OK (0 pairs), R2 OK (0), lambda8=4095 lambda1=1
+    K= 8 deployed 283/288 = 98.26 %  ensemble 97.69 +- 1.00 %  ident_pairs=0 rms1 ratio=0.978
+    K= 9 deployed 284/288 = 98.61 %  ensemble 98.49 +- 0.83 %  ident_pairs=0 rms1 ratio=1.006
+    K=10 deployed 287/288 = 99.65 %  ensemble 99.20 +- 0.45 %  ident_pairs=0 rms1 ratio=0.958
+C4: X_i = S(4095 i), W_i = S(4095 (15 - i)) (mod 65535): equal spacing 4095 in single steps (max lambda1)
+    R1 OK (0 pairs), R2 OK (0), lambda8=3585 lambda1=511
+    K= 8 deployed 280/288 = 97.22 %  ensemble 97.05 +- 1.82 %  ident_pairs=0 rms1 ratio=1.017
+    K= 9 deployed 284/288 = 98.61 %  ensemble 98.68 +- 0.58 %  ident_pairs=0 rms1 ratio=1.087
+    K=10 deployed 285/288 = 98.96 %  ensemble 99.01 +- 0.64 %  ident_pairs=0 rms1 ratio=1.131
+# ranking (worst-case deployed count, then ensemble mean): ['C0', 'C3', 'C4', 'C2', 'C1']; SELECTED: C0
+#   info: C0 vs C1 K=8: discordant 8/2 McNemar p=0.109
+#   info: C0 vs C1 K=9: discordant 11/0 McNemar p=0.000977
+#   info: C0 vs C1 K=10: discordant 4/0 McNemar p=0.125
+#   info: C0 vs C2 K=8: discordant 10/1 McNemar p=0.0117
+#   info: C0 vs C2 K=9: discordant 3/0 McNemar p=0.25
+#   info: C0 vs C2 K=10: discordant 3/0 McNemar p=0.25
+#   info: C0 vs C3 K=8: discordant 3/1 McNemar p=0.625
+#   info: C0 vs C3 K=9: discordant 2/1 McNemar p=1
+#   info: C0 vs C3 K=10: discordant 1/2 McNemar p=1
+#   info: C0 vs C4 K=8: discordant 6/1 McNemar p=0.125
+#   info: C0 vs C4 K=9: discordant 3/2 McNemar p=1
+#   info: C0 vs C4 K=10: discordant 1/0 McNemar p=1
+# wrote reports/sw/seed_selection_revC.json/.md (66.2 s)
+
+real	1m7.179s
+user	1m6.488s
+sys	0m0.070s
+EXIT=0

@@ -63,7 +63,7 @@ def test_paired_cells_counts() -> None:
 
 def test_revB_pair_streams_are_delayed_copies() -> None:
     """Rev B: (r_x,i+1(k), r_w,i+1(k)) = (r_x,i(k+512), r_w,i(k+512)) for every lane."""
-    rx, rw = M.rng_streams(2, 512 + 64)
+    rx, rw = M.rng_streams(2, 512 + 64, spec_rev="B")
     for i in range(7):
         assert np.array_equal(rx[i + 1, :64], rx[i, 512:576])
         assert np.array_equal(rw[i + 1, :64], rw[i, 512:576])

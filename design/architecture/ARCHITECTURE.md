@@ -211,3 +211,17 @@ unused in rev A). Pin numbers: `design/constraints/tangnano9k.cst` (sourced).
   (the operands that are multiplied together) are 4096 stream cycles apart — more
   than one full inference at K <= 8 (2560 stream cycles).
 - PARAMS.version = 0x02.
+
+## 12. Rev C (2026-11-04, ADR-010) — CURRENT; supersedes the seed text of sections 5.3 and 11
+- Default RNG_MODE = 2. PARAMS.version = 0x03.
+- Modes 0/1: seed_x = 0xACE1, seed_w = 0xF9DE (= S(32768), unchanged from rev B).
+- Mode 2: seed_x_i = (0xACE1 + 0x3C5A*i) mod 2^16, seed_w_i = (0x7A5C + 0x2B67*i) mod 2^16:
+  X = 0xACE1 0xE93B 0x2595 0x61EF 0x9E49 0xDAA3 0x16FD 0x5357;
+  W = 0x7A5C 0xA5C3 0xD12A 0xFC91 0x27F8 0x535F 0x7EC6 0xAA2D
+  (identical to the rev A mode-2 seeds). Minimum pairwise lag 321 stream cycles (X0-W3).
+- Rationale: the seed set must satisfy R1 (no two lanes' operand-pair streams are
+  translates: (lag_x(i)-lag_x(j)) != (lag_w(i)-lag_w(j)) for i != j) and R2 (no direct
+  or swapped shared-bit lag between operand pairs). Rev B violated R1 on all 28 lane
+  pairs. Among 5 candidates satisfying/violating the rules, this set had the best
+  worst-case validation accuracy over K in {8,9,10} (reports/sw/seed_selection_revC.md).
+  Maximal phase spacing alone is not a sufficient criterion.

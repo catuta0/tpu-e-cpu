@@ -1,6 +1,6 @@
 {
-  "revision": "B",
-  "status": "FROZEN rev B (2026-11-04, ADR-008); rev A superseded",
+  "revision": "C",
+  "status": "FROZEN rev C (2026-11-04, ADR-010); rev A/B superseded",
   "spec": "design/architecture/ARCHITECTURE.md",
   "clock": {
     "name": "clk",
@@ -153,13 +153,14 @@
       "step": "fb = s[15]^s[13]^s[12]^s[10]; s = ((s<<1)|fb) & 0xFFFF",
       "steps_per_stream_cycle": 8,
       "r": "low byte of state after the 8 steps",
-      "seed_x": "0xACE1 (=S(0))",
-      "seed_w": "0xF9DE (=S(32768))",
-      "seed_x_i_mode2": "S(4096*i): 0xACE1,0x357B,0x6F4D,0xEAD3,0x0348,0x70BC,0xB617,0xC223",
-      "seed_w_i_mode2": "S(32768+4096*i): 0xF9DE,0x71EC,0xAA39,0x520B,0x9DB1,0xF251,0x5D8E,0x91AB",
+      "seed_x": "0xACE1",
+      "seed_w": "0xF9DE",
+      "seed_x_i_mode2": "0xACE1,0xE93B,0x2595,0x61EF,0x9E49,0xDAA3,0x16FD,0x5357",
+      "seed_w_i_mode2": "0x7A5C,0xA5C3,0xD12A,0xFC91,0x27F8,0x535F,0x7EC6,0xAA2D",
       "reload": "on START only; advance only in stream cycles",
-      "seed_rule": "phase-spaced: S(n) = state of the LFSR started at 0xACE1 after n single steps",
-      "min_lag_stream_cycles": 512
+      "seed_rule": "modes 0/1: seed_x=0xACE1, seed_w=0xF9DE (=S(32768)); mode 2: seed_x_i=(0xACE1+0x3C5A*i) mod 2^16, seed_w_i=(0x7A5C+0x2B67*i) mod 2^16",
+      "min_lag_stream_cycles": 321,
+      "decorrelation_rules": "R1: no translated operand-pair streams; R2: no direct or swapped shared-bit lags between operand pairs (mode 2 only)"
     },
     "rng_modes": {
       "0": "SHARED",
@@ -202,7 +203,7 @@
       "PARAMS": {
         "offset": "0x014",
         "access": "R",
-        "bits": "[7:0] NL [15:8] IL [17:16] RNG_MODE [31:24] version=0x02"
+        "bits": "[7:0] NL [15:8] IL [17:16] RNG_MODE [31:24] version=0x03"
       },
       "INPUT": {
         "offset": "0x040",

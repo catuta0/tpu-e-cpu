@@ -1,0 +1,2 @@
+# flow nwl, worst seed 2 (45.69 MHz), source logs/soc/pnr_nwl_s2.log (last report = post-route)
+

@@ -129,3 +129,31 @@ With the rev B hardware seeds the layer-1 RMS at K = 9 is 0.741 vs 0.342 predict
 2.17) and at K = 10 0.442 vs 0.242 (1.83); the error no longer falls as 1/sqrt(L) above K = 8.
 Eq. (2) therefore remains adequate for rev B modes 0/1 (ensemble ratios 0.77–1.01 for K >= 7) and for mode 2 at K <= 8, but
 under-predicts mode 2 at K = 9, 10.
+
+## Rev C addendum (task SW-03, 2026-11-04)
+
+Rev C (ADR-009; seeds selected on validation data, `reports/sw/seed_selection_revC.md`)
+uses the rev A per-lane seeds in mode 2 and the rev B pair in modes 0/1, so its streams
+are bit-identical to rev A (mode 2) and rev B (modes 0/1). Re-check of eq. (2) with the rev C
+seeds (SIMULATION, 360 test images, 20 start offsets of `default_rng(0)`, `qat_noise`,
+`reports/sw/accuracy_revC.json` key `error_study`, log `logs/sw/accuracy_revC.log`;
+figure `fig_rms_error_vs_K.pdf` is now rev C, the rev B figure was kept as
+`fig_rms_error_vs_K_revB.pdf`). Layer 1, measured RMS / eq. (2):
+
+| K | 4 | 5 | 6 | 7 | 8 | 9 | 10 |
+|---|---|---|---|---|---|---|---|
+| mode 2, ensemble of 20 | 0.93 | 1.02 | 1.01 | 0.98 | 1.01 | 0.90 | 0.98 |
+| mode 2, deployed seeds (one realisation) | 1.09 | 0.92 | 0.81 | 1.10 | 0.73 | 1.07 | 0.87 |
+| mode 1, ensemble | 0.96 | 1.01 | 0.95 | 0.96 | 0.93 | 0.84 | 0.81 |
+| mode 0, ensemble | 1.00 | 0.99 | 0.91 | 0.77 | 0.88 | 0.83 | 0.91 |
+
+Layer 2 (lanes 0..9), mode 2 ensemble ratio: 0.92–1.05 over K = 4..10. No identical
+(tile, lane) count tables occur in rev C mode 2 at any K (`revABC_comparison.md` section 5).
+Assumption A4 holds again for mode 2 in the sense used by the model: no two lanes' operand
+pair streams are translates of each other (ADR-009 rule R1, checked in
+`code/python/tests/test_model.py::test_revC_no_translated_pair_streams_revB_violates`), and
+no lane pair shares bits in both operands at any common lag (stricter rule R2 of
+`sctpu/seed_select.py`). The remaining lagged copies (minimum 321 stream cycles, X0–W3)
+couple only one operand of two products; their first-order effect is within the ±10 %
+agreement above. Eq. (2) is adequate for rev C in all modes for K >= 7 (all ensemble
+ratios 0.77–1.01; every hardware-seed ratio of mode 2 within 0.73–1.10).

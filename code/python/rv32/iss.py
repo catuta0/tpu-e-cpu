@@ -119,16 +119,16 @@ class TpuStub:
     * CONFIG (0x008) RW: [3:0] LOG2_L (reset 8, clamped to 4..10 on write),
       [6:4] ACT_SHIFT (reset 0); other bits read 0 (INTERFACES.json).
     * RESULT (0x00C) -> ``result & 0xF``; CYCLES (0x010) -> ``cycles``.
-    * PARAMS (0x014) -> NL=16, IL=8, RNG_MODE, version (rev B defaults: RNG_MODE 2,
-      version 0x02 -> 0x02020810, ARCHITECTURE.md 11 / ADR-008; SW-02).
+    * PARAMS (0x014) -> NL=16, IL=8, RNG_MODE, version (rev C defaults: RNG_MODE 2,
+      version 0x03 -> 0x03020810, ADR-009; SW-03. Rev B was 0x02020810, rev A 0x01).
     * Every other offset of the 4 KiB window is plain read/write storage
       (stands in for INPUT/SCORE/HIDDEN/BIAS/WEIGHT; no inference is done).
     """
     result: int = 0
     cycles: int = 0
     busy_polls: int = 0
-    rng_mode: int = 2              # rev B default RNG_MODE (ARCHITECTURE.md 11)
-    version: int = 0x02            # PARAMS[31:24], rev B (was 0x01 in rev A)
+    rng_mode: int = 2              # rev B/C default RNG_MODE (ARCHITECTURE.md 11, ADR-009)
+    version: int = 0x03            # PARAMS[31:24], rev C (0x02 rev B, 0x01 rev A)
     config: int = 0x08
     starts: int = 0
     config_writes: list[int] = field(default_factory=list)

@@ -1,0 +1,107 @@
+15.4.8. Executing PROC_DLATCH pass (convert process syncs to latches).
+No latch inferred for signal `$paramod\sc_lfsr8\SEED=32'00000000000000001111100111011110.\leap8$func$design/rtl/tpu/sc_lfsr8.v:119$5243.$result' from process `$paramod\sc_lfsr8\SEED=32'00000000000000001111100111011110.$proc$design/rtl/tpu/sc_lfsr8.v:119$5255'.
+No latch inferred for signal `$paramod\sc_lfsr8\SEED=32'00000000000000000011010101111011.\leap8$func$design/rtl/tpu/sc_lfsr8.v:119$5176.$result' from process `$paramod\sc_lfsr8\SEED=32'00000000000000000011010101111011.$proc$design/rtl/tpu/sc_lfsr8.v:119$5188'.
+No latch inferred for signal `$paramod\sc_lfsr8\SEED=32'00000000000000000111000111101100.\leap8$func$design/rtl/tpu/sc_lfsr8.v:119$5109.$result' from process `$paramod\sc_lfsr8\SEED=32'00000000000000000111000111101100.$proc$design/rtl/tpu/sc_lfsr8.v:119$5121'.
+No latch inferred for signal `$paramod\sc_lfsr8\SEED=32'00000000000000000110111101001101.\leap8$func$design/rtl/tpu/sc_lfsr8.v:119$5042.$result' from process `$paramod\sc_lfsr8\SEED=32'00000000000000000110111101001101.$proc$design/rtl/tpu/sc_lfsr8.v:119$5054'.
+No latch inferred for signal `$paramod\sc_lfsr8\SEED=32'00000000000000001010101000111001.\leap8$func$design/rtl/tpu/sc_lfsr8.v:119$4975.$result' from process `$paramod\sc_lfsr8\SEED=32'00000000000000001010101000111001.$proc$design/rtl/tpu/sc_lfsr8.v:119$4987'.
+No latch inferred for signal `$paramod\sc_lfsr8\SEED=32'00000000000000001110101011010011.\leap8$func$design/rtl/tpu/sc_lfsr8.v:119$4908.$result' from process `$paramod\sc_lfsr8\SEED=32'00000000000000001110101011010011.$proc$design/rtl/tpu/sc_lfsr8.v:119$4920'.
+No latch inferred for signal `$paramod\sc_lfsr8\SEED=32'00000000000000000101001000001011.\leap8$func$design/rtl/tpu/sc_lfsr8.v:119$4841.$result' from process `$paramod\sc_lfsr8\SEED=32'00000000000000000101001000001011.$proc$design/rtl/tpu/sc_lfsr8.v:119$4853'.
+No latch inferred for signal `$paramod\sc_lfsr8\SEED=32'00000000000000000000001101001000.\leap8$func$design/rtl/tpu/sc_lfsr8.v:119$4774.$result' from process `$paramod\sc_lfsr8\SEED=32'00000000000000000000001101001000.$proc$design/rtl/tpu/sc_lfsr8.v:119$4786'.
+No latch inferred for signal `$paramod\sc_lfsr8\SEED=32'00000000000000001001110110110001.\leap8$func$design/rtl/tpu/sc_lfsr8.v:119$4707.$result' from process `$paramod\sc_lfsr8\SEED=32'00000000000000001001110110110001.$proc$design/rtl/tpu/sc_lfsr8.v:119$4719'.
+No latch inferred for signal `$paramod\sc_lfsr8\SEED=32'00000000000000000111000010111100.\leap8$func$design/rtl/tpu/sc_lfsr8.v:119$4640.$result' from process `$paramod\sc_lfsr8\SEED=32'00000000000000000111000010111100.$proc$design/rtl/tpu/sc_lfsr8.v:119$4652'.
+No latch inferred for signal `$paramod\sc_lfsr8\SEED=32'00000000000000001111001001010001.\leap8$func$design/rtl/tpu/sc_lfsr8.v:119$4573.$result' from process `$paramod\sc_lfsr8\SEED=32'00000000000000001111001001010001.$proc$design/rtl/tpu/sc_lfsr8.v:119$4585'.
+No latch inferred for signal `$paramod\sc_lfsr8\SEED=32'00000000000000001011011000010111.\leap8$func$design/rtl/tpu/sc_lfsr8.v:119$4506.$result' from process `$paramod\sc_lfsr8\SEED=32'00000000000000001011011000010111.$proc$design/rtl/tpu/sc_lfsr8.v:119$4518'.
+No latch inferred for signal `$paramod\sc_lfsr8\SEED=32'00000000000000000101110110001110.\leap8$func$design/rtl/tpu/sc_lfsr8.v:119$4439.$result' from process `$paramod\sc_lfsr8\SEED=32'00000000000000000101110110001110.$proc$design/rtl/tpu/sc_lfsr8.v:119$4451'.
+No latch inferred for signal `$paramod\sc_lfsr8\SEED=32'00000000000000001100001000100011.\leap8$func$design/rtl/tpu/sc_lfsr8.v:119$4372.$result' from process `$paramod\sc_lfsr8\SEED=32'00000000000000001100001000100011.$proc$design/rtl/tpu/sc_lfsr8.v:119$4384'.
+No latch inferred for signal `$paramod\sc_lfsr8\SEED=32'00000000000000001001000110101011.\leap8$func$design/rtl/tpu/sc_lfsr8.v:119$4305.$result' from process `$paramod\sc_lfsr8\SEED=32'00000000000000001001000110101011.$proc$design/rtl/tpu/sc_lfsr8.v:119$4317'.
+No latch inferred for signal `$paramod\soc_periph\UART_DIV=s32'00000000000000000000000011101010.\rd_mux' from process `$paramod\soc_periph\UART_DIV=s32'00000000000000000000000011101010.$proc$design/rtl/soc/soc_periph.v:189$6543'.
+No latch inferred for signal `\soc_bus.\mem_ready' from process `\soc_bus.$proc$design/rtl/soc/soc_bus.v:119$3870'.
+No latch inferred for signal `\soc_bus.\mem_rdata' from process `\soc_bus.$proc$design/rtl/soc/soc_bus.v:119$3870'.
+No latch inferred for signal `$paramod$9775fa7c97adc2c81689563cd805c1c535204e0a\sc_tpu.\reg_rdata' from process `$paramod$9775fa7c97adc2c81689563cd805c1c535204e0a\sc_tpu.$proc$design/rtl/tpu/sc_tpu.v:374$6500'.
+No latch inferred for signal `$paramod\sc_lfsr8\SEED=32'00000000000000001010110011100001.\leap8$func$design/rtl/tpu/sc_lfsr8.v:119$5310.$result' from process `$paramod\sc_lfsr8\SEED=32'00000000000000001010110011100001.$proc$design/rtl/tpu/sc_lfsr8.v:119$5322'.
+No latch inferred for signal `\rv32i_regfile.\i' from process `\rv32i_regfile.$proc$design/rtl/cpu/rv32i_regfile.v:101$334'.
+No latch inferred for signal `\rv32i_regfile.$memwr$\bank1$design/rtl/cpu/rv32i_regfile.v:103$188_EN' from process `\rv32i_regfile.$proc$design/rtl/cpu/rv32i_regfile.v:101$334'.
+No latch inferred for signal `\rv32i_regfile.$memwr$\bank2$design/rtl/cpu/rv32i_regfile.v:104$189_EN' from process `\rv32i_regfile.$proc$design/rtl/cpu/rv32i_regfile.v:101$334'.
+No latch inferred for signal `\rv32i_regfile.$memwr$\bank1$design/rtl/cpu/rv32i_regfile.v:103$190_EN' from process `\rv32i_regfile.$proc$design/rtl/cpu/rv32i_regfile.v:101$334'.
+No latch inferred for signal `\rv32i_regfile.$memwr$\bank2$design/rtl/cpu/rv32i_regfile.v:104$191_EN' from process `\rv32i_regfile.$proc$design/rtl/cpu/rv32i_regfile.v:101$334'.
+No latch inferred for signal `\rv32i_regfile.$memwr$\bank1$design/rtl/cpu/rv32i_regfile.v:103$192_EN' from process `\rv32i_regfile.$proc$design/rtl/cpu/rv32i_regfile.v:101$334'.
+No latch inferred for signal `\rv32i_regfile.$memwr$\bank2$design/rtl/cpu/rv32i_regfile.v:104$193_EN' from process `\rv32i_regfile.$proc$design/rtl/cpu/rv32i_regfile.v:101$334'.
+No latch inferred for signal `\rv32i_regfile.$memwr$\bank1$design/rtl/cpu/rv32i_regfile.v:103$194_EN' from process `\rv32i_regfile.$proc$design/rtl/cpu/rv32i_regfile.v:101$334'.
+No latch inferred for signal `\rv32i_regfile.$memwr$\bank2$design/rtl/cpu/rv32i_regfile.v:104$195_EN' from process `\rv32i_regfile.$proc$design/rtl/cpu/rv32i_regfile.v:101$334'.
+No latch inferred for signal `\rv32i_regfile.$memwr$\bank1$design/rtl/cpu/rv32i_regfile.v:103$196_EN' from process `\rv32i_regfile.$proc$design/rtl/cpu/rv32i_regfile.v:101$334'.
+No latch inferred for signal `\rv32i_regfile.$memwr$\bank2$design/rtl/cpu/rv32i_regfile.v:104$197_EN' from process `\rv32i_regfile.$proc$design/rtl/cpu/rv32i_regfile.v:101$334'.
+No latch inferred for signal `\rv32i_regfile.$memwr$\bank1$design/rtl/cpu/rv32i_regfile.v:103$198_EN' from process `\rv32i_regfile.$proc$design/rtl/cpu/rv32i_regfile.v:101$334'.
+No latch inferred for signal `\rv32i_regfile.$memwr$\bank2$design/rtl/cpu/rv32i_regfile.v:104$199_EN' from process `\rv32i_regfile.$proc$design/rtl/cpu/rv32i_regfile.v:101$334'.
+No latch inferred for signal `\rv32i_regfile.$memwr$\bank1$design/rtl/cpu/rv32i_regfile.v:103$200_EN' from process `\rv32i_regfile.$proc$design/rtl/cpu/rv32i_regfile.v:101$334'.
+No latch inferred for signal `\rv32i_regfile.$memwr$\bank2$design/rtl/cpu/rv32i_regfile.v:104$201_EN' from process `\rv32i_regfile.$proc$design/rtl/cpu/rv32i_regfile.v:101$334'.
+No latch inferred for signal `\rv32i_regfile.$memwr$\bank1$design/rtl/cpu/rv32i_regfile.v:103$202_EN' from process `\rv32i_regfile.$proc$design/rtl/cpu/rv32i_regfile.v:101$334'.
+No latch inferred for signal `\rv32i_regfile.$memwr$\bank2$design/rtl/cpu/rv32i_regfile.v:104$203_EN' from process `\rv32i_regfile.$proc$design/rtl/cpu/rv32i_regfile.v:101$334'.
+No latch inferred for signal `\rv32i_regfile.$memwr$\bank1$design/rtl/cpu/rv32i_regfile.v:103$204_EN' from process `\rv32i_regfile.$proc$design/rtl/cpu/rv32i_regfile.v:101$334'.
+No latch inferred for signal `\rv32i_regfile.$memwr$\bank2$design/rtl/cpu/rv32i_regfile.v:104$205_EN' from process `\rv32i_regfile.$proc$design/rtl/cpu/rv32i_regfile.v:101$334'.
+No latch inferred for signal `\rv32i_regfile.$memwr$\bank1$design/rtl/cpu/rv32i_regfile.v:103$206_EN' from process `\rv32i_regfile.$proc$design/rtl/cpu/rv32i_regfile.v:101$334'.
+No latch inferred for signal `\rv32i_regfile.$memwr$\bank2$design/rtl/cpu/rv32i_regfile.v:104$207_EN' from process `\rv32i_regfile.$proc$design/rtl/cpu/rv32i_regfile.v:101$334'.
+No latch inferred for signal `\rv32i_regfile.$memwr$\bank1$design/rtl/cpu/rv32i_regfile.v:103$208_EN' from process `\rv32i_regfile.$proc$design/rtl/cpu/rv32i_regfile.v:101$334'.
+No latch inferred for signal `\rv32i_regfile.$memwr$\bank2$design/rtl/cpu/rv32i_regfile.v:104$209_EN' from process `\rv32i_regfile.$proc$design/rtl/cpu/rv32i_regfile.v:101$334'.
+No latch inferred for signal `\rv32i_regfile.$memwr$\bank1$design/rtl/cpu/rv32i_regfile.v:103$210_EN' from process `\rv32i_regfile.$proc$design/rtl/cpu/rv32i_regfile.v:101$334'.
+No latch inferred for signal `\rv32i_regfile.$memwr$\bank2$design/rtl/cpu/rv32i_regfile.v:104$211_EN' from process `\rv32i_regfile.$proc$design/rtl/cpu/rv32i_regfile.v:101$334'.
+No latch inferred for signal `\rv32i_regfile.$memwr$\bank1$design/rtl/cpu/rv32i_regfile.v:103$212_EN' from process `\rv32i_regfile.$proc$design/rtl/cpu/rv32i_regfile.v:101$334'.
+No latch inferred for signal `\rv32i_regfile.$memwr$\bank2$design/rtl/cpu/rv32i_regfile.v:104$213_EN' from process `\rv32i_regfile.$proc$design/rtl/cpu/rv32i_regfile.v:101$334'.
+No latch inferred for signal `\rv32i_regfile.$memwr$\bank1$design/rtl/cpu/rv32i_regfile.v:103$214_EN' from process `\rv32i_regfile.$proc$design/rtl/cpu/rv32i_regfile.v:101$334'.
+No latch inferred for signal `\rv32i_regfile.$memwr$\bank2$design/rtl/cpu/rv32i_regfile.v:104$215_EN' from process `\rv32i_regfile.$proc$design/rtl/cpu/rv32i_regfile.v:101$334'.
+No latch inferred for signal `\rv32i_regfile.$memwr$\bank1$design/rtl/cpu/rv32i_regfile.v:103$216_EN' from process `\rv32i_regfile.$proc$design/rtl/cpu/rv32i_regfile.v:101$334'.
+No latch inferred for signal `\rv32i_regfile.$memwr$\bank2$design/rtl/cpu/rv32i_regfile.v:104$217_EN' from process `\rv32i_regfile.$proc$design/rtl/cpu/rv32i_regfile.v:101$334'.
+No latch inferred for signal `\rv32i_regfile.$memwr$\bank1$design/rtl/cpu/rv32i_regfile.v:103$218_EN' from process `\rv32i_regfile.$proc$design/rtl/cpu/rv32i_regfile.v:101$334'.
+No latch inferred for signal `\rv32i_regfile.$memwr$\bank2$design/rtl/cpu/rv32i_regfile.v:104$219_EN' from process `\rv32i_regfile.$proc$design/rtl/cpu/rv32i_regfile.v:101$334'.
+No latch inferred for signal `\rv32i_regfile.$memwr$\bank1$design/rtl/cpu/rv32i_regfile.v:103$220_EN' from process `\rv32i_regfile.$proc$design/rtl/cpu/rv32i_regfile.v:101$334'.
+No latch inferred for signal `\rv32i_regfile.$memwr$\bank2$design/rtl/cpu/rv32i_regfile.v:104$221_EN' from process `\rv32i_regfile.$proc$design/rtl/cpu/rv32i_regfile.v:101$334'.
+No latch inferred for signal `\rv32i_regfile.$memwr$\bank1$design/rtl/cpu/rv32i_regfile.v:103$222_EN' from process `\rv32i_regfile.$proc$design/rtl/cpu/rv32i_regfile.v:101$334'.
+No latch inferred for signal `\rv32i_regfile.$memwr$\bank2$design/rtl/cpu/rv32i_regfile.v:104$223_EN' from process `\rv32i_regfile.$proc$design/rtl/cpu/rv32i_regfile.v:101$334'.
+No latch inferred for signal `\rv32i_regfile.$memwr$\bank1$design/rtl/cpu/rv32i_regfile.v:103$224_EN' from process `\rv32i_regfile.$proc$design/rtl/cpu/rv32i_regfile.v:101$334'.
+No latch inferred for signal `\rv32i_regfile.$memwr$\bank2$design/rtl/cpu/rv32i_regfile.v:104$225_EN' from process `\rv32i_regfile.$proc$design/rtl/cpu/rv32i_regfile.v:101$334'.
+No latch inferred for signal `\rv32i_regfile.$memwr$\bank1$design/rtl/cpu/rv32i_regfile.v:103$226_EN' from process `\rv32i_regfile.$proc$design/rtl/cpu/rv32i_regfile.v:101$334'.
+No latch inferred for signal `\rv32i_regfile.$memwr$\bank2$design/rtl/cpu/rv32i_regfile.v:104$227_EN' from process `\rv32i_regfile.$proc$design/rtl/cpu/rv32i_regfile.v:101$334'.
+No latch inferred for signal `\rv32i_regfile.$memwr$\bank1$design/rtl/cpu/rv32i_regfile.v:103$228_EN' from process `\rv32i_regfile.$proc$design/rtl/cpu/rv32i_regfile.v:101$334'.
+No latch inferred for signal `\rv32i_regfile.$memwr$\bank2$design/rtl/cpu/rv32i_regfile.v:104$229_EN' from process `\rv32i_regfile.$proc$design/rtl/cpu/rv32i_regfile.v:101$334'.
+No latch inferred for signal `\rv32i_regfile.$memwr$\bank1$design/rtl/cpu/rv32i_regfile.v:103$230_EN' from process `\rv32i_regfile.$proc$design/rtl/cpu/rv32i_regfile.v:101$334'.
+No latch inferred for signal `\rv32i_regfile.$memwr$\bank2$design/rtl/cpu/rv32i_regfile.v:104$231_EN' from process `\rv32i_regfile.$proc$design/rtl/cpu/rv32i_regfile.v:101$334'.
+No latch inferred for signal `\rv32i_regfile.$memwr$\bank1$design/rtl/cpu/rv32i_regfile.v:103$232_EN' from process `\rv32i_regfile.$proc$design/rtl/cpu/rv32i_regfile.v:101$334'.
+No latch inferred for signal `\rv32i_regfile.$memwr$\bank2$design/rtl/cpu/rv32i_regfile.v:104$233_EN' from process `\rv32i_regfile.$proc$design/rtl/cpu/rv32i_regfile.v:101$334'.
+No latch inferred for signal `\rv32i_regfile.$memwr$\bank1$design/rtl/cpu/rv32i_regfile.v:103$234_EN' from process `\rv32i_regfile.$proc$design/rtl/cpu/rv32i_regfile.v:101$334'.
+No latch inferred for signal `\rv32i_regfile.$memwr$\bank2$design/rtl/cpu/rv32i_regfile.v:104$235_EN' from process `\rv32i_regfile.$proc$design/rtl/cpu/rv32i_regfile.v:101$334'.
+No latch inferred for signal `\rv32i_regfile.$memwr$\bank1$design/rtl/cpu/rv32i_regfile.v:103$236_EN' from process `\rv32i_regfile.$proc$design/rtl/cpu/rv32i_regfile.v:101$334'.
+No latch inferred for signal `\rv32i_regfile.$memwr$\bank2$design/rtl/cpu/rv32i_regfile.v:104$237_EN' from process `\rv32i_regfile.$proc$design/rtl/cpu/rv32i_regfile.v:101$334'.
+No latch inferred for signal `\rv32i_regfile.$memwr$\bank1$design/rtl/cpu/rv32i_regfile.v:103$238_EN' from process `\rv32i_regfile.$proc$design/rtl/cpu/rv32i_regfile.v:101$334'.
+No latch inferred for signal `\rv32i_regfile.$memwr$\bank2$design/rtl/cpu/rv32i_regfile.v:104$239_EN' from process `\rv32i_regfile.$proc$design/rtl/cpu/rv32i_regfile.v:101$334'.
+No latch inferred for signal `\rv32i_regfile.$memwr$\bank1$design/rtl/cpu/rv32i_regfile.v:103$240_EN' from process `\rv32i_regfile.$proc$design/rtl/cpu/rv32i_regfile.v:101$334'.
+No latch inferred for signal `\rv32i_regfile.$memwr$\bank2$design/rtl/cpu/rv32i_regfile.v:104$241_EN' from process `\rv32i_regfile.$proc$design/rtl/cpu/rv32i_regfile.v:101$334'.
+No latch inferred for signal `\rv32i_regfile.$memwr$\bank1$design/rtl/cpu/rv32i_regfile.v:103$242_EN' from process `\rv32i_regfile.$proc$design/rtl/cpu/rv32i_regfile.v:101$334'.
+No latch inferred for signal `\rv32i_regfile.$memwr$\bank2$design/rtl/cpu/rv32i_regfile.v:104$243_EN' from process `\rv32i_regfile.$proc$design/rtl/cpu/rv32i_regfile.v:101$334'.
+No latch inferred for signal `\rv32i_regfile.$memwr$\bank1$design/rtl/cpu/rv32i_regfile.v:103$244_EN' from process `\rv32i_regfile.$proc$design/rtl/cpu/rv32i_regfile.v:101$334'.
+No latch inferred for signal `\rv32i_regfile.$memwr$\bank2$design/rtl/cpu/rv32i_regfile.v:104$245_EN' from process `\rv32i_regfile.$proc$design/rtl/cpu/rv32i_regfile.v:101$334'.
+No latch inferred for signal `\rv32i_regfile.$memwr$\bank1$design/rtl/cpu/rv32i_regfile.v:103$246_EN' from process `\rv32i_regfile.$proc$design/rtl/cpu/rv32i_regfile.v:101$334'.
+No latch inferred for signal `\rv32i_regfile.$memwr$\bank2$design/rtl/cpu/rv32i_regfile.v:104$247_EN' from process `\rv32i_regfile.$proc$design/rtl/cpu/rv32i_regfile.v:101$334'.
+No latch inferred for signal `\rv32i_regfile.$memwr$\bank1$design/rtl/cpu/rv32i_regfile.v:103$248_EN' from process `\rv32i_regfile.$proc$design/rtl/cpu/rv32i_regfile.v:101$334'.
+No latch inferred for signal `\rv32i_regfile.$memwr$\bank2$design/rtl/cpu/rv32i_regfile.v:104$249_EN' from process `\rv32i_regfile.$proc$design/rtl/cpu/rv32i_regfile.v:101$334'.
+No latch inferred for signal `\rv32i_regfile.$memwr$\bank1$design/rtl/cpu/rv32i_regfile.v:103$250_EN' from process `\rv32i_regfile.$proc$design/rtl/cpu/rv32i_regfile.v:101$334'.
+No latch inferred for signal `\rv32i_regfile.$memwr$\bank2$design/rtl/cpu/rv32i_regfile.v:104$251_EN' from process `\rv32i_regfile.$proc$design/rtl/cpu/rv32i_regfile.v:101$334'.
+No latch inferred for signal `\rv32i_alu.\result' from process `\rv32i_alu.$proc$design/rtl/cpu/rv32i_alu.v:104$183'.
+No latch inferred for signal `\rv32i_decode.\imm' from process `\rv32i_decode.$proc$design/rtl/cpu/rv32i_decode.v:141$158'.
+No latch inferred for signal `\rv32i_core.\ld_byte' from process `\rv32i_core.$proc$design/rtl/cpu/rv32i_core.v:371$40'.
+No latch inferred for signal `\rv32i_core.\st_strb' from process `\rv32i_core.$proc$design/rtl/cpu/rv32i_core.v:344$31'.
+Found and reported 0 problems.
+Found and reported 0 problems.
+15.37. Executing DFFLEGALIZE pass (convert FFs and LATCHes to types supported by the target).
+15.39.1. Executing Verilog-2005 frontend: /share/gowin/cells_latch.v
+Parsing Verilog input from `/share/gowin/cells_latch.v' to AST representation.
+Generating RTLIL representation for module `$_DLATCH_P_'.
+Generating RTLIL representation for module `$_DLATCH_N_'.
+Generating RTLIL representation for module `$_DLATCH_PP0_'.
+Generating RTLIL representation for module `$_DLATCH_NP0_'.
+Generating RTLIL representation for module `$_DLATCH_PP1_'.
+Generating RTLIL representation for module `$_DLATCH_NP1_'.
+15.44.3.8. Executing PROC_DLATCH pass (convert process syncs to latches).
+No latch inferred for signal `$paramod\ALU\ALU_MODE=s32'00000000000000000000000000000010.\C' from process `$paramod\ALU\ALU_MODE=s32'00000000000000000000000000000010.$proc$/share/gowin/cells_sim.v:1064$80082'.
+No latch inferred for signal `$paramod\ALU\ALU_MODE=s32'00000000000000000000000000000010.\S' from process `$paramod\ALU\ALU_MODE=s32'00000000000000000000000000000010.$proc$/share/gowin/cells_sim.v:1064$80082'.
+15.44.4. Executing SCC pass (detecting logic loops).
+Found and reported 0 problems.
+Found and reported 0 problems.

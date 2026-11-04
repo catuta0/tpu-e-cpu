@@ -188,7 +188,7 @@ python3 -c "import sys; sys.exit(0 if $WF >= 29.7 else 1)" || { echo "worst Fmax
 # ---------------------------------------------------------------- latch / loop check
 for fl in $FLOWS; do
     { grep -E -i 'latch|combinational loop|logic loop|multiple conflicting drivers|found and reported [0-9]+ problems' "$LOG/synth_$fl.log" || true; } > "$LOG/check_$fl.log"
-    grep -E -q 'found and reported 0 problems' "$LOG/synth_$fl.log" || { echo "yosys check reported problems ($fl)"; fail=1; }
+    grep -E -i -q 'found and reported 0 problems' "$LOG/synth_$fl.log" && ! grep -E -i -q 'found and reported [1-9][0-9]* problems' "$LOG/synth_$fl.log" || { echo "yosys check reported problems ($fl)"; fail=1; }
 done
 
 # ---------------------------------------------------------------- pins (worst nwl seed)

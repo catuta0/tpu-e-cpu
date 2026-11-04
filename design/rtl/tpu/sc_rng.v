@@ -95,6 +95,12 @@ module sc_rng #(
     output wire [IL*8-1:0] rw
 );
 
+    // =========================================================================
+    // SEED TABLES - the ONLY place where LFSR seeds are defined in the RTL.
+    // A future seed revision changes only the constants in this block (and
+    // PARAMS.version in sc_tpu.v); tests/tpu/tb_sc_lfsr8.v TC7 re-derives the
+    // rev B rule and must be updated together with it.
+    // =========================================================================
     // ---- Modes 0/1: the two shared LFSRs (ARCHITECTURE.md 11) ----------------
     localparam [15:0] SEED_X = 16'hACE1;   // S(0)
     localparam [15:0] SEED_W = 16'hF9DE;   // S(32768): half a period from X
@@ -119,6 +125,7 @@ module sc_rng #(
         16'hE90C, 16'h582E, 16'h89DF, 16'h2389 };   // S(47104) S(43008) S(38912) S(34816)
     localparam [16*16-1:0] SEEDS_X = {SEEDS_X_EXT, SEEDS_X_SPEC};
     localparam [16*16-1:0] SEEDS_W = {SEEDS_W_EXT, SEEDS_W_SPEC};
+    // ======================== end of the seed tables ===========================
 
     // 8-bit rotate left by n (0..7): pure wiring when n is a constant.
     function [7:0] rotl8;

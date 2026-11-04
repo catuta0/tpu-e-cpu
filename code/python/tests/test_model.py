@@ -1,14 +1,18 @@
-"""Unit tests of the SC-TPU golden model (tasks SW-01a, SW-02).
+"""Unit tests of the SC-TPU golden model (tasks SW-01a, SW-02, SW-03).
 
 Spec: design/architecture/ARCHITECTURE.md sections 5.2-5.6 ([BIT-EXACT]) with
-the rev B seed rule of section 11 (ADR-008); INTERFACES.json revision B.
+the rev C seeds of ADR-009 (SW-03: mode 2 = rev A per-lane seeds, modes 0/1 =
+rev B pair, PARAMS version 0x03); rev B (section 11) and rev A selectable.
 Run: ``.venv/bin/python -m pytest -q code/python/tests``.
 
 Covered:
+* rev C seeds: literal hex table = rule; default revision; pairwise lag >= 321
+  stream cycles; no translated pair streams (the ADR-009 rule) for rev C, with
+  rev B as the negative test; rev C streams = rev A (mode 2) / rev B (0/1);
 * rev B seeds: S(n) recomputed here from 0xACE1 with literal single steps and
-  compared with the hex table of ARCHITECTURE.md 11 and INTERFACES.json;
-  pairwise stream-cycle lag >= 512 for all 16 mode-2 LFSRs
-  (lag_cycles = d * inv(8) mod 65535); rev A seeds still selectable;
+  compared with the hex table of ARCHITECTURE.md 11 (and INTERFACES.json while
+  it is at revision B); pairwise stream-cycle lag >= 512 for all 16 mode-2
+  LFSRs (lag_cycles = d * inv(8) mod 65535); rev A seeds still selectable;
 * leap-forward LFSR = 8 single steps, for every one of the 65536 states (5.3);
 * slow literal reference vs fast vectorised model on random cases, all
   RNG modes, K = 4..10 (5.3);
@@ -96,19 +100,107 @@ def test_revB_seeds_equal_spec_table() -> None:
     w_calc = [lfsr.step_n(0xACE1, 32768 + 4096 * i) for i in range(8)]
     assert x_calc == SPEC_REVB_X and w_calc == SPEC_REVB_W
     assert lfsr.step_n(0xACE1, 32768) == 0xF9DE
-    # model (default = rev B) uses exactly these seeds
-    assert M.DEFAULT_SPEC_REV == "B" and M.DEFAULT_RNG_MODE == 2
-    assert M.lane_seeds(2) == M.lane_seeds(2, "B") == (SPEC_REVB_X, SPEC_REVB_W)
-    assert M.lane_seeds(0) == M.lane_seeds(1) == ([0xACE1], [0xF9DE])
+    # model (spec_rev="B") uses exactly these seeds
+    assert M.lane_seeds(2, "B") == (SPEC_REVB_X, SPEC_REVB_W)
+    assert M.lane_seeds(0, "B") == M.lane_seeds(1, "B") == ([0xACE1], [0xF9DE])
     assert 0 not in x_calc + w_calc
-    # INTERFACES.json revision B carries the same table
+
+
+# Literal copy of the rev C table handed to the manager (SW-03 handoff); independent of model.py.
+SPEC_REVC_X = [0xACE1, 0xE93B, 0x2595, 0x61EF, 0x9E49, 0xDAA3, 0x16FD, 0x5357]
+SPEC_REVC_W = [0x7A5C, 0xA5C3, 0xD12A, 0xFC91, 0x27F8, 0x535F, 0x7EC6, 0xAA2D]
+
+
+def test_revC_seed_table_and_defaults() -> None:
+    """Rev C: mode 2 = (0xACE1 + 0x3C5A i, 0x7A5C + 0x2B67 i) mod 2^16; modes 0/1 = rev B pair."""
+    assert [(0xACE1 + 0x3C5A * i) & 0xFFFF for i in range(8)] == SPEC_REVC_X
+    assert [(0x7A5C + 0x2B67 * i) & 0xFFFF for i in range(8)] == SPEC_REVC_W
+    assert M.DEFAULT_SPEC_REV == "C" and M.DEFAULT_RNG_MODE == 2
+    assert M.lane_seeds(2) == M.lane_seeds(2, "C") == (SPEC_REVC_X, SPEC_REVC_W)
+    assert M.lane_seeds(2, "C") == M.lane_seeds(2, "A")
+    assert M.lane_seeds(0) == M.lane_seeds(1) == M.lane_seeds(0, "B") == ([0xACE1], [0xF9DE])
+    assert lfsr.step_n(0xACE1, 32768) == 0xF9DE
+    assert 0 not in SPEC_REVC_X + SPEC_REVC_W and len(set(SPEC_REVC_X + SPEC_REVC_W)) == 16
+    assert M.params_word(2) == 0x03020810 and M.PARAMS_VERSION["C"] == 0x03
+
+
+def test_interfaces_json_seed_table_matches_model_revision() -> None:
+    """INTERFACES.json carries the seed table of its own revision (B now, C after the spec update)."""
     tpu = json.loads((ROOT / "management" / "INTERFACES.json").read_text())
-    assert tpu["revision"] == "B"
+    rev = tpu["revision"]
+    assert rev in M.SPEC_REVS and rev != "A"
     lf = tpu["tpu"]["lfsr"]
-    parse = lambda s: [int(v, 16) for v in s.split(":", 1)[1].split(",")]  # noqa: E731
-    assert parse(lf["seed_x_i_mode2"]) == SPEC_REVB_X and parse(lf["seed_w_i_mode2"]) == SPEC_REVB_W
-    assert lf["seed_x"].startswith("0xACE1") and lf["seed_w"].startswith("0xF9DE")
+    hexes = lambda s: [int(v, 16) for v in s.split(":", 1)[-1].replace(" ", "").split(",")]  # noqa: E731
+    sx, sw = M.lane_seeds(2, rev)
+    assert hexes(lf["seed_x_i_mode2"]) == sx and hexes(lf["seed_w_i_mode2"]) == sw
+    (x01,), (w01,) = M.lane_seeds(0, rev)
+    assert int(lf["seed_x"].split()[0], 16) == x01 and int(lf["seed_w"].split()[0], 16) == w01
     assert tpu["tpu"]["rng_mode_default"] == 2
+
+
+def _translate_violations(pos: dict, sx: list, sw: list) -> list:
+    """ADR-009 rule, computed here from first principles: lane pairs whose pair streams are translates."""
+    lx = [_lag_cycles(pos, sx[0], v) for v in sx]
+    lw = [_lag_cycles(pos, sx[0], v) for v in sw]
+    return [(i, j) for i in range(8) for j in range(i + 1, 8)
+            if (lx[i] - lx[j]) % PERIOD == (lw[i] - lw[j]) % PERIOD]
+
+
+def test_revC_no_translated_pair_streams_revB_violates() -> None:
+    """(lag_x(i)-lag_x(j)) != (lag_w(i)-lag_w(j)) mod 65535 for all lanes i != j: rev C yes, rev B no."""
+    from sctpu import seed_select as SS
+    pos = _positions_from_origin()
+    assert _translate_violations(pos, SPEC_REVC_X, SPEC_REVC_W) == []
+    viol_b = _translate_violations(pos, SPEC_REVB_X, SPEC_REVB_W)
+    assert len(viol_b) == 28  # negative test: every one of the 28 lane pairs of rev B
+    assert SS.translate_rule_violations(SPEC_REVC_X, SPEC_REVC_W) == []
+    assert [tuple(v) for v in SS.translate_rule_violations(SPEC_REVB_X, SPEC_REVB_W)] == viol_b
+    # the rule is about the streams themselves: rev B lane 1 = lane 0 delayed by 512 cycles
+    rx, rw = M.rng_streams(2, 600, spec_rev="B")
+    assert np.array_equal(rx[1, :64], rx[0, 512:576]) and np.array_equal(rw[1, :64], rw[0, 512:576])
+    # rev C: no lane's joint pair stream equals another lane's at any lag within one K=10 inference
+    n = M.N_TILES_TOTAL << M.K_MAX
+    rx, rw = M.rng_streams(2, 2 * n)
+    pair = rx.astype(np.int64) * 256 + rw
+    for i in range(8):
+        for j in range(8):
+            if i != j:
+                lag = (_lag_cycles(pos, SPEC_REVC_X[i], SPEC_REVC_X[j])) % PERIOD
+                # the only lag at which X_j copies X_i; W_j must NOT copy W_i there
+                if lag < n:
+                    assert not np.array_equal(pair[j, :n - lag], pair[i, lag:n]), (i, j)
+
+
+def test_revC_pairwise_stream_lag_at_least_321() -> None:
+    """Minimum pairwise lag of the 16 rev C mode-2 LFSRs = 321 stream cycles (X0-W3), stated value."""
+    pos = _positions_from_origin()
+    seeds = SPEC_REVC_X + SPEC_REVC_W
+    worst, arg = PERIOD, None
+    for a in range(16):
+        for b in range(a + 1, 16):
+            m = _lag_cycles(pos, seeds[a], seeds[b])
+            dist = min(m, PERIOD - m)
+            assert dist >= 321
+            if dist < worst:
+                worst, arg = dist, (a, b)
+    assert worst == 321 == M.REVC_MIN_LAG_CYCLES and arg == (0, 11)  # X0 and W3
+    assert M.stream_distance_cycles(0xACE1, 0xF9DE) == 4096  # modes 0/1 X-W (rev B pair)
+
+
+def test_revC_streams_equal_revA_mode2_and_revB_modes01() -> None:
+    """Rev C changes no stream other than by choice of table: mode 2 = rev A, modes 0/1 = rev B."""
+    for mode, other in ((0, "B"), (1, "B"), (2, "A")):
+        a = M.rng_streams(mode, 300, spec_rev="C")
+        b = M.rng_streams(mode, 300, spec_rev=other)
+        assert np.array_equal(a[0], b[0]) and np.array_equal(a[1], b[1])
+
+
+def test_revC_no_repeated_count_tables() -> None:
+    """Structural check of the rev B defect: no identical (tile, lane) count tables in rev C, K = 6..10."""
+    from sctpu import compare_revs as C
+    for K in (6, 8, 9, 10):
+        assert C.identical_table_pairs(M.SCEngine(K, 2, spec_rev="C")) == 0
+    assert C.identical_table_pairs(M.SCEngine(9, 2, spec_rev="B")) == 196  # negative test
 
 
 def _lag_cycles(pos: dict, a: int, b: int) -> int:
@@ -155,32 +247,37 @@ def test_revA_lag_defect_documented() -> None:
 
 
 def test_params_word() -> None:
-    """PARAMS = {version, RNG_MODE, IL=8, NL=16}; version 0x02 in rev B (5.4, 11)."""
-    assert M.params_word(2) == 0x02020810 and M.params_word(0) == 0x02000810
+    """PARAMS = {version, RNG_MODE, IL=8, NL=16}; version 0x01 / 0x02 / 0x03 in rev A / B / C."""
+    assert M.params_word(2) == 0x03020810 and M.params_word(0) == 0x03000810
+    assert M.params_word(2, "B") == 0x02020810 and M.params_word(0, "B") == 0x02000810
     assert M.params_word(1, "A") == 0x01010810
 
 
 def test_spec_rev_validation() -> None:
     """Unknown spec revisions are rejected."""
     with pytest.raises(ValueError):
-        M.lane_seeds(2, "C")
+        M.lane_seeds(2, "D")
     with pytest.raises(ValueError):
         M.SCEngine(4, 2, spec_rev="b")
 
 
 def test_rng_streams_modes() -> None:
     """Lane r values: mode 0 identical, mode 1 rotl8(r, lane), mode 2 own LFSR (5.3)."""
-    rx0, rw0 = M.rng_streams(0, 20)
-    rx1, rw1 = M.rng_streams(1, 20)
-    rx2, _ = M.rng_streams(2, 20)
+    rx0, rw0 = M.rng_streams(0, 20, spec_rev="B")
+    rx1, rw1 = M.rng_streams(1, 20, spec_rev="B")
+    rx2, _ = M.rng_streams(2, 20, spec_rev="B")
     assert (rx0 == rx0[0]).all() and (rw0 == rw0[0]).all()
     for i in range(8):
         assert [int(v) for v in rx1[i]] == [M.rotl8(int(v), i) for v in rx0[0]]
         assert [int(v) for v in rw1[i]] == [M.rotl8(int(v), i) for v in rw0[0]]
     assert list(rx2[0]) == list(rx0[0])  # lane 0 seed equals the shared seed
     assert list(rx2[3]) == lfsr.stream_r_sequence(SPEC_REVB_X[3], 20)
-    _, rw2 = M.rng_streams(2, 20)
+    _, rw2 = M.rng_streams(2, 20, spec_rev="B")
     assert list(rw2[7]) == lfsr.stream_r_sequence(SPEC_REVB_W[7], 20)
+    # rev C (default) mode 2
+    rx2c, rw2c = M.rng_streams(2, 20)
+    assert list(rx2c[3]) == lfsr.stream_r_sequence(SPEC_REVC_X[3], 20)
+    assert list(rw2c[7]) == lfsr.stream_r_sequence(SPEC_REVC_W[7], 20)
     # rev A still available
     rx2a, _ = M.rng_streams(2, 20, spec_rev="A")
     assert list(rx2a[3]) == lfsr.stream_r_sequence((0xACE1 + 3 * 0x3C5A) & 0xFFFF, 20)
@@ -330,7 +427,7 @@ def _random_case(rng, extreme: bool = False):
     return x, ram, b
 
 
-@pytest.mark.parametrize("spec_rev", ["B", "A"])
+@pytest.mark.parametrize("spec_rev", ["C", "B", "A"])
 @pytest.mark.parametrize("mode", [0, 1, 2])
 def test_reference_vs_vectorised_random(mode: int, spec_rev: str) -> None:
     """Bit-exact agreement (HIDDEN, SCORE, RESULT, acc, Dp) on random cases, K=4..10."""
@@ -469,11 +566,12 @@ def test_vector_files_recheck_with_reference() -> None:
         psets[n] = (np.array(M.words_to_bytes([int(t, 16) for t in _hexlines(DATA / "corner" / f"pset{n}_weights.hex")])),
                     [int(t, 16) - (65536 if int(t, 16) & 0x8000 else 0)
                      for t in _hexlines(DATA / "corner" / f"pset{n}_bias.hex")])
-    files = sorted(DATA.glob("tpu_vectors_*.txt")) + sorted((DATA / "revA").glob("tpu_vectors_*.txt"))
-    assert len(files) == 16
+    files = (sorted(DATA.glob("tpu_vectors_*.txt")) + sorted((DATA / "revB").glob("tpu_vectors_*.txt"))
+             + sorted((DATA / "revA").glob("tpu_vectors_*.txt")))
+    assert len(files) == 24
     for p in files:
         rev = G.read_spec_rev(p)
-        assert rev == ("A" if p.parent.name == "revA" else "B"), p
+        assert rev == {"revA": "A", "revB": "B"}.get(p.parent.name, "C"), p
         vecs = G.read_vectors(p)
         assert len(vecs) in (360, 16, 51)
         for v in (vecs[0], vecs[len(vecs) // 2], vecs[-1]):
@@ -484,11 +582,12 @@ def test_vector_files_recheck_with_reference() -> None:
 
 @pytest.mark.skipif(not (DATA / "tpu_rng_trace_mode2.txt").exists(), reason="run sctpu.gen_hex first")
 def test_rng_trace_files_rev_tags_and_seeds() -> None:
-    """Trace files: '# spec_rev B' header, seeds line and first states follow the rev B seeds."""
+    """Trace files: '# spec_rev C' header, seeds line and first states follow the rev C seeds."""
     from sctpu import gen_hex as G
     for mode in (0, 1, 2):
         p = DATA / f"tpu_rng_trace_mode{mode}.txt"
-        assert G.read_spec_rev(p) == "B"
+        assert G.read_spec_rev(p) == "C"
+        assert G.read_spec_rev(DATA / "revB" / p.name) == "B"
         assert G.read_spec_rev(DATA / "revA" / p.name) == "A"
         sx, sw = M.lane_seeds(mode)
         rows = [ln.split() for ln in p.read_text().splitlines() if not ln.startswith("#")]
@@ -500,14 +599,18 @@ def test_rng_trace_files_rev_tags_and_seeds() -> None:
 
 @pytest.mark.skipif(not (DATA / "soc_expected.json").exists(), reason="run sctpu.gen_hex first")
 def test_soc_expected_matches_reference() -> None:
-    """soc_expected.json = slow reference on input.hex, K=8, s=0, mode 2, rev B."""
+    """soc_expected.json = slow reference on input.hex, K=8, s=0, mode 2, rev C."""
     se = json.loads((DATA / "soc_expected.json").read_text())
-    assert (se["spec_rev"], se["K"], se["act_shift_s"], se["rng_mode"]) == ("B", 8, 0, 2)
+    assert (se["spec_rev"], se["K"], se["act_shift_s"], se["rng_mode"]) == ("C", 8, 0, 2)
     mp = json.loads((DATA / "model_params.json").read_text())
     ram = M.pack_weight_ram(np.array(mp["w1_codes"]), np.array(mp["w2_codes"]))
     b = M.pack_biases(mp["b1_int16"], mp["b2_int16"])
     x = M.words_to_bytes([int(t, 16) for t in _hexlines(DATA / "input.hex")])
-    r = M.sc_inference_reference(x, ram, b, 8, 0, 2, "B")
+    r = M.sc_inference_reference(x, ram, b, 8, 0, 2, "C")
     assert se["hidden_codes"] == r.hidden and se["score"] == r.score and se["result"] == r.result
     assert se["score_words"] == [f"0x{w:08x}" for w in M.score_words(r.score)]
-    assert se["params_expected"] == "0x02020810" and se["reference_crosscheck_mismatching_fields"] == 0
+    assert se["params_expected"] == "0x03020810" and se["reference_crosscheck_mismatching_fields"] == 0
+    # the rev B expectation is kept for traceability and still reproduces
+    sb = json.loads((DATA / "revB" / "soc_expected.json").read_text())
+    rb = M.sc_inference_reference(x, ram, b, 8, 0, 2, "B")
+    assert sb["spec_rev"] == "B" and sb["score"] == rb.score and sb["params_expected"] == "0x02020810"

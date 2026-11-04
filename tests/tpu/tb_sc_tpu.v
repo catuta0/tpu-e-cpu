@@ -78,6 +78,9 @@
 module tb_sc_tpu;
 
     parameter integer RNG_MODE   = 2;   // rev B default (ADR-008)
+    // Expected PARAMS.version: 0x02 = rev B (ARCHITECTURE.md 11). Single place
+    // to change for a later spec revision (must equal sc_tpu.v P_VERSION).
+    parameter [7:0]   EXP_VERSION = 8'h02;
     // INIT_FILES = 1: the DUT is elaborated with WEIGHT_INIT / BIAS_INIT /
     // INPUT_INIT = sim/data/{weights,bias,input}.hex (spec 5.6) for test D12.
     parameter integer INIT_FILES = 0;
@@ -434,9 +437,9 @@ module tb_sc_tpu;
 
             // ---------------- D2 PARAMS ----------------------------------------
             e0 = errors;
-            v = {8'h02, 6'd0, RNG_MODE[1:0], 8'd8, 8'd16};   // rev B version 0x02
+            v = {EXP_VERSION, 6'd0, RNG_MODE[1:0], 8'd8, 8'd16};
             expect_read(A_PARAMS, v, "D2 PARAMS");
-            if (errors == e0) $display("PASS: D2 PARAMS = 0x%08h (NL=16, IL=8, RNG_MODE=%0d, version 0x02)", v, RNG_MODE);
+            if (errors == e0) $display("PASS: D2 PARAMS = 0x%08h (NL=16, IL=8, RNG_MODE=%0d, version 0x%02h)", v, RNG_MODE, EXP_VERSION);
             else              $display("FAIL: D2 PARAMS");
 
             // ---------------- D3 CONFIG clamp ----------------------------------
@@ -479,7 +482,7 @@ module tb_sc_tpu;
             bus_write(A_STATUS, 32'hFFFF_FFFF); expect_read(A_STATUS, 32'd0, "D4 STATUS is read-only");
             bus_write(A_RESULT, 32'hFFFF_FFFF); expect_read(A_RESULT, 32'd0, "D4 RESULT is read-only");
             bus_write(A_CYCLES, 32'hFFFF_FFFF); expect_read(A_CYCLES, 32'd0, "D4 CYCLES is read-only");
-            bus_write(A_PARAMS, 32'hFFFF_FFFF); expect_read(A_PARAMS, {8'h02, 6'd0, RNG_MODE[1:0], 8'd8, 8'd16}, "D4 PARAMS is read-only");
+            bus_write(A_PARAMS, 32'hFFFF_FFFF); expect_read(A_PARAMS, {EXP_VERSION, 6'd0, RNG_MODE[1:0], 8'd8, 8'd16}, "D4 PARAMS is read-only");
             bus_write(A_SCORE,  32'hFFFF_FFFF); expect_read(A_SCORE, 32'd0, "D4 SCORE is read-only");
             bus_write(A_HIDDEN, 32'hFFFF_FFFF); expect_read(A_HIDDEN, 32'd0, "D4 HIDDEN is read-only");
             expect_read(A_STATUS, 32'd0, "D4 no START from other writes");

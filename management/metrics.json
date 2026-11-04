@@ -119,6 +119,38 @@
    "label": "SIMULATION",
    "revision": "1e853f7",
    "evidence": "logs/tpu/sim_tpu_console.log"
+  },
+  {
+   "name": "acc_sc_mode2_K8_revC",
+   "value": 94.4,
+   "unit": "%",
+   "label": "SIMULATION",
+   "revision": "ba9dfb9",
+   "evidence": "reports/sw/accuracy_revC.json"
+  },
+  {
+   "name": "acc_sc_mode2_K9_revC",
+   "value": 94.4,
+   "unit": "%",
+   "label": "SIMULATION",
+   "revision": "ba9dfb9",
+   "evidence": "reports/sw/accuracy_revC.json"
+  },
+  {
+   "name": "acc_sc_mode2_K9_revB",
+   "value": 89.7,
+   "unit": "%",
+   "label": "SIMULATION",
+   "revision": "ba9dfb9",
+   "evidence": "reports/sw/accuracy_revB.json"
+  },
+  {
+   "name": "acc_sc_mode2_K8_ensemble20_revC",
+   "value": 92.8,
+   "unit": "%",
+   "label": "SIMULATION",
+   "revision": "ba9dfb9",
+   "evidence": "reports/sw/accuracy_revC.json"
   }
  ]
 }

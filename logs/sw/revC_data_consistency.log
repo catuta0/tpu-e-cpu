@@ -1,0 +1,47 @@
+# SW-03 rev C data consistency check 2026-11-04T06:41:30+00:00, git ba9dfb9-dirty
+# expectation: init files + corner/*.hex byte-identical to revB; mode-2 data lines = rev A; mode-0/1 data lines = rev B
+IDENTICAL-BYTES weights.hex
+IDENTICAL-BYTES bias.hex
+IDENTICAL-BYTES input.hex
+IDENTICAL-BYTES model_params.json
+IDENTICAL-BYTES corner/pset1_bias.hex
+IDENTICAL-BYTES corner/pset1_weights.hex
+IDENTICAL-BYTES corner/pset2_bias.hex
+IDENTICAL-BYTES corner/pset2_weights.hex
+IDENTICAL-BYTES corner/pset3_bias.hex
+IDENTICAL-BYTES corner/pset3_weights.hex
+IDENTICAL-BYTES corner/pset4_bias.hex
+IDENTICAL-BYTES corner/pset4_weights.hex
+IDENTICAL-BYTES corner/pset5_bias.hex
+IDENTICAL-BYTES corner/pset5_weights.hex
+IDENTICAL-BYTES corner/pset6_bias.hex
+IDENTICAL-BYTES corner/pset6_weights.hex
+IDENTICAL-BYTES corner/pset7_bias.hex
+IDENTICAL-BYTES corner/pset7_weights.hex
+IDENTICAL-BYTES corner/pset8_bias.hex
+IDENTICAL-BYTES corner/pset8_weights.hex
+DATA=revA tpu_vectors_mode2.txt
+  differs from revB: 360 of 360 lines
+DATA=revA tpu_vectors_corner_mode2.txt
+  differs from revB: 48 of 51 lines
+DATA=revA tpu_rng_trace_mode2.txt
+  differs from revB: 64 of 64 lines
+DATA=revB tpu_vectors_mode0.txt
+DATA=revB tpu_vectors_mode1.txt
+DATA=revB tpu_vectors_K4_mode1.txt
+DATA=revB tpu_vectors_K10_mode1.txt
+DATA=revB tpu_vectors_corner_mode0.txt
+DATA=revB tpu_vectors_corner_mode1.txt
+DATA=revB tpu_rng_trace_mode0.txt
+DATA=revB tpu_rng_trace_mode1.txt
+HEADER-C tpu_rng_trace_mode0.txt
+HEADER-C tpu_rng_trace_mode1.txt
+HEADER-C tpu_rng_trace_mode2.txt
+HEADER-C tpu_vectors_K10_mode1.txt
+HEADER-C tpu_vectors_K4_mode1.txt
+HEADER-C tpu_vectors_corner_mode0.txt
+HEADER-C tpu_vectors_corner_mode1.txt
+HEADER-C tpu_vectors_corner_mode2.txt
+HEADER-C tpu_vectors_mode0.txt
+HEADER-C tpu_vectors_mode1.txt
+HEADER-C tpu_vectors_mode2.txt
