@@ -225,3 +225,9 @@ unused in rev A). Pin numbers: `design/constraints/tangnano9k.cst` (sourced).
   pairs. Among 5 candidates satisfying/violating the rules, this set had the best
   worst-case validation accuracy over K in {8,9,10} (reports/sw/seed_selection_revC.md).
   Maximal phase spacing alone is not a sufficient criterion.
+
+## 13. Rev C.1 text clarification (review RA-012)
+Section 3 "write data, already shifted to the byte lanes": the CPU replicates the
+store data on all byte lanes (SB: byte x4, SH: halfword x2) and `mem_wstrb` selects
+the lanes; slaves must use `mem_wstrb`. This is a superset of the shifted form and
+is the normative behaviour.
