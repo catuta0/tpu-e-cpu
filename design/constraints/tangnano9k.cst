@@ -1,0 +1,84 @@
+// =============================================================================
+// File    : design/constraints/tangnano9k.cst
+// Board   : Sipeed Tang Nano 9K
+// Part    : GW1NR-LV9QN88PC6/I5   (nextpnr-himbaechel: --device GW1NR-LV9QN88PC6/I5
+//                                  --vopt family=GW1N-9C)
+// Task    : ST-FPGA-01 (created); intended for reuse by the SoC top level.
+// Author  : fpga-engineer
+//
+// SOURCES (fetched 2026-11-04; label SOURCE for every pin number below)
+//  [A] YosysHQ Apicula examples, file examples/tangnano9k.cst
+//      https://raw.githubusercontent.com/YosysHQ/apicula/master/examples/tangnano9k.cst
+//      (repo HEAD 993faec69ebca98838185298a834c46c670a11f1 per git ls-remote)
+//      lines used:
+//        IO_LOC  "clk" 52;     IO_PORT "clk" IO_TYPE=LVCMOS33 PULL_MODE=UP;
+//        IO_LOC  "led[0]" 10 ... "led[5]" 16 (10,11,13,14,15,16);
+//                              IO_PORT "led[i]" IO_TYPE=LVCMOS18 PULL_MODE=NONE;
+//        IO_LOC  "key_i" 3;    IO_PORT "key_i" IO_TYPE=LVCMOS18 PULL_MODE=UP;
+//        IO_LOC  "rst_i" 4;    IO_PORT "rst_i" IO_TYPE=LVCMOS18 PULL_MODE=UP;
+//        // Use buildin USB-serial
+//        IO_LOC  "TXD" 17;     IO_PORT "TXD" IO_TYPE=LVCMOS33 PULL_MODE=UP;
+//        IO_LOC  "RXD" 18;     IO_PORT "RXD" IO_TYPE=LVCMOS33 PULL_MODE=UP;
+//  [B] Sipeed official examples (cross-check)
+//      https://github.com/sipeed/TangNano-9K-example (HEAD c3b7957)
+//        led/src/9K_LED_project.cst : led[0..5] = 10,11,13,14,15,16;
+//                                     sys_rst_n = 4; sys_clk = 52 (LVCMOS33)
+//        uart/src/top.cst           : uart_tx = 17; uart_rx = 18 (LVCMOS33 UP);
+//                                     rst_n = 3; clk = 52
+//        uart/src/uart_top.v        : uart_tx is an output, uart_rx an input
+//      Sipeed wiki schematic excerpt (LED_Pins.png): LED anodes on VCCO3_1V8,
+//      cathodes on pins 10/11/13/14/15/16 -> LEDs are ACTIVE-LOW, bank 3 is
+//      1.8 V (hence LVCMOS18 on LEDs and buttons, consistent with [A]).
+//
+// ASSUMPTION (not found as text in any fetched source):
+//   Which of pins 3 / 4 is silkscreen "S1" and which is "S2". This file uses
+//   S1 = pin 3, S2 = pin 4 (common community convention; Sipeed pinmap image
+//   shows the S1/S2 buttons but not their FPGA pins). Both are active-low
+//   push-buttons with the internal pull-up enabled, so swapping them only
+//   changes WHICH button resets the design - no electrical risk. To be checked
+//   against the official schematic PDF (dl.sipeed.com, not reachable here).
+//
+// PORT NAMES (proposal for the SoC; INTERFACES.json did not exist at ST-FPGA-01)
+//   clk          27 MHz oscillator input
+//   btn_s1_n     button S1, active-low (used as reset by smoke_counter / SoC)
+//   btn_s2_n     button S2, active-low (spare)
+//   led_n[5:0]   LEDs 1..6, active-low
+//   uart_tx      FPGA -> BL702 USB-UART bridge (FPGA output)
+//   uart_rx      BL702 -> FPGA (FPGA input)
+//
+// UNUSED CONSTRAINTS: nextpnr-himbaechel-gowin (0.11.1) only WARNS about a
+// constraint whose port is not in the netlist, it does not abort (verified by
+// ST-FPGA-01: smoke_counter has no btn_s2_n/uart_tx/uart_rx ports; see
+// logs/smoke/fpga_pnr.log). Therefore this single file can be shared by the
+// smoke test and the SoC without editing.
+// =============================================================================
+
+// ---- 27 MHz clock ----------------------------------------------------------
+IO_LOC  "clk" 52;
+IO_PORT "clk" IO_TYPE=LVCMOS33 PULL_MODE=UP;
+
+// ---- Push-buttons (active-low, bank 3 = 1.8 V) ------------------------------
+IO_LOC  "btn_s1_n" 3;
+IO_PORT "btn_s1_n" IO_TYPE=LVCMOS18 PULL_MODE=UP;
+IO_LOC  "btn_s2_n" 4;
+IO_PORT "btn_s2_n" IO_TYPE=LVCMOS18 PULL_MODE=UP;
+
+// ---- LEDs 1..6 (active-low, bank 3 = 1.8 V) ---------------------------------
+IO_LOC  "led_n[0]" 10;
+IO_PORT "led_n[0]" IO_TYPE=LVCMOS18 PULL_MODE=NONE;
+IO_LOC  "led_n[1]" 11;
+IO_PORT "led_n[1]" IO_TYPE=LVCMOS18 PULL_MODE=NONE;
+IO_LOC  "led_n[2]" 13;
+IO_PORT "led_n[2]" IO_TYPE=LVCMOS18 PULL_MODE=NONE;
+IO_LOC  "led_n[3]" 14;
+IO_PORT "led_n[3]" IO_TYPE=LVCMOS18 PULL_MODE=NONE;
+IO_LOC  "led_n[4]" 15;
+IO_PORT "led_n[4]" IO_TYPE=LVCMOS18 PULL_MODE=NONE;
+IO_LOC  "led_n[5]" 16;
+IO_PORT "led_n[5]" IO_TYPE=LVCMOS18 PULL_MODE=NONE;
+
+// ---- USB-UART via on-board BL702 --------------------------------------------
+IO_LOC  "uart_tx" 17;
+IO_PORT "uart_tx" IO_TYPE=LVCMOS33 PULL_MODE=UP;
+IO_LOC  "uart_rx" 18;
+IO_PORT "uart_rx" IO_TYPE=LVCMOS33 PULL_MODE=UP;

@@ -1,4 +1,5 @@
 `default_nettype none
+`timescale 1ns / 1ps  // simulation only; keeps Icarus/Verilator timescale-consistent with the testbenches
 // =============================================================================
 // File        : design/rtl/common/smoke_counter.v
 // Module      : smoke_counter
