@@ -1,0 +1,10 @@
+# ST-FPGA-02 DSP smoke, revision b82c146-dirty, 2026-11-04T13:46:20+00:00
+1 lint     : 3 x LINT_OK
+2 rtl sim  : 12 PASS lines, TEST PASSED; inject-fault run exit 1, TEST FAILED (expected)
+3 synth    : MULT9X9 cells in dsp_smoke_top = 1
+4 gate sim : netlist MULT9X9 x 1, 12 PASS lines, TEST PASSED
+5 pnr      :                MULT9X9:       1/     40     2% ; Max frequency for clock 'u_mac.clk': 270.49 MHz (PASS at 27.00 MHz)
+6 pack     : exit 0, 2069320 bytes, sha256 dd5cf74cbae877c3...
+7 probe dsp: MULT9X9=2, Max frequency for clock 'clk_IBUF_I_O': 422.48 MHz (PASS at 27.00 MHz); critical path q_DFF_Q_7.Q -> uart_tx_OBUF_O_I_DFF_Q.D (1.96 ns logic, 0.41 ns routing)
+7 probe nodsp: MULT9X9=0, Max frequency for clock 'clk_IBUF_I_O': 39.19 MHz (PASS at 27.00 MHz); critical path a_DFF_Q_1.Q -> q_DFF_Q_2.D (12.08 ns logic, 13.44 ns routing)
+DSP_SMOKE DONE (revision b82c146-dirty)

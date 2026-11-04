@@ -1,0 +1,4 @@
+# cmd: verilator --lint-only -Wall tests/smoke/dsp/dsp_smoke_mac.v --top-module dsp_smoke_mac (Verilator 5.020 2024-01-01 rev (Debian 5.020-1), rev b82c146-dirty)
+LINT_OK dsp_smoke_mac
+LINT_OK dsp_smoke_top
+LINT_OK dsp_timing_probe

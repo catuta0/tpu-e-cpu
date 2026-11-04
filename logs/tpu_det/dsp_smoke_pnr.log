@@ -1,0 +1,261 @@
+# cmd: yowasp-nextpnr-himbaechel-gowin --json sim/tpu_det/build/dsp_smoke/dsp_smoke_top.json --write sim/tpu_det/build/dsp_smoke/dsp_smoke_top_pnr.json --device GW1NR-LV9QN88PC6/I5 --vopt family=GW1N-9C --vopt cst=design/constraints/tangnano9k.cst --freq 27 --threads 1 --report sim/tpu_det/build/dsp_smoke/dsp_smoke_report.json --seed 1 (rev b82c146-dirty)
+Info: Using uarch 'gowin' for device 'GW1NR-LV9QN88PC6/I5'
+
+Info: Cell O_psram_ck[0] not found
+Info: Cell O_psram_ck[1] not found
+Info: Cell O_psram_ck_n[0] not found
+Info: Cell O_psram_ck_n[1] not found
+Info: Cell O_psram_cs_n[0] not found
+Info: Cell O_psram_cs_n[1] not found
+Info: Cell O_psram_reset_n[0] not found
+Info: Cell O_psram_reset_n[1] not found
+Info: Cell IO_psram_dq[0] not found
+Info: Cell IO_psram_dq[1] not found
+Info: Cell IO_psram_dq[2] not found
+Info: Cell IO_psram_dq[3] not found
+Info: Cell IO_psram_dq[4] not found
+Info: Cell IO_psram_dq[5] not found
+Info: Cell IO_psram_dq[6] not found
+Info: Cell IO_psram_dq[7] not found
+Info: Cell IO_psram_dq[8] not found
+Info: Cell IO_psram_dq[9] not found
+Info: Cell IO_psram_dq[10] not found
+Info: Cell IO_psram_dq[11] not found
+Info: Cell IO_psram_dq[12] not found
+Info: Cell IO_psram_dq[13] not found
+Info: Cell IO_psram_dq[14] not found
+Info: Cell IO_psram_dq[15] not found
+Info: Cell IO_psram_rwds[0] not found
+Info: Cell IO_psram_rwds[1] not found
+Info: Reading constraints...
+Info: Cell btn_s2_n not found
+Info: Cell btn_s2_n not found
+Info: Create constant nets...
+Info: Modify LUTs...
+Info: Pack IOBs...
+Info: Pack I3C IOs...
+Info: Pack MIPI IOs...
+Info: Pack diff IOBs...
+Info: Pack FFs into IO cells...
+Info: Pack IODELAY...
+Info: Pack Input Edge Monitors...
+Info: Pack IO logic...
+Info: Pack DESER16 logic...
+Info: Pack GSR...
+Info: Pack HCLK cells...
+Info: Pack DLLDLYs...
+Info: Pack wide LUTs...
+Info: Packed MUX2_LUT8:0, MUX2_LU7:0, MUX2_LUT6:0, MUX2_LUT5:5
+Info: Pack ALUs...
+Info: Pack SSRAMs...
+Info: Constrained 34 LUTFF pairs.
+Info: Pack PLL...
+Info: Pack ADC...
+Info: Pack BSRAMs...
+Info: Pack DSP...
+Info: Pack INV...
+Info: Pack buffered nets...
+Info: Pack EMCU and UserFlash cells...
+Info: Pack UserFlash cells...
+Info: Pack DQCE cells...
+Info: Pack DCS cells...
+Info: Checksum: 0xb5d62f7c
+
+Info: Device utilisation:
+Info: 	                 VCC:       1/      1   100%
+Info: 	                 IOB:      10/    276     3%
+Info: 	                LUT4:     109/   8640     1%
+Info: 	              OSER16:       0/     80     0%
+Info: 	              IDES16:       0/     80     0%
+Info: 	            IOLOGICI:       0/    276     0%
+Info: 	            IOLOGICO:       0/    276     0%
+Info: 	           MUX2_LUT5:       5/   4320     0%
+Info: 	           MUX2_LUT6:       0/   2160     0%
+Info: 	           MUX2_LUT7:       0/   1080     0%
+Info: 	           MUX2_LUT8:       0/   1080     0%
+Info: 	                 ALU:      36/   6480     0%
+Info: 	                 GND:       1/      1   100%
+Info: 	                 DFF:      86/   6480     1%
+Info: 	           RAM16SDP4:       0/    270     0%
+Info: 	               BSRAM:       0/     26     0%
+Info: 	              ALU54D:       0/     10     0%
+Info: 	     MULTADDALU18X18:       0/     10     0%
+Info: 	        MULTALU18X18:       0/     10     0%
+Info: 	        MULTALU36X18:       0/     10     0%
+Info: 	           MULT36X36:       0/      5     0%
+Info: 	           MULT18X18:       0/     20     0%
+Info: 	             MULT9X9:       1/     40     2%
+Info: 	              PADD18:       0/     20     0%
+Info: 	               PADD9:       0/     40     0%
+Info: 	                 GSR:       1/      1   100%
+Info: 	                 OSC:       0/      1     0%
+Info: 	                rPLL:       0/      2     0%
+Info: 	           FLASH608K:       0/      1     0%
+Info: 	                BUFG:       0/     22     0%
+Info: 	                DQCE:       0/     24     0%
+Info: 	                 DCS:       0/      8     0%
+Info: 	               DHCEN:       0/     24     0%
+Info: 	              CLKDIV:       0/      8     0%
+Info: 	             CLKDIV2:       0/     16     0%
+Info: 	           MIPI_IBUF:       0/     22     0%
+Info: 	           MIPI_OBUF:       0/     20     0%
+
+Info: Running custom HCLK placer...
+Info: Placed 0 cells based on constraints.
+Info: Creating initial analytic placement for 123 cells, random placement wirelen = 6096.
+Info:     at initial placer iter 0, wirelen = 308
+Info:     at initial placer iter 1, wirelen = 301
+Info:     at initial placer iter 2, wirelen = 284
+Info:     at initial placer iter 3, wirelen = 284
+Info: Running main analytical placer, max placement attempts per cell = 10000.
+Info:     at iteration #1, type ALL: wirelen solved = 282, spread = 634, legal = 759; time = 0.01s
+Info:     at iteration #2, type ALL: wirelen solved = 301, spread = 697, legal = 694; time = 0.01s
+Info:     at iteration #3, type ALL: wirelen solved = 240, spread = 606, legal = 708; time = 0.01s
+Info:     at iteration #4, type ALL: wirelen solved = 235, spread = 705, legal = 711; time = 0.01s
+Info:     at iteration #5, type ALL: wirelen solved = 292, spread = 537, legal = 655; time = 0.01s
+Info:     at iteration #6, type ALL: wirelen solved = 257, spread = 642, legal = 695; time = 0.01s
+Info:     at iteration #7, type ALL: wirelen solved = 302, spread = 604, legal = 711; time = 0.00s
+Info:     at iteration #8, type ALL: wirelen solved = 276, spread = 605, legal = 777; time = 0.01s
+Info:     at iteration #9, type ALL: wirelen solved = 319, spread = 614, legal = 786; time = 0.01s
+Info:     at iteration #10, type ALL: wirelen solved = 336, spread = 638, legal = 803; time = 0.01s
+Info: HeAP Placer Time: 0.19s
+Info:   of which solving equations: 0.05s
+Info:   of which spreading cells: 0.01s
+Info:   of which strict legalisation: 0.01s
+
+Info: Running simulated annealing placer for refinement.
+Info:   at iteration #1: temp = 0.000000, timing cost = 4, wirelen = 655
+Info:   at iteration #5: temp = 0.000000, timing cost = 3, wirelen = 582
+Info:   at iteration #10: temp = 0.000000, timing cost = 2, wirelen = 558
+Info:   at iteration #12: temp = 0.000000, timing cost = 2, wirelen = 539 
+Info: SA placement time 0.09s
+
+Info: Max frequency for clock 'u_mac.clk': 311.92 MHz (PASS at 27.00 MHz)
+
+Info: Slack histogram:
+Info:  legend: * represents 1 endpoint(s)
+Info:          + represents [1,1) endpoint(s)
+Info: [ 33831,  33967) |*** 
+Info: [ 33967,  34103) |* 
+Info: [ 34103,  34239) |* 
+Info: [ 34239,  34375) |*** 
+Info: [ 34375,  34511) | 
+Info: [ 34511,  34647) |**** 
+Info: [ 34647,  34783) | 
+Info: [ 34783,  34919) | 
+Info: [ 34919,  35055) |* 
+Info: [ 35055,  35191) |*** 
+Info: [ 35191,  35327) | 
+Info: [ 35327,  35463) |************ 
+Info: [ 35463,  35599) |********** 
+Info: [ 35599,  35735) | 
+Info: [ 35735,  35871) |************** 
+Info: [ 35871,  36007) |*************** 
+Info: [ 36007,  36143) |******************* 
+Info: [ 36143,  36279) |***************** 
+Info: [ 36279,  36415) |****** 
+Info: [ 36415,  36551) |**** 
+Info: Checksum: 0x92b6f5c9
+Info: Routing globals...
+Info:     'u_mac.clk' net was routed using global resources only.
+
+Info: Routing..
+Info: Setting up routing queue.
+Info: Routing 573 arcs.
+Info:            |   (re-)routed arcs  |   delta    | remaining|       time spent     |
+Info:    IterCnt |  w/ripup   wo/ripup |  w/r  wo/r |      arcs| batch(sec) total(sec)|
+Info:        580 |        7        531 |    7   531 |         0|       0.25       0.25|
+Info: Routing complete.
+Info: Router1 time 0.25s
+Info: Checksum: 0x54bb134a
+
+Info: Critical path report for clock 'u_mac.clk' (posedge -> posedge):
+Info:       type curr  total name
+Info:   clk-to-q  0.46  0.46 Source cnt_DFFR_Q_7.Q
+Info:    routing  0.89  1.35 Net cnt[0] (4,15) -> (4,16)
+Info:                          Sink cnt_DFFR_Q_6_D_ALU_SUM_CIN_ALU_COUT.I1
+Info:                          Defined in:
+Info:                               /share/gowin/cells_map.v:130.20-130.21
+Info:      logic  1.04  2.39 Source cnt_DFFR_Q_6_D_ALU_SUM_CIN_ALU_COUT.COUT
+Info:    routing  0.00  2.39 Net cnt_DFFR_Q_6_D_ALU_SUM_CIN (4,16) -> (4,16)
+Info:                          Sink cnt_DFFR_Q_6_D_ALU_SUM.CIN
+Info:                          Defined in:
+Info:                               tests/smoke/dsp/dsp_smoke_top.v:46.47-46.57
+Info:                               /share/gowin/arith_map.v:57.7-63.5
+Info:                               /share/gowin/cells_sim.v:1033.25-1033.29
+Info:      logic  0.06  2.45 Source cnt_DFFR_Q_6_D_ALU_SUM.COUT
+Info:    routing  0.00  2.45 Net cnt_DFFR_Q_6_D_ALU_SUM_COUT (4,16) -> (4,16)
+Info:                          Sink cnt_DFFR_Q_5_D_ALU_SUM.CIN
+Info:                          Defined in:
+Info:                               tests/smoke/dsp/dsp_smoke_top.v:46.47-46.57
+Info:                               /share/gowin/arith_map.v:57.7-63.5
+Info:                               /share/gowin/cells_sim.v:1033.25-1033.29
+Info:      logic  0.06  2.51 Source cnt_DFFR_Q_5_D_ALU_SUM.COUT
+Info:    routing  0.00  2.51 Net cnt_DFFR_Q_5_D_ALU_SUM_COUT (4,16) -> (4,16)
+Info:                          Sink cnt_DFFR_Q_4_D_ALU_SUM.CIN
+Info:                          Defined in:
+Info:                               tests/smoke/dsp/dsp_smoke_top.v:46.47-46.57
+Info:                               /share/gowin/arith_map.v:57.7-63.5
+Info:                               /share/gowin/cells_sim.v:1033.25-1033.29
+Info:      logic  0.06  2.56 Source cnt_DFFR_Q_4_D_ALU_SUM.COUT
+Info:    routing  0.00  2.56 Net cnt_DFFR_Q_4_D_ALU_SUM_COUT (4,16) -> (4,16)
+Info:                          Sink cnt_DFFR_Q_3_D_ALU_SUM.CIN
+Info:                          Defined in:
+Info:                               tests/smoke/dsp/dsp_smoke_top.v:46.47-46.57
+Info:                               /share/gowin/arith_map.v:57.7-63.5
+Info:                               /share/gowin/cells_sim.v:1033.25-1033.29
+Info:      logic  0.06  2.62 Source cnt_DFFR_Q_3_D_ALU_SUM.COUT
+Info:    routing  0.00  2.62 Net cnt_DFFR_Q_3_D_ALU_SUM_COUT (4,16) -> (5,16)
+Info:                          Sink cnt_DFFR_Q_2_D_ALU_SUM.CIN
+Info:                          Defined in:
+Info:                               tests/smoke/dsp/dsp_smoke_top.v:46.47-46.57
+Info:                               /share/gowin/arith_map.v:57.7-63.5
+Info:                               /share/gowin/cells_sim.v:1033.25-1033.29
+Info:      logic  0.06  2.68 Source cnt_DFFR_Q_2_D_ALU_SUM.COUT
+Info:    routing  0.00  2.68 Net cnt_DFFR_Q_2_D_ALU_SUM_COUT (5,16) -> (5,16)
+Info:                          Sink cnt_DFFR_Q_1_D_ALU_SUM.CIN
+Info:                          Defined in:
+Info:                               tests/smoke/dsp/dsp_smoke_top.v:46.47-46.57
+Info:                               /share/gowin/arith_map.v:57.7-63.5
+Info:                               /share/gowin/cells_sim.v:1033.25-1033.29
+Info:      logic  0.06  2.73 Source cnt_DFFR_Q_1_D_ALU_SUM.COUT
+Info:    routing  0.00  2.73 Net cnt_DFFR_Q_1_D_ALU_SUM_COUT (5,16) -> (5,16)
+Info:                          Sink cnt_DFFR_Q_D_ALU_SUM.CIN
+Info:                          Defined in:
+Info:                               tests/smoke/dsp/dsp_smoke_top.v:46.47-46.57
+Info:                               /share/gowin/arith_map.v:57.7-63.5
+Info:                               /share/gowin/cells_sim.v:1033.25-1033.29
+Info:      logic  0.56  3.30 Source cnt_DFFR_Q_D_ALU_SUM.SUM
+Info:    routing  0.00  3.30 Net cnt_DFFR_Q_D (5,16) -> (5,16)
+Info:                          Sink cnt_DFFR_Q.D
+Info:      setup  0.40  3.70 Source cnt_DFFR_Q.D
+Info: 2.81 ns logic, 0.89 ns routing
+
+Info: Max frequency for clock 'u_mac.clk': 270.49 MHz (PASS at 27.00 MHz)
+
+Info: Slack histogram:
+Info:  legend: * represents 1 endpoint(s)
+Info:          + represents [1,1) endpoint(s)
+Info: [ 33340,  33484) |** 
+Info: [ 33484,  33628) |*** 
+Info: [ 33628,  33772) | 
+Info: [ 33772,  33916) | 
+Info: [ 33916,  34060) | 
+Info: [ 34060,  34204) | 
+Info: [ 34204,  34348) |** 
+Info: [ 34348,  34492) |********* 
+Info: [ 34492,  34636) |*************** 
+Info: [ 34636,  34780) | 
+Info: [ 34780,  34924) | 
+Info: [ 34924,  35068) |******* 
+Info: [ 35068,  35212) |******** 
+Info: [ 35212,  35356) | 
+Info: [ 35356,  35500) | 
+Info: [ 35500,  35644) |************ 
+Info: [ 35644,  35788) |****************** 
+Info: [ 35788,  35932) | 
+Info: [ 35932,  36076) |** 
+Info: [ 36076,  36220) |**** 
+
+Info: Program finished normally.
+PNR_EXIT=0

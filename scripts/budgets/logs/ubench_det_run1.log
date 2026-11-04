@@ -36,3 +36,90 @@ yosys exit=0
   yosys:        39   DFFR
   yosys:       400   DFFRE
   yosys:         3   DFFS
+  IOB:       8/    276     2%
+  LUT4:    1284/   8640    14%
+  ALU:     440/   6480     6%
+  DFF:     857/   6480    13%
+  RAM16SDP4:       8/    270     2%
+  BSRAM:       4/     26    15%
+  MULT36X36:       0/      5     0%
+  MULT18X18:       0/     20     0%
+  MULT9X9:      16/     40    40%
+  seed 1 nextpnr exit=0 :: Max frequency for clock 'u.clk': 148.28 MHz (PASS at 27.00 MHz)
+  seed 2 nextpnr exit=0 :: Max frequency for clock 'u.clk': 133.80 MHz (PASS at 27.00 MHz)
+  seed 3 nextpnr exit=0 :: Max frequency for clock 'u.clk': 141.40 MHz (PASS at 27.00 MHz)
+
+================ dt_nl8_dsp (synth_gowin -nowidelut ; chparam -set NL 8 -set PIPE 1) ================
+yosys exit=0
+  yosys:      235 DFF
+  yosys:        3 DFFS
+  yosys:       38 DFFR
+  yosys:      207 DFFRE
+  yosys:        2 SDPX9B
+  yosys:        8 MULT9X9
+  yosys:         4   LUT1
+  yosys:        43   LUT2
+  yosys:       229   LUT3
+  yosys:       132   LUT4
+  yosys:         8   MULT9X9
+  yosys:         8   RAM16SDP4
+  yosys:         2   SDPX9B
+  yosys:       210   ALU
+  yosys:       235   DFF
+  yosys:        38   DFFR
+  yosys:       207   DFFRE
+  yosys:         3   DFFS
+  yosys:         4   LUT1
+  yosys:        43   LUT2
+  yosys:       229   LUT3
+  yosys:       132   LUT4
+  yosys:         8   MULT9X9
+  yosys:         8   RAM16SDP4
+  yosys:         2   SDPX9B
+  yosys:       210   ALU
+  yosys:       235   DFF
+  yosys:        38   DFFR
+  yosys:       207   DFFRE
+  yosys:         3   DFFS
+  IOB:       8/    276     2%
+  LUT4:     702/   8640     8%
+  ALU:     230/   6480     3%
+  DFF:     531/   6480     8%
+  RAM16SDP4:       8/    270     2%
+  BSRAM:       2/     26     7%
+  MULT36X36:       0/      5     0%
+  MULT18X18:       0/     20     0%
+  MULT9X9:       8/     40    20%
+  seed 1 nextpnr exit=0 :: Max frequency for clock 'u.clk': 188.64 MHz (PASS at 27.00 MHz)
+  seed 2 nextpnr exit=0 :: Max frequency for clock 'u.clk': 197.04 MHz (PASS at 27.00 MHz)
+  seed 3 nextpnr exit=0 :: Max frequency for clock 'u.clk': 187.41 MHz (PASS at 27.00 MHz)
+
+================ dt_nl16_lut (synth_gowin -nowidelut -nodsp; chparam -set NL 16 -set PIPE 1) ================
+yosys exit=0
+  yosys:      367 DFF
+  yosys:        3 DFFS
+  yosys:       39 DFFR
+  yosys:      400 DFFRE
+  yosys:        4 SDPX9B
+  yosys:         3   LUT1
+  yosys:       435   LUT2
+  yosys:      1116   LUT3
+  yosys:      1971   LUT4
+  yosys:         8   RAM16SDP4
+  yosys:         4   SDPX9B
+  yosys:       660   ALU
+  yosys:       367   DFF
+  yosys:        39   DFFR
+  yosys:       400   DFFRE
+  yosys:         3   DFFS
+  yosys:         3   LUT1
+  yosys:       435   LUT2
+  yosys:      1116   LUT3
+  yosys:      1971   LUT4
+  yosys:         8   RAM16SDP4
+  yosys:         4   SDPX9B
+  yosys:       660   ALU
+  yosys:       367   DFF
+  yosys:        39   DFFR
+  yosys:       400   DFFRE
+  yosys:         3   DFFS

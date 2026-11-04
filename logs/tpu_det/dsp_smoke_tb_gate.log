@@ -1,0 +1,15 @@
+# cmd: iverilog tb_dsp_smoke.v + synth_gowin netlist dsp_smoke_mac_syn.v + gowin_mult_models.v + yowasp share/gowin/cells_sim.v (rev b82c146-dirty)
+PASS: T1 a=-128 b=-128 p=16384
+PASS: T1 a=-128 b=127 p=-16256
+PASS: T1 a=127 b=127 p=16129
+PASS: T1 a=127 b=-128 p=-16256
+PASS: T1 a=-1 b=-1 p=1
+PASS: T1 a=1 b=-1 p=-1
+PASS: T1 a=-128 b=1 p=-128
+PASS: T1 a=0 b=-128 p=0
+PASS: T2 exhaustive 65536 signed 8x8 products, 0 mismatches
+PASS: T3i 64 x 16384 = 1048576
+PASS: T3ii sum over all 65536 pairs = 16384
+PASS: T3iii clr+product acc = -15621
+TEST PASSED
+tests/smoke/dsp/tb_dsp_smoke.v:175: $finish called at 4853845000 (1ps)
