@@ -2,6 +2,7 @@
 // File      : design/rtl/tpu/sc_lane_array.v
 // Module    : sc_lane_array
 // Project   : SC-TPU + RV32I SoC on Tang Nano 9K (GW1NR-LV9QN88PC6/I5)
+// Reqs      : requirements/REQUIREMENTS.md REQ-TPU-001 (geometry), REQ-TPU-004 (SNG, XNOR, APC), REQ-TPU-013
 // Task      : RTL-TPU (fpga-engineer)
 // Spec      : ARCHITECTURE.md rev A 5.1, 5.2 [BIT-EXACT], 5.3 step 1b
 //             [BIT-EXACT]; INTERFACES.json tpu.sng / tpu.mult / tpu.accumulate;

@@ -19,6 +19,8 @@
 #      that mode (SW-01a) and the K/s sweep sim/tpu/vectors/tpu_vectors_sweep_mode<m>.txt
 #      (tests/tpu/gen_tpu_sweep_vectors.py), with LOG2_L clamp re-runs
 #                                                            -> tb_sc_tpu_mode<m>.log
+#   4b. tb_sc_tpu D12 with INIT_FILES=1 (init files read back, inference
+#      without bus loading)                                  -> tb_sc_tpu_init_mode<m>.log
 #   5. tb_sc_tpu negative run (-DINJECT_FAULT, mode 1, K=4 set) MUST fail
 #                                                            -> tb_sc_tpu_inject_fault.log
 #
@@ -166,6 +168,18 @@ for m in 0 1 2; do
     require "$L" '^SIM_EXIT=0$' "tb_sc_tpu mode $m exit 0"
     require "$L" 'mismatching inferences 0, mismatching fields 0$' "tb_sc_tpu mode $m zero mismatches"
     if grep -q '^FAIL' "$L"; then fail "FAIL lines in $L"; fi
+done
+
+# ---------------------------------------------------------------- 4b. init files
+step "4b. tb_sc_tpu D12: \$readmemh init files (INIT_FILES=1), RNG_MODE 0/1/2"
+for m in 0 1 2; do
+    L="$LOG/tb_sc_tpu_init_mode$m.log"
+    run_tb tb_sc_tpu_init_m$m "$L" -P tb_sc_tpu.RNG_MODE=$m -P tb_sc_tpu.INIT_FILES=1 $RTL tests/tpu/tb_sc_tpu.v -- \
+        +DATA=$DATA +INITVEC=$DATA/tpu_vectors_mode$m.txt
+    grep -E '^(PASS|FAIL|TEST)' "$L"
+    require "$L" '^PASS: D12 ' "D12 PASS mode $m"
+    require "$L" '^TEST PASSED$' "tb_sc_tpu init mode $m TEST PASSED"
+    require "$L" '^SIM_EXIT=0$' "tb_sc_tpu init mode $m exit 0"
 done
 
 # ---------------------------------------------------------------- 5. negative

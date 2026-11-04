@@ -1,0 +1,28 @@
+# input revision: 1e853f7-dirty
+# cmd: iverilog -g2005 -Wall -DINJECT_FAULT -P tb_sc_tpu.RNG_MODE=1 design/rtl/tpu/sc_lfsr8.v design/rtl/tpu/sc_rng.v design/rtl/tpu/sc_lane_array.v design/rtl/tpu/sc_postproc.v design/rtl/tpu/sc_tpu_ctrl.v design/rtl/tpu/sc_tpu.v tests/tpu/tb_sc_tpu.v -o sim/tpu/build/tb_sc_tpu_fault.vvp && vvp -n sim/tpu/build/tb_sc_tpu_fault.vvp +DATA=sim/data +VEC1=sim/data/tpu_vectors_K4_mode1.txt
+INFO: tb_sc_tpu RNG_MODE=1 DATA=sim/data
+FAIL: vec pset 0 idx 0 K 4 s 0: SCORE[0] 0xfffffff1 exp 0xfffffff0
+FAIL: vec pset 0 idx 1 K 4 s 0: SCORE[0] 0x00000005 exp 0x00000004
+FAIL: vec pset 0 idx 2 K 4 s 0: SCORE[0] 0xffffffed exp 0xffffffec
+FAIL: vec pset 0 idx 3 K 4 s 0: SCORE[0] 0xffffffef exp 0xffffffee
+FAIL: vec pset 0 idx 4 K 4 s 0: SCORE[0] 0xffffffed exp 0xffffffec
+FAIL: vec pset 0 idx 5 K 4 s 0: SCORE[0] 0xffffffef exp 0xffffffee
+FAIL: vec pset 0 idx 6 K 4 s 0: SCORE[0] 0xffffffcb exp 0xffffffca
+FAIL: vec pset 0 idx 7 K 4 s 0: SCORE[0] 0xfffffff5 exp 0xfffffff4
+FAIL: vec pset 0 idx 8 K 4 s 0: SCORE[0] 0xffffffff exp 0xfffffffe
+FAIL: vec pset 0 idx 9 K 4 s 0: SCORE[0] 0xffffffb1 exp 0xffffffb0
+FAIL: vec pset 0 idx 10 K 4 s 0: SCORE[0] 0xfffffff5 exp 0xfffffff4
+FAIL: vec pset 0 idx 11 K 4 s 0: SCORE[0] 0xfffffff5 exp 0xfffffff4
+FAIL: vec pset 0 idx 12 K 4 s 0: SCORE[0] 0xfffffffd exp 0xfffffffc
+FAIL: vec pset 0 idx 13 K 4 s 0: SCORE[0] 0x0000001d exp 0x0000001c
+FAIL: vec pset 0 idx 14 K 4 s 0: SCORE[0] 0xffffffd1 exp 0xffffffd0
+FAIL: vec pset 0 idx 15 K 4 s 0: SCORE[0] 0xffffffcd exp 0xffffffcc
+FAIL: VECFILE sim/data/tpu_vectors_K4_mode1.txt : vectors 16 (+0 clamp re-runs), mismatching inferences 16, mismatching fields 16
+PASS: R1/R2 RNG trace: 1024 stream cycles x 8 lanes compared with the golden trace (64 rows), 0 mismatches; LFSR frozen in all 9477 non-stream cycles
+INFO: golden vectors total 16 (+0 clamp re-runs), mismatching inferences 16, mismatching fields 16
+INFO: bus protocol errors 0, longest valid->ready 3 cycles
+errors=16
+TEST FAILED
+FATAL: tests/tpu/tb_sc_tpu.v:882: tb_sc_tpu failed
+       Time: 446127500  Scope: tb_sc_tpu
+SIM_EXIT=1

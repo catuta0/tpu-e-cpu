@@ -1,0 +1,24 @@
+==== variant il8_m1 (IL=8 RNG_MODE=1 synth_gowin ) ====
+  seed 1: exit 0 :: Max frequency for clock 'u_tpu.clk': 56.52 MHz (PASS at 27.00 MHz)
+  seed 2: exit 0 :: Max frequency for clock 'u_tpu.clk': 57.04 MHz (PASS at 27.00 MHz)
+  seed 3: exit 0 :: Max frequency for clock 'u_tpu.clk': 55.26 MHz (PASS at 27.00 MHz)
+==== variant il8_m1_nwl (IL=8 RNG_MODE=1 synth_gowin -nowidelut) ====
+  seed 1: exit 0 :: Max frequency for clock 'u_tpu.clk': 61.41 MHz (PASS at 27.00 MHz)
+  seed 2: exit 0 :: Max frequency for clock 'u_tpu.clk': 64.54 MHz (PASS at 27.00 MHz)
+  seed 3: exit 0 :: Max frequency for clock 'u_tpu.clk': 62.16 MHz (PASS at 27.00 MHz)
+==== variant il8_m0 (IL=8 RNG_MODE=0 synth_gowin ) ====
+  seed 1: exit 0 :: Max frequency for clock 'u_tpu.clk': 61.38 MHz (PASS at 27.00 MHz)
+  seed 2: exit 0 :: Max frequency for clock 'u_tpu.clk': 54.95 MHz (PASS at 27.00 MHz)
+  seed 3: exit 0 :: Max frequency for clock 'u_tpu.clk': 57.56 MHz (PASS at 27.00 MHz)
+==== variant il8_m2 (IL=8 RNG_MODE=2 synth_gowin ) ====
+  seed 1: exit 0 :: Max frequency for clock 'u_tpu.clk': 59.25 MHz (PASS at 27.00 MHz)
+  seed 2: exit 0 :: Max frequency for clock 'u_tpu.clk': 59.28 MHz (PASS at 27.00 MHz)
+  seed 3: exit 0 :: Max frequency for clock 'u_tpu.clk': 54.34 MHz (PASS at 27.00 MHz)
+==== variant il4_m1 (IL=4 RNG_MODE=1 synth_gowin ) ====
+  seed 1: exit 0 :: Max frequency for clock 'u_tpu.clk': 72.90 MHz (PASS at 27.00 MHz)
+  seed 2: exit 0 :: Max frequency for clock 'u_tpu.clk': 71.34 MHz (PASS at 27.00 MHz)
+  seed 3: exit 0 :: Max frequency for clock 'u_tpu.clk': 76.21 MHz (PASS at 27.00 MHz)
+==== variant il16_m1 (IL=16 RNG_MODE=1 synth_gowin ) ====
+  seed 1: exit 125 :: 
+  seed 2: exit 125 :: 
+  seed 3: exit 125 :: 

@@ -2,6 +2,7 @@
 // File      : design/rtl/tpu/sc_tpu_ctrl.v
 // Module    : sc_tpu_ctrl
 // Project   : SC-TPU + RV32I SoC on Tang Nano 9K (GW1NR-LV9QN88PC6/I5)
+// Reqs      : requirements/REQUIREMENTS.md REQ-TPU-001, REQ-TPU-009 (argmax), REQ-TPU-010 (START/BUSY/DONE), REQ-TPU-012 (layout), REQ-TPU-014 (CYCLES), REQ-TPU-016 (reset)
 // Task      : RTL-TPU (fpga-engineer)
 // Spec      : ARCHITECTURE.md rev A 5.3 (sequence after START) [BIT-EXACT],
 //             5.4 (STATUS, RESULT, CYCLES), 5.5 (weight layout) [BIT-EXACT];
@@ -61,8 +62,10 @@
 //              layer-2 input reads see the new codes); layer 2 -> RESULT <=
 //              argmax, BUSY <= 0, DONE <= 1, S_IDLE (edge E1).
 //
-// CYCLES (spec 5.3 step 3, 5.4): counts every clock edge after E0 up to and
-//   including E1, i.e. the number of clock cycles during which BUSY = 1.
+// CYCLES (spec 5.3 step 3, 5.4; ARCHITECTURE.md 10 rev A.2): counts every
+//   clock edge after E0 up to and including E1, i.e. the number of rising
+//   clock edges during which STATUS.BUSY = 1 (BUSY rises after E0 and falls
+//   after E1). It is a function of K only (deterministic, REQ-TPU-014).
 //   CALCULATION from the FSM above:
 //     CYCLES = (T1 + T2) * (NWT + 1 + L) + 2 * (NL + 3)
 //            = 10 * (33 + 2^K) + 38 = 10 * 2^K + 368   (NL = 16, IL = 8)

@@ -2,6 +2,7 @@
 // File      : design/rtl/tpu/sc_tpu.v
 // Module    : sc_tpu   (top of the stochastic-computing TPU)
 // Project   : SC-TPU + RV32I SoC on Tang Nano 9K (GW1NR-LV9QN88PC6/I5)
+// Reqs      : requirements/REQUIREMENTS.md REQ-TPU-002 (register map, reset values), REQ-TPU-003 (PARAMS), REQ-TPU-007 (LOG2_L clamp), REQ-TPU-011 (writes while BUSY), REQ-TPU-012 (init files), REQ-TPU-015 (reserved offsets), REQ-SYS bus rules (ARCHITECTURE.md 3)
 // Task      : RTL-TPU (fpga-engineer)
 // Spec      : ARCHITECTURE.md rev A: 3 (bus), 5.1-5.6 (SC-TPU; 5.2, 5.3, 5.5
 //             are [BIT-EXACT]); management/INTERFACES.json keys "bus", "tpu".

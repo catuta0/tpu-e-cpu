@@ -56,7 +56,9 @@ lat() { local il=$1 k=$2; echo $(( (64/il + 16/il) * (16*il/4 + 1 + (1<<k)) + 2*
 # -nowidelut (no MUX2_LUT5..8 wide-LUT cells; suggestion from RTL-CPU).
 parse() { local b=${1%_nwl}; il=${b#il}; il=${il%%_*}; m=${b##*_m}; opt=""; if [ "$b" != "$1" ]; then opt="-nowidelut"; fi; }
 
+REPORT_ONLY=${REPORT_ONLY:-0}   # 1: only rebuild the report from existing logs
 for v in $VARIANTS; do
+    [ "$REPORT_ONLY" = 1 ] && break
     parse "$v"
     echo "==== variant $v (IL=$il RNG_MODE=$m synth_gowin $opt) ===="
     YS=$B/synth_$v.ys
@@ -104,8 +106,8 @@ done
     echo "value (last 'Max frequency' line) per seed, worst seed reported. Requirement: Fmax >= 29.7 MHz"
     echo "(27 MHz + 10 % margin)."
     echo
-    echo "| Variant | IL | RNG_MODE | synth_gowin option | LUT4 | ALU | DFF | BSRAM | RAM16SDP4 | MUX2_LUT5..8 | Fmax per seed (MHz) | worst Fmax (MHz) | margin vs 27 MHz | latency cycles K=4 / K=8 / K=10 |"
-    echo "|---|---|---|---|---|---|---|---|---|---|---|---|---|---|"
+    echo "| Variant | IL | RNG_MODE | synth_gowin option | LUT4 | ALU | DFF | BSRAM | RAM16SDP4 | MUX2_LUT5..8 | Fmax per seed (MHz) | worst Fmax (MHz) | margin vs 27 MHz | Fmax >= 29.7 | max util % | latency cycles K=4 / K=8 / K=10 |"
+    echo "|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|"
     for v in $VARIANTS; do
         parse "$v"
         s1=$(echo $SEEDS | awk '{print $1}')
@@ -118,14 +120,24 @@ done
         bs=$(u BSRAM)
         fl=""; worst=""
         for s in $SEEDS; do
-            f=$(grep 'Max frequency for clock' "$LOG/pnr_${v}_s$s.log" | tail -n 1 | sed -E 's/.*: ([0-9.]+) MHz.*/\1/')
+            f=""
+            if grep -q '^PNR_EXIT=0$' "$LOG/pnr_${v}_s$s.log"; then
+                f=$(grep 'Max frequency for clock' "$LOG/pnr_${v}_s$s.log" | tail -n 1 | sed -E 's/.*: ([0-9.]+) MHz.*/\1/')
+            fi
             fl="$fl${fl:+ / }${f:-FAIL}"
             if [ -n "$f" ]; then
                 if [ -z "$worst" ] || awk "BEGIN{exit !($f < $worst)}"; then worst=$f; fi
             fi
         done
-        margin=$(awk "BEGIN{printf \"%+.1f %%\", ($worst/27-1)*100}")
-        echo "| $v | $il | $m | ${opt:-default} | $(u LUT4) | $(u ALU) | $(u DFF) | ${bs:-?} | $(u RAM16SDP4) | $mux | $fl | $worst | $margin | $(lat $il 4) / $(lat $il 8) / $(lat $il 10) |"
+        if [ -n "$worst" ] && [ "$(echo "$fl" | grep -c FAIL)" = 0 ]; then
+            margin=$(awk "BEGIN{printf \"%+.1f %%\", ($worst/27-1)*100}")
+            okf=$(awk "BEGIN{print ($worst >= 29.7) ? \"PASS\" : \"FAIL\"}")
+        else
+            worst="no route"; margin="-"; okf="FAIL (placement)"
+        fi
+        # Highest utilisation percentage over the logic/memory resources (85 % rule).
+        maxu=$(grep -E "^Info:[[:space:]]+(LUT4|ALU|DFF|RAM16SDP4|BSRAM|MUX2_LUT5):" "$P1" | sed -n 1,6p | awk '{gsub("%","",$5); if ($5+0 > m) m = $5+0} END{print m}')
+        echo "| $v | $il | $m | ${opt:-default} | $(u LUT4) | $(u ALU) | $(u DFF) | ${bs:-?} | $(u RAM16SDP4) | $mux | $fl | $worst | $margin | $okf | ${maxu}% | $(lat $il 4) / $(lat $il 8) / $(lat $il 10) |"
     done
     echo
     echo "Latency = cycles from START accepted to DONE (= CYCLES register). Formula of sc_tpu_ctrl.v"
@@ -134,6 +146,24 @@ done
     echo "CYCLES register == measured BUSY cycles == formula; logs/tpu/tb_sc_tpu_mode*.log)."
     echo "IL = 4 / 16 latencies are CALCULATION only (not simulated: the golden vectors are defined"
     echo "for IL = 8 only). Time per inference at 27 MHz, K = 8: IL4 $(awk "BEGIN{printf \"%.1f\", $(lat 4 8)/27}") us, IL8 $(awk "BEGIN{printf \"%.1f\", $(lat 8 8)/27}") us, IL16 $(awk "BEGIN{printf \"%.1f\", $(lat 16 8)/27}") us."
+    echo
+    echo "LUT4 counts every occupied LUT position (LUT1..4 cells + ALU cells + 8 per RAM16SDP4,"
+    echo "requirements/BUDGETS.md); 'max util %' is the highest of LUT4/ALU/DFF/RAM16SDP4/BSRAM/MUX2_LUT5"
+    echo "(85 % rule of ARCHITECTURE.md 10). BSRAM = 1 SDPX9B (weight RAM); RAM16SDP4 = INPUT + BIAS."
+    echo
+    echo "P&R runs that did not produce a routed design:"
+    nf=0
+    for v in $VARIANTS; do
+        for s in $SEEDS; do
+            PL="$LOG/pnr_${v}_s$s.log"
+            if [ ! -f "$PL" ]; then echo "- $v seed $s: not run"; nf=1; continue; fi
+            if ! grep -q '^PNR_EXIT=0$' "$PL"; then
+                why=$(grep -E '^ERROR|^ABORTED' "$PL" | sed -n 1p)
+                echo "- $v seed $s: ${why:-no PNR_EXIT line (run interrupted)} ($PL)"; nf=1
+            fi
+        done
+    done
+    [ $nf = 0 ] && echo "- none"
     echo
     echo "Logs: logs/tpu/synth_<variant>.log (yosys incl. stat), logs/tpu/pnr_<variant>_s<seed>.log (nextpnr)."
 } > "$REP/variants.md"

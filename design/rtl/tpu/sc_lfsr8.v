@@ -2,6 +2,7 @@
 // File      : design/rtl/tpu/sc_lfsr8.v
 // Module    : sc_lfsr8
 // Project   : SC-TPU + RV32I SoC on Tang Nano 9K (GW1NR-LV9QN88PC6/I5)
+// Reqs      : requirements/REQUIREMENTS.md REQ-TPU-005 (LFSR definition and sequencing)
 // Task      : RTL-TPU (fpga-engineer)
 // Spec      : design/architecture/ARCHITECTURE.md rev A, section 5.3 [BIT-EXACT]
 //             (RNG paragraph), management/INTERFACES.json tpu.lfsr, ADR-005.

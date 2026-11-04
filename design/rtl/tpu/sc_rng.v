@@ -2,6 +2,7 @@
 // File      : design/rtl/tpu/sc_rng.v
 // Module    : sc_rng
 // Project   : SC-TPU + RV32I SoC on Tang Nano 9K (GW1NR-LV9QN88PC6/I5)
+// Reqs      : requirements/REQUIREMENTS.md REQ-TPU-005, REQ-TPU-006 (RNG modes)
 // Task      : RTL-TPU (fpga-engineer)
 // Spec      : ARCHITECTURE.md rev A 5.3 [BIT-EXACT] (RNG, RNG_MODE),
 //             INTERFACES.json tpu.lfsr / tpu.rng_modes, ADR-003, ADR-005.

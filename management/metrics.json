@@ -95,6 +95,30 @@
    "label": "SIMULATION",
    "revision": "494448a",
    "evidence": "reports/fpga/cpu/cpu_synth_pnr.txt"
+  },
+  {
+   "name": "tpu_bitexact_mismatches_revA",
+   "value": 0,
+   "unit": "inferences",
+   "label": "SIMULATION",
+   "revision": "1e853f7",
+   "evidence": "logs/tpu/sim_tpu_console.log"
+  },
+  {
+   "name": "tpu_lut_mode1_standalone",
+   "value": 4567,
+   "unit": "LUT4",
+   "label": "SIMULATION",
+   "revision": "1e853f7",
+   "evidence": "reports/fpga/tpu/variants.md"
+  },
+  {
+   "name": "tpu_cycles_per_inference_K8",
+   "value": 2928,
+   "unit": "cycles",
+   "label": "SIMULATION",
+   "revision": "1e853f7",
+   "evidence": "logs/tpu/sim_tpu_console.log"
   }
  ]
 }

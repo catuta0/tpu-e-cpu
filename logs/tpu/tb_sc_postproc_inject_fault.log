@@ -1,4 +1,4 @@
-# input revision: 9144278-dirty
+# input revision: 1e853f7-dirty
 # cmd: iverilog -g2005 -Wall -DINJECT_FAULT design/rtl/tpu/sc_postproc.v tests/tpu/tb_sc_postproc.v -o sim/tpu/build/tb_sc_postproc_fault.vvp && vvp -n sim/tpu/build/tb_sc_postproc_fault.vvp 
 FAIL: vec 1 dp got -5120 exp -5119 | code got 128 exp 128 | idx 1/1 l2 0/0
 FAIL: vec 2 dp got -1153 exp -1152 | code got 128 exp 128 | idx 2/2 l2 0/0

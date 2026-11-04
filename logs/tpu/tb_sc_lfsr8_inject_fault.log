@@ -1,4 +1,4 @@
-# input revision: 9144278-dirty
+# input revision: 1e853f7-dirty
 # cmd: iverilog -g2005 -Wall -DINJECT_FAULT design/rtl/tpu/sc_lfsr8.v tests/tpu/tb_sc_lfsr8.v -o sim/tpu/build/tb_sc_lfsr8_fault.vvp && vvp -n sim/tpu/build/tb_sc_lfsr8_fault.vvp 
 FAIL: TC6 reset value != leap8(seed)
 FAIL: TC1 load value

@@ -2,6 +2,7 @@
 // File      : design/rtl/tpu/sc_tpu_synth_top.v
 // Module    : sc_tpu_synth_top   (SYNTHESIS-ONLY wrapper, not part of the SoC)
 // Project   : SC-TPU + RV32I SoC on Tang Nano 9K (GW1NR-LV9QN88PC6/I5)
+// Reqs      : requirements/REQUIREMENTS.md REQ-RES-001..006, REQ-TIM-001 (evidence vehicle only)
 // Task      : RTL-TPU (fpga-engineer): stand-alone synthesis / P&R of sc_tpu
 //             for utilisation and Fmax, and the RNG_MODE / IL variant study
 //             (scripts/synth_tpu_variants.sh).

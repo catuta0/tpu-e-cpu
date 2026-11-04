@@ -1,0 +1,317 @@
+# cmd: yowasp-nextpnr-himbaechel-gowin --json sim/tpu/build/il4_m1_nwl.json --write sim/tpu/build/il4_m1_nwl_pnr.json --device GW1NR-LV9QN88PC6/I5 --vopt family=GW1N-9C --vopt cst=design/constraints/tangnano9k.cst --freq 27 --report sim/tpu/build/il4_m1_nwl_s2_report.json --seed 2 --threads 1   ("yowasp-nextpnr-himbaechel-gowin" -- Next Generation Place and Route (Version nextpnr-0.11.1), revision 1e853f7-dirty)
+Info: Using uarch 'gowin' for device 'GW1NR-LV9QN88PC6/I5'
+
+Info: Cell O_psram_ck[0] not found
+Info: Cell O_psram_ck[1] not found
+Info: Cell O_psram_ck_n[0] not found
+Info: Cell O_psram_ck_n[1] not found
+Info: Cell O_psram_cs_n[0] not found
+Info: Cell O_psram_cs_n[1] not found
+Info: Cell O_psram_reset_n[0] not found
+Info: Cell O_psram_reset_n[1] not found
+Info: Cell IO_psram_dq[0] not found
+Info: Cell IO_psram_dq[1] not found
+Info: Cell IO_psram_dq[2] not found
+Info: Cell IO_psram_dq[3] not found
+Info: Cell IO_psram_dq[4] not found
+Info: Cell IO_psram_dq[5] not found
+Info: Cell IO_psram_dq[6] not found
+Info: Cell IO_psram_dq[7] not found
+Info: Cell IO_psram_dq[8] not found
+Info: Cell IO_psram_dq[9] not found
+Info: Cell IO_psram_dq[10] not found
+Info: Cell IO_psram_dq[11] not found
+Info: Cell IO_psram_dq[12] not found
+Info: Cell IO_psram_dq[13] not found
+Info: Cell IO_psram_dq[14] not found
+Info: Cell IO_psram_dq[15] not found
+Info: Cell IO_psram_rwds[0] not found
+Info: Cell IO_psram_rwds[1] not found
+Info: Reading constraints...
+Info: Cell btn_s2_n not found
+Info: Cell btn_s2_n not found
+Info: Create constant nets...
+Info: Modify LUTs...
+Info: Pack IOBs...
+Info: Pack I3C IOs...
+Info: Pack MIPI IOs...
+Info: Pack diff IOBs...
+Info: Pack FFs into IO cells...
+Info: Pack IODELAY...
+Info: Pack Input Edge Monitors...
+Info: Pack IO logic...
+Info: Pack DESER16 logic...
+Info: Pack GSR...
+Info: Pack HCLK cells...
+Info: Pack DLLDLYs...
+Info: Pack wide LUTs...
+Info: Packed MUX2_LUT8:0, MUX2_LU7:0, MUX2_LUT6:0, MUX2_LUT5:0
+Info: Pack ALUs...
+Info: Pack SSRAMs...
+Info: Constrained 748 LUTFF pairs.
+Info: Pack PLL...
+Info: Pack ADC...
+Info: Pack BSRAMs...
+Info: Pack DSP...
+Info: Pack INV...
+Info: Pack buffered nets...
+Info: Pack EMCU and UserFlash cells...
+Info: Pack UserFlash cells...
+Info: Pack DQCE cells...
+Info: Pack DCS cells...
+Info: Checksum: 0x6a68f7eb
+
+Info: Device utilisation:
+Info: 	                 VCC:       1/      1   100%
+Info: 	                 IOB:      10/    276     3%
+Info: 	                LUT4:    3542/   8640    40%
+Info: 	              OSER16:       0/     80     0%
+Info: 	              IDES16:       0/     80     0%
+Info: 	            IOLOGICI:       0/    276     0%
+Info: 	            IOLOGICO:       0/    276     0%
+Info: 	           MUX2_LUT5:       0/   4320     0%
+Info: 	           MUX2_LUT6:       0/   2160     0%
+Info: 	           MUX2_LUT7:       0/   1080     0%
+Info: 	           MUX2_LUT8:       0/   1080     0%
+Info: 	                 ALU:    1146/   6480    17%
+Info: 	                 GND:       1/      1   100%
+Info: 	                 DFF:    1901/   6480    29%
+Info: 	           RAM16SDP4:      16/    270     5%
+Info: 	               BSRAM:       1/     26     3%
+Info: 	              ALU54D:       0/     10     0%
+Info: 	     MULTADDALU18X18:       0/     10     0%
+Info: 	        MULTALU18X18:       0/     10     0%
+Info: 	        MULTALU36X18:       0/     10     0%
+Info: 	           MULT36X36:       0/      5     0%
+Info: 	           MULT18X18:       0/     20     0%
+Info: 	             MULT9X9:       0/     40     0%
+Info: 	              PADD18:       0/     20     0%
+Info: 	               PADD9:       0/     40     0%
+Info: 	                 GSR:       1/      1   100%
+Info: 	                 OSC:       0/      1     0%
+Info: 	                rPLL:       0/      2     0%
+Info: 	           FLASH608K:       0/      1     0%
+Info: 	                BUFG:       0/     22     0%
+Info: 	                DQCE:       0/     24     0%
+Info: 	                 DCS:       0/      8     0%
+Info: 	               DHCEN:       0/     24     0%
+Info: 	              CLKDIV:       0/      8     0%
+Info: 	             CLKDIV2:       0/     16     0%
+Info: 	           MIPI_IBUF:       0/     22     0%
+Info: 	           MIPI_OBUF:       0/     20     0%
+
+Info: Running custom HCLK placer...
+Info: Placed 0 cells based on constraints.
+Info: Creating initial analytic placement for 3441 cells, random placement wirelen = 123326.
+Info:     at initial placer iter 0, wirelen = 854
+Info:     at initial placer iter 1, wirelen = 966
+Info:     at initial placer iter 2, wirelen = 952
+Info:     at initial placer iter 3, wirelen = 955
+Info: Running main analytical placer, max placement attempts per cell = 5476395.
+Info:     at iteration #1, type ALL: wirelen solved = 965, spread = 25990, legal = 54763; time = 1.98s
+Info:     at iteration #2, type ALL: wirelen solved = 2087, spread = 21690, legal = 43898; time = 0.85s
+Info:     at iteration #3, type ALL: wirelen solved = 4346, spread = 22796, legal = 48054; time = 1.04s
+Info:     at iteration #4, type ALL: wirelen solved = 5707, spread = 25982, legal = 47907; time = 0.80s
+Info:     at iteration #5, type ALL: wirelen solved = 6911, spread = 22586, legal = 43007; time = 1.03s
+Info:     at iteration #6, type ALL: wirelen solved = 7620, spread = 21286, legal = 34388; time = 0.89s
+Info:     at iteration #7, type ALL: wirelen solved = 8494, spread = 18708, legal = 35328; time = 0.97s
+Info:     at iteration #8, type ALL: wirelen solved = 9381, spread = 19156, legal = 33374; time = 0.77s
+Info:     at iteration #9, type ALL: wirelen solved = 10056, spread = 17846, legal = 30972; time = 0.93s
+Info:     at iteration #10, type ALL: wirelen solved = 10320, spread = 16729, legal = 26333; time = 0.51s
+Info:     at iteration #11, type ALL: wirelen solved = 10476, spread = 19327, legal = 28596; time = 0.79s
+Info:     at iteration #12, type ALL: wirelen solved = 11496, spread = 15982, legal = 26627; time = 0.57s
+Info:     at iteration #13, type ALL: wirelen solved = 11564, spread = 18464, legal = 26246; time = 0.44s
+Info:     at iteration #14, type ALL: wirelen solved = 12261, spread = 19644, legal = 25797; time = 0.40s
+Info:     at iteration #15, type ALL: wirelen solved = 13052, spread = 19453, legal = 25231; time = 0.38s
+Info:     at iteration #16, type ALL: wirelen solved = 13230, spread = 19110, legal = 23779; time = 0.34s
+Info:     at iteration #17, type ALL: wirelen solved = 13487, spread = 17638, legal = 23133; time = 0.35s
+Info:     at iteration #18, type ALL: wirelen solved = 13743, spread = 18400, legal = 24574; time = 0.39s
+Info:     at iteration #19, type ALL: wirelen solved = 14478, spread = 18692, legal = 23450; time = 0.38s
+Info:     at iteration #20, type ALL: wirelen solved = 14354, spread = 18767, legal = 27285; time = 0.48s
+Info:     at iteration #21, type ALL: wirelen solved = 15330, spread = 20477, legal = 27426; time = 0.48s
+Info:     at iteration #22, type ALL: wirelen solved = 16043, spread = 23866, legal = 27022; time = 0.37s
+Info: HeAP Placer Time: 16.27s
+Info:   of which solving equations: 3.92s
+Info:   of which spreading cells: 0.28s
+Info:   of which strict legalisation: 11.52s
+
+Info: Running simulated annealing placer for refinement.
+Info:   at iteration #1: temp = 0.000000, timing cost = 111, wirelen = 23133
+Info:   at iteration #5: temp = 0.000000, timing cost = 83, wirelen = 19210
+Info:   at iteration #10: temp = 0.000000, timing cost = 166, wirelen = 17948
+Info:   at iteration #15: temp = 0.000000, timing cost = 175, wirelen = 17237
+Info:   at iteration #20: temp = 0.000000, timing cost = 161, wirelen = 16676
+Info:   at iteration #25: temp = 0.000000, timing cost = 161, wirelen = 16468
+Info:   at iteration #30: temp = 0.000000, timing cost = 161, wirelen = 16383
+Info:   at iteration #31: temp = 0.000000, timing cost = 160, wirelen = 16373 
+Info: SA placement time 10.33s
+
+Info: Max frequency for clock 'u_tpu.clk': 87.06 MHz (PASS at 27.00 MHz)
+
+Info: Slack histogram:
+Info:  legend: * represents 12 endpoint(s)
+Info:          + represents [1,12) endpoint(s)
+Info: [ 25551,  26101) |+
+Info: [ 26101,  26651) |*+
+Info: [ 26651,  27201) |***+
+Info: [ 27201,  27751) |**+
+Info: [ 27751,  28301) |*****+
+Info: [ 28301,  28851) |******+
+Info: [ 28851,  29401) |******+
+Info: [ 29401,  29951) |*****+
+Info: [ 29951,  30501) |**+
+Info: [ 30501,  31051) |*****+
+Info: [ 31051,  31601) |****+
+Info: [ 31601,  32151) |***+
+Info: [ 32151,  32701) |****+
+Info: [ 32701,  33251) |******+
+Info: [ 33251,  33801) |***********+
+Info: [ 33801,  34351) |************************+
+Info: [ 34351,  34901) |**********+
+Info: [ 34901,  35451) |************************+
+Info: [ 35451,  36001) |*************************************+
+Info: [ 36001,  36551) |************************************************************ 
+Info: Checksum: 0x6919ad61
+Info: Routing globals...
+Info:     'u_tpu.clk' net was routed using global resources only.
+Info:     'mem_valid_LUT1_I0_F' is routed using segments.
+Info:     'u_tpu.score_DFFRE_Q_318_D_LUT3_F_I2[1]' is routed using segments.
+Info:     'u_tpu.pp_in_idx[2]' is routed using segments.
+Info:     'u_tpu.cfg_k[0]' is routed using segments.
+Info:     'u_tpu.score_DFFRE_Q_131_D_LUT3_F_I2[1]' is routed using segments.
+Info:     'u_tpu.pp_out_idx[0]' is routed using segments.
+Info:     'u_tpu.acc_DFFRE_Q_49_D_ALU_SUM_I0_LUT4_F_I3_LUT2_F_I1' is routed using segments.
+Info:     'u_tpu.score_DFFRE_Q_10_D_LUT3_F_I2[1]' is routed using segments.
+Info:     'u_tpu.acc_DFFRE_Q_100_D_ALU_SUM_I0_LUT4_F_I3_LUT4_F_I2' is routed using segments.
+Info:     'u_tpu.ctl_x_raddr[1]' is routed using segments.
+Info:     'u_tpu.ctl_b_raddr[4]' is routed using segments.
+Info:     'u_tpu.score_DFFRE_Q_172_D_LUT3_F_I2[1]' is routed using segments.
+Info:     'u_tpu.inram.0.7_RAD_3' is routed using segments.
+Info:     'u_tpu.inram.0.7_RAD_2' is routed using segments.
+Info:     'u_tpu.inram.0.7_RAD_1' is routed using segments.
+Info:     'u_tpu.inram.0.7_RAD' is routed using segments.
+Info:     'u_tpu.score_DFFRE_Q_248_D_LUT3_F_I2[1]' is routed using segments.
+Info:     'u_tpu.ctl_b_raddr_DFFRE_Q_2_D_LUT4_F_I2[1]' is routed using segments.
+Info:     'u_tpu.bram_q[15]' is routed using segments.
+Info:     'u_tpu.bram.0.7_RAD' is routed using segments.
+Info:     'u_tpu.score_DFFRE_Q_225_D_LUT3_F_I2[1]' is routed using segments.
+Info:     'u_tpu.x_shift' is routed using segments.
+Info:     'u_tpu.pp_out_hcode_DFFR_Q_4_D_LUT4_F_I1_LUT4_F_I2_LUT4_I2_F_LUT2_I1_F_LUT4_F_I3_LUT4_F_1_I0_LUT3_F_I2_LUT3_F_I2_LUT2_F_I1_LUT4_F_I1_LUT3_I1_F_LUT2_F_I0_LUT3_I1_F_LUT2_I0_F_LUT4_I3_F_LUT3_F_I2_LUT2_F_I1_LUT4_F_I3[0]' is routed using segments.
+Info:     'u_tpu.pp_out_hcode_DFFR_Q_3_D_LUT4_F_I1_LUT3_F_I1_LUT3_F_I2_LUT3_F_I2_LUT3_F_I1[0]' is routed using segments.
+Info:     'u_tpu.acc_DFFRE_Q_100_D_ALU_SUM_I0_LUT4_F_I3_LUT4_F_I3' is routed using segments.
+Info:     'u_tpu.pp_out_hcode_DFFR_Q_1_D_LUT4_F_I1[0]' is routed using segments.
+Info:     'u_tpu.pp_out_hcode_DFFR_Q_3_D_LUT4_F_I1_LUT3_F_I1[1]' is routed using segments.
+Info:     'mem_valid_LUT3_I0_F[2]' is routed using segments.
+Info:     'u_tpu.score_DFFRE_Q_141_D_LUT3_F_I1_LUT2_F_I1_LUT2_I1_1_F[1]' is routed using segments.
+Info:     'u_tpu.score_DFFRE_Q_100_D_LUT3_F_I2[1]' is routed using segments.
+Info:     'u_tpu.score_DFFRE_Q_177_D_LUT3_F_I2_LUT3_F_I2_LUT2_F_I1_LUT4_F_I2_LUT2_I0_I1_LUT3_I2_1_F[1]' is routed using segments.
+
+Info: Routing..
+Info: Setting up routing queue.
+Info: Routing 15430 arcs.
+Info:            |   (re-)routed arcs  |   delta    | remaining|       time spent     |
+Info:    IterCnt |  w/ripup   wo/ripup |  w/r  wo/r |      arcs| batch(sec) total(sec)|
+Info:       1000 |       41        958 |   41   958 |     14486|       1.01       1.01|
+Info:       2000 |       85       1834 |   44   876 |     13546|       0.65       1.66|
+Info:       3000 |       94       2379 |    9   545 |     12558|       0.20       1.86|
+Info:       4000 |      112       3281 |   18   902 |     11580|       0.44       2.30|
+Info:       5000 |      116       4257 |    4   976 |     10585|       0.47       2.78|
+Info:       6000 |      120       5220 |    4   963 |      9590|       0.54       3.32|
+Info:       7000 |      133       6165 |   13   945 |      8617|       0.63       3.95|
+Info:       8000 |      150       7111 |   17   946 |      7636|       0.63       4.58|
+Info:       9000 |      162       8057 |   12   946 |      6649|       0.75       5.34|
+Info:      10000 |      185       8995 |   23   938 |      5682|       0.79       6.12|
+Info:      11000 |      219       9918 |   34   923 |      4727|       1.05       7.18|
+Info:      12000 |      273      10833 |   54   915 |      3796|       1.09       8.26|
+Info:      13000 |      381      11693 |  108   860 |      2990|       1.66       9.93|
+Info:      14000 |      498      12546 |  117   853 |      2147|       1.55      11.48|
+Info:      15000 |      619      13394 |  121   848 |      1313|       1.38      12.86|
+Info:      16000 |      784      14198 |  165   804 |       541|       1.75      14.60|
+Info:      16907 |      994      14878 |  210   680 |         0|       1.79      16.39|
+Info: Routing complete.
+Info: Router1 time 16.39s
+Info: Checksum: 0x6594d896
+
+Info: Critical path report for clock 'u_tpu.clk' (posedge -> posedge):
+Info:       type curr  total name
+Info:   clk-to-q  0.46  0.46 Source u_tpu.u_post.s1_DFF_Q_1.Q
+Info:    routing  1.93  2.38 Net u_tpu.u_post.s1[1] (24,10) -> (26,5)
+Info:                          Sink u_tpu.u_post.s1_ALU_I1_SUM_ALU_SUM.I1
+Info:                          Defined in:
+Info:                               design/rtl/tpu/sc_postproc.v:110.20-110.22
+Info:      logic  1.04  3.43 Source u_tpu.u_post.s1_ALU_I1_SUM_ALU_SUM.COUT
+Info:    routing  0.00  3.43 Net u_tpu.u_post.s1_ALU_I1_SUM_ALU_SUM_COUT (26,5) -> (26,5)
+Info:                          Sink u_tpu.u_post.s1_ALU_I1.CIN
+Info:                          Defined in:
+Info:                               design/rtl/tpu/sc_postproc.v:128.25-128.42
+Info:                               /share/gowin/arith_map.v:57.7-63.5
+Info:                               /share/gowin/cells_sim.v:1033.25-1033.29
+Info:      logic  0.56  3.99 Source u_tpu.u_post.s1_ALU_I1.SUM
+Info:    routing  0.33  4.32 Net u_tpu.pp_out_hcode_DFFR_Q_3_D_LUT4_F_I1_LUT3_F_I1_LUT3_F_I2_LUT3_F_I2_LUT3_F_I1_LUT4_F_I1_LUT3_I1_F[2] (26,5) -> (26,5)
+Info:                          Sink u_tpu.pp_out_hcode_DFFR_Q_4_D_LUT4_F_I1_LUT4_F_I2_LUT4_I2_F_LUT2_I1_F_LUT4_F_I3_LUT4_F_I3_LUT3_F_I2_LUT3_F_I2_LUT3_F_I2_LUT3_F_1_I1_LUT2_I1_F_LUT4_F.I3
+Info:                          Defined in:
+Info:                               /share/gowin/cells_map.v:130.20-130.21
+Info:      logic  0.62  4.94 Source u_tpu.pp_out_hcode_DFFR_Q_4_D_LUT4_F_I1_LUT4_F_I2_LUT4_I2_F_LUT2_I1_F_LUT4_F_I3_LUT4_F_I3_LUT3_F_I2_LUT3_F_I2_LUT3_F_I2_LUT3_F_1_I1_LUT2_I1_F_LUT4_F.F
+Info:    routing  1.37  6.31 Net u_tpu.pp_out_hcode_DFFR_Q_4_D_LUT4_F_I1_LUT4_F_I2_LUT4_I2_F_LUT2_I1_F_LUT4_F_I3_LUT4_F_I3_LUT3_F_I2_LUT3_F_I2_LUT3_F_I2_LUT3_F_1_I1_LUT2_I1_F[1] (26,5) -> (27,8)
+Info:                          Sink u_tpu.pp_out_hcode_DFFR_Q_4_D_LUT4_F_I1_LUT4_F_I2_LUT4_I2_F_LUT2_I1_F_LUT4_F_I3_LUT4_F_1_I0_LUT3_F_I2_LUT3_F_I2_LUT2_F_I1_LUT4_F_I1_LUT3_I1_F_LUT2_F_I0_LUT3_I1_F_LUT3_I1_F_LUT3_F_I2_LUT3_I1_F_LUT3_I2_F_LUT4_F.I1
+Info:                          Defined in:
+Info:                               /share/gowin/cells_map.v:130.20-130.21
+Info:      logic  1.10  7.41 Source u_tpu.pp_out_hcode_DFFR_Q_4_D_LUT4_F_I1_LUT4_F_I2_LUT4_I2_F_LUT2_I1_F_LUT4_F_I3_LUT4_F_1_I0_LUT3_F_I2_LUT3_F_I2_LUT2_F_I1_LUT4_F_I1_LUT3_I1_F_LUT2_F_I0_LUT3_I1_F_LUT3_I1_F_LUT3_F_I2_LUT3_I1_F_LUT3_I2_F_LUT4_F.F
+Info:    routing  0.81  8.22 Net u_tpu.pp_out_hcode_DFFR_Q_4_D_LUT4_F_I1_LUT4_F_I2_LUT4_I2_F_LUT2_I1_F_LUT4_F_I3_LUT4_F_1_I0_LUT3_F_I2_LUT3_F_I2_LUT2_F_I1_LUT4_F_I1_LUT3_I1_F_LUT2_F_I0_LUT3_I1_F_LUT3_I1_F_LUT3_F_I2_LUT3_I1_F_LUT3_I2_F[2] (27,8) -> (29,8)
+Info:                          Sink u_tpu.pp_out_hcode_DFFR_Q_3_D_LUT4_F_I1_LUT3_F_I1_LUT3_F_I2_LUT3_I1_F_LUT4_F.I2
+Info:                          Defined in:
+Info:                               /share/gowin/cells_map.v:130.20-130.21
+Info:      logic  0.82  9.04 Source u_tpu.pp_out_hcode_DFFR_Q_3_D_LUT4_F_I1_LUT3_F_I1_LUT3_F_I2_LUT3_I1_F_LUT4_F.F
+Info:    routing  0.33  9.36 Net u_tpu.pp_out_hcode_DFFR_Q_3_D_LUT4_F_I1_LUT3_F_I1_LUT3_F_I2_LUT3_I1_F[2] (29,8) -> (29,8)
+Info:                          Sink u_tpu.pp_out_hcode_DFFR_Q_3_D_LUT4_F_I1_LUT3_F_I1_LUT3_I2_F_LUT4_F_2.I2
+Info:                          Defined in:
+Info:                               /share/gowin/cells_map.v:130.20-130.21
+Info:      logic  0.82  10.19 Source u_tpu.pp_out_hcode_DFFR_Q_3_D_LUT4_F_I1_LUT3_F_I1_LUT3_I2_F_LUT4_F_2.F
+Info:    routing  0.81  10.99 Net u_tpu.pp_out_hcode_DFFR_Q_3_D_LUT4_F_I1_LUT3_F_I1_LUT3_I2_F[1] (29,8) -> (30,8)
+Info:                          Sink u_tpu.pp_out_hcode_DFFR_Q_4_D_LUT4_F_I1_LUT4_F_I2_LUT4_I2_F_LUT2_I1_F_LUT4_F_I3_LUT4_F_I3_LUT4_I3_F_LUT4_F_2.I1
+Info:                          Defined in:
+Info:                               /share/gowin/cells_map.v:130.20-130.21
+Info:      logic  1.10  12.09 Source u_tpu.pp_out_hcode_DFFR_Q_4_D_LUT4_F_I1_LUT4_F_I2_LUT4_I2_F_LUT2_I1_F_LUT4_F_I3_LUT4_F_I3_LUT4_I3_F_LUT4_F_2.F
+Info:    routing  0.33  12.41 Net u_tpu.pp_out_hcode_DFFR_Q_4_D_LUT4_F_I1_LUT4_F_I2_LUT4_I2_F_LUT2_I1_F_LUT4_F_I3_LUT4_F_I3_LUT4_I3_F[3] (30,8) -> (30,8)
+Info:                          Sink u_tpu.pp_out_hcode_DFFR_Q_4_D_LUT4_F_I1_LUT4_F_I2_LUT4_I2_F_LUT2_I1_F_LUT4_F_1.I3
+Info:                          Defined in:
+Info:                               /share/gowin/cells_map.v:130.20-130.21
+Info:      logic  0.62  13.04 Source u_tpu.pp_out_hcode_DFFR_Q_4_D_LUT4_F_I1_LUT4_F_I2_LUT4_I2_F_LUT2_I1_F_LUT4_F_1.F
+Info:    routing  0.48  13.52 Net u_tpu.pp_out_hcode_DFFR_Q_1_D_LUT4_F_I1[3] (30,8) -> (30,10)
+Info:                          Sink u_tpu.pp_out_hcode_DFFR_Q_6_D_LUT4_F.I3
+Info:                          Defined in:
+Info:                               /share/gowin/cells_map.v:130.20-130.21
+Info:      logic  0.62  14.14 Source u_tpu.pp_out_hcode_DFFR_Q_6_D_LUT4_F.F
+Info:    routing  0.00  14.14 Net u_tpu.pp_out_hcode_DFFR_Q_6_D (30,10) -> (30,10)
+Info:                          Sink u_tpu.pp_out_hcode_DFFR_Q_6.D
+Info:      setup  0.40  14.54 Source u_tpu.pp_out_hcode_DFFR_Q_6.D
+Info: 8.18 ns logic, 6.36 ns routing
+
+Info: Max frequency for clock 'u_tpu.clk': 68.76 MHz (PASS at 27.00 MHz)
+
+Info: Slack histogram:
+Info:  legend: * represents 9 endpoint(s)
+Info:          + represents [1,9) endpoint(s)
+Info: [ 22494,  23176) |+
+Info: [ 23176,  23858) | 
+Info: [ 23858,  24540) |**+
+Info: [ 24540,  25222) |***** 
+Info: [ 25222,  25904) |***********+
+Info: [ 25904,  26586) |*********+
+Info: [ 26586,  27268) |**+
+Info: [ 27268,  27950) |*+
+Info: [ 27950,  28632) |**+
+Info: [ 28632,  29314) |***+
+Info: [ 29314,  29996) |+
+Info: [ 29996,  30678) |*+
+Info: [ 30678,  31360) |*+
+Info: [ 31360,  32042) |***+
+Info: [ 32042,  32724) |*******+
+Info: [ 32724,  33406) |*************************+
+Info: [ 33406,  34088) |************************************************************ 
+Info: [ 34088,  34770) |*********************************************+
+Info: [ 34770,  35452) |*******************************+
+Info: [ 35452,  36134) |*****+
+
+Info: Program finished normally.
+PNR_EXIT=0

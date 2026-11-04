@@ -1,4 +1,4 @@
-# input revision: 9144278-dirty
+# input revision: 1e853f7-dirty
 # cmd: iverilog -g2005 -Wall design/rtl/tpu/sc_lfsr8.v tests/tpu/tb_sc_lfsr8.v -o sim/tpu/build/tb_sc_lfsr8.vvp && vvp -n sim/tpu/build/tb_sc_lfsr8.vvp 
 PASS: TC6 RESET state_x=0xe1e4 state_w=0x5c0a
 PASS: TC1 LOAD state_x=0xe1e4 (=8 steps of 0xACE1) state_w=0x5c0a (=8 steps of 0x7A5C)

@@ -2,6 +2,7 @@
 // File      : design/rtl/tpu/sc_postproc.v
 // Module    : sc_postproc
 // Project   : SC-TPU + RV32I SoC on Tang Nano 9K (GW1NR-LV9QN88PC6/I5)
+// Reqs      : requirements/REQUIREMENTS.md REQ-TPU-008 (post-processing exactness and widths), REQ-TPU-013
 // Task      : RTL-TPU (fpga-engineer)
 // Spec      : ARCHITECTURE.md rev A 5.3 step 1c [BIT-EXACT];
 //             INTERFACES.json tpu.postproc.

@@ -1,0 +1,182 @@
+Info: Critical path report for clock 'u_tpu.clk' (posedge -> posedge):
+Info:       type curr  total name
+Info:   clk-to-q  0.46  0.46 Source u_tpu.u_array.x_tile_DFFE_Q_23.Q
+Info:    routing  0.89  1.35 Net u_tpu.u_array.x_tile[40] (15,11) -> (16,11)
+Info:                          Sink u_tpu.acc_DFFRE_Q_33_D_LUT4_F_I3_LUT4_F_I3_LUT4_F_I2_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT.I1
+Info:                          Defined in:
+Info:                               design/rtl/tpu/sc_lane_array.v:72.31-72.37
+Info:      logic  1.04  2.39 Source u_tpu.acc_DFFRE_Q_33_D_LUT4_F_I3_LUT4_F_I3_LUT4_F_I2_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT.COUT
+Info:    routing  0.00  2.39 Net u_tpu.acc_DFFRE_Q_33_D_LUT4_F_I3_LUT4_F_I3_LUT4_F_I2_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_CIN (16,11) -> (16,11)
+Info:                          Sink u_tpu.acc_DFFRE_Q_33_D_LUT4_F_I3_LUT4_F_I3_LUT4_F_I2_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT.CIN
+Info:                          Defined in:
+Info:                               design/rtl/tpu/sc_lane_array.v:119.29-119.60
+Info:                               /share/gowin/arith_map.v:57.7-63.5
+Info:                               /share/gowin/cells_sim.v:1033.25-1033.29
+Info:      logic  0.06  2.45 Source u_tpu.acc_DFFRE_Q_33_D_LUT4_F_I3_LUT4_F_I3_LUT4_F_I2_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT.COUT
+Info:    routing  0.00  2.45 Net u_tpu.acc_DFFRE_Q_33_D_LUT4_F_I3_LUT4_F_I3_LUT4_F_I2_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_CIN (16,11) -> (16,11)
+Info:                          Sink u_tpu.acc_DFFRE_Q_33_D_LUT4_F_I3_LUT4_F_I3_LUT4_F_I2_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT.CIN
+Info:                          Defined in:
+Info:                               design/rtl/tpu/sc_lane_array.v:119.29-119.60
+Info:                               /share/gowin/arith_map.v:57.7-63.5
+Info:                               /share/gowin/cells_sim.v:1033.25-1033.29
+Info:      logic  0.06  2.51 Source u_tpu.acc_DFFRE_Q_33_D_LUT4_F_I3_LUT4_F_I3_LUT4_F_I2_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT.COUT
+Info:    routing  0.00  2.51 Net u_tpu.acc_DFFRE_Q_33_D_LUT4_F_I3_LUT4_F_I3_LUT4_F_I2_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_CIN (16,11) -> (16,11)
+Info:                          Sink u_tpu.acc_DFFRE_Q_33_D_LUT4_F_I3_LUT4_F_I3_LUT4_F_I2_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT.CIN
+Info:                          Defined in:
+Info:                               design/rtl/tpu/sc_lane_array.v:119.29-119.60
+Info:                               /share/gowin/arith_map.v:57.7-63.5
+Info:                               /share/gowin/cells_sim.v:1033.25-1033.29
+Info:      logic  0.06  2.56 Source u_tpu.acc_DFFRE_Q_33_D_LUT4_F_I3_LUT4_F_I3_LUT4_F_I2_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT.COUT
+Info:    routing  0.00  2.56 Net u_tpu.acc_DFFRE_Q_33_D_LUT4_F_I3_LUT4_F_I3_LUT4_F_I2_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_CIN (16,11) -> (16,11)
+Info:                          Sink u_tpu.acc_DFFRE_Q_33_D_LUT4_F_I3_LUT4_F_I3_LUT4_F_I2_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT.CIN
+Info:                          Defined in:
+Info:                               design/rtl/tpu/sc_lane_array.v:119.29-119.60
+Info:                               /share/gowin/arith_map.v:57.7-63.5
+Info:                               /share/gowin/cells_sim.v:1033.25-1033.29
+Info:      logic  0.06  2.62 Source u_tpu.acc_DFFRE_Q_33_D_LUT4_F_I3_LUT4_F_I3_LUT4_F_I2_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT.COUT
+Info:    routing  0.00  2.62 Net u_tpu.acc_DFFRE_Q_33_D_LUT4_F_I3_LUT4_F_I3_LUT4_F_I2_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_CIN (16,11) -> (17,11)
+Info:                          Sink u_tpu.acc_DFFRE_Q_33_D_LUT4_F_I3_LUT4_F_I3_LUT4_F_I2_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT.CIN
+Info:                          Defined in:
+Info:                               design/rtl/tpu/sc_lane_array.v:119.29-119.60
+Info:                               /share/gowin/arith_map.v:57.7-63.5
+Info:                               /share/gowin/cells_sim.v:1033.25-1033.29
+Info:      logic  0.06  2.68 Source u_tpu.acc_DFFRE_Q_33_D_LUT4_F_I3_LUT4_F_I3_LUT4_F_I2_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT.COUT
+Info:    routing  0.00  2.68 Net u_tpu.acc_DFFRE_Q_33_D_LUT4_F_I3_LUT4_F_I3_LUT4_F_I2_ALU_COUT_CIN_ALU_COUT_CIN (17,11) -> (17,11)
+Info:                          Sink u_tpu.acc_DFFRE_Q_33_D_LUT4_F_I3_LUT4_F_I3_LUT4_F_I2_ALU_COUT_CIN_ALU_COUT.CIN
+Info:                          Defined in:
+Info:                               design/rtl/tpu/sc_lane_array.v:119.29-119.60
+Info:                               /share/gowin/arith_map.v:57.7-63.5
+Info:                               /share/gowin/cells_sim.v:1033.25-1033.29
+Info:      logic  0.06  2.73 Source u_tpu.acc_DFFRE_Q_33_D_LUT4_F_I3_LUT4_F_I3_LUT4_F_I2_ALU_COUT_CIN_ALU_COUT.COUT
+Info:    routing  0.00  2.73 Net u_tpu.acc_DFFRE_Q_33_D_LUT4_F_I3_LUT4_F_I3_LUT4_F_I2_ALU_COUT_CIN (17,11) -> (17,11)
+Info:                          Sink u_tpu.acc_DFFRE_Q_33_D_LUT4_F_I3_LUT4_F_I3_LUT4_F_I2_ALU_COUT.CIN
+Info:                          Defined in:
+Info:                               design/rtl/tpu/sc_lane_array.v:119.29-119.60
+Info:                               /share/gowin/arith_map.v:57.7-63.5
+Info:                               /share/gowin/cells_sim.v:1033.25-1033.29
+Info:      logic  0.06  2.79 Source u_tpu.acc_DFFRE_Q_33_D_LUT4_F_I3_LUT4_F_I3_LUT4_F_I2_ALU_COUT.COUT
+Info:    routing  0.00  2.79 Net u_tpu.acc_DFFRE_Q_33_D_LUT4_F_I3_LUT4_F_I3_LUT4_F_I2_ALU_COUT_TAIL_ALULC (17,11) -> (17,11)
+Info:                          Sink u_tpu.acc_DFFRE_Q_33_D_LUT4_F_I3_LUT4_F_I3_LUT4_F_I2_ALU_COUT_TAIL_ALULC.CIN
+Info:      logic  0.56  3.36 Source u_tpu.acc_DFFRE_Q_33_D_LUT4_F_I3_LUT4_F_I3_LUT4_F_I2_ALU_COUT_TAIL_ALULC.SUM
+Info:    routing  2.72  6.08 Net u_tpu.acc_DFFRE_Q_33_D_LUT4_F_I3_LUT4_F_I3_LUT4_F_I2 (17,11) -> (30,7)
+Info:                          Sink u_tpu.acc_DFFRE_Q_169_D_LUT4_F_I3_LUT4_F_I3_LUT4_F_1.I2
+Info:                          Defined in:
+Info:                               design/rtl/tpu/sc_lane_array.v:119.29-119.60
+Info:                               /share/gowin/arith_map.v:57.7-63.5
+Info:                               /share/gowin/cells_sim.v:1033.25-1033.29
+Info:      logic  0.82  6.90 Source u_tpu.acc_DFFRE_Q_169_D_LUT4_F_I3_LUT4_F_I3_LUT4_F_1.F
+Info:    routing  2.08  8.98 Net u_tpu.acc_DFFRE_Q_169_D_LUT4_F_I3_LUT4_F_I3[2] (30,7) -> (33,2)
+Info:                          Sink u_tpu.acc_DFFRE_Q_169_D_LUT4_F_I3_LUT4_F.I2
+Info:                          Defined in:
+Info:                               /share/gowin/cells_map.v:130.20-130.21
+Info:      logic  0.82  9.80 Source u_tpu.acc_DFFRE_Q_169_D_LUT4_F_I3_LUT4_F.F
+Info:    routing  0.41  10.21 Net u_tpu.acc_DFFRE_Q_169_D_LUT4_F_I3[2] (33,2) -> (33,1)
+Info:                          Sink u_tpu.acc_DFFRE_Q_169_D_LUT4_F.I2
+Info:                          Defined in:
+Info:                               /share/gowin/cells_map.v:130.20-130.21
+Info:      logic  0.82  11.04 Source u_tpu.acc_DFFRE_Q_169_D_LUT4_F.F
+Info:    routing  2.08  13.12 Net u_tpu.acc_DFFRE_Q_169_D (33,1) -> (22,2)
+Info:                          Sink u_tpu.acc_DFFRE_Q_168_D_ALU_SUM_CIN_ALU_COUT.I0
+Info:      logic  0.96  14.07 Source u_tpu.acc_DFFRE_Q_168_D_ALU_SUM_CIN_ALU_COUT.COUT
+Info:    routing  0.00  14.07 Net u_tpu.acc_DFFRE_Q_168_D_ALU_SUM_CIN (22,2) -> (22,2)
+Info:                          Sink u_tpu.acc_DFFRE_Q_168_D_ALU_SUM.CIN
+Info:                          Defined in:
+Info:                               /share/gowin/arith_map.v:57.7-63.5
+Info:                               /share/gowin/cells_sim.v:1033.25-1033.29
+Info:      logic  0.06  14.13 Source u_tpu.acc_DFFRE_Q_168_D_ALU_SUM.COUT
+Info:    routing  0.00  14.13 Net u_tpu.acc_DFFRE_Q_168_D_ALU_SUM_COUT (22,2) -> (22,2)
+Info:                          Sink u_tpu.acc_DFFRE_Q_167_D_ALU_SUM.CIN
+Info:                          Defined in:
+Info:                               /share/gowin/arith_map.v:57.7-63.5
+Info:                               /share/gowin/cells_sim.v:1033.25-1033.29
+Info:      logic  0.06  14.19 Source u_tpu.acc_DFFRE_Q_167_D_ALU_SUM.COUT
+Info:    routing  0.00  14.19 Net u_tpu.acc_DFFRE_Q_167_D_ALU_SUM_COUT (22,2) -> (22,2)
+Info:                          Sink u_tpu.acc_DFFRE_Q_166_D_ALU_SUM.CIN
+Info:                          Defined in:
+Info:                               /share/gowin/arith_map.v:57.7-63.5
+Info:                               /share/gowin/cells_sim.v:1033.25-1033.29
+Info:      logic  0.06  14.24 Source u_tpu.acc_DFFRE_Q_166_D_ALU_SUM.COUT
+Info:    routing  0.00  14.24 Net u_tpu.acc_DFFRE_Q_166_D_ALU_SUM_COUT (22,2) -> (22,2)
+Info:                          Sink u_tpu.acc_DFFRE_Q_165_D_ALU_SUM.CIN
+Info:                          Defined in:
+Info:                               /share/gowin/arith_map.v:57.7-63.5
+Info:                               /share/gowin/cells_sim.v:1033.25-1033.29
+Info:      logic  0.06  14.30 Source u_tpu.acc_DFFRE_Q_165_D_ALU_SUM.COUT
+Info:    routing  0.00  14.30 Net u_tpu.acc_DFFRE_Q_165_D_ALU_SUM_COUT (22,2) -> (23,2)
+Info:                          Sink u_tpu.acc_DFFRE_Q_164_D_ALU_SUM.CIN
+Info:                          Defined in:
+Info:                               /share/gowin/arith_map.v:57.7-63.5
+Info:                               /share/gowin/cells_sim.v:1033.25-1033.29
+Info:      logic  0.06  14.36 Source u_tpu.acc_DFFRE_Q_164_D_ALU_SUM.COUT
+Info:    routing  0.00  14.36 Net u_tpu.acc_DFFRE_Q_164_D_ALU_SUM_COUT (23,2) -> (23,2)
+Info:                          Sink u_tpu.acc_DFFRE_Q_163_D_ALU_SUM.CIN
+Info:                          Defined in:
+Info:                               /share/gowin/arith_map.v:57.7-63.5
+Info:                               /share/gowin/cells_sim.v:1033.25-1033.29
+Info:      logic  0.06  14.42 Source u_tpu.acc_DFFRE_Q_163_D_ALU_SUM.COUT
+Info:    routing  0.00  14.42 Net u_tpu.acc_DFFRE_Q_163_D_ALU_SUM_COUT (23,2) -> (23,2)
+Info:                          Sink u_tpu.acc_DFFRE_Q_162_D_ALU_SUM.CIN
+Info:                          Defined in:
+Info:                               /share/gowin/arith_map.v:57.7-63.5
+Info:                               /share/gowin/cells_sim.v:1033.25-1033.29
+Info:      logic  0.06  14.47 Source u_tpu.acc_DFFRE_Q_162_D_ALU_SUM.COUT
+Info:    routing  0.00  14.47 Net u_tpu.acc_DFFRE_Q_162_D_ALU_SUM_COUT (23,2) -> (23,2)
+Info:                          Sink u_tpu.acc_DFFRE_Q_161_D_ALU_SUM.CIN
+Info:                          Defined in:
+Info:                               /share/gowin/arith_map.v:57.7-63.5
+Info:                               /share/gowin/cells_sim.v:1033.25-1033.29
+Info:      logic  0.06  14.53 Source u_tpu.acc_DFFRE_Q_161_D_ALU_SUM.COUT
+Info:    routing  0.00  14.53 Net u_tpu.acc_DFFRE_Q_161_D_ALU_SUM_COUT (23,2) -> (23,2)
+Info:                          Sink u_tpu.acc_DFFRE_Q_160_D_ALU_SUM.CIN
+Info:                          Defined in:
+Info:                               /share/gowin/arith_map.v:57.7-63.5
+Info:                               /share/gowin/cells_sim.v:1033.25-1033.29
+Info:      logic  0.06  14.59 Source u_tpu.acc_DFFRE_Q_160_D_ALU_SUM.COUT
+Info:    routing  0.00  14.59 Net u_tpu.acc_DFFRE_Q_160_D_ALU_SUM_COUT (23,2) -> (23,2)
+Info:                          Sink u_tpu.acc_DFFRE_Q_159_D_ALU_SUM.CIN
+Info:                          Defined in:
+Info:                               /share/gowin/arith_map.v:57.7-63.5
+Info:                               /share/gowin/cells_sim.v:1033.25-1033.29
+Info:      logic  0.06  14.64 Source u_tpu.acc_DFFRE_Q_159_D_ALU_SUM.COUT
+Info:    routing  0.00  14.64 Net u_tpu.acc_DFFRE_Q_159_D_ALU_SUM_COUT (23,2) -> (24,2)
+Info:                          Sink u_tpu.acc_DFFRE_Q_158_D_ALU_SUM.CIN
+Info:                          Defined in:
+Info:                               /share/gowin/arith_map.v:57.7-63.5
+Info:                               /share/gowin/cells_sim.v:1033.25-1033.29
+Info:      logic  0.06  14.70 Source u_tpu.acc_DFFRE_Q_158_D_ALU_SUM.COUT
+Info:    routing  0.00  14.70 Net u_tpu.acc_DFFRE_Q_158_D_ALU_SUM_COUT (24,2) -> (24,2)
+Info:                          Sink u_tpu.acc_DFFRE_Q_157_D_ALU_SUM.CIN
+Info:                          Defined in:
+Info:                               /share/gowin/arith_map.v:57.7-63.5
+Info:                               /share/gowin/cells_sim.v:1033.25-1033.29
+Info:      logic  0.06  14.76 Source u_tpu.acc_DFFRE_Q_157_D_ALU_SUM.COUT
+Info:    routing  0.00  14.76 Net u_tpu.acc_DFFRE_Q_157_D_ALU_SUM_COUT (24,2) -> (24,2)
+Info:                          Sink u_tpu.acc_DFFRE_Q_156_D_ALU_SUM.CIN
+Info:                          Defined in:
+Info:                               /share/gowin/arith_map.v:57.7-63.5
+Info:                               /share/gowin/cells_sim.v:1033.25-1033.29
+Info:      logic  0.06  14.81 Source u_tpu.acc_DFFRE_Q_156_D_ALU_SUM.COUT
+Info:    routing  0.00  14.81 Net u_tpu.acc_DFFRE_Q_156_D_ALU_SUM_COUT (24,2) -> (24,2)
+Info:                          Sink u_tpu.acc_DFFRE_Q_155_D_ALU_SUM.CIN
+Info:                          Defined in:
+Info:                               /share/gowin/arith_map.v:57.7-63.5
+Info:                               /share/gowin/cells_sim.v:1033.25-1033.29
+Info:      logic  0.06  14.87 Source u_tpu.acc_DFFRE_Q_155_D_ALU_SUM.COUT
+Info:    routing  0.00  14.87 Net u_tpu.acc_DFFRE_Q_155_D_ALU_SUM_COUT (24,2) -> (24,2)
+Info:                          Sink u_tpu.acc_DFFRE_Q_154_D_ALU_SUM.CIN
+Info:                          Defined in:
+Info:                               /share/gowin/arith_map.v:57.7-63.5
+Info:                               /share/gowin/cells_sim.v:1033.25-1033.29
+Info:      logic  0.06  14.93 Source u_tpu.acc_DFFRE_Q_154_D_ALU_SUM.COUT
+Info:    routing  0.00  14.93 Net u_tpu.acc_DFFRE_Q_154_D_ALU_SUM_COUT (24,2) -> (24,2)
+Info:                          Sink u_tpu.acc_DFFRE_Q_153_D_ALU_SUM.CIN
+Info:                          Defined in:
+Info:                               /share/gowin/arith_map.v:57.7-63.5
+Info:                               /share/gowin/cells_sim.v:1033.25-1033.29
+Info:      logic  0.56  15.49 Source u_tpu.acc_DFFRE_Q_153_D_ALU_SUM.SUM
+Info:    routing  0.00  15.49 Net u_tpu.acc_DFFRE_Q_153_D (24,2) -> (24,2)
+Info:                          Sink u_tpu.acc_DFFRE_Q_153.D
+Info:      setup  0.40  15.89 Source u_tpu.acc_DFFRE_Q_153.D
+Info: 7.70 ns logic, 8.19 ns routing
+
+Info: Max frequency for clock 'u_tpu.clk': 62.93 MHz (PASS at 27.00 MHz)

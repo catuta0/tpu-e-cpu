@@ -1,4 +1,4 @@
-# input revision: 9144278-dirty
+# input revision: 1e853f7-dirty
 # cmd: verilator --lint-only --timing -Wno-INITIALDLY design/rtl/tpu/sc_lfsr8.v tests/tpu/tb_sc_lfsr8.v --top-module tb_sc_lfsr8
 LINT_TB_OK tb_sc_lfsr8
 # cmd: verilator --lint-only --timing -Wno-INITIALDLY design/rtl/tpu/sc_postproc.v tests/tpu/tb_sc_postproc.v --top-module tb_sc_postproc

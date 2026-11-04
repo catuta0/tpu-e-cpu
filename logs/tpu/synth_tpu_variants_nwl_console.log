@@ -1,0 +1,15 @@
+==== variant il8_m0_nwl (IL=8 RNG_MODE=0 synth_gowin -nowidelut) ====
+  seed 1: exit 0 :: Max frequency for clock 'u_tpu.clk': 62.93 MHz (PASS at 27.00 MHz)
+  seed 2: exit 0 :: Max frequency for clock 'u_tpu.clk': 59.44 MHz (PASS at 27.00 MHz)
+  seed 3: exit 0 :: Max frequency for clock 'u_tpu.clk': 64.73 MHz (PASS at 27.00 MHz)
+==== variant il8_m2_nwl (IL=8 RNG_MODE=2 synth_gowin -nowidelut) ====
+  seed 1: exit 0 :: Max frequency for clock 'u_tpu.clk': 64.28 MHz (PASS at 27.00 MHz)
+  seed 2: exit 0 :: Max frequency for clock 'u_tpu.clk': 64.24 MHz (PASS at 27.00 MHz)
+  seed 3: exit 0 :: Max frequency for clock 'u_tpu.clk': 60.43 MHz (PASS at 27.00 MHz)
+==== variant il4_m1_nwl (IL=4 RNG_MODE=1 synth_gowin -nowidelut) ====
+  seed 1: exit 0 :: Max frequency for clock 'u_tpu.clk': 73.58 MHz (PASS at 27.00 MHz)
+  seed 2: exit 0 :: Max frequency for clock 'u_tpu.clk': 68.76 MHz (PASS at 27.00 MHz)
+  seed 3: exit 0 :: Max frequency for clock 'u_tpu.clk': 65.30 MHz (PASS at 27.00 MHz)
+==== variant il16_m1_nwl (IL=16 RNG_MODE=1 synth_gowin -nowidelut) ====
+  seed 1: exit 125 :: 
+# il16_m1_nwl seeds 2/3 aborted manually at 2026-11-04T05:56:46+00:00 after seed 1 placement failure (see pnr_il16_m1_nwl_s2.log)

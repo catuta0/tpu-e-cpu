@@ -1,0 +1,127 @@
+# RTL-TPU simulation regression  2026-11-04T04:57:46+00:00  input revision: 1e853f7-dirty
+verilator : Verilator 5.020 2024-01-01 rev (Debian 5.020-1)
+iverilog  : Icarus Verilog version 12.0 (stable) ()
+
+==== 1. RTL lint (verilator -Wall) ====
+LINT_OK sc_lfsr8 
+LINT_OK sc_rng -GRNG_MODE=0
+LINT_OK sc_rng -GRNG_MODE=1
+LINT_OK sc_rng -GRNG_MODE=2
+LINT_OK sc_lane_array 
+LINT_OK sc_postproc 
+LINT_OK sc_tpu_ctrl 
+LINT_OK sc_tpu -GRNG_MODE=0
+LINT_OK sc_tpu -GRNG_MODE=1
+LINT_OK sc_tpu -GRNG_MODE=2
+LINT_OK sc_tpu -GIL=4 -GRNG_MODE=1
+LINT_OK sc_tpu -GIL=16 -GRNG_MODE=1
+LINT_OK sc_tpu_synth_top 
+
+==== 2. TB lint (verilator --timing, default warnings, -Wno-INITIALDLY) ====
+LINT_TB_OK tb_sc_lfsr8
+LINT_TB_OK tb_sc_postproc
+LINT_TB_OK tb_sc_lane_array
+LINT_TB_OK tb_sc_tpu
+
+==== 3. unit testbenches ====
+PASS: TC6 RESET state_x=0xe1e4 state_w=0x5c0a
+PASS: TC1 LOAD state_x=0xe1e4 (=8 steps of 0xACE1) state_w=0x5c0a (=8 steps of 0x7A5C)
+PASS: TC2 LEAP==8x1 70000 cycles, 0 mismatches (state and r, both seeds)
+PASS: TC3 PERIOD x=65535 w=65535 leap cycles (expected 65535), zero state never reached
+PASS: TC4 FREEZE state unchanged for 100 cycles with adv=0
+PASS: TC5 RELOAD load+adv -> state_x=0xe1e4 state_w=0x5c0a (load wins)
+negative run tb_sc_lfsr8 -DINJECT_FAULT: TEST FAILED as required
+PASS: TC1 DIRECTED GRID 11760 vectors (2 layers x K 4..10 x s 0..7 x 7 acc x 15 bias)
+PASS: TC2 NEAR-THRESHOLD 1568 vectors
+PASS: TC3 RANDOM 40000 vectors
+INFO: coverage: B floor!=trunc (negative non-integer) 8114, clip-low 26950, clip-high 25157, in-range 1221, u==0 367, u==127 42, u==128 193
+INFO: vectors checked = 53328, mismatches = 0
+negative run tb_sc_postproc -DINJECT_FAULT: TEST FAILED as required
+PASS: TC1 9216 stream cycles (6x6 forced r pairs x 256 codes), SNG bits and all 16 accumulators exact
+PASS: TC2 en=0 holds, clr has priority over en
+negative run tb_sc_lane_array -DINJECT_FAULT: TEST FAILED as required
+
+==== 4. tb_sc_tpu: directed tests + golden vectors (SW-01a), RNG_MODE 0/1/2 ====
+INFO: tb_sc_tpu RNG_MODE=0 DATA=sim/data
+PASS: D1 reset values STATUS/RESULT/CYCLES/SCORE/HIDDEN = 0, CONFIG = 0x08, CTRL reads 0
+PASS: D2 PARAMS = 0x01000810 (NL=16, IL=8, RNG_MODE=0, version 0x01)
+PASS: D3 CONFIG LOG2_L raw 0..15 read back clamped to 4..10, ACT_SHIFT kept
+PASS: D4 INPUT/BIAS/WEIGHT read-back incl. byte strobes, BIAS sign-extension, unmapped = 0, read-only regs
+PASS: D4b 0x55555555/0xAAAAAAAA (xor index) on all 16 INPUT, 32 BIAS, 512 WEIGHT words and CONFIG; R registers unchanged
+PASS: D6 first inference: BUSY=1/DONE=0 while busy; reads while BUSY return current storage (HIDDEN = layer-1 codes, SCORE = reset 0)
+PASS: D8 CYCLES = 2928 = measured BUSY cycles 2928 = formula 10*2^8+368 (K=8)
+PASS: D9 after DONE: RESULT = 9, HIDDEN[0] = 0xdcffffff, SCORE[0] = 0xfffffbee
+PASS: D10 STATUS = DONE (0x2) and RESULT unchanged after 1000 idle cycles
+PASS: D7 DONE cleared by START; START/INPUT/BIAS/WEIGHT/CONFIG writes while BUSY ignored (1 busy pulse, CYCLES 2928 unchanged, results identical); memory reads while busy stall (31 cycles) and return correct data
+PASS: D11 rst during a stream phase: all registers at reset values after 1 cycle; re-run bit-exact with inference A
+PASS: D5 analytic zero-code test (acc = 64L, Dp = floor(d_j L/128)), K = 4/7/10, s = 0/7, 16 neurons each
+PASS: VECFILE sim/data/tpu_vectors_mode0.txt : vectors 360 (+0 clamp re-runs), mismatching inferences 0, mismatching fields 0
+PASS: VECFILE sim/data/tpu_vectors_corner_mode0.txt : vectors 51 (+51 clamp re-runs), mismatching inferences 0, mismatching fields 0
+PASS: VECFILE sim/tpu/vectors/tpu_vectors_sweep_mode0.txt : vectors 63 (+18 clamp re-runs), mismatching inferences 0, mismatching fields 0
+PASS: R1/R2 RNG trace: 35392 stream cycles x 8 lanes compared with the golden trace (64 rows), 0 mismatches; LFSR frozen in all 298039 non-stream cycles
+INFO: golden vectors total 474 (+69 clamp re-runs), mismatching inferences 0, mismatching fields 0
+INFO: bus protocol errors 0, longest valid->ready 35 cycles
+TEST PASSED
+INFO: tb_sc_tpu RNG_MODE=1 DATA=sim/data
+PASS: D1 reset values STATUS/RESULT/CYCLES/SCORE/HIDDEN = 0, CONFIG = 0x08, CTRL reads 0
+PASS: D2 PARAMS = 0x01010810 (NL=16, IL=8, RNG_MODE=1, version 0x01)
+PASS: D3 CONFIG LOG2_L raw 0..15 read back clamped to 4..10, ACT_SHIFT kept
+PASS: D4 INPUT/BIAS/WEIGHT read-back incl. byte strobes, BIAS sign-extension, unmapped = 0, read-only regs
+PASS: D4b 0x55555555/0xAAAAAAAA (xor index) on all 16 INPUT, 32 BIAS, 512 WEIGHT words and CONFIG; R registers unchanged
+PASS: D6 first inference: BUSY=1/DONE=0 while busy; reads while BUSY return current storage (HIDDEN = layer-1 codes, SCORE = reset 0)
+PASS: D8 CYCLES = 2928 = measured BUSY cycles 2928 = formula 10*2^8+368 (K=8)
+PASS: D9 after DONE: RESULT = 7, HIDDEN[0] = 0x80ff80ff, SCORE[0] = 0xfffffd24
+PASS: D10 STATUS = DONE (0x2) and RESULT unchanged after 1000 idle cycles
+PASS: D7 DONE cleared by START; START/INPUT/BIAS/WEIGHT/CONFIG writes while BUSY ignored (1 busy pulse, CYCLES 2928 unchanged, results identical); memory reads while busy stall (31 cycles) and return correct data
+PASS: D11 rst during a stream phase: all registers at reset values after 1 cycle; re-run bit-exact with inference A
+PASS: D5 analytic zero-code test (acc = 64L, Dp = floor(d_j L/128)), K = 4/7/10, s = 0/7, 16 neurons each
+PASS: VECFILE sim/data/tpu_vectors_mode1.txt : vectors 360 (+0 clamp re-runs), mismatching inferences 0, mismatching fields 0
+PASS: VECFILE sim/data/tpu_vectors_K4_mode1.txt : vectors 16 (+16 clamp re-runs), mismatching inferences 0, mismatching fields 0
+PASS: VECFILE sim/data/tpu_vectors_K10_mode1.txt : vectors 16 (+16 clamp re-runs), mismatching inferences 0, mismatching fields 0
+PASS: VECFILE sim/data/tpu_vectors_corner_mode1.txt : vectors 51 (+51 clamp re-runs), mismatching inferences 0, mismatching fields 0
+PASS: VECFILE sim/tpu/vectors/tpu_vectors_sweep_mode1.txt : vectors 63 (+18 clamp re-runs), mismatching inferences 0, mismatching fields 0
+PASS: R1/R2 RNG trace: 39488 stream cycles x 8 lanes compared with the golden trace (64 rows), 0 mismatches; LFSR frozen in all 329399 non-stream cycles
+INFO: golden vectors total 506 (+101 clamp re-runs), mismatching inferences 0, mismatching fields 0
+INFO: bus protocol errors 0, longest valid->ready 35 cycles
+TEST PASSED
+INFO: tb_sc_tpu RNG_MODE=2 DATA=sim/data
+PASS: D1 reset values STATUS/RESULT/CYCLES/SCORE/HIDDEN = 0, CONFIG = 0x08, CTRL reads 0
+PASS: D2 PARAMS = 0x01020810 (NL=16, IL=8, RNG_MODE=2, version 0x01)
+PASS: D3 CONFIG LOG2_L raw 0..15 read back clamped to 4..10, ACT_SHIFT kept
+PASS: D4 INPUT/BIAS/WEIGHT read-back incl. byte strobes, BIAS sign-extension, unmapped = 0, read-only regs
+PASS: D4b 0x55555555/0xAAAAAAAA (xor index) on all 16 INPUT, 32 BIAS, 512 WEIGHT words and CONFIG; R registers unchanged
+PASS: D6 first inference: BUSY=1/DONE=0 while busy; reads while BUSY return current storage (HIDDEN = layer-1 codes, SCORE = reset 0)
+PASS: D8 CYCLES = 2928 = measured BUSY cycles 2928 = formula 10*2^8+368 (K=8)
+PASS: D9 after DONE: RESULT = 7, HIDDEN[0] = 0x80fe94cb, SCORE[0] = 0xfffffd48
+PASS: D10 STATUS = DONE (0x2) and RESULT unchanged after 1000 idle cycles
+PASS: D7 DONE cleared by START; START/INPUT/BIAS/WEIGHT/CONFIG writes while BUSY ignored (1 busy pulse, CYCLES 2928 unchanged, results identical); memory reads while busy stall (31 cycles) and return correct data
+PASS: D11 rst during a stream phase: all registers at reset values after 1 cycle; re-run bit-exact with inference A
+PASS: D5 analytic zero-code test (acc = 64L, Dp = floor(d_j L/128)), K = 4/7/10, s = 0/7, 16 neurons each
+PASS: VECFILE sim/data/tpu_vectors_mode2.txt : vectors 360 (+0 clamp re-runs), mismatching inferences 0, mismatching fields 0
+PASS: VECFILE sim/data/tpu_vectors_corner_mode2.txt : vectors 51 (+51 clamp re-runs), mismatching inferences 0, mismatching fields 0
+PASS: VECFILE sim/tpu/vectors/tpu_vectors_sweep_mode2.txt : vectors 63 (+18 clamp re-runs), mismatching inferences 0, mismatching fields 0
+PASS: R1/R2 RNG trace: 35392 stream cycles x 8 lanes compared with the golden trace (64 rows), 0 mismatches; LFSR frozen in all 298039 non-stream cycles
+INFO: golden vectors total 474 (+69 clamp re-runs), mismatching inferences 0, mismatching fields 0
+INFO: bus protocol errors 0, longest valid->ready 35 cycles
+TEST PASSED
+
+==== 4b. tb_sc_tpu D12: $readmemh init files (INIT_FILES=1), RNG_MODE 0/1/2 ====
+PASS: D12 $readmemh init: 512 WEIGHT, 32 BIAS, 16 INPUT words equal the files; inference without any bus load bit-exact with sim/data/tpu_vectors_mode0.txt vector 0 (RESULT 9)
+PASS: R1/R2 RNG trace: 64 stream cycles x 8 lanes compared with the golden trace (64 rows), 0 mismatches; LFSR frozen in all 2124 non-stream cycles
+TEST PASSED
+PASS: D12 $readmemh init: 512 WEIGHT, 32 BIAS, 16 INPUT words equal the files; inference without any bus load bit-exact with sim/data/tpu_vectors_mode1.txt vector 0 (RESULT 7)
+PASS: R1/R2 RNG trace: 64 stream cycles x 8 lanes compared with the golden trace (64 rows), 0 mismatches; LFSR frozen in all 2124 non-stream cycles
+TEST PASSED
+PASS: D12 $readmemh init: 512 WEIGHT, 32 BIAS, 16 INPUT words equal the files; inference without any bus load bit-exact with sim/data/tpu_vectors_mode2.txt vector 0 (RESULT 7)
+PASS: R1/R2 RNG trace: 64 stream cycles x 8 lanes compared with the golden trace (64 rows), 0 mismatches; LFSR frozen in all 2124 non-stream cycles
+TEST PASSED
+
+==== 5. tb_sc_tpu negative run (-DINJECT_FAULT must fail) ====
+INFO: tb_sc_tpu RNG_MODE=1 DATA=sim/data
+FAIL: VECFILE sim/data/tpu_vectors_K4_mode1.txt : vectors 16 (+0 clamp re-runs), mismatching inferences 16, mismatching fields 16
+INFO: golden vectors total 16 (+0 clamp re-runs), mismatching inferences 16, mismatching fields 16
+INFO: bus protocol errors 0, longest valid->ready 3 cycles
+TEST FAILED
+
+SIM_TPU ALL PASSED (revision 1e853f7-dirty)
+RC=0

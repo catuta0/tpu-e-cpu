@@ -39,10 +39,10 @@
 //      Biases b_j = -8192 + d_j make Dp_j = floor(d_j L/128) small, so HIDDEN
 //      exercises the floor and both clips; expected values computed here with
 //      explicit floor division (independent of the RTL and of the Python model).
-//   D6 inference A (pset 0, image of input.hex, K = 8, s = 0) - the FIRST
-//      inference after reset: while BUSY, after layer 1 has written HIDDEN
-//      internally, CPU reads of HIDDEN/SCORE return 0 (rev A.1 "0 until the
-//      first inference completes"). STATUS reads BUSY=1, DONE=0 while busy.
+//   D6 inference A (pset 0, image of input.hex, K = 8, s = 0), the first
+//      inference after reset: STATUS reads BUSY=1, DONE=0 while busy; after
+//      layer 1 has written HIDDEN, CPU reads return the current storage
+//      (HIDDEN = new codes, SCORE = reset value 0) - ARCHITECTURE.md 10.
 //   D7 inference B = same data as A, with bus abuse while BUSY: START written
 //      again (must be ignored: one BUSY pulse only, CYCLES unchanged), writes
 //      to INPUT/BIAS/WEIGHT/CONFIG (ignored: read back after DONE unchanged,
@@ -52,6 +52,15 @@
 //   D8 CYCLES == number of cycles BUSY was 1 measured by this TB (hierarchical
 //      probe dut.busy) == formula 10*2^K + 368 (sc_tpu_ctrl.v), for K=8.
 //   D9 SCORE/HIDDEN readable after DONE (non-zero), RESULT in 0..9.
+//   D10 DONE stays 1 (and RESULT stable) across 1000 idle cycles.
+//   D11 rst asserted for 1 cycle in a stream phase: every register back at
+//       its reset value 1 cycle later; a re-run is bit-exact with D6.
+//   D4b 0x5555_5555 / 0xAAAA_AAAA pattern test of every RW location.
+//   D12 (+INITVEC, compile with INIT_FILES=1) $readmemh init files read back
+//       and an inference without any bus load is bit-exact.
+//   R1/R2 RNG monitor (always on): r of every lane vs the golden RNG trace for
+//       the first 64 stream cycles after every START; LFSR frozen outside
+//       stream cycles.
 //
 // VECTOR TESTS (+VECn): for every vector: (re)load WEIGHT/BIAS if the parameter
 //   set changes (via the bus), write INPUT[0..15], CONFIG, START, poll STATUS
@@ -67,7 +76,13 @@
 
 module tb_sc_tpu;
 
-    parameter integer RNG_MODE = 1;
+    parameter integer RNG_MODE   = 1;
+    // INIT_FILES = 1: the DUT is elaborated with WEIGHT_INIT / BIAS_INIT /
+    // INPUT_INIT = sim/data/{weights,bias,input}.hex (spec 5.6) for test D12.
+    parameter integer INIT_FILES = 0;
+    localparam W_INIT = (INIT_FILES != 0) ? "sim/data/weights.hex" : "";
+    localparam B_INIT = (INIT_FILES != 0) ? "sim/data/bias.hex"    : "";
+    localparam I_INIT = (INIT_FILES != 0) ? "sim/data/input.hex"   : "";
     localparam integer NL = 16;
     localparam integer IL = 8;
 
@@ -84,7 +99,8 @@ module tb_sc_tpu;
     wire        mem_ready;
     wire [31:0] mem_rdata;
 
-    sc_tpu #(.NL(NL), .IL(IL), .RNG_MODE(RNG_MODE)) dut (
+    sc_tpu #(.NL(NL), .IL(IL), .RNG_MODE(RNG_MODE),
+             .WEIGHT_INIT(W_INIT), .BIAS_INIT(B_INIT), .INPUT_INIT(I_INIT)) dut (
         .clk(clk), .rst(rst),
         .mem_valid(mem_valid), .mem_addr(mem_addr), .mem_wdata(mem_wdata),
         .mem_wstrb(mem_wstrb), .mem_ready(mem_ready), .mem_rdata(mem_rdata));
@@ -718,6 +734,49 @@ module tb_sc_tpu;
         end
     endtask
 
+    // ---------------- D12 init files (REQ-TPU-012) ------------------------------
+    // Compiled with INIT_FILES = 1: right after reset, read back the whole
+    // weight RAM, BIAS and INPUT through the bus and compare with the files
+    // (init via $readmemh, no bus writes at all), then START with the reset
+    // CONFIG (K = 8, s = 0) and compare HIDDEN/SCORE/RESULT with the first
+    // vector of +INITVEC=<file> (test position 0 = the image of input.hex).
+    task init_file_test;
+        input [8*256-1:0] vf;
+        integer e1, q, bf;
+        reg [31:0] cyc, got;
+        begin
+            e1 = errors;
+            $sformat(fname, "%0s/weights.hex", data_dir); $readmemh(fname, pw);
+            $sformat(fname, "%0s/bias.hex", data_dir);    $readmemh(fname, pb);
+            $sformat(fname, "%0s/input.hex", data_dir);   $readmemh(fname, img);
+            for (q = 0; q < 512; q = q + 1) expect_read(A_WEIGHT + 4 * q, pw[q], "D12 WEIGHT init");
+            for (q = 0; q < 32; q = q + 1)  expect_read(A_BIAS + 4 * q, {{16{pb[q][15]}}, pb[q]}, "D12 BIAS init");
+            for (q = 0; q < 16; q = q + 1)  expect_read(A_INPUT + 4 * q, img[q], "D12 INPUT init");
+            fd = $fopen(vf, "r");
+            c = $fgetc(fd);
+            while (c == "#") begin r = $fgets(line, fd); c = $fgetc(fd); end
+            r = $ungetc(c, fd);
+            r = $fscanf(fd, "%h %h %h %h %h %h", f_pset, f_k, f_s, f_mode, f_idx, f_label);
+            for (w = 0; w < 16; w = w + 1) r = $fscanf(fd, "%h", f_in[w]);
+            for (w = 0; w < 4;  w = w + 1) r = $fscanf(fd, "%h", f_hid[w]);
+            for (w = 0; w < 16; w = w + 1) r = $fscanf(fd, "%h", f_sco[w]);
+            r = $fscanf(fd, "%h", f_result);
+            $fclose(fd);
+            bf = 0;
+            for (q = 0; q < 16; q = q + 1) if (f_in[q] !== img[q]) bf = bf + 1;
+            if (bf != 0 || f_k != 8 || f_s != 0 || f_pset != 0) begin
+                errors = errors + 1;
+                $display("FAIL: D12 first vector of %0s is not pset 0 / K 8 / s 0 / input.hex", vf);
+            end
+            run_inference(cyc);
+            for (q = 0; q < 4; q = q + 1)  expect_read(A_HIDDEN + 4 * q, f_hid[q], "D12 HIDDEN (init files)");
+            for (q = 0; q < 16; q = q + 1) expect_read(A_SCORE + 4 * q, f_sco[q], "D12 SCORE (init files)");
+            expect_read(A_RESULT, f_result, "D12 RESULT (init files)");
+            if (errors == e1) $display("PASS: D12 $readmemh init: 512 WEIGHT, 32 BIAS, 16 INPUT words equal the files; inference without any bus load bit-exact with %0s vector 0 (RESULT %0d)", vf, f_result);
+            else              $display("FAIL: D12 init files");
+        end
+    endtask
+
     task run_vector_file;
         input [8*256-1:0] vf;
         integer nvec, nbad, nfields, bf, rk, nclamp;
@@ -788,6 +847,12 @@ module tb_sc_tpu;
         rst <= 1'b0;
         @(posedge clk);
 
+        if ($value$plusargs("INITVEC=%s", vfile)) begin
+            if (INIT_FILES != 1) begin
+                errors = errors + 1;
+                $display("FAIL: +INITVEC needs INIT_FILES=1");
+            end else init_file_test(vfile);
+        end
         if ($test$plusargs("DIRECTED")) directed_tests;
 
         if ($value$plusargs("VEC1=%s", vfile)) run_vector_file(vfile);
