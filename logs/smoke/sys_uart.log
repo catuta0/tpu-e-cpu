@@ -1,0 +1,9 @@
+# command: python3 scripts/budgets/uart_divider.py
+# date: 2026-11-04T02:58:45Z  python: Python 3.13.18  revision: no commits (untracked tree)
+UART divider CALCULATION
+  f_clk = 27000000 Hz (ASSUMPTION, SOURCES.md S-020)
+  baud  = 115200 Bd (ASSUMPTION, project choice)
+  oversample x1  (primary): D_ideal = 234.375000, D = 234, B_real = 115384.6 Bd, error = +0.160 %
+  oversample x16 (info only): D_ideal = 14.648438, D = 15, B_real = 112500.0 Bd, error = -2.344 %
+KNOWN-ANSWER CHECK: PASS (234.375 -> 234, +0.16 %)
+# exit code: 0

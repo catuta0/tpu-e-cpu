@@ -1,0 +1,10 @@
+.venv/
+__pycache__/
+*.pyc
+sim/**/build/
+*.vvp
+*.vcd
+*.fst
+*.aux
+*.log.tmp
+obj_dir/

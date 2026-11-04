@@ -1,0 +1,4 @@
+# cmd: .venv/bin/python -m pytest -q code/python/tests   (2026-11-04T02:57:25+00:00)
+.....                                                                    [100%]
+5 passed in 0.80s
+exit=0
