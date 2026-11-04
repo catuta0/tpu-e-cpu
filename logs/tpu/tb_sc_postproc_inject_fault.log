@@ -1,0 +1,31 @@
+# input revision: 9144278-dirty
+# cmd: iverilog -g2005 -Wall -DINJECT_FAULT design/rtl/tpu/sc_postproc.v tests/tpu/tb_sc_postproc.v -o sim/tpu/build/tb_sc_postproc_fault.vvp && vvp -n sim/tpu/build/tb_sc_postproc_fault.vvp 
+FAIL: vec 1 dp got -5120 exp -5119 | code got 128 exp 128 | idx 1/1 l2 0/0
+FAIL: vec 2 dp got -1153 exp -1152 | code got 128 exp 128 | idx 2/2 l2 0/0
+FAIL: vec 3 dp got -1041 exp -1040 | code got 128 exp 128 | idx 3/3 l2 0/0
+FAIL: vec 5 dp got -1040 exp -1039 | code got 128 exp 128 | idx 5/5 l2 0/0
+FAIL: vec 6 dp got -1033 exp -1032 | code got 128 exp 128 | idx 6/6 l2 0/0
+FAIL: vec 7 dp got -1025 exp -1024 | code got 128 exp 128 | idx 7/7 l2 0/0
+FAIL: vec 16 dp got -5118 exp -5117 | code got 128 exp 128 | idx 0/0 l2 0/0
+FAIL: vec 17 dp got -1151 exp -1150 | code got 128 exp 128 | idx 1/1 l2 0/0
+FAIL: vec 18 dp got -1039 exp -1038 | code got 128 exp 128 | idx 2/2 l2 0/0
+FAIL: vec 20 dp got -1038 exp -1037 | code got 128 exp 128 | idx 4/4 l2 0/0
+FAIL: vec 21 dp got -1031 exp -1030 | code got 128 exp 128 | idx 5/5 l2 0/0
+FAIL: vec 22 dp got -1023 exp -1022 | code got 128 exp 128 | idx 6/6 l2 0/0
+FAIL: vec 31 dp got -4098 exp -4097 | code got 128 exp 128 | idx 15/15 l2 0/0
+FAIL: vec 32 dp got -131 exp -130 | code got 128 exp 128 | idx 0/0 l2 0/0
+FAIL: vec 33 dp got -19 exp -18 | code got 128 exp 128 | idx 1/1 l2 0/0
+FAIL: vec 35 dp got -18 exp -17 | code got 128 exp 128 | idx 3/3 l2 0/0
+FAIL: vec 36 dp got -11 exp -10 | code got 128 exp 128 | idx 4/4 l2 0/0
+FAIL: vec 37 dp got -3 exp -2 | code got 128 exp 128 | idx 5/5 l2 0/0
+FAIL: vec 46 dp got -4096 exp -4095 | code got 128 exp 128 | idx 14/14 l2 0/0
+FAIL: vec 47 dp got -129 exp -128 | code got 128 exp 128 | idx 15/15 l2 0/0
+FAIL: TC1 DIRECTED GRID errors=2016
+PASS: TC2 NEAR-THRESHOLD 1568 vectors
+FAIL: TC3 RANDOM errors=6098
+INFO: coverage: B floor!=trunc (negative non-integer) 8114, clip-low 26900, clip-high 25163, in-range 1265, u==0 417, u==127 42, u==128 193
+INFO: vectors checked = 53328, mismatches = 8114
+TEST FAILED
+FATAL: tests/tpu/tb_sc_postproc.v:258: tb_sc_postproc failed
+       Time: 533435000  Scope: tb_sc_postproc
+SIM_EXIT=1

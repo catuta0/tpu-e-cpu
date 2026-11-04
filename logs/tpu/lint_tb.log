@@ -1,0 +1,9 @@
+# input revision: 9144278-dirty
+# cmd: verilator --lint-only --timing -Wno-INITIALDLY design/rtl/tpu/sc_lfsr8.v tests/tpu/tb_sc_lfsr8.v --top-module tb_sc_lfsr8
+LINT_TB_OK tb_sc_lfsr8
+# cmd: verilator --lint-only --timing -Wno-INITIALDLY design/rtl/tpu/sc_postproc.v tests/tpu/tb_sc_postproc.v --top-module tb_sc_postproc
+LINT_TB_OK tb_sc_postproc
+# cmd: verilator --lint-only --timing -Wno-INITIALDLY design/rtl/tpu/sc_lane_array.v tests/tpu/tb_sc_lane_array.v --top-module tb_sc_lane_array
+LINT_TB_OK tb_sc_lane_array
+# cmd: verilator --lint-only --timing -Wno-INITIALDLY design/rtl/tpu/sc_lfsr8.v design/rtl/tpu/sc_rng.v design/rtl/tpu/sc_lane_array.v design/rtl/tpu/sc_postproc.v design/rtl/tpu/sc_tpu_ctrl.v design/rtl/tpu/sc_tpu.v tests/tpu/tb_sc_tpu.v --top-module tb_sc_tpu
+LINT_TB_OK tb_sc_tpu

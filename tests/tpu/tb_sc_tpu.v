@@ -306,12 +306,96 @@ module tb_sc_tpu;
     endfunction
 
     // =========================================================================
+    // RNG monitor (REQ-TPU-005), always active:
+    //   R1 for the first 64 stream cycles after EVERY accepted START, the r
+    //      values of all 8 input lanes (x side) and all 8 weight columns (w
+    //      side) are compared with the golden RNG trace
+    //      sim/data/tpu_rng_trace_mode<RNG_MODE>.txt (SW-01a, Python model);
+    //   R2 in every cycle that is neither a stream cycle nor a START (LFSR
+    //      load), the LFSR outputs must not change at the next edge (LFSRs
+    //      advance only in stream cycles, never during loads / post / idle).
+    // =========================================================================
+    reg  [7:0] tr_rx [0:64*8-1];
+    reg  [7:0] tr_rw [0:64*8-1];
+    integer tr_rows = 0;
+    integer rng_k = 1000;            // stream cycle index since the last START
+    integer rng_cmp = 0, rng_err = 0, frz_cmp = 0, frz_err = 0;
+    reg  [8*IL-1:0] rx_q, rw_q;
+    reg             frz_q = 1'b0;    // previous cycle must freeze the LFSRs
+    integer li;
+
+    task load_rng_trace;
+        integer tfd, tc, tr, ti, nst;
+        reg [8*1024-1:0] tline;
+        reg [31:0] tv;
+        begin
+            $sformat(fname, "%0s/tpu_rng_trace_mode%0d.txt", data_dir, RNG_MODE);
+            tfd = $fopen(fname, "r");
+            nst = (RNG_MODE == 2) ? IL : 1;
+            if (tfd == 0) begin
+                errors = errors + 1;
+                $display("FAIL: cannot open RNG trace %0s", fname);
+            end else begin
+                tc = $fgetc(tfd);
+                while (tc != -1 && tr_rows < 64) begin
+                    if (tc == "#") tr = $fgets(tline, tfd);
+                    else if (tc == "\n" || tc == " " || tc == "\r") begin end
+                    else begin
+                        tr = $ungetc(tc, tfd);
+                        tr = $fscanf(tfd, "%h", tv);                       // cycle
+                        for (ti = 0; ti < 2 * nst; ti = ti + 1) tr = $fscanf(tfd, "%h", tv);  // states
+                        for (ti = 0; ti < IL; ti = ti + 1) begin tr = $fscanf(tfd, "%h", tv); tr_rx[tr_rows * 8 + ti] = tv[7:0]; end
+                        for (ti = 0; ti < IL; ti = ti + 1) begin tr = $fscanf(tfd, "%h", tv); tr_rw[tr_rows * 8 + ti] = tv[7:0]; end
+                        tr_rows = tr_rows + 1;
+                    end
+                    tc = $fgetc(tfd);
+                end
+                $fclose(tfd);
+            end
+        end
+    endtask
+
+    always @(posedge clk) begin
+        if (!rst) begin
+            // R2: previous cycle was neither stream nor load -> no change now
+            if (frz_q) begin
+                frz_cmp = frz_cmp + 1;
+                if (dut.rx !== rx_q || dut.rw !== rw_q) begin
+                    frz_err = frz_err + 1;
+                    if (frz_err < 5) $display("FAIL: R2 LFSR output changed outside a stream cycle at %0t", $time);
+                end
+            end
+            // R1: compare r of this stream cycle with the golden trace
+            if (dut.stream_en === 1'b1) begin
+                if (rng_k < tr_rows) begin
+                    for (li = 0; li < IL; li = li + 1) begin
+                        if (dut.rx[8 * li +: 8] !== tr_rx[rng_k * 8 + li] || dut.rw[8 * li +: 8] !== tr_rw[rng_k * 8 + li]) begin
+                            rng_err = rng_err + 1;
+                            if (rng_err < 5) $display("FAIL: R1 stream cycle %0d lane %0d r_x %02h exp %02h r_w %02h exp %02h",
+                                                      rng_k, li, dut.rx[8 * li +: 8], tr_rx[rng_k * 8 + li],
+                                                      dut.rw[8 * li +: 8], tr_rw[rng_k * 8 + li]);
+                        end
+                    end
+                    rng_cmp = rng_cmp + 1;
+                end
+                rng_k = rng_k + 1;
+            end
+            if (dut.lfsr_load === 1'b1) rng_k = 0;
+        end
+        frz_q <= !rst && (dut.stream_en !== 1'b1) && (dut.lfsr_load !== 1'b1);
+        rx_q  <= dut.rx;
+        rw_q  <= dut.rw;
+    end
+
+    // =========================================================================
     // Directed tests
     // =========================================================================
     reg  [31:0] cyc_a, cyc_b, v, res_a;
     reg  [31:0] hid_a [0:3];
     reg  [31:0] sco_a [0:15];
-    integer e0, j, raw, sh, k_eff, lat, d5_k, d5_s;
+    integer e0, j, raw, sh, k_eff, lat, d5_k, d5_s, pat;
+    reg  [31:0] pv;
+    reg  [15:0] pw16;
     reg signed [63:0] L64, Bj, Dpj, uj, hj, j64;
     integer bint;
     reg  [7:0]  exp_code;
@@ -385,6 +469,30 @@ module tb_sc_tpu;
             if (errors == e0) $display("PASS: D4 INPUT/BIAS/WEIGHT read-back incl. byte strobes, BIAS sign-extension, unmapped = 0, read-only regs");
             else              $display("FAIL: D4 buffers/strobes");
 
+            // ---------------- D4b pattern test of every RW location (REQ-TPU-002) --
+            e0 = errors;
+            for (pat = 0; pat < 2; pat = pat + 1) begin
+                pv = (pat == 0) ? 32'h5555_5555 : 32'hAAAA_AAAA;
+                for (n = 0; n < 16; n = n + 1)  bus_write(A_INPUT + 4 * n, pv ^ n);
+                for (n = 0; n < 32; n = n + 1)  bus_write(A_BIAS + 4 * n, pv ^ n);
+                for (n = 0; n < 512; n = n + 1) bus_write(A_WEIGHT + 4 * n, pv ^ n);
+                bus_write(A_CONFIG, pv);
+                for (n = 0; n < 16; n = n + 1)  expect_read(A_INPUT + 4 * n, pv ^ n, "D4b INPUT pattern");
+                for (n = 0; n < 32; n = n + 1) begin
+                    pw16 = pv[15:0] ^ n[15:0];
+                    expect_read(A_BIAS + 4 * n, {{16{pw16[15]}}, pw16}, "D4b BIAS pattern");
+                end
+                for (n = 0; n < 512; n = n + 1) expect_read(A_WEIGHT + 4 * n, pv ^ n, "D4b WEIGHT pattern");
+                // 0x55 -> K=5, s=5 -> 0x55 ; 0xAA -> raw K=10, s=2 -> 0x2A
+                expect_read(A_CONFIG, (pat == 0) ? 32'h55 : 32'h2A, "D4b CONFIG pattern (masked)");
+                expect_read(A_STATUS, 32'd0, "D4b STATUS unchanged");
+                expect_read(A_RESULT, 32'd0, "D4b RESULT unchanged");
+                expect_read(A_CYCLES, 32'd0, "D4b CYCLES unchanged");
+            end
+            bus_write(A_CONFIG, 32'h0000_0008);
+            if (errors == e0) $display("PASS: D4b 0x55555555/0xAAAAAAAA (xor index) on all 16 INPUT, 32 BIAS, 512 WEIGHT words and CONFIG; R registers unchanged");
+            else              $display("FAIL: D4b pattern test");
+
             // ---------------- D5/D6 inference A (first inference) ------------------
             // D6 needs the very first inference: pset 0, image = input.hex, K=8, s=0.
             e0 = errors;
@@ -402,15 +510,17 @@ module tb_sc_tpu;
                 errors = errors + 1;
                 $display("FAIL: D6 precondition: internal HIDDEN still 0 after layer 1");
             end
-            for (n = 0; n < 4; n = n + 1)  expect_read(A_HIDDEN + 4 * n, 32'd0, "D6 HIDDEN = 0 before first DONE");
-            for (n = 0; n < 16; n = n + 1) expect_read(A_SCORE + 4 * n, 32'd0, "D6 SCORE = 0 before first DONE");
+            // rev A.2: reads while BUSY return the current storage contents:
+            // HIDDEN = codes just written by layer 1, SCORE still at reset 0.
+            for (n = 0; n < 4; n = n + 1)  expect_read(A_HIDDEN + 4 * n, dut.hidden[32 * n +: 32], "D6 HIDDEN live read while busy");
+            for (n = 0; n < 16; n = n + 1) expect_read(A_SCORE + 4 * n, 32'd0, "D6 SCORE (reset value) while busy");
             st = 32'd1;
             while (st[1] !== 1'b1) bus_read(A_STATUS, st);
             bus_read(A_CYCLES, cyc_a);
             bus_read(A_RESULT, res_a);
             for (n = 0; n < 4; n = n + 1)  bus_read(A_HIDDEN + 4 * n, hid_a[n]);
             for (n = 0; n < 16; n = n + 1) bus_read(A_SCORE + 4 * n, sco_a[n]);
-            if (errors == e0) $display("PASS: D6 first inference: BUSY=1/DONE=0 while busy, HIDDEN/SCORE read 0 until first DONE (internal HIDDEN already written)");
+            if (errors == e0) $display("PASS: D6 first inference: BUSY=1/DONE=0 while busy; reads while BUSY return current storage (HIDDEN = layer-1 codes, SCORE = reset 0)");
             else              $display("FAIL: D6 first inference");
 
             // ---------------- D8 CYCLES ------------------------------------------
@@ -428,6 +538,14 @@ module tb_sc_tpu;
                 $display("FAIL: D9 RESULT %0d / HIDDEN all zero after DONE", res_a);
             end else
                 $display("PASS: D9 after DONE: RESULT = %0d, HIDDEN[0] = 0x%08h, SCORE[0] = 0x%08h", res_a, hid_a[0], sco_a[0]);
+
+            // ---------------- D10 DONE persists (REQ-TPU-010) ----------------------
+            e0 = errors;
+            idle(1000);
+            expect_read(A_STATUS, 32'h2, "D10 DONE stays 1 after 1000 idle cycles");
+            expect_read(A_RESULT, res_a, "D10 RESULT stable");
+            if (errors == e0) $display("PASS: D10 STATUS = DONE (0x2) and RESULT unchanged after 1000 idle cycles");
+            else              $display("FAIL: D10 DONE persistence");
 
             // ---------------- D7 inference B with bus abuse while BUSY -----------
             e0 = errors;
@@ -473,6 +591,40 @@ module tb_sc_tpu;
             end
             if (errors == e0) $display("PASS: D7 DONE cleared by START; START/INPUT/BIAS/WEIGHT/CONFIG writes while BUSY ignored (1 busy pulse, CYCLES %0d unchanged, results identical); memory reads while busy stall (%0d cycles) and return correct data", cyc_b, lat);
             else              $display("FAIL: D7 busy behaviour");
+
+            // ---------------- D11 reset during an inference (REQ-TPU-016) ----------
+            // Assert rst for one cycle in the middle of a stream phase of layer 1,
+            // check every architectural register is back at its reset value, then
+            // re-run: the result must equal inference A bit for bit (memories keep
+            // their contents across rst; CONFIG is reset to K=8, s=0 = A's setting).
+            e0 = errors;
+            bus_write(A_CTRL, 32'd1);
+            repeat (3) begin
+                while (dut.stream_en !== 1'b1) @(posedge clk);
+                while (dut.stream_en === 1'b1) @(posedge clk);
+            end
+            while (dut.stream_en !== 1'b1) @(posedge clk);
+            repeat (100) @(posedge clk);                 // inside stream of tile 3
+            rst <= 1'b1;
+            @(posedge clk);
+            rst <= 1'b0;
+            @(posedge clk);
+            if (dut.busy !== 1'b0 || dut.done !== 1'b0 || dut.cycles !== 32'd0 || dut.result !== 4'd0 ||
+                dut.hidden !== 128'd0 || dut.score !== 320'd0 || dut.cfg_k !== 4'd8 || dut.cfg_s !== 3'd0 ||
+                dut.u_ctrl.state !== 2'd0 || dut.mem_ready !== 1'b0) begin
+                errors = errors + 1;
+                $display("FAIL: D11 registers not at reset values 1 cycle after rst");
+            end
+            expect_read(A_STATUS, 32'd0, "D11 STATUS after rst");
+            expect_read(A_CYCLES, 32'd0, "D11 CYCLES after rst");
+            expect_read(A_CONFIG, 32'h08, "D11 CONFIG after rst");
+            run_inference(v);
+            if (v != cyc_a) begin errors = errors + 1; $display("FAIL: D11 CYCLES %0d != %0d", v, cyc_a); end
+            expect_read(A_RESULT, res_a, "D11 RESULT after reset + rerun");
+            for (n = 0; n < 4; n = n + 1)  expect_read(A_HIDDEN + 4 * n, hid_a[n], "D11 HIDDEN after reset + rerun");
+            for (n = 0; n < 16; n = n + 1) expect_read(A_SCORE + 4 * n, sco_a[n], "D11 SCORE after reset + rerun");
+            if (errors == e0) $display("PASS: D11 rst during a stream phase: all registers at reset values after 1 cycle; re-run bit-exact with inference A");
+            else              $display("FAIL: D11 reset during inference");
 
             // ---------------- D5 analytic zero-code test --------------------------
             // weights = inputs = code 0 -> every SNG bit 0 -> XNOR = 1 -> acc = 64 L.
@@ -631,6 +783,7 @@ module tb_sc_tpu;
         if (!$value$plusargs("DATA=%s", data_dir)) data_dir = "sim/data";
         do_clamp = $test$plusargs("CLAMP");
         $display("INFO: tb_sc_tpu RNG_MODE=%0d DATA=%0s", RNG_MODE, data_dir);
+        load_rng_trace;
         repeat (4) @(posedge clk);
         rst <= 1'b0;
         @(posedge clk);
@@ -645,6 +798,12 @@ module tb_sc_tpu;
         if ($value$plusargs("VEC6=%s", vfile)) run_vector_file(vfile);
 
         idle(5);
+        if (rng_err == 0 && frz_err == 0 && rng_cmp > 0 && frz_cmp > 0)
+            $display("PASS: R1/R2 RNG trace: %0d stream cycles x %0d lanes compared with the golden trace (%0d rows), 0 mismatches; LFSR frozen in all %0d non-stream cycles",
+                     rng_cmp, IL, tr_rows, frz_cmp);
+        else
+            $display("FAIL: R1/R2 RNG trace: compared %0d (errors %0d), freeze checks %0d (errors %0d)", rng_cmp, rng_err, frz_cmp, frz_err);
+        errors = errors + rng_err + frz_err + ((rng_cmp == 0) ? 1 : 0);
         errors = errors + proto_errors;
         $display("INFO: golden vectors total %0d (+%0d clamp re-runs), mismatching inferences %0d, mismatching fields %0d",
                  tot_vec, tot_clamp, tot_bad, tot_fields);

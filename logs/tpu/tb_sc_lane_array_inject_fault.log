@@ -1,0 +1,18 @@
+# input revision: 9144278-dirty
+# cmd: iverilog -g2005 -Wall -DINJECT_FAULT design/rtl/tpu/sc_lane_array.v tests/tpu/tb_sc_lane_array.v -o sim/tpu/build/tb_sc_lane_array_fault.vvp && vvp -n sim/tpu/build/tb_sc_lane_array_fault.vvp 
+FAIL: TC1 neuron 0 acc 5 expected 1
+FAIL: TC1 neuron 1 acc 4 expected 1
+FAIL: TC1 neuron 2 acc 4 expected 1
+FAIL: TC1 neuron 3 acc 4 expected 1
+FAIL: TC1 neuron 4 acc 4 expected 1
+FAIL: TC1 neuron 5 acc 4 expected 1
+FAIL: TC1 neuron 6 acc 4 expected 1
+FAIL: TC1 neuron 7 acc 4 expected 1
+FAIL: TC1 neuron 8 acc 4 expected 1
+FAIL: TC1 neuron 9 acc 5 expected 2
+FAIL: TC1 errors=147456
+errors=147472
+TEST FAILED
+FATAL: tests/tpu/tb_sc_lane_array.v:147: tb_sc_lane_array failed
+       Time: 92236000  Scope: tb_sc_lane_array
+SIM_EXIT=1

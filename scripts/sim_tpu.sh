@@ -12,11 +12,13 @@
 #      assignments in initial-block tasks, which are standard Verilog
 #      semantics for Icarus - the TBs are not meant for Verilator)
 #                                                            -> lint_tb.log
-#   3. unit TBs (Icarus): tb_sc_lfsr8, tb_sc_postproc, plus their
+#   3. unit TBs (Icarus): tb_sc_lfsr8, tb_sc_postproc, tb_sc_lane_array, plus their
 #      -DINJECT_FAULT negative runs, which MUST fail          -> tb_*.log
 #   4. tb_sc_tpu for RNG_MODE 0, 1, 2 (one compile per mode): directed tests
-#      D1..D9 and all golden vector files of sim/data/ for that mode
-#      (SW-01a), with LOG2_L clamp re-runs                    -> tb_sc_tpu_mode<m>.log
+#      D1..D11, RNG trace R1/R2, all golden vector files of sim/data/ for
+#      that mode (SW-01a) and the K/s sweep sim/tpu/vectors/tpu_vectors_sweep_mode<m>.txt
+#      (tests/tpu/gen_tpu_sweep_vectors.py), with LOG2_L clamp re-runs
+#                                                            -> tb_sc_tpu_mode<m>.log
 #   5. tb_sc_tpu negative run (-DINJECT_FAULT, mode 1, K=4 set) MUST fail
 #                                                            -> tb_sc_tpu_inject_fault.log
 #
@@ -83,7 +85,7 @@ if grep -q -E '^LINT_FAIL|%Warning|%Error' "$LOG/lint_rtl.log"; then fail "RTL l
 step "2. TB lint (verilator --timing, default warnings, -Wno-INITIALDLY)"
 {
     echo "# input revision: $REV"
-    for t in "tb_sc_lfsr8:$D/sc_lfsr8.v" "tb_sc_postproc:$D/sc_postproc.v" "tb_sc_tpu:$RTL"; do
+    for t in "tb_sc_lfsr8:$D/sc_lfsr8.v" "tb_sc_postproc:$D/sc_postproc.v" "tb_sc_lane_array:$D/sc_lane_array.v" "tb_sc_tpu:$RTL"; do
         top=${t%%:*}; files=${t#*:}
         echo "# cmd: verilator --lint-only --timing -Wno-INITIALDLY $files tests/tpu/$top.v --top-module $top"
         if verilator --lint-only --timing -Wno-INITIALDLY $files tests/tpu/$top.v --top-module $top; then
@@ -132,6 +134,15 @@ require "$LOG/tb_sc_postproc_inject_fault.log" '^TEST FAILED$' "tb_sc_postproc n
 require "$LOG/tb_sc_postproc_inject_fault.log" '^SIM_EXIT=[1-9]' "tb_sc_postproc negative run non-zero exit"
 echo "negative run tb_sc_postproc -DINJECT_FAULT: TEST FAILED as required"
 
+run_tb tb_sc_lane_array "$LOG/tb_sc_lane_array.log" "$D/sc_lane_array.v" tests/tpu/tb_sc_lane_array.v --
+require "$LOG/tb_sc_lane_array.log" '^TEST PASSED$' "tb_sc_lane_array TEST PASSED"
+require "$LOG/tb_sc_lane_array.log" '^SIM_EXIT=0$' "tb_sc_lane_array exit 0"
+grep -E '^(PASS|FAIL)' "$LOG/tb_sc_lane_array.log"
+run_tb tb_sc_lane_array_fault "$LOG/tb_sc_lane_array_inject_fault.log" -DINJECT_FAULT "$D/sc_lane_array.v" tests/tpu/tb_sc_lane_array.v --
+require "$LOG/tb_sc_lane_array_inject_fault.log" '^TEST FAILED$' "tb_sc_lane_array negative run TEST FAILED"
+require "$LOG/tb_sc_lane_array_inject_fault.log" '^SIM_EXIT=[1-9]' "tb_sc_lane_array negative run non-zero exit"
+echo "negative run tb_sc_lane_array -DINJECT_FAULT: TEST FAILED as required"
+
 # ---------------------------------------------------------------- 4. system TB
 step "4. tb_sc_tpu: directed tests + golden vectors (SW-01a), RNG_MODE 0/1/2"
 for m in 0 1 2; do
@@ -142,7 +153,8 @@ for m in 0 1 2; do
         VECS+=("+VEC$n=$DATA/tpu_vectors_K4_mode1.txt");  n=$((n+1))
         VECS+=("+VEC$n=$DATA/tpu_vectors_K10_mode1.txt"); n=$((n+1))
     fi
-    VECS+=("+VEC$n=$DATA/tpu_vectors_corner_mode$m.txt")
+    VECS+=("+VEC$n=$DATA/tpu_vectors_corner_mode$m.txt"); n=$((n+1))
+    VECS+=("+VEC$n=sim/tpu/vectors/tpu_vectors_sweep_mode$m.txt")
     for f in "${VECS[@]}"; do [ -s "${f#*=}" ] || fail "vector file ${f#*=} missing"; done
     L="$LOG/tb_sc_tpu_mode$m.log"
     run_tb tb_sc_tpu_m$m "$L" -P tb_sc_tpu.RNG_MODE=$m $RTL tests/tpu/tb_sc_tpu.v -- \

@@ -1,0 +1,4 @@
+# cmd: .venv/bin/python tests/tpu/gen_tpu_sweep_vectors.py
+wrote sim/tpu/vectors/tpu_vectors_sweep_mode0.txt: 63 vectors (reference == fast for all), 4.4 s
+wrote sim/tpu/vectors/tpu_vectors_sweep_mode1.txt: 63 vectors (reference == fast for all), 4.5 s
+wrote sim/tpu/vectors/tpu_vectors_sweep_mode2.txt: 63 vectors (reference == fast for all), 11.3 s

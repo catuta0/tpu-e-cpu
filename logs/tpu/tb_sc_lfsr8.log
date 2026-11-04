@@ -1,0 +1,11 @@
+# input revision: 9144278-dirty
+# cmd: iverilog -g2005 -Wall design/rtl/tpu/sc_lfsr8.v tests/tpu/tb_sc_lfsr8.v -o sim/tpu/build/tb_sc_lfsr8.vvp && vvp -n sim/tpu/build/tb_sc_lfsr8.vvp 
+PASS: TC6 RESET state_x=0xe1e4 state_w=0x5c0a
+PASS: TC1 LOAD state_x=0xe1e4 (=8 steps of 0xACE1) state_w=0x5c0a (=8 steps of 0x7A5C)
+PASS: TC2 LEAP==8x1 70000 cycles, 0 mismatches (state and r, both seeds)
+PASS: TC3 PERIOD x=65535 w=65535 leap cycles (expected 65535), zero state never reached
+PASS: TC4 FREEZE state unchanged for 100 cycles with adv=0
+PASS: TC5 RELOAD load+adv -> state_x=0xe1e4 state_w=0x5c0a (load wins)
+TEST PASSED
+tests/tpu/tb_sc_lfsr8.v:166: $finish called at 701036000 (1ps)
+SIM_EXIT=0

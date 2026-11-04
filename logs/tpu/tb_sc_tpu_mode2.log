@@ -1,0 +1,2 @@
+# input revision: 9144278-dirty
+# cmd: iverilog -g2005 -Wall -P tb_sc_tpu.RNG_MODE=2 design/rtl/tpu/sc_lfsr8.v design/rtl/tpu/sc_rng.v design/rtl/tpu/sc_lane_array.v design/rtl/tpu/sc_postproc.v design/rtl/tpu/sc_tpu_ctrl.v design/rtl/tpu/sc_tpu.v tests/tpu/tb_sc_tpu.v -o sim/tpu/build/tb_sc_tpu_m2.vvp && vvp -n sim/tpu/build/tb_sc_tpu_m2.vvp +DATA=sim/data +DIRECTED +CLAMP +VEC1=sim/data/tpu_vectors_corner_mode2.txt +VEC2=sim/tpu/vectors/tpu_vectors_sweep_mode2.txt

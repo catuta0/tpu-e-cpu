@@ -1,0 +1,7 @@
+# input revision: 9144278-dirty
+# cmd: iverilog -g2005 -Wall design/rtl/tpu/sc_lane_array.v tests/tpu/tb_sc_lane_array.v -o sim/tpu/build/tb_sc_lane_array.vvp && vvp -n sim/tpu/build/tb_sc_lane_array.vvp 
+PASS: TC1 9216 stream cycles (6x6 forced r pairs x 256 codes), SNG bits and all 16 accumulators exact
+PASS: TC2 en=0 holds, clr has priority over en
+TEST PASSED
+tests/tpu/tb_sc_lane_array.v:143: $finish called at 92236000 (1ps)
+SIM_EXIT=0

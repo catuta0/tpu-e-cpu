@@ -37,9 +37,13 @@
 //   acc <= 65536 (17 bit); D in [-65536, 65536] (18 bit signed);
 //   B in [-262144, 262136] (19 bit signed); Dp in [-327680, 327672] -> DPW =
 //   20 bit signed (2^19 = 524288). u = Dp * 2^(s+7) needs 20 + 14 = 34 bits
-//   before the right shift: the shifter is 34 bits wide so no intermediate
-//   value is ever truncated (no saturation shortcuts, so the hardware is a
-//   literal transcription of the formula).
+//   before the right shift: worst case |Dp * 2^(s+7)| = 327680 * 2^14 =
+//   5 368 709 120 (2^32.3) < 2^33, so a 34-bit SIGNED intermediate holds every
+//   legal value (ARCHITECTURE.md 10 rev A.2 bound |Dp*2^(s+7)| < 2^34;
+//   REQ-TPU-008). The shifter is 34 bits wide, no intermediate value is ever
+//   truncated and no early saturation is used: the hardware is a literal
+//   transcription of the formula (proved by tests/tpu/tb_sc_postproc.v over
+//   every K, s and the extreme acc/bias values).
 //
 // INTERFACE / TIMING: 2-stage pipeline, latency 2 clocks, throughput 1/clock
 //   cycle n   : in_valid, in_* presented

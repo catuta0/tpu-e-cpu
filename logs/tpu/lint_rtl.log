@@ -1,0 +1,27 @@
+# input revision: 9144278-dirty
+# cmd: verilator --lint-only -Wall design/rtl/tpu/sc_lfsr8.v --top-module sc_lfsr8 
+LINT_OK sc_lfsr8 
+# cmd: verilator --lint-only -Wall design/rtl/tpu/sc_lfsr8.v design/rtl/tpu/sc_rng.v --top-module sc_rng -GRNG_MODE=0
+LINT_OK sc_rng -GRNG_MODE=0
+# cmd: verilator --lint-only -Wall design/rtl/tpu/sc_lfsr8.v design/rtl/tpu/sc_rng.v --top-module sc_rng -GRNG_MODE=1
+LINT_OK sc_rng -GRNG_MODE=1
+# cmd: verilator --lint-only -Wall design/rtl/tpu/sc_lfsr8.v design/rtl/tpu/sc_rng.v --top-module sc_rng -GRNG_MODE=2
+LINT_OK sc_rng -GRNG_MODE=2
+# cmd: verilator --lint-only -Wall design/rtl/tpu/sc_lane_array.v --top-module sc_lane_array 
+LINT_OK sc_lane_array 
+# cmd: verilator --lint-only -Wall design/rtl/tpu/sc_postproc.v --top-module sc_postproc 
+LINT_OK sc_postproc 
+# cmd: verilator --lint-only -Wall design/rtl/tpu/sc_tpu_ctrl.v --top-module sc_tpu_ctrl 
+LINT_OK sc_tpu_ctrl 
+# cmd: verilator --lint-only -Wall design/rtl/tpu/sc_lfsr8.v design/rtl/tpu/sc_rng.v design/rtl/tpu/sc_lane_array.v design/rtl/tpu/sc_postproc.v design/rtl/tpu/sc_tpu_ctrl.v design/rtl/tpu/sc_tpu.v --top-module sc_tpu -GRNG_MODE=0
+LINT_OK sc_tpu -GRNG_MODE=0
+# cmd: verilator --lint-only -Wall design/rtl/tpu/sc_lfsr8.v design/rtl/tpu/sc_rng.v design/rtl/tpu/sc_lane_array.v design/rtl/tpu/sc_postproc.v design/rtl/tpu/sc_tpu_ctrl.v design/rtl/tpu/sc_tpu.v --top-module sc_tpu -GRNG_MODE=1
+LINT_OK sc_tpu -GRNG_MODE=1
+# cmd: verilator --lint-only -Wall design/rtl/tpu/sc_lfsr8.v design/rtl/tpu/sc_rng.v design/rtl/tpu/sc_lane_array.v design/rtl/tpu/sc_postproc.v design/rtl/tpu/sc_tpu_ctrl.v design/rtl/tpu/sc_tpu.v --top-module sc_tpu -GRNG_MODE=2
+LINT_OK sc_tpu -GRNG_MODE=2
+# cmd: verilator --lint-only -Wall design/rtl/tpu/sc_lfsr8.v design/rtl/tpu/sc_rng.v design/rtl/tpu/sc_lane_array.v design/rtl/tpu/sc_postproc.v design/rtl/tpu/sc_tpu_ctrl.v design/rtl/tpu/sc_tpu.v --top-module sc_tpu -GIL=4 -GRNG_MODE=1
+LINT_OK sc_tpu -GIL=4 -GRNG_MODE=1
+# cmd: verilator --lint-only -Wall design/rtl/tpu/sc_lfsr8.v design/rtl/tpu/sc_rng.v design/rtl/tpu/sc_lane_array.v design/rtl/tpu/sc_postproc.v design/rtl/tpu/sc_tpu_ctrl.v design/rtl/tpu/sc_tpu.v --top-module sc_tpu -GIL=16 -GRNG_MODE=1
+LINT_OK sc_tpu -GIL=16 -GRNG_MODE=1
+# cmd: verilator --lint-only -Wall design/rtl/tpu/sc_lfsr8.v design/rtl/tpu/sc_rng.v design/rtl/tpu/sc_lane_array.v design/rtl/tpu/sc_postproc.v design/rtl/tpu/sc_tpu_ctrl.v design/rtl/tpu/sc_tpu.v design/rtl/tpu/sc_tpu_synth_top.v --top-module sc_tpu_synth_top 
+LINT_OK sc_tpu_synth_top 

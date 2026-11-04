@@ -1,0 +1,126 @@
+% Bibliography of the DOC-01 article draft.
+% Rule (documentation-engineer role): only real, verifiable publications.
+% Where a bibliographic field was not certain it has been OMITTED, not guessed
+% (e.g. page numbers of the 2013 survey; full author lists of the multi-author
+% conference papers are abbreviated with "and others" = "et al.").
+
+% ---------------------------------------------------------------- SC theory
+@incollection{gaines1969,
+  author    = {Gaines, Brian R.},
+  title     = {Stochastic Computing Systems},
+  booktitle = {Advances in Information Systems Science},
+  editor    = {Tou, Julius T.},
+  volume    = {2},
+  publisher = {Plenum Press},
+  address   = {New York, NY, USA},
+  year      = {1969}
+}
+
+@article{alaghi2013survey,
+  author  = {Alaghi, Armin and Hayes, John P.},
+  title   = {Survey of Stochastic Computing},
+  journal = {ACM Transactions on Embedded Computing Systems},
+  volume  = {12},
+  number  = {2s},
+  year    = {2013}
+}
+
+@article{brown2001stochastic,
+  author  = {Brown, Bradley D. and Card, Howard C.},
+  title   = {Stochastic Neural Computation {I}: Computational Elements},
+  journal = {IEEE Transactions on Computers},
+  volume  = {50},
+  number  = {9},
+  year    = {2001}
+}
+
+% ---------------------------------------------------------------- SC for NNs
+@inproceedings{kim2016dynamic,
+  author    = {Kim, Kyounghoon and others},
+  title     = {Dynamic Energy-Accuracy Trade-off Using Stochastic Computing in Deep Neural Networks},
+  booktitle = {Proceedings of the 53rd Annual Design Automation Conference (DAC)},
+  year      = {2016}
+}
+
+@inproceedings{ren2017scdcnn,
+  author    = {Ren, Ao and others},
+  title     = {{SC-DCNN}: Highly-Scalable Deep Convolutional Neural Network Using Stochastic Computing},
+  booktitle = {Proceedings of the 22nd International Conference on Architectural Support for Programming Languages and Operating Systems (ASPLOS)},
+  year      = {2017}
+}
+
+% ---------------------------------------------------------------- RISC-V
+@manual{riscv2019unpriv,
+  author       = {Waterman, Andrew and Asanovi{\'c}, Krste},
+  title        = {The {RISC-V} Instruction Set Manual, Volume {I}: Unprivileged {ISA}},
+  organization = {RISC-V Foundation},
+  note         = {Document version 20191213},
+  year         = {2019}
+}
+
+@misc{wolf_picorv32,
+  author       = {Wolf, Claire},
+  title        = {{PicoRV32} -- A Size-Optimized {RISC-V} {CPU}},
+  howpublished = {GitHub repository, \url{https://github.com/YosysHQ/picorv32}},
+  note         = {Commit ef203c2 used as a calibration proxy}
+}
+
+% ---------------------------------------------------------------- tools
+@inproceedings{shah2019yosysnextpnr,
+  author    = {Shah, David and others},
+  title     = {{Yosys+nextpnr}: An Open Source Framework from {Verilog} to Bitstream for Commercial {FPGAs}},
+  booktitle = {Proceedings of the IEEE International Symposium on Field-Programmable Custom Computing Machines (FCCM)},
+  year      = {2019}
+}
+
+@misc{yosys,
+  author       = {Wolf, Claire},
+  title        = {Yosys Open {SYnthesis} Suite},
+  howpublished = {\url{https://github.com/YosysHQ/yosys}},
+  note         = {Version 0.70 (YoWASP build) used in this work}
+}
+
+@misc{apicula,
+  title        = {Project {Apicula}: open-source bitstream documentation and tools for {Gowin} {FPGAs}},
+  howpublished = {\url{https://github.com/YosysHQ/apicula}},
+  note         = {Version 0.32 used in this work}
+}
+
+@misc{icarus,
+  author       = {Williams, Stephen},
+  title        = {{Icarus Verilog}},
+  howpublished = {\url{https://github.com/steveicarus/iverilog}},
+  note         = {Version 12.0 used in this work}
+}
+
+@misc{verilator,
+  author       = {Snyder, Wilson},
+  title        = {{Verilator}},
+  howpublished = {\url{https://www.veripool.org/verilator/}},
+  note         = {Version 5.020 used in this work}
+}
+
+% ---------------------------------------------------------------- data / ML
+@article{pedregosa2011sklearn,
+  author  = {Pedregosa, Fabian and others},
+  title   = {Scikit-learn: Machine Learning in {Python}},
+  journal = {Journal of Machine Learning Research},
+  volume  = {12},
+  pages   = {2825--2830},
+  year    = {2011}
+}
+
+@misc{uci_digits,
+  author       = {Alpaydin, E. and Kaynak, C.},
+  title        = {Optical Recognition of Handwritten Digits},
+  howpublished = {UCI Machine Learning Repository},
+  year         = {1998}
+}
+
+% ---------------------------------------------------------------- board
+@misc{sipeed_tn9k,
+  author       = {{Sipeed}},
+  title        = {Tang {Nano} {9K}},
+  howpublished = {Sipeed Wiki (source file \url{https://github.com/sipeed/sipeed_wiki}, docs/hardware/en/tang/Tang-Nano-9K/Nano-9K.md)},
+  note         = {Accessed 2026-11-04}
+}

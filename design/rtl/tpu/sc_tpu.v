@@ -31,21 +31,24 @@
 //   0x004 STATUS  R   [0] BUSY, [1] DONE (DONE cleared by START, set at the end).
 //   0x008 CONFIG  RW  [3:0] LOG2_L (reset 8), [6:4] ACT_SHIFT (reset 0).
 //                     LOG2_L is CLAMPED TO 4..10 WHEN WRITTEN, so the read-back
-//                     value is the effective K (design choice, see ASSUMPTIONS).
+//                     value is the effective K actually used (ARCHITECTURE.md
+//                     10, rev A.2: write 15 -> read 10, write 1 -> read 4).
 //   0x00C RESULT  R   [3:0] argmax class of the last inference (reset 0).
-//   0x010 CYCLES  R   clock cycles with BUSY = 1 of the last inference (counts
-//                     live while BUSY; reset 0). See sc_tpu_ctrl.v.
+//   0x010 CYCLES  R   number of rising clock edges with BUSY = 1 of the last
+//                     inference (ARCHITECTURE.md 10); counts live while BUSY;
+//                     reset 0. Closed-form value in sc_tpu_ctrl.v.
 //   0x014 PARAMS  R   [7:0] NL, [15:8] IL, [17:16] RNG_MODE, [31:24] 0x01.
 //                     Rev A default build: 0x0101_0810.
 //   0x040-0x07F INPUT  RW 64 codes, 4 per word, little-endian, byte writes OK.
 //   0x080-0x0BF SCORE  R  16 x signed 32-bit (Dp sign-extended from 20 bits).
 //   0x0C0-0x0CF HIDDEN R  16 codes, 4 per word.
 //   0x100-0x17F BIAS   RW 32 words, [15:0] int16 bias, index 16*(l-1)+j.
-//                     Read-back is SIGN-EXTENDED to 32 bits; writes use byte
-//                     strobes 0/1 only (bits [31:16] are not stored).
+//                     Read-back is SIGN-EXTENDED from [15:0]; write bits
+//                     [31:16] are ignored (ARCHITECTURE.md 10, rev A.2).
 //   0x800-0xFFF WEIGHT RW 2 KiB weight RAM (512 x 32-bit BSRAM), layout 5.5.
-//   Everything else inside the window: reads 0, writes ignored, mem_ready is
-//   still returned (no hang). The SoC decoder is responsible for addr[31:28].
+//   Everything else inside the window (0x018-0x03F, 0x0D0-0x0FF, 0x180-0x7FF):
+//   reads 0, writes ignored, mem_ready is still returned (no hang;
+//   ARCHITECTURE.md 10, REQ-TPU-015). The SoC decoder handles addr[31:28].
 //   WRITES WHILE BUSY: ignored for every register and buffer (CTRL, CONFIG,
 //   INPUT, BIAS, WEIGHT) - ASSUMPTION of 5.4 / INTERFACES.json busy_writes.
 //
@@ -78,13 +81,10 @@
 //
 // RESET: synchronous, active-high rst (ARCHITECTURE.md 2). Reset values:
 //   CONFIG = {s=0, K=8}, STATUS = 0 (BUSY = 0, DONE = 0), RESULT = 0,
-//   CYCLES = 0, HIDDEN = 0, SCORE = 0 (ARCHITECTURE.md rev A.1 manager
-//   clarification: "SCORE/HIDDEN = 0 until the first inference completes").
-//   To honour the "until the first inference completes" wording literally,
-//   a sticky flag has_result (cleared by rst, set at the first DONE) forces
-//   CPU reads of SCORE and HIDDEN to 0 during the very first inference, when
-//   HIDDEN is already being written internally. After that, reads during
-//   BUSY return the current (possibly partially updated) contents.
+//   CYCLES = 0, HIDDEN = 0, SCORE = 0 (ARCHITECTURE.md 9, rev A.1). They
+//   keep these values until the first inference overwrites them; reads while
+//   BUSY return the current storage contents (ARCHITECTURE.md 10, rev A.2),
+//   so HIDDEN/SCORE may be partially updated during an inference.
 //   Memories (INPUT, BIAS, WEIGHT) are not reset; they hold their
 //   init-file contents until written.
 // =============================================================================
@@ -287,14 +287,6 @@ module sc_tpu #(
     reg [16*8-1:0]   hidden;   // HIDDEN[j] at [8j +: 8]
     reg [16*DPW-1:0] score;    // SCORE[j]  at [DPW*j +: DPW]
 
-    // has_result: 0 from reset until the first inference completes (DONE
-    // rises), then 1 for ever (rev A.1 reset clarification, see header).
-    reg has_result;
-    always @(posedge clk) begin
-        if (rst)       has_result <= 1'b0;
-        else if (done) has_result <= 1'b1;
-    end
-
     always @(posedge clk) begin
         if (rst) begin
             hidden <= {16*8{1'b0}};
@@ -385,9 +377,9 @@ module sc_tpu #(
                 4'd5:    reg_rdata = {P_VERSION, 6'd0, P_MODE, P_IL, P_NL}; // PARAMS
                 default: reg_rdata = 32'd0;                               // CTRL (W only), unmapped
             endcase
-        end else if (sel_score && has_result) begin
+        end else if (sel_score) begin
             reg_rdata = {{(32-DPW){score_sel[DPW-1]}}, score_sel};        // sign-extend
-        end else if (sel_hidden && has_result) begin
+        end else if (sel_hidden) begin
             reg_rdata = hidden[32*reg_idx[1:0] +: 32];
         end
     end

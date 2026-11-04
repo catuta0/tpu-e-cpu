@@ -1,0 +1,73 @@
+# cmd: .venv/bin/python reports/figures/article_figures.py   rev 9144278-dirty  2026-11-04T03:39:24+00:00
+# evidence: reports/sw/accuracy.json (git_rev field: d2ed476-dirty, label: SIMULATION (Python golden model sctpu.model, bit-exact per ARCHITECTURE.md 5))
+# accuracy figure: variant=qat_noise, n_test=360
+# EV K->inf: 95.00 % (342/360), CI95 [92.24, 96.81]
+# mode K hw_acc% hw_k ci_lo ci_hi ens_mean% ens_sd% n_real
+0  4  58.6 211  53.5  63.6  41.9 17.6 16
+0  5  41.4 149  36.4  46.5  54.4 20.1 16
+0  6  65.3 235  60.2  70.0  65.2 18.3 16
+0  7  49.7 179  44.6  54.9  81.6 13.4 16
+0  8  65.6 236  60.5  70.3  89.7  6.2 16
+0  9  88.6 319  84.9  91.5  93.7  1.2 16
+0 10  94.4 340  91.6  96.4  94.5  0.8 16
+1  4  63.6 229  58.5  68.4  56.3 11.7 16
+1  5  66.4 239  61.4  71.1  68.7 10.7 16
+1  6  84.2 303  80.0  87.6  86.5  4.6 16
+1  7  92.2 332  89.0  94.6  90.1  2.6 16
+1  8  91.1 328  87.7  93.6  93.3  1.9 16
+1  9  94.7 341  91.9  96.6  94.4  1.0 16
+1 10  94.7 341  91.9  96.6  95.1  0.6 16
+2  4  45.3 163  40.2  50.4  59.6 13.9 16
+2  5  75.3 271  70.6  79.5  70.8 10.2 16
+2  6  89.2 321  85.5  92.0  84.5  4.5 16
+2  7  88.9 320  85.2  91.7  90.5  1.6 16
+2  8  94.4 340  91.6  96.4  92.7  1.5 16
+2  9  94.4 340  91.6  96.4  94.4  0.6 16
+2 10  95.3 343  92.6  97.0  94.8  0.5 16
+wrote /home/user/tpu-e-cpu/reports/figures/article_acc_vs_k.pdf
+# rms figure: layer mode K ens_meas ens_pred_eq2 ratio hw_meas
+layer1 0  4 3.212 3.158 1.02 1.794
+layer1 0  5 2.252 2.233 1.01 2.054
+layer1 0  6 1.630 1.579 1.03 1.564
+layer1 0  7 1.153 1.116 1.03 1.828
+layer1 0  8 0.821 0.789 1.04 1.551
+layer1 0  9 0.466 0.558 0.83 0.526
+layer1 0 10 0.290 0.395 0.74 0.270
+layer1 1  4 1.943 2.051 0.95 1.781
+layer1 1  5 1.483 1.451 1.02 1.825
+layer1 1  6 0.880 1.026 0.86 1.113
+layer1 1  7 0.671 0.725 0.93 0.715
+layer1 1  8 0.466 0.513 0.91 0.541
+layer1 1  9 0.297 0.363 0.82 0.306
+layer1 1 10 0.218 0.256 0.85 0.206
+layer1 2  4 1.823 1.932 0.94 2.110
+layer1 2  5 1.382 1.366 1.01 1.256
+layer1 2  6 0.955 0.966 0.99 0.779
+layer1 2  7 0.669 0.683 0.98 0.749
+layer1 2  8 0.499 0.483 1.03 0.353
+layer1 2  9 0.303 0.342 0.89 0.366
+layer1 2 10 0.242 0.241 1.00 0.209
+layer2_real 0  4 0.703 0.713 0.99 0.482
+layer2_real 0  5 0.503 0.506 0.99 0.431
+layer2_real 0  6 0.362 0.363 1.00 0.276
+layer2_real 0  7 0.302 0.267 1.13 0.194
+layer2_real 0  8 0.157 0.190 0.82 0.301
+layer2_real 0  9 0.139 0.137 1.01 0.215
+layer2_real 0 10 0.080 0.098 0.82 0.177
+layer2_real 1  4 0.788 0.776 1.02 0.665
+layer2_real 1  5 0.550 0.543 1.01 0.523
+layer2_real 1  6 0.378 0.392 0.96 0.292
+layer2_real 1  7 0.277 0.281 0.99 0.294
+layer2_real 1  8 0.186 0.197 0.95 0.268
+layer2_real 1  9 0.131 0.138 0.95 0.151
+layer2_real 1 10 0.091 0.098 0.93 0.104
+layer2_real 2  4 0.719 0.795 0.91 0.918
+layer2_real 2  5 0.590 0.568 1.04 0.536
+layer2_real 2  6 0.362 0.396 0.91 0.428
+layer2_real 2  7 0.302 0.285 1.06 0.234
+layer2_real 2  8 0.195 0.198 0.99 0.198
+layer2_real 2  9 0.138 0.139 1.00 0.126
+layer2_real 2 10 0.094 0.099 0.95 0.094
+'created' timestamp seems very low; regarding as unix timestamp
+'modified' timestamp seems very low; regarding as unix timestamp
+wrote /home/user/tpu-e-cpu/reports/figures/article_rms_vs_k.pdf
