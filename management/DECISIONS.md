@@ -62,3 +62,15 @@ advances the LFSR 8 steps (unrolled XOR network) so every r is 8 fresh bits.
    CYCLES=0, SCORE/HIDDEN=0.
 These add precision without changing any INTERFACES.json field; both RTL tasks
 were notified.
+
+## ADR-007 — Spec clarifications rev A.2 and budget corrections (from REQ-01)
+- Clarifications listed in ARCHITECTURE.md section 10 (CONFIG read-back, CYCLES
+  definition, reserved offsets, reads while BUSY, BIAS sign extension,
+  post-processing width, margin definition).
+- Correction to ADR-001/002: the calibrated 16x8 SC tile costs 2855 LUT4 /
+  1454 FF (~22 LUT per MAC lane, SIMULATION of P&R, requirements/BUDGETS.md), not
+  ~9 LUT as first estimated. Device totals are now SOURCE (nextpnr/Apicula chip
+  database: 8640 LUT4, 6480 FF, 26 BSRAM, 20 MULT18X18). The fully-parallel option
+  remains infeasible; IL=16 (94.5 % LUT, CALCULATION) is kept only as a reported
+  variant that does not fit.
+- Build products under scripts/budgets/build/ are untracked (70 MB).

@@ -187,3 +187,15 @@ unused in rev A). Pin numbers: `design/constraints/tangnano9k.cst` (sourced).
 - Strict decoding: CSR instructions, unknown funct3/funct7 (e.g. MUL), FENCE.I,
   0x00000000 and 0xFFFFFFFF are illegal (cause 3).
 - Reset values: LED=0, TOHOST=0, TPU STATUS=0, RESULT=0, CYCLES=0, SCORE/HIDDEN=0.
+
+## 10. Rev A.2 clarifications (2026-11-04, from REQ-01 open decisions; ADR-007)
+- CONFIG reads back the clamped LOG2_L value actually used (write 15 -> read 10, write 1 -> read 4).
+- CYCLES = number of rising clock edges during which STATUS.BUSY = 1 for the last inference.
+- Reserved / unmapped offsets inside the TPU window read 0 and ignore writes.
+- Reads are allowed while BUSY and return the current storage contents (SCORE/HIDDEN may be partially updated).
+- BIAS words read back sign-extended from [15:0]; bits [31:16] of a write are ignored.
+- Post-processing intermediates must be wide enough (or saturate early) so that the
+  result equals the mathematical formula of 5.3 for every legal input (worst-case
+  |Dp * 2^(s+7)| < 2^34); the RTL documents its chosen widths.
+- Margins: "with margin" means each FPGA resource <= 85 % of the device total and
+  post-route Fmax >= 29.7 MHz (27 MHz + 10 %) on the worst of 3 seeds.

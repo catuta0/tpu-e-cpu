@@ -8,3 +8,4 @@ sim/**/build/
 *.aux
 *.log.tmp
 obj_dir/
+scripts/budgets/build/
