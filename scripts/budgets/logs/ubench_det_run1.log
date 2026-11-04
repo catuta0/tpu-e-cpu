@@ -1,0 +1,38 @@
+# command: PNR_TIMEOUT=900 SEEDS="1 2 3" bash scripts/budgets/run_ubench_det.sh 
+# date: 2026-11-04T13:42:58Z  revision: 660e245
+# bench sha256: 5994a2845eba0a29b88ac5f7ad75478b40118978104a705358ebca808c1f1ef4
+# yosys: Yosys 0.70 (git sha1 28ba3cb92, Release, Clang /workspace/YoWASP/yosys/wasi-sdk-33.0-x86_64-linux/share/cmake/../..//bin/clang++ 22.1.0)
+# nextpnr: "yowasp-nextpnr-himbaechel-gowin" -- Next Generation Place and Route (Version nextpnr-0.11.1)
+
+================ dt_nl16_dsp (synth_gowin -nowidelut ; chparam -set NL 16 -set PIPE 1) ================
+yosys exit=0
+  yosys:      367 DFF
+  yosys:        3 DFFS
+  yosys:       39 DFFR
+  yosys:      400 DFFRE
+  yosys:        4 SDPX9B
+  yosys:       16 MULT9X9
+  yosys:         4   LUT1
+  yosys:        20   LUT2
+  yosys:       577   LUT3
+  yosys:       179   LUT4
+  yosys:        16   MULT9X9
+  yosys:         8   RAM16SDP4
+  yosys:         4   SDPX9B
+  yosys:       404   ALU
+  yosys:       367   DFF
+  yosys:        39   DFFR
+  yosys:       400   DFFRE
+  yosys:         3   DFFS
+  yosys:         4   LUT1
+  yosys:        20   LUT2
+  yosys:       577   LUT3
+  yosys:       179   LUT4
+  yosys:        16   MULT9X9
+  yosys:         8   RAM16SDP4
+  yosys:         4   SDPX9B
+  yosys:       404   ALU
+  yosys:       367   DFF
+  yosys:        39   DFFR
+  yosys:       400   DFFRE
+  yosys:         3   DFFS
