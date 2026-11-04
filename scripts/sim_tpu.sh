@@ -41,6 +41,7 @@ D=design/rtl/tpu
 RTL="$D/sc_lfsr8.v $D/sc_rng.v $D/sc_lane_array.v $D/sc_postproc.v $D/sc_tpu_ctrl.v $D/sc_tpu.v"
 DATA=sim/data
 QUICK=${QUICK:-0}
+SPEC_REV=${SPEC_REV:-B}     # required "# spec_rev" header of every golden file
 
 REV="$(git rev-parse --short HEAD 2>/dev/null || echo no-commit)"
 if [ -n "$(git status --porcelain -- design/rtl/tpu tests/tpu 2>/dev/null)" ]; then REV="${REV}-dirty"; fi
@@ -159,11 +160,13 @@ for m in 0 1 2; do
     VECS+=("+VEC$n=$DATA/tpu_vectors_corner_mode$m.txt"); n=$((n+1))
     VECS+=("+VEC$n=sim/tpu/vectors/tpu_vectors_sweep_mode$m.txt")
     for f in "${VECS[@]}"; do [ -s "${f#*=}" ] || fail "vector file ${f#*=} missing"; done
-    # Rev B guard (RTL-SOC): every golden file must carry the "# spec_rev B"
-    # header of SW-02 (sim/data/README.md), so stale rev-A vectors cannot pass.
+    # Spec-revision guard (RTL-SOC): every golden file must carry the
+    # "# spec_rev $SPEC_REV" header of SW-02 (sim/data/README.md), so stale
+    # vectors of another revision cannot pass silently.
     for f in "${VECS[@]}" "+TRACE=$DATA/tpu_rng_trace_mode$m.txt"; do
-        grep -q -x '# spec_rev B' "${f#*=}" || fail "${f#*=} has no '# spec_rev B' header (rev A vectors?)"
+        grep -q -x "# spec_rev $SPEC_REV" "${f#*=}" || fail "${f#*=} has no '# spec_rev $SPEC_REV' header"
     done
+    echo "spec_rev guard: all vector/trace files of mode $m carry '# spec_rev $SPEC_REV'"
     L="$LOG/tb_sc_tpu_mode$m.log"
     run_tb tb_sc_tpu_m$m "$L" -P tb_sc_tpu.RNG_MODE=$m $RTL tests/tpu/tb_sc_tpu.v -- \
         +DATA=$DATA +DIRECTED +CLAMP "${VECS[@]}"
