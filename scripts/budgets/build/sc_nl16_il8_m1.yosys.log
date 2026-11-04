@@ -2876,3 +2876,101 @@ Optimizing LUTs in sc_ubench_top.
 Removed 0 unused cells and 3455 unused wires.
 
 3.48. Executing AUTONAME pass.
+Renamed 8889 objects in module sc_ubench_top.
+<suppressed ~8889 debug messages>
+
+3.49. Executing HIERARCHY pass (managing design hierarchy).
+Attribute `top' found on module `sc_ubench_top'. Setting top module to sc_ubench_top.
+
+3.49.1. Analyzing design hierarchy..
+Top module:  \sc_ubench_top
+
+3.49.2. Analyzing design hierarchy..
+Top module:  \sc_ubench_top
+Removed 0 unused modules.
+
+3.50. Printing statistics.
+
+=== sc_ubench_top ===
+
+        +----------Local Count, excluding submodules.
+        | 
+     4378 wires
+     6350 wire bits
+     4378 public wires
+     6350 public wire bits
+        8 ports
+        8 port bits
+     1656 cells
+        3   $scopeinfo
+        1   GND
+        7   IBUF
+      157   LUT1
+      123   LUT2
+       51   LUT3
+      766   LUT4
+      322   MUX2_LUT5
+      128   MUX2_LUT6
+       64   MUX2_LUT7
+       32   MUX2_LUT8
+        1   OBUF
+        1   VCC
+     2889 submodules
+     1435   ALU
+       17   DFF
+     1088   DFFE
+       35   DFFR
+      294   DFFRE
+        3   DFFS
+       17   DFFSE
+
+=== design hierarchy ===
+
+        +----------Count including submodules.
+        | 
+     1656 sc_ubench_top
+
+        +----------Count including submodules.
+        | 
+     4378 wires
+     6350 wire bits
+     4378 public wires
+     6350 public wire bits
+        8 ports
+        8 port bits
+        - memories
+        - memory bits
+        - processes
+     1656 cells
+        3   $scopeinfo
+        1   GND
+        7   IBUF
+      157   LUT1
+      123   LUT2
+       51   LUT3
+      766   LUT4
+      322   MUX2_LUT5
+      128   MUX2_LUT6
+       64   MUX2_LUT7
+       32   MUX2_LUT8
+        1   OBUF
+        1   VCC
+     2889 submodules
+     1435   ALU
+       17   DFF
+     1088   DFFE
+       35   DFFR
+      294   DFFRE
+        3   DFFS
+       17   DFFSE
+
+3.51. Executing CHECK pass (checking for obvious problems).
+Checking module sc_ubench_top...
+Found and reported 0 problems.
+
+3.52. Executing JSON backend.
+
+Warnings: 4 unique messages, 4 total
+End of script. Logfile hash: a6b474bc29, time: 2.95s, user: 2.95s, system: 0.00s
+Yosys 0.70 (git sha1 28ba3cb92, Release, Clang /workspace/YoWASP/yosys/wasi-sdk-33.0-x86_64-linux/share/cmake/../..//bin/clang++ 22.1.0)
+Time spent: 18% 1x abc9_exe (0 sec), 11% 14x techmap (0 sec), ...
