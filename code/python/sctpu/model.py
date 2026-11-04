@@ -55,6 +55,8 @@ A2  The first stream cycle after START uses r = low byte of the state AFTER the
     first 8 steps (the seed itself is never used as r).
 A3  Internal widths of acc/D/B/Dp are not specified; the model uses unbounded
     integers. Ranges needed by the RTL are documented in ``value_ranges()``.
+A4  SCORE is computed for all 16 lanes of layer 2, including the padding lanes
+    10..15 (5.3 step 1c applies to j = 0..15); argmax ignores them.
 """
 
 from __future__ import annotations

@@ -56,6 +56,7 @@
 //        most N_in*L = 64 * 2^10 = 65536 (CALCULATION, 5.3 with K <= 10), so
 //        AW = 17 bits suffices and never wraps.
 // =============================================================================
+`timescale 1ns/1ps
 `default_nettype none
 
 module sc_lane_array #(

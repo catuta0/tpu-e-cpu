@@ -1,0 +1,18 @@
+INFO: test=dir_jumps ws=0 rand_stall=1 seed=6 prog=sim/data/cpu_tests/dir_jumps.hex
+PASS: stop kind (0 tohost, 1 trap) : got 0x00000000 expected 0x00000000
+PASS: TOHOST store pc : got 0x00000518 expected 0x00000518
+PASS: trap_cause : got 0x00000000 expected 0x00000000
+PASS: instret (retire pulses) : got 0x00000045 expected 0x00000045
+PASS: TOHOST written : got 0x00000001 expected 0x00000001
+PASS: TOHOST value : got 0x00000001 expected 0x00000001
+PASS: bus_err : got 0x00000000 expected 0x00000000
+PASS: LED : got 0x00000000 expected 0x00000000
+PASS: UART byte count : got 0x00000000 expected 0x00000000
+PASS: UART bytes equal : got 0x00000001 expected 0x00000001
+PASS: signature 0x0F00..0x0F7C (32 words) equal : got 0x00000001 expected 0x00000001
+PASS: bus-protocol violations : got 0x00000000 expected 0x00000000
+INFO: cycles=655 instret=69 fetch=69 load=1 store=34 wait_cycles=392
+RESULT name=dir_jumps ws=0 rand=1 status=PASS cycles=655 instret=69 cpi=9.493 viol=0
+TEST PASSED
+tests/cpu/tb_rv32i_core.v:468: $finish called at 6946000 (1ps)
+VVP_EXIT=0

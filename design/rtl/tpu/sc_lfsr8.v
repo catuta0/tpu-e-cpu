@@ -65,6 +65,7 @@
 //
 // RESOURCES (expected): 16 DFF + ~16 LUT4 (XOR network + load/adv mux).
 // =============================================================================
+`timescale 1ns/1ps
 `default_nettype none
 
 module sc_lfsr8 #(

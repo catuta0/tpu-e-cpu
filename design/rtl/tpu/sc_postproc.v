@@ -51,6 +51,7 @@
 //   consumer knows which neuron / layer the result belongs to.
 //   rst clears only the valid flags (datapath flops need no reset).
 // =============================================================================
+`timescale 1ns/1ps
 `default_nettype none
 
 module sc_postproc #(

@@ -77,10 +77,18 @@
 //   "" -> memory initialised to zero.
 //
 // RESET: synchronous, active-high rst (ARCHITECTURE.md 2). Reset values:
-//   CONFIG = {s=0, K=8}, STATUS = 0, RESULT = 0, CYCLES = 0, HIDDEN = 0,
-//   SCORE = 0. Memories (INPUT, BIAS, WEIGHT) are not reset; they hold their
+//   CONFIG = {s=0, K=8}, STATUS = 0 (BUSY = 0, DONE = 0), RESULT = 0,
+//   CYCLES = 0, HIDDEN = 0, SCORE = 0 (ARCHITECTURE.md rev A.1 manager
+//   clarification: "SCORE/HIDDEN = 0 until the first inference completes").
+//   To honour the "until the first inference completes" wording literally,
+//   a sticky flag has_result (cleared by rst, set at the first DONE) forces
+//   CPU reads of SCORE and HIDDEN to 0 during the very first inference, when
+//   HIDDEN is already being written internally. After that, reads during
+//   BUSY return the current (possibly partially updated) contents.
+//   Memories (INPUT, BIAS, WEIGHT) are not reset; they hold their
 //   init-file contents until written.
 // =============================================================================
+`timescale 1ns/1ps
 `default_nettype none
 
 module sc_tpu #(
@@ -279,6 +287,14 @@ module sc_tpu #(
     reg [16*8-1:0]   hidden;   // HIDDEN[j] at [8j +: 8]
     reg [16*DPW-1:0] score;    // SCORE[j]  at [DPW*j +: DPW]
 
+    // has_result: 0 from reset until the first inference completes (DONE
+    // rises), then 1 for ever (rev A.1 reset clarification, see header).
+    reg has_result;
+    always @(posedge clk) begin
+        if (rst)       has_result <= 1'b0;
+        else if (done) has_result <= 1'b1;
+    end
+
     always @(posedge clk) begin
         if (rst) begin
             hidden <= {16*8{1'b0}};
@@ -369,9 +385,9 @@ module sc_tpu #(
                 4'd5:    reg_rdata = {P_VERSION, 6'd0, P_MODE, P_IL, P_NL}; // PARAMS
                 default: reg_rdata = 32'd0;                               // CTRL (W only), unmapped
             endcase
-        end else if (sel_score) begin
+        end else if (sel_score && has_result) begin
             reg_rdata = {{(32-DPW){score_sel[DPW-1]}}, score_sel};        // sign-extend
-        end else if (sel_hidden) begin
+        end else if (sel_hidden && has_result) begin
             reg_rdata = hidden[32*reg_idx[1:0] +: 32];
         end
     end

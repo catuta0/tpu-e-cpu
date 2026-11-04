@@ -47,6 +47,7 @@
 //   IL       : input lanes (8 in rev A; 4/16 only for the synthesis study)
 //   RNG_MODE : 0, 1 or 2 as above (default 1, ADR-003)
 // =============================================================================
+`timescale 1ns/1ps
 `default_nettype none
 
 module sc_rng #(

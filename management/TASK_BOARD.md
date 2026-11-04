@@ -8,7 +8,10 @@
 | ST-MGR-01 | Manager LaTeX page | manager | PASS |
 | ST-REV-01 | Reviewer smoke | independent-reviewer | PASS |
 | REQ-01 | Requirements + budgets | systems-engineer | RUNNING |
-| SW-01a/b | Golden model+training / assembler+ISS | software-engineer x2 | RUNNING |
+| SW-01a | Golden model, training, vectors | software-engineer | PASS |
+| SW-01b | Assembler, ISS, 44 CPU tests | software-engineer | PASS |
+| RTL-CPU | RV32I core | fpga-engineer | RUNNING |
+| RTL-TPU | SC-TPU | fpga-engineer | RUNNING |
 | RTL-CPU | RV32I CPU + TB | fpga-engineer | TODO |
 | RTL-TPU | SC-TPU + TB | fpga-engineer | TODO |
 | RTL-SOC | SoC + synth/P&R | fpga-engineer | TODO |

@@ -1,0 +1,2 @@
+reproducible: True
+w1 code hist: frac 0/255: 0.184 b1 range -93 98 b2 -189 139

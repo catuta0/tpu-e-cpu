@@ -1,5 +1,5 @@
 # command: .venv/bin/python -m pytest -v code/python/tests/test_model.py code/python/tests/test_smoke.py
-# rev: d2ed476-dirty  date: 2026-11-04T03:19:58Z  python: Python 3.13.18
+# rev: d05477e-dirty  date: 2026-11-04T03:22:56Z  python: Python 3.13.18
 ============================= test session starts ==============================
 platform linux -- Python 3.13.18, pytest-9.2.0, pluggy-1.7.0 -- /home/user/tpu-e-cpu/.venv/bin/python
 cachedir: .pytest_cache
@@ -41,5 +41,5 @@ code/python/tests/test_smoke.py::test_lfsr_rejects_zero_seed PASSED      [ 93%]
 code/python/tests/test_smoke.py::test_digits_dataset_shape PASSED        [ 96%]
 code/python/tests/test_smoke.py::test_popcount_bytes_sum PASSED          [100%]
 
-============================== 33 passed in 7.85s ==============================
+============================== 33 passed in 7.74s ==============================
 exit=0

@@ -1,0 +1,18 @@
+INFO: test=dir_branches ws=1 rand_stall=0 seed=1 prog=sim/data/cpu_tests/dir_branches.hex
+PASS: stop kind (0 tohost, 1 trap) : got 0x00000000 expected 0x00000000
+PASS: TOHOST store pc : got 0x00000450 expected 0x00000450
+PASS: trap_cause : got 0x00000000 expected 0x00000000
+PASS: instret (retire pulses) : got 0x000000ae expected 0x000000ae
+PASS: TOHOST written : got 0x00000001 expected 0x00000001
+PASS: TOHOST value : got 0x00000001 expected 0x00000001
+PASS: bus_err : got 0x00000000 expected 0x00000000
+PASS: LED : got 0x00000000 expected 0x00000000
+PASS: UART byte count : got 0x00000000 expected 0x00000000
+PASS: UART bytes equal : got 0x00000001 expected 0x00000001
+PASS: signature 0x0F00..0x0F7C (32 words) equal : got 0x00000001 expected 0x00000001
+PASS: bus-protocol violations : got 0x00000000 expected 0x00000000
+INFO: cycles=856 instret=174 fetch=174 load=1 store=34 wait_cycles=210
+RESULT name=dir_branches ws=1 rand=0 status=PASS cycles=856 instret=174 cpi=4.920 viol=0
+TEST PASSED
+tests/cpu/tb_rv32i_core.v:468: $finish called at 8956000 (1ps)
+VVP_EXIT=0

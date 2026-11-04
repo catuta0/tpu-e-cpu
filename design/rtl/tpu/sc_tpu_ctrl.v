@@ -76,6 +76,7 @@
 //
 // PARAMETERS: NL (16), IL (8; 4/16 for the synthesis study), DPW (Dp width).
 // =============================================================================
+`timescale 1ns/1ps
 `default_nettype none
 
 module sc_tpu_ctrl #(

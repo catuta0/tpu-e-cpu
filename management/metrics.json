@@ -1,1 +1,68 @@
-{"metrics": []}
+{
+ "metrics": [
+  {
+   "name": "smoke_counter_fmax",
+   "value": 245.52,
+   "unit": "MHz",
+   "label": "SIMULATION",
+   "revision": "d05477e",
+   "evidence": "logs/smoke/fpga_pnr.log"
+  },
+  {
+   "name": "acc_float_qat_noise",
+   "value": 95.0,
+   "unit": "%",
+   "label": "SIMULATION",
+   "revision": "d05477e",
+   "evidence": "reports/sw/accuracy.json"
+  },
+  {
+   "name": "acc_expected_value",
+   "value": 95.0,
+   "unit": "%",
+   "label": "SIMULATION",
+   "revision": "d05477e",
+   "evidence": "reports/sw/accuracy.json"
+  },
+  {
+   "name": "acc_sc_mode0_K8_revA",
+   "value": 65.6,
+   "unit": "%",
+   "label": "SIMULATION",
+   "revision": "d05477e",
+   "evidence": "reports/sw/accuracy.json"
+  },
+  {
+   "name": "acc_sc_mode1_K8_revA",
+   "value": 91.1,
+   "unit": "%",
+   "label": "SIMULATION",
+   "revision": "d05477e",
+   "evidence": "reports/sw/accuracy.json"
+  },
+  {
+   "name": "acc_sc_mode2_K8_revA",
+   "value": 94.4,
+   "unit": "%",
+   "label": "SIMULATION",
+   "revision": "d05477e",
+   "evidence": "reports/sw/accuracy.json"
+  },
+  {
+   "name": "golden_model_crosscheck_mismatches",
+   "value": 0,
+   "unit": "count",
+   "label": "SIMULATION",
+   "revision": "d05477e",
+   "evidence": "logs/sw/gen_hex.log"
+  },
+  {
+   "name": "uart_baud_error",
+   "value": 0.16,
+   "unit": "%",
+   "label": "CALCULATION",
+   "revision": "d05477e",
+   "evidence": "logs/smoke/sys_uart.log"
+  }
+ ]
+}
