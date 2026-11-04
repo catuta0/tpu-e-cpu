@@ -138,3 +138,11 @@ now justified by an explicit rule and validation evidence instead of by accident
   To be applied to REQUIREMENTS.md by the systems-engineer in the status-matrix step.
 - OD-11: accuracy thresholds of REQ-AI-003..006 confirmed as written in REQ-01/REQ-02.
 - OD-16: network access to vendor hosts remains a user decision (GATES.md).
+
+## ADR-000 addendum (2026-11-04 13:08 UTC)
+After a worker restart the named agent types in .claude/agents/ loaded natively.
+From REV-01 onward specialists run as native agent types (frontmatter
+disallowedTools/skills enforced by the harness). Earlier tasks (ST-*, SW-01..03,
+REQ-01/02, RTL-CPU/TPU/SOC, DOC-01) ran in the ADR-000 fallback mode.
+A usage-limit interruption (HTTP 429, reset 11:50 UTC) killed the first REV-01
+attempt before it wrote any file; it was restarted from scratch.
