@@ -1,0 +1,17 @@
+# command: python3 scripts/budgets/latency_budget.py
+# revision: d2ed476 (inputs: ARCHITECTURE.md rev A)
+# constants: f_clk=27 MHz, T_TILES=10, O_TILE=36, P_POST=16, C_LAYER=2, A_ARGMAX=10, T_START=2, T_DONE=1
+# closed form: N(K) = 10*2^K + 409  (CALCULATION)
+
+ K     L   N_cycles   t_us     inf/s   eta_%   SCbitop/s    MAC/s    | dbuf N   dbuf t_us
+ 4    16       569    21.07     47452    28.1   9.718e+08  5.618e+07 |     441     16.33
+ 5    32       729    27.00     37037    43.9   1.517e+09  4.385e+07 |     473     17.52
+ 6    64      1049    38.85     25739    61.0   2.109e+09  3.047e+07 |     761     28.19
+ 7   128      1689    62.56     15986    75.8   2.619e+09  1.893e+07 |    1401     51.89
+ 8   256      2969   109.96      9094    86.2   2.980e+09  1.077e+07 |    2681     99.30
+ 9   512      5529   204.78      4883    92.6   3.200e+09  5.782e+06 |    5241    194.11
+10  1024     10649   394.41      2535    96.2   3.323e+09  3.002e+06 |   10361    383.74
+
+peak SC bit-ops/s (100 % streaming) = NL*IL*f_clk = 3.456e+09
+sensitivity of N(8) to O_TILE: O=34: 2949, O=36: 2969, O=40: 3009, O=48: 3089
+KNOWN-ANSWER CHECK: PASS (N(8) = 2969 cycles)

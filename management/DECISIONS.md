@@ -51,3 +51,14 @@ the SC-TPU; the CPU only orchestrates (START, poll, read result).
 Taking 8 bits of a single-step Fibonacci LFSR gives consecutive r values that
 are shifted copies of each other (strong serial correlation). Each stream cycle
 advances the LFSR 8 steps (unrolled XOR network) so every r is 8 fresh bits.
+
+## ADR-006 — Spec clarifications rev A.1 (from SW-01b open decisions)
+1. Misaligned jump/branch target (cause 4) traps on the taken jump/branch itself
+   (RISC-V unprivileged spec: reported on the branch/jump, not the target); halt
+   PC = jump address; rd not written.
+2. Strict decoding: SYSTEM other than ECALL/EBREAK (i.e. CSR*), unknown
+   funct3/funct7 (e.g. MUL), FENCE.I, 0x00000000 and 0xFFFFFFFF -> illegal (cause 3).
+3. Reset values: LED=0, TOHOST=0, TPU STATUS=0 (BUSY=0, DONE=0), RESULT=0,
+   CYCLES=0, SCORE/HIDDEN=0.
+These add precision without changing any INTERFACES.json field; both RTL tasks
+were notified.

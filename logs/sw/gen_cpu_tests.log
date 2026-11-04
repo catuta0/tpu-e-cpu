@@ -1,0 +1,51 @@
+# command: .venv/bin/python code/python/rv32/gen_cpu_tests.py
+# date: 2026-11-04T03:19:35+00:00
+gen_cpu_tests: revision d2ed476-dirty, n_random=20, base_seed=1000, body=200, out=/home/user/tpu-e-cpu/sim/data/cpu_tests
+PASS dir_lui_auipc            kind=directed seed=None  stop=tohost cause=0 pc=0x000000e4 instret=   58 code=  236B roundtrip_mismatch=0
+PASS dir_alu_imm              kind=directed seed=None  stop=tohost cause=0 pc=0x000000f4 instret=   62 code=  252B roundtrip_mismatch=0
+PASS dir_alu_reg              kind=directed seed=None  stop=tohost cause=0 pc=0x0000011c instret=   72 code=  292B roundtrip_mismatch=0
+PASS dir_shifts               kind=directed seed=None  stop=tohost cause=0 pc=0x00000114 instret=   70 code=  284B roundtrip_mismatch=0
+PASS dir_branches             kind=directed seed=None  stop=tohost cause=0 pc=0x00000450 instret=  174 code= 1112B roundtrip_mismatch=0
+PASS dir_jumps                kind=directed seed=None  stop=tohost cause=0 pc=0x00000518 instret=   69 code= 1312B roundtrip_mismatch=0
+PASS dir_loads                kind=directed seed=None  stop=tohost cause=0 pc=0x00000994 instret=   64 code=  104B roundtrip_mismatch=0
+PASS dir_stores               kind=directed seed=None  stop=tohost cause=0 pc=0x00000138 instret=   79 code=  320B roundtrip_mismatch=0
+PASS dir_x0                   kind=directed seed=None  stop=tohost cause=0 pc=0x00000994 instret=   61 code=   92B roundtrip_mismatch=0
+PASS dir_fence_nop            kind=directed seed=None  stop=tohost cause=0 pc=0x000000c4 instret=   50 code=  204B roundtrip_mismatch=0
+PASS dir_mmio                 kind=directed seed=None  stop=tohost cause=0 pc=0x000000b4 instret=   46 code=  188B roundtrip_mismatch=0
+PASS rand_00                  kind=random   seed=1000  stop=tohost cause=0 pc=0x00000a94 instret=  232 code= 1024B roundtrip_mismatch=0
+PASS rand_01                  kind=random   seed=1001  stop=tohost cause=0 pc=0x00000a94 instret=  259 code= 1020B roundtrip_mismatch=0
+PASS rand_02                  kind=random   seed=1002  stop=tohost cause=0 pc=0x00000a94 instret=  269 code= 1028B roundtrip_mismatch=0
+PASS rand_03                  kind=random   seed=1003  stop=tohost cause=0 pc=0x00000a94 instret=  261 code= 1040B roundtrip_mismatch=0
+PASS rand_04                  kind=random   seed=1004  stop=tohost cause=0 pc=0x00000a94 instret=  259 code= 1036B roundtrip_mismatch=0
+PASS rand_05                  kind=random   seed=1005  stop=tohost cause=0 pc=0x00000a94 instret=  278 code= 1044B roundtrip_mismatch=0
+PASS rand_06                  kind=random   seed=1006  stop=tohost cause=0 pc=0x00000a94 instret=  260 code= 1040B roundtrip_mismatch=0
+PASS rand_07                  kind=random   seed=1007  stop=tohost cause=0 pc=0x00000a94 instret=  274 code= 1040B roundtrip_mismatch=0
+PASS rand_08                  kind=random   seed=1008  stop=tohost cause=0 pc=0x00000a94 instret=  272 code= 1036B roundtrip_mismatch=0
+PASS rand_09                  kind=random   seed=1009  stop=tohost cause=0 pc=0x00000a94 instret=  263 code= 1044B roundtrip_mismatch=0
+PASS rand_10                  kind=random   seed=1010  stop=tohost cause=0 pc=0x00000a94 instret=  274 code= 1028B roundtrip_mismatch=0
+PASS rand_11                  kind=random   seed=1011  stop=tohost cause=0 pc=0x00000a94 instret=  279 code= 1040B roundtrip_mismatch=0
+PASS rand_12                  kind=random   seed=1012  stop=tohost cause=0 pc=0x00000a94 instret=  261 code= 1036B roundtrip_mismatch=0
+PASS rand_13                  kind=random   seed=1013  stop=tohost cause=0 pc=0x00000a94 instret=  277 code= 1028B roundtrip_mismatch=0
+PASS rand_14                  kind=random   seed=1014  stop=tohost cause=0 pc=0x00000a94 instret=  264 code= 1040B roundtrip_mismatch=0
+PASS rand_15                  kind=random   seed=1015  stop=tohost cause=0 pc=0x00000a94 instret=  266 code= 1036B roundtrip_mismatch=0
+PASS rand_16                  kind=random   seed=1016  stop=tohost cause=0 pc=0x00000a94 instret=  266 code= 1036B roundtrip_mismatch=0
+PASS rand_17                  kind=random   seed=1017  stop=tohost cause=0 pc=0x00000a94 instret=  249 code= 1024B roundtrip_mismatch=0
+PASS rand_18                  kind=random   seed=1018  stop=tohost cause=0 pc=0x00000a94 instret=  249 code= 1024B roundtrip_mismatch=0
+PASS rand_19                  kind=random   seed=1019  stop=tohost cause=0 pc=0x00000a94 instret=  288 code= 1036B roundtrip_mismatch=0
+PASS trap_ecall               kind=trap     seed=None  stop=trap   cause=1 pc=0x000000ac instret=   43 code=  192B roundtrip_mismatch=0
+PASS trap_ebreak              kind=trap     seed=None  stop=trap   cause=2 pc=0x000000ac instret=   43 code=  192B roundtrip_mismatch=0
+PASS trap_illegal_zero        kind=trap     seed=None  stop=trap   cause=3 pc=0x000000ac instret=   43 code=  192B roundtrip_mismatch=0
+PASS trap_illegal_ones        kind=trap     seed=None  stop=trap   cause=3 pc=0x000000ac instret=   43 code=  192B roundtrip_mismatch=0
+PASS trap_illegal_csr         kind=trap     seed=None  stop=trap   cause=3 pc=0x000000ac instret=   43 code=  192B roundtrip_mismatch=0
+PASS trap_illegal_funct7      kind=trap     seed=None  stop=trap   cause=3 pc=0x000000ac instret=   43 code=  192B roundtrip_mismatch=0
+PASS trap_misaligned_lw       kind=trap     seed=None  stop=trap   cause=5 pc=0x000000ac instret=   43 code=  192B roundtrip_mismatch=0
+PASS trap_misaligned_lh       kind=trap     seed=None  stop=trap   cause=5 pc=0x000000ac instret=   43 code=  192B roundtrip_mismatch=0
+PASS trap_misaligned_sh       kind=trap     seed=None  stop=trap   cause=6 pc=0x000000ac instret=   43 code=  192B roundtrip_mismatch=0
+PASS trap_misaligned_sw       kind=trap     seed=None  stop=trap   cause=6 pc=0x000000ac instret=   43 code=  192B roundtrip_mismatch=0
+PASS trap_misaligned_jalr     kind=trap     seed=None  stop=trap   cause=4 pc=0x000000b4 instret=   45 code=  204B roundtrip_mismatch=0
+PASS trap_misaligned_jal      kind=trap     seed=None  stop=trap   cause=4 pc=0x000000ac instret=   43 code=  200B roundtrip_mismatch=0
+PASS trap_misaligned_branch   kind=trap     seed=None  stop=trap   cause=4 pc=0x000000b0 instret=   44 code=  204B roundtrip_mismatch=0
+retired instructions per mnemonic (all tests): (branch next_pc!=pc+4)=160, (branch next_pc==pc+4)=158, add=116, addi=913, and=118, andi=152, auipc=111, beq=51, bge=61, bgeu=43, blt=50, bltu=46, bne=67, fence=4, jal=109, jalr=33, lb=88, lbu=89, lh=86, lhu=98, lui=797, lw=182, or=89, ori=134, sb=132, sh=121, sll=93, slli=98, slt=86, slti=158, sltiu=122, sltu=103, sra=91, srai=84, srl=115, srli=84, sub=111, sw=1605, xor=111, xori=116
+base mnemonics never retired: []
+wrote 44 tests + index.txt to /home/user/tpu-e-cpu/sim/data/cpu_tests; failures: 0
+# exit code: 0

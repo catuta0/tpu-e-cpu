@@ -1,0 +1,65 @@
+# command: cd code/python && ../../.venv/bin/python -m sctpu.accuracy
+# accuracy.py rev=d2ed476-dirty numpy=2.5.4
+# test images: 360, seeds {'split': 0, 'val_split': 0, 'train': 0}, selected variant qat_noise s=0
+mode 0 K= 4 acc[qat_noise]=0.5861 ens acc=0.4187+-0.1760 | rms1 hw=1.7936 ens=3.2116 pred=3.1579 | rms2 hw=0.4822 ens=0.7027 pred=0.7573
+mode 0 K= 5 acc[qat_noise]=0.4139 ens acc=0.5436+-0.2012 | rms1 hw=2.0539 ens=2.2524 pred=2.2330 | rms2 hw=0.4307 ens=0.5031 pred=0.5127
+mode 0 K= 6 acc[qat_noise]=0.6528 ens acc=0.6523+-0.1828 | rms1 hw=1.5637 ens=1.6299 pred=1.5790 | rms2 hw=0.2758 ens=0.3622 pred=0.3182
+mode 0 K= 7 acc[qat_noise]=0.4972 ens acc=0.8161+-0.1335 | rms1 hw=1.8279 ens=1.1531 pred=1.1165 | rms2 hw=0.1937 ens=0.3017 pred=0.2173
+mode 0 K= 8 acc[qat_noise]=0.6556 ens acc=0.8965+-0.0615 | rms1 hw=1.5511 ens=0.8215 pred=0.7895 | rms2 hw=0.3010 ens=0.1567 pred=0.1606
+mode 0 K= 9 acc[qat_noise]=0.8861 ens acc=0.9370+-0.0123 | rms1 hw=0.5263 ens=0.4657 pred=0.5582 | rms2 hw=0.2153 ens=0.1389 pred=0.1350
+mode 0 K=10 acc[qat_noise]=0.9444 ens acc=0.9448+-0.0080 | rms1 hw=0.2695 ens=0.2902 pred=0.3947 | rms2 hw=0.1773 ens=0.0800 pred=0.0977
+mode 1 K= 4 acc[qat_noise]=0.6361 ens acc=0.5630+-0.1168 | rms1 hw=1.7809 ens=1.9432 pred=2.0513 | rms2 hw=0.6646 ens=0.7880 pred=0.7165
+mode 1 K= 5 acc[qat_noise]=0.6639 ens acc=0.6868+-0.1068 | rms1 hw=1.8253 ens=1.4825 pred=1.4505 | rms2 hw=0.5230 ens=0.5496 pred=0.4399
+mode 1 K= 6 acc[qat_noise]=0.8417 ens acc=0.8649+-0.0461 | rms1 hw=1.1127 ens=0.8805 pred=1.0257 | rms2 hw=0.2919 ens=0.3776 pred=0.3557
+mode 1 K= 7 acc[qat_noise]=0.9222 ens acc=0.9005+-0.0261 | rms1 hw=0.7148 ens=0.6714 pred=0.7253 | rms2 hw=0.2942 ens=0.2771 pred=0.2584
+mode 1 K= 8 acc[qat_noise]=0.9111 ens acc=0.9333+-0.0194 | rms1 hw=0.5414 ens=0.4657 pred=0.5128 | rms2 hw=0.2679 ens=0.1862 pred=0.1915
+mode 1 K= 9 acc[qat_noise]=0.9472 ens acc=0.9443+-0.0096 | rms1 hw=0.3062 ens=0.2965 pred=0.3626 | rms2 hw=0.1515 ens=0.1310 pred=0.1392
+mode 1 K=10 acc[qat_noise]=0.9472 ens acc=0.9510+-0.0065 | rms1 hw=0.2064 ens=0.2182 pred=0.2564 | rms2 hw=0.1044 ens=0.0911 pred=0.0985
+mode 2 K= 4 acc[qat_noise]=0.4528 ens acc=0.5958+-0.1387 | rms1 hw=2.1101 ens=1.8229 pred=1.9319 | rms2 hw=0.9177 ens=0.7194 pred=0.8392
+mode 2 K= 5 acc[qat_noise]=0.7528 ens acc=0.7076+-0.1022 | rms1 hw=1.2562 ens=1.3815 pred=1.3661 | rms2 hw=0.5355 ens=0.5900 pred=0.5586
+mode 2 K= 6 acc[qat_noise]=0.8917 ens acc=0.8455+-0.0449 | rms1 hw=0.7792 ens=0.9555 pred=0.9660 | rms2 hw=0.4283 ens=0.3618 pred=0.4040
+mode 2 K= 7 acc[qat_noise]=0.8889 ens acc=0.9049+-0.0161 | rms1 hw=0.7485 ens=0.6686 pred=0.6830 | rms2 hw=0.2345 ens=0.3024 pred=0.2895
+mode 2 K= 8 acc[qat_noise]=0.9444 ens acc=0.9274+-0.0147 | rms1 hw=0.3528 ens=0.4987 pred=0.4830 | rms2 hw=0.1982 ens=0.1952 pred=0.1992
+mode 2 K= 9 acc[qat_noise]=0.9444 ens acc=0.9437+-0.0055 | rms1 hw=0.3657 ens=0.3032 pred=0.3415 | rms2 hw=0.1258 ens=0.1383 pred=0.1431
+mode 2 K=10 acc[qat_noise]=0.9528 ens acc=0.9477+-0.0055 | rms1 hw=0.2092 ens=0.2424 pred=0.2415 | rms2 hw=0.0940 ens=0.0943 pred=0.0974
+
+## variant qat (s=0), test n=360  [SIMULATION]
+float(master)=0.9583  EV(K->inf)=0.9583  int8=0.9583  int8-vs-EV mismatches=0
+K   EV(K)   SC m0   SC m1   SC m2
+4   0.9583  0.5833  0.5194  0.5083
+5   0.9583  0.5000  0.5139  0.7194
+6   0.9583  0.6194  0.7694  0.8306
+7   0.9583  0.4139  0.9028  0.8889
+8   0.9583  0.6861  0.9056  0.9528
+9   0.9583  0.8972  0.9556  0.9556
+10  0.9583  0.9583  0.9528  0.9611
+design rule (smallest K within 1 pp of EV; monotone): {'0': (10, 10), '1': (9, 9), '2': (8, 8)}
+
+## variant qat_noise (s=0), test n=360  [SIMULATION]
+float(master)=0.9500  EV(K->inf)=0.9500  int8=0.9500  int8-vs-EV mismatches=0
+K   EV(K)   SC m0   SC m1   SC m2
+4   0.9500  0.5861  0.6361  0.4528
+5   0.9500  0.4139  0.6639  0.7528
+6   0.9500  0.6528  0.8417  0.8917
+7   0.9500  0.4972  0.9222  0.8889
+8   0.9500  0.6556  0.9111  0.9444
+9   0.9500  0.8861  0.9472  0.9444
+10  0.9500  0.9444  0.9472  0.9528
+design rule (smallest K within 1 pp of EV; monotone): {'0': (10, 10), '1': (9, 9), '2': (8, 8)}
+
+## variant float (s=1), test n=360  [SIMULATION]
+float(master)=0.9528  EV(K->inf)=0.9528  int8=0.9528  int8-vs-EV mismatches=0
+K   EV(K)   SC m0   SC m1   SC m2
+4   0.9528  0.3472  0.5111  0.4944
+5   0.9583  0.2556  0.3833  0.5889
+6   0.9556  0.2167  0.6222  0.7944
+7   0.9528  0.2639  0.8194  0.8444
+8   0.9528  0.3667  0.8389  0.9083
+9   0.9528  0.8833  0.9250  0.9222
+10  0.9528  0.9333  0.9417  0.9417
+design rule (smallest K within 1 pp of EV; monotone): {'0': (None, None), '1': (None, None), '2': (None, None)}
+# wrote /home/user/tpu-e-cpu/reports/sw/accuracy.json and figures (44.2 s)
+
+real	0m44.568s
+user	0m42.449s
+sys	0m2.257s

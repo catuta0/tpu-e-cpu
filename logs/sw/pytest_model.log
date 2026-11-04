@@ -1,0 +1,45 @@
+# command: .venv/bin/python -m pytest -v code/python/tests/test_model.py code/python/tests/test_smoke.py
+# rev: d2ed476-dirty  date: 2026-11-04T03:19:58Z  python: Python 3.13.18
+============================= test session starts ==============================
+platform linux -- Python 3.13.18, pytest-9.2.0, pluggy-1.7.0 -- /home/user/tpu-e-cpu/.venv/bin/python
+cachedir: .pytest_cache
+rootdir: /home/user/tpu-e-cpu
+plugins: platformdirs-4.14.3
+collecting ... collected 33 items
+
+code/python/tests/test_model.py::test_leap8_equals_8_single_steps_for_all_states PASSED [  3%]
+code/python/tests/test_model.py::test_leap8_masks_shift_structure PASSED [  6%]
+code/python/tests/test_model.py::test_stream_r_uses_state_after_8_steps PASSED [  9%]
+code/python/tests/test_model.py::test_mode2_seeds PASSED                 [ 12%]
+code/python/tests/test_model.py::test_rng_streams_modes PASSED           [ 15%]
+code/python/tests/test_model.py::test_rotl8 PASSED                       [ 18%]
+code/python/tests/test_model.py::test_advance_seed_matches_step_n PASSED [ 21%]
+code/python/tests/test_model.py::test_weight_addr_examples PASSED        [ 24%]
+code/python/tests/test_model.py::test_weight_addr_is_bijection PASSED    [ 27%]
+code/python/tests/test_model.py::test_tile_is_128_contiguous_bytes PASSED [ 30%]
+code/python/tests/test_model.py::test_pack_unpack_roundtrip PASSED       [ 33%]
+code/python/tests/test_model.py::test_little_endian_words PASSED         [ 36%]
+code/python/tests/test_model.py::test_clamp_log2l PASSED                 [ 39%]
+code/python/tests/test_model.py::test_floor_bias_negative_examples PASSED [ 42%]
+code/python/tests/test_model.py::test_floor_u_negative_examples PASSED   [ 45%]
+code/python/tests/test_model.py::test_floor_semantics_vectorised_vs_fraction PASSED [ 48%]
+code/python/tests/test_model.py::test_argmax_ties_lowest_index PASSED    [ 51%]
+code/python/tests/test_model.py::test_reference_vs_vectorised_random[0] PASSED [ 54%]
+code/python/tests/test_model.py::test_reference_vs_vectorised_random[1] PASSED [ 57%]
+code/python/tests/test_model.py::test_reference_vs_vectorised_random[2] PASSED [ 60%]
+code/python/tests/test_model.py::test_reference_vs_vectorised_batch_with_digits_like_inputs PASSED [ 63%]
+code/python/tests/test_model.py::test_all_zero_codes_deterministic PASSED [ 66%]
+code/python/tests/test_model.py::test_lfsr_not_reset_between_layers PASSED [ 69%]
+code/python/tests/test_model.py::test_ev_equals_int8_and_rational PASSED [ 72%]
+code/python/tests/test_model.py::test_ev_finite_K_formula PASSED         [ 75%]
+code/python/tests/test_model.py::test_pixel_to_code PASSED               [ 78%]
+code/python/tests/test_model.py::test_init_files_format_and_content PASSED [ 81%]
+code/python/tests/test_model.py::test_vector_files_recheck_with_reference PASSED [ 84%]
+code/python/tests/test_smoke.py::test_lfsr_period_from_seed_ace1 PASSED  [ 87%]
+code/python/tests/test_smoke.py::test_lfsr_first_steps_match_formula PASSED [ 90%]
+code/python/tests/test_smoke.py::test_lfsr_rejects_zero_seed PASSED      [ 93%]
+code/python/tests/test_smoke.py::test_digits_dataset_shape PASSED        [ 96%]
+code/python/tests/test_smoke.py::test_popcount_bytes_sum PASSED          [100%]
+
+============================== 33 passed in 7.85s ==============================
+exit=0

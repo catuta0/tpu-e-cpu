@@ -57,3 +57,25 @@ yosys exit=0
   MULT9X9:       0/     40     0%
   seed 1 nextpnr exit=0 :: Max frequency for clock 'u.clk': 52.98 MHz (PASS at 27.00 MHz)
   seed 2 nextpnr exit=0 :: Max frequency for clock 'u.clk': 54.02 MHz (PASS at 27.00 MHz)
+  seed 3 nextpnr exit=0 :: Max frequency for clock 'u.clk': 54.70 MHz (PASS at 27.00 MHz)
+
+================ sc_nl16_il4_m1 (top=sc_ubench_top -set IL 4 -set AW 6 -set RNG_MODE 1) ================
+yosys exit=0
+  IOB:       8/    276     2%
+  LUT4:    1447/   8640    16%
+  MUX2_LUT5:      34/   4320     0%
+  MUX2_LUT6:       0/   2160     0%
+  MUX2_LUT7:       0/   1080     0%
+  MUX2_LUT8:       0/   1080     0%
+  ALU:    1046/   6480    16%
+  DFF:     909/   6480    14%
+  RAM16SDP4:       0/    270     0%
+  BSRAM:       0/     26     0%
+  MULT18X18:       0/     20     0%
+  MULT9X9:       0/     40     0%
+  seed 1 nextpnr exit=0 :: Max frequency for clock 'u.clk': 68.51 MHz (PASS at 27.00 MHz)
+  seed 2 nextpnr exit=0 :: Max frequency for clock 'u.clk': 71.72 MHz (PASS at 27.00 MHz)
+  seed 3 nextpnr exit=0 :: Max frequency for clock 'u.clk': 70.18 MHz (PASS at 27.00 MHz)
+
+================ sc_nl16_il16_m1 (top=sc_ubench_top -set IL 16 -set AW 8 -set RNG_MODE 1) ================
+yosys exit=0

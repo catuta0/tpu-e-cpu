@@ -1,0 +1,6 @@
+# command: .venv/bin/python code/python/rv32/gen_soc_demo.py --act-shift 0
+# date: 2026-11-04T03:19:36+00:00
+gen_soc_demo: ACT_SHIFT=0 CONFIG=0x08 code=112 bytes -> /home/user/tpu-e-cpu/sim/data/soc_demo_prog.hex
+round-trip mismatches: 0
+ISS checks (RESULT 0..9 x busy_polls 0/3 = 20 runs): 0 errors
+# exit code: 0

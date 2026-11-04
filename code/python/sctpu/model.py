@@ -382,15 +382,42 @@ def sc_inference_reference(inputs: Sequence[int], weight_ram: Sequence[int],
 # Random-number streams for the fast path (5.3)
 # ---------------------------------------------------------------------------
 
-def rng_streams(mode: int, n_cycles: int) -> tuple[np.ndarray, np.ndarray]:
+_MSEQ: list = []
+_MSEQ_POS: dict = {}
+
+
+def advance_seed(seed: int, n_steps: int) -> int:
+    """Return the LFSR state ``n_steps`` single steps after ``seed`` (analysis helper).
+
+    Uses a cached walk of the full 65535-state m-sequence, so large offsets
+    are O(1). Equivalent to ``lfsr.step_n(seed, n_steps)``.
+    """
+    if not _MSEQ:
+        st = SEED_X
+        for n in range(lfsr.MAX_PERIOD):
+            _MSEQ.append(st)
+            _MSEQ_POS[st] = n
+            st = lfsr.step(st)
+    return _MSEQ[(_MSEQ_POS[seed] + n_steps) % lfsr.MAX_PERIOD]
+
+
+def rng_streams(mode: int, n_cycles: int, start_offset: int = 0) -> tuple[np.ndarray, np.ndarray]:
     """Return r_x and r_w per input lane for ``n_cycles`` stream cycles (5.3).
 
     Shapes (IL, n_cycles), dtype uint8. Column k is the r used in stream cycle
     k counted from START (k continues across tiles and layers because the
     LFSRs are never reset between them). Uses the leap-forward function
     ``lfsr.leap8`` (checked against 8 single steps by the unit tests).
+
+    ``start_offset`` is an ANALYSIS-ONLY option (not hardware behaviour): every
+    seed is first advanced by that many single steps, which keeps all relative
+    phases between the LFSRs and emulates a different, equally valid random
+    realisation. The hardware model always uses ``start_offset = 0``.
     """
     sx, sw = lane_seeds(mode)
+    if start_offset:
+        sx = [advance_seed(v, start_offset) for v in sx]
+        sw = [advance_seed(v, start_offset) for v in sw]
     seq_x = [lfsr.stream_r_sequence(s0, n_cycles) for s0 in sx]
     seq_w = [lfsr.stream_r_sequence(s0, n_cycles) for s0 in sw]
     rx = np.empty((IL, n_cycles), np.uint8)
@@ -449,12 +476,13 @@ class SCEngine:
     after START does not depend on the data (5.3).
     """
 
-    def __init__(self, K: int, mode: int) -> None:
+    def __init__(self, K: int, mode: int, start_offset: int = 0) -> None:
+        """Build the tables; ``start_offset`` != 0 is analysis-only (see rng_streams)."""
         check_k_s_mode(K, 0, mode)
         self.K, self.mode, self.L = K, mode, 1 << K
         L = self.L
         n_cycles = N_TILES_TOTAL * L
-        self.rx, self.rw = rng_streams(mode, n_cycles)
+        self.rx, self.rw = rng_streams(mode, n_cycles, start_offset)
         table = np.empty((N_TILES_TOTAL, IL, 256, 256), np.int16)  # counts <= L <= 1024
         for g in range(N_TILES_TOTAL):
             for i in range(IL):

@@ -181,3 +181,9 @@ unused in rev A). Pin numbers: `design/constraints/tangnano9k.cst` (sourced).
   testbench stimuli, not firmware.
 - The SoC demo program (`sim/data/soc_demo_prog.hex`): configure TPU, START, poll
   DONE, read RESULT, write LED and UART, write TOHOST.
+
+## 9. Rev A.1 clarifications (2026-11-04, see ADR-006)
+- Misaligned jump/branch target traps on the jump/branch (halt PC = its address, rd not written).
+- Strict decoding: CSR instructions, unknown funct3/funct7 (e.g. MUL), FENCE.I,
+  0x00000000 and 0xFFFFFFFF are illegal (cause 3).
+- Reset values: LED=0, TOHOST=0, TPU STATUS=0, RESULT=0, CYCLES=0, SCORE/HIDDEN=0.

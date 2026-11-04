@@ -1,0 +1,36 @@
+# command: python3 scripts/budgets/lfsr_check.py
+single-step period from 0x0001: 65535 (maximal = 65535) -> MAXIMAL
+8-step leap period: 65535 stream cycles
+seeds (none is 0): X=0xACE1, W=0x7A5C, X0=0xACE1, W0=0x7A5C, X1=0xE93B, W1=0xA5C3, X2=0x2595, W2=0xD12A, X3=0x61EF, W3=0xFC91, X4=0x9E49, W4=0x27F8, X5=0xDAA3, W5=0x535F, X6=0x16FD, W6=0x7EC6, X7=0x5357, W7=0xAA2D
+modes 0/1: offset X->W = 18027 steps; circular min = 18027 steps = 2253.4 stream cycles
+mode 2: smallest circular offset among the 16 LFSRs = 553 steps = 69.1 stream cycles (X5 vs W3)
+steps per inference = 10 tiles * 2^K * 8 vs period 65535:
+  K= 4:   1280 steps = 0.020 periods
+  K= 5:   2560 steps = 0.039 periods
+  K= 6:   5120 steps = 0.078 periods
+  K= 7:  10240 steps = 0.156 periods
+  K= 8:  20480 steps = 0.313 periods
+  K= 9:  40960 steps = 0.625 periods
+  K=10:  81920 steps = 1.250 periods  <-- sequence WRAPS within one inference
+overlap check modes 0/1: for K where steps > offset, LFSR_W reaches a state LFSR_X already used (or vice versa) within the same inference:
+  K= 4: X reaches W's seed after 18027 steps, W reaches X's after 47508: no overlap
+  K= 5: X reaches W's seed after 18027 steps, W reaches X's after 47508: no overlap
+  K= 6: X reaches W's seed after 18027 steps, W reaches X's after 47508: no overlap
+  K= 7: X reaches W's seed after 18027 steps, W reaches X's after 47508: no overlap
+  K= 8: X reaches W's seed after 18027 steps, W reaches X's after 47508: OVERLAP
+  K= 9: X reaches W's seed after 18027 steps, W reaches X's after 47508: OVERLAP
+  K=10: X reaches W's seed after 18027 steps, W reaches X's after 47508: OVERLAP
+  mode 2 lane 0: |offset X0<->W0| = 18027 steps = 2253.4 stream cycles
+  mode 2 lane 1: |offset X1<->W1| = 28555 steps = 3569.4 stream cycles
+  mode 2 lane 2: |offset X2<->W2| = 27248 steps = 3406.0 stream cycles
+  mode 2 lane 3: |offset X3<->W3| = 30214 steps = 3776.8 stream cycles
+  mode 2 lane 4: |offset X4<->W4| = 22406 steps = 2800.8 stream cycles
+  mode 2 lane 5: |offset X5<->W5| = 24897 steps = 3112.1 stream cycles
+  mode 2 lane 6: |offset X6<->W6| = 1379 steps = 172.4 stream cycles
+  mode 2 lane 7: |offset X7<->W7| = 14141 steps = 1767.6 stream cycles
+Pearson corr over 2560 stream cycles (K=8), sigma for independent ~ 1/sqrt(n) = 0.020:
+  modes 0/1 same lane:   corr(r_x, r_w) = +0.050
+  mode 1 cross-lane:     max |corr(rotl8(r_x,a), rotl8(r_x,b))| = 0.523  (mode 0: 1.000, identical)
+  mode 2 same lane:      max_i |corr(r_x_i, r_w_i)| = 0.050
+  mode 2 any pair:       max |corr| among 16 LFSRs = 0.053
+SNG bias from missing zero state (full period): max |P(r<c) - c/256| = 1.52e-05

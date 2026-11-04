@@ -1,0 +1,25 @@
+{
+  "name": "soc_demo_prog",
+  "generator": "code/python/rv32/gen_soc_demo.py",
+  "act_shift": 0,
+  "log2_l": 8,
+  "config_value": "0x08",
+  "expected_led": "RESULT[3:0] (one LED write)",
+  "expected_uart": "two bytes: 0x30 + RESULT, 0x0a",
+  "cycles_store_addr": "0x00000e00",
+  "cycles_store_value": "TPU CYCLES register read after DONE",
+  "expected_tohost": 1,
+  "tohost_pc": "0x00000068",
+  "requires": [
+    "ram",
+    "tohost",
+    "led",
+    "uart",
+    "tpu (pre-initialised weights/bias/input)"
+  ],
+  "iss_check": "RESULT 0..9 x busy_polls {0,3} on the TPU stub",
+  "iss_check_errors": [],
+  "roundtrip_mismatches": 0,
+  "code_bytes": 112,
+  "hex_sha256": "bbb6912f44f0218631107a9fa5d2dbae703249ee94a46db9568023c87e402411"
+}

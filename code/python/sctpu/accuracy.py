@@ -216,6 +216,50 @@ def design_rule(sc: dict, ev_acc: float, tol: float = 0.01) -> dict:
     return {"smallest_K_within_1pp": first, "smallest_K_within_1pp_for_all_larger_K": mono}
 
 
+ENSEMBLE_SIZE = 16  #: number of analysis-only random LFSR start offsets
+ENSEMBLE_SEED = 0  #: numpy seed of the start offsets
+
+
+def error_arrays(r: dict, xc, w1, w2, b, K: int, mode: int, S) -> dict:
+    """Per (image, neuron) errors of Dp/L and predicted variances, both layers.
+
+    e = (Dp - B)/L - P/2^14, i.e. Dp/L minus its expectation E[Dp]/L at this K
+    (the deterministic bias term B is removed). Layer 2 uses the hidden codes
+    of the same SC run as inputs (conditional error of layer 2 alone).
+    """
+    L = 1 << K
+    P1 = (xc - 128) @ (w1 - 128).T
+    B1 = (b[None, :16] << K) >> 7
+    e1 = (r["dp1"] - B1) / L - P1 / 16384.0
+    e1_tot = r["dp1"] / L - (P1 / 16384.0 + b[None, :16] / 128.0)
+    h = r["hidden"]
+    P2 = (h - 128) @ (w2 - 128).T
+    B2 = (b[None, 16:] << K) >> 7
+    e2 = (r["dp2"] - B2) / L - P2 / 16384.0
+    vg1, vi1 = predicted_variance(xc, w1, K, mode, S)
+    vg2, vi2 = predicted_variance(h, w2, K, mode, S)
+    return {"layer1": {"e": e1, "vg": vg1, "vi": vi1, "e_tot": e1_tot},
+            "layer2": {"e": e2, "vg": vg2, "vi": vi2}}
+
+
+def error_entry(r: dict, xc, w1, w2, b, K: int, mode: int, S) -> dict:
+    """Summary statistics (RMS, mean, predictions) for one SC run."""
+    raw = error_arrays(r, xc, w1, w2, b, K, mode, S)
+    ent = {}
+    for name, lay, sl in (("layer1", "layer1", slice(0, 16)),
+                          ("layer2_real", "layer2", slice(0, 10)),
+                          ("layer2_padding", "layer2", slice(10, 16))):
+        ee = raw[lay]["e"][:, sl]
+        ent[name] = {"n_samples": int(ee.size),
+                     "rms_measured": float(np.sqrt(np.mean(ee ** 2))),
+                     "mean_measured": float(np.mean(ee)),
+                     "rms_predicted_eq2": float(np.sqrt(np.mean(raw[lay]["vg"][:, sl]))),
+                     "rms_predicted_eq3_independent": float(np.sqrt(np.mean(raw[lay]["vi"][:, sl])))}
+        ent[name]["ratio_measured_over_eq2"] = ent[name]["rms_measured"] / ent[name]["rms_predicted_eq2"]
+    ent["layer1"]["rms_total_vs_Kinf"] = float(np.sqrt(np.mean(raw["layer1"]["e_tot"] ** 2)))
+    return ent
+
+
 def main() -> int:
     """Run the full study, write reports/sw/accuracy.json and the PDF figures."""
     t0 = time.time()
@@ -278,6 +322,9 @@ def main() -> int:
     hw_sel = hws[selv]
     w1, w2 = M.unpack_weight_ram(hw_sel["weight_ram"])
     b = hw_sel["biases"]
+    ens_rng = np.random.default_rng(ENSEMBLE_SEED)
+    ens_offsets = ens_rng.integers(1, lfsr.MAX_PERIOD, ENSEMBLE_SIZE)
+    ens_acc = {str(mo): {} for mo in MODES}
     for mode in MODES:
         S = spin_table(mode) if mode != 2 else None
         for K in K_RANGE:
@@ -288,38 +335,49 @@ def main() -> int:
                 res["models"][v]["sc"][str(mode)][K] = acc_entry(r["result"], y)
                 if v == selv:
                     rsel = r
-            L = 1 << K
-            # measured errors of Dp/L vs E[Dp]/L (pure stochastic part)
-            P1 = (xc - 128) @ (w1 - 128).T
-            B1 = (b[None, :16] << K) >> 7
-            e1 = (rsel["dp1"] - B1) / L - P1 / 16384.0
-            e1_tot = rsel["dp1"] / L - (P1 / 16384.0 + b[None, :16] / 128.0)
-            h = rsel["hidden"]
-            P2 = (h - 128) @ (w2 - 128).T
-            B2 = (b[None, 16:] << K) >> 7
-            e2 = ((rsel["dp2"] - B2) / L - P2 / 16384.0)
-            vg1, vi1 = predicted_variance(xc, w1, K, mode, S)
-            vg2, vi2 = predicted_variance(h, w2, K, mode, S)
-            ent = {}
-            for name, e, vg, vi, sl in (("layer1", e1, vg1, vi1, slice(0, 16)),
-                                        ("layer2_real", e2, vg2, vi2, slice(0, 10)),
-                                        ("layer2_padding", e2, vg2, vi2, slice(10, 16))):
-                ee = e[:, sl]
-                ent[name] = {"n_samples": int(ee.size),
-                             "rms_measured": float(np.sqrt(np.mean(ee ** 2))),
-                             "mean_measured": float(np.mean(ee)),
-                             "rms_predicted_eq2": float(np.sqrt(np.mean(vg[:, sl]))),
-                             "rms_predicted_eq3_independent": float(np.sqrt(np.mean(vi[:, sl])))}
-                ent[name]["ratio_measured_over_eq2"] = ent[name]["rms_measured"] / ent[name]["rms_predicted_eq2"]
-            ent["layer1"]["rms_total_vs_Kinf"] = float(np.sqrt(np.mean(e1_tot ** 2)))
+            ent = error_entry(rsel, xc, w1, w2, b, K, mode, S)
+            # Ensemble over analysis-only LFSR start offsets (not hardware
+            # behaviour): validates eq. (2) as an expectation over random
+            # realisations, and shows the realisation-to-realisation spread
+            # of the accuracy that a single fixed seed set hides.
+            sq = {k: [] for k in ("layer1", "layer2_real")}
+            pr = {k: [] for k in ("layer1", "layer2_real")}
+            accs = []
+            for off in ens_offsets:
+                ee = M.SCEngine(K, mode, start_offset=int(off)).run(
+                    xc, hw_sel["weight_ram"], hw_sel["biases"], hw_sel["s"])
+                accs.append(float(np.mean(ee["result"] == y)))
+                raw = error_arrays(ee, xc, w1, w2, b, K, mode, S)
+                for name, sl in (("layer1", slice(0, 16)), ("layer2_real", slice(0, 10))):
+                    lay = "layer1" if name == "layer1" else "layer2"
+                    sq[name].append(np.mean(raw[lay]["e"][:, sl] ** 2))
+                    pr[name].append(np.mean(raw[lay]["vg"][:, sl]))
+            for name in sq:
+                ent[name]["ensemble_rms_measured"] = float(np.sqrt(np.mean(sq[name])))
+                ent[name]["ensemble_rms_predicted_eq2"] = float(np.sqrt(np.mean(pr[name])))
+                ent[name]["ensemble_ratio"] = ent[name]["ensemble_rms_measured"] / ent[name]["ensemble_rms_predicted_eq2"]
+                ent[name]["single_realisation_rms_min_max"] = [float(np.sqrt(min(sq[name]))),
+                                                               float(np.sqrt(max(sq[name])))]
+            ens_acc[str(mode)][K] = {"mean": float(np.mean(accs)), "std": float(np.std(accs, ddof=1)),
+                                     "min": float(min(accs)), "max": float(max(accs)),
+                                     "n_realisations": len(accs)}
             err[str(mode)][K] = ent
             print(f"mode {mode} K={K:2d} acc[{selv}]={res['models'][selv]['sc'][str(mode)][K]['acc']:.4f} "
-                  f"rms1 meas={ent['layer1']['rms_measured']:.4f} pred={ent['layer1']['rms_predicted_eq2']:.4f} "
-                  f"rms2 meas={ent['layer2_real']['rms_measured']:.4f} pred={ent['layer2_real']['rms_predicted_eq2']:.4f}",
-                  flush=True)
+                  f"ens acc={ens_acc[str(mode)][K]['mean']:.4f}+-{ens_acc[str(mode)][K]['std']:.4f} | "
+                  f"rms1 hw={ent['layer1']['rms_measured']:.4f} ens={ent['layer1']['ensemble_rms_measured']:.4f} "
+                  f"pred={ent['layer1']['rms_predicted_eq2']:.4f} | "
+                  f"rms2 hw={ent['layer2_real']['rms_measured']:.4f} ens={ent['layer2_real']['ensemble_rms_measured']:.4f} "
+                  f"pred={ent['layer2_real']['rms_predicted_eq2']:.4f}", flush=True)
             del eng
     res["error_study"] = {"variant": selv, "quantity": "Dp/L - E[Dp]/L (B removed); units of the bipolar value",
+                          "hardware_seeds": "rms_measured / mean_measured: the fixed seeds of 5.3 (one realisation)",
+                          "ensemble": f"{ENSEMBLE_SIZE} analysis-only LFSR start offsets, rng seed {ENSEMBLE_SEED}: "
+                                      + ", ".join(str(int(o)) for o in ens_offsets),
                           "per_mode_K": err}
+    res["models"][selv]["sc_ensemble_accuracy"] = ens_acc
+    ev_sel = res["models"][selv]["expected_value_Kinf"]["acc"]
+    res["models"][selv]["design_rule_ensemble_mean"] = {
+        mo: design_rule({K: {"acc": ens_acc[mo][K]["mean"]} for K in K_RANGE}, ev_sel) for mo in ens_acc}
     for v in variants:
         ev_acc = res["models"][v]["expected_value_Kinf"]["acc"]
         res["models"][v]["design_rule"] = {str(mo): design_rule(res["models"][v]["sc"][str(mo)], ev_acc)
@@ -340,7 +398,7 @@ def print_table(res: dict) -> None:
         print(f"\n## variant {v} (s={mr['s']}), test n={res['n_test']}  [SIMULATION]")
         print(f"float(master)={mr['float_master_weights']['acc']:.4f}  EV(K->inf)={mr['expected_value_Kinf']['acc']:.4f}"
               f"  int8={mr['int8_binary']['acc']:.4f}  int8-vs-EV mismatches={mr['int8_vs_ev_mismatches_hidden_score_result']}")
-        print("K   " + "  ".join(f"EV(K)   m0      m1      m2"[0:0] for _ in [0]) + "EV(K)   SC m0   SC m1   SC m2")
+        print("K   EV(K)   SC m0   SC m1   SC m2")
         for K in K_RANGE:
             row = [mr["expected_value_finite_K"][K]["acc"]] + [mr["sc"][str(mo)][K]["acc"] for mo in MODES]
             print(f"{K:<3d} " + "  ".join(f"{a:.4f}" for a in row))
@@ -363,7 +421,7 @@ def make_figures(res: dict) -> None:
 
     # 1. accuracy vs K, one panel per variant
     vs = ["qat_noise", "qat", "float"]
-    fig, axs = plt.subplots(1, 3, figsize=(10, 3.3), sharey=True)
+    fig, axs = plt.subplots(1, 3, figsize=(11, 3.8), sharey=True)
     for ax, v in zip(axs, vs):
         mr = res["models"][v]
         ev = mr["expected_value_Kinf"]["acc"] * 100
@@ -378,21 +436,27 @@ def make_figures(res: dict) -> None:
             ax.plot(K_RANGE, a, color=col[mo], marker=mk[mo], ms=5, lw=2,
                     label=f"SC mode {mo} {MODE_NAMES[mo]}")
             ax.fill_between(K_RANGE, lo, hi, color=col[mo], alpha=0.12, lw=0)
+            if "sc_ensemble_accuracy" in mr:  # selected model: ensemble mean (analysis-only)
+                ea = [mr["sc_ensemble_accuracy"][str(mo)][K]["mean"] * 100 for K in K_RANGE]
+                ax.plot(K_RANGE, ea, color=col[mo], lw=1.2, ls="--",
+                        label=f"mode {mo} mean of 16 random LFSR offsets")
         ax.set_title(f"weights: {v} (s={mr['s']})")
         ax.set_xlabel("K = log2 L")
         ax.set_xticks(K_RANGE)
     axs[0].set_ylabel("test accuracy [%] (n=360)")
     axs[0].set_ylim(0, 100)
-    axs[-1].legend(loc="lower right", fontsize=7, frameon=False)
+    handles, labels = axs[0].get_legend_handles_labels()
+    labels = [lb.split(" (")[0] if lb.startswith(("expected", "float")) else lb for lb in labels]
+    fig.legend(handles, labels, loc="lower center", ncol=5, fontsize=7, frameon=False)
     fig.suptitle("SC-TPU accuracy vs stream length — SIMULATION (bit-exact golden model, "
-                 "digits test split seed 0); bands = 95 % Wilson CI", fontsize=9)
-    fig.tight_layout()
+                 "digits test split seed 0, n=360); bands = 95 % Wilson CI", fontsize=9)
+    fig.tight_layout(rect=(0, 0.13, 1, 1))
     fig.savefig(REPORT_DIR / "fig_accuracy_vs_K.pdf")
     plt.close(fig)
 
     # 2. RMS error vs K, measured (markers) vs predicted (lines)
     es = res["error_study"]["per_mode_K"]
-    fig, axs = plt.subplots(1, 2, figsize=(8, 3.3), sharey=True)
+    fig, axs = plt.subplots(1, 2, figsize=(9, 3.6), sharey=True)
     for ax, layer, title in ((axs[0], "layer1", "layer 1 (64 inputs)"),
                              (axs[1], "layer2_real", "layer 2 (16 inputs, lanes 0..9)")):
         for mo in MODES:
@@ -400,14 +464,16 @@ def make_figures(res: dict) -> None:
             pred = [es[str(mo)][K][layer]["rms_predicted_eq2"] for K in K_RANGE]
             ax.plot(K_RANGE, pred, color=col[mo], lw=2, label=f"mode {mo} predicted, eq. (2)")
             ax.plot(K_RANGE, meas, color=col[mo], marker=mk[mo], ms=6, lw=0,
-                    label=f"mode {mo} measured")
-        ind = [es["2"][K][layer]["rms_predicted_eq3_independent"] for K in K_RANGE]
+                    label=f"mode {mo} measured, hardware seeds")
+            ens = [es[str(mo)][K][layer]["ensemble_rms_measured"] for K in K_RANGE]
+            ax.plot(K_RANGE, ens, color=col[mo], marker=mk[mo], ms=8, lw=0, mfc="none", mew=1.5,
+                    label=f"mode {mo} measured, 16 random offsets")
         ax.set_yscale("log", base=2)
         ax.set_title(title)
         ax.set_xlabel("K = log2 L")
         ax.set_xticks(K_RANGE)
     axs[0].set_ylabel("RMS of Dp/L − E[Dp]/L")
-    axs[1].legend(fontsize=7, frameon=False, loc="upper right")
+    axs[1].legend(fontsize=6, frameon=False, loc="upper right", ncol=1)
     fig.suptitle(f"Stochastic error, weights {res['error_study']['variant']} — SIMULATION vs analytical model",
                  fontsize=9)
     fig.tight_layout()
