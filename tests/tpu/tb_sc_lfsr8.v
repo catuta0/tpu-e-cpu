@@ -3,8 +3,8 @@
 // Purpose : Self-checking unit testbench of design/rtl/tpu/sc_lfsr8.v
 //           (task RTL-TPU; spec ARCHITECTURE.md 5.3 RNG paragraph [BIT-EXACT]).
 //
-// What is checked (two DUT instances, seeds 0xACE1 = LFSR_X and 0x7A5C =
-// LFSR_W of spec 5.3):
+// What is checked (two DUT instances, seeds 0xACE1 = LFSR_X and 0xF9DE =
+// LFSR_W of spec 5.3 / rev B section 11; rev A used 0x7A5C for LFSR_W):
 //   TC1 LOAD      : after load, state == 8 single steps of the seed
 //                   (look-ahead convention: the register holds the state
 //                   whose low byte is r of stream cycle 0).
@@ -23,6 +23,15 @@
 //   TC5 RELOAD    : a load in the middle of the run restores the TC1 value,
 //                   and load has priority over a simultaneous adv.
 //   TC6 RESET     : rst gives the same value as load.
+//   TC7 SEEDS     : (rev B, ARCHITECTURE.md 11) the seed tables of sc_rng.v
+//                   are re-derived here from first principles: a 1-step
+//                   reference LFSR is started at 0xACE1 and stepped 65535
+//                   times; S(n) is captured at n = 4096 i (X), 32768 + 4096 i
+//                   (W) and, for the IL=16 study build, at the half-way points
+//                   +2048. Every LFSR inside three sc_rng instances (mode 0
+//                   IL 8, mode 2 IL 8, mode 2 IL 16) must hold leap8(S(n))
+//                   after reset (look-ahead convention). Also checks that the
+//                   reference returns to 0xACE1 after exactly 65535 steps.
 //
 // Negative check: compiling with -DINJECT_FAULT uses a wrong tap in the
 // reference model; the TB must then print TEST FAILED and exit non-zero
@@ -48,7 +57,7 @@ module tb_sc_lfsr8;
 
     sc_lfsr8 #(.SEED(32'h0000_ACE1)) dut_x (.clk(clk), .rst(rst), .load(load), .adv(adv),
                                        .state(st_x), .r(r_x));
-    sc_lfsr8 #(.SEED(32'h0000_7A5C)) dut_w (.clk(clk), .rst(rst), .load(load), .adv(adv),
+    sc_lfsr8 #(.SEED(32'h0000_F9DE)) dut_w (.clk(clk), .rst(rst), .load(load), .adv(adv),
                                        .state(st_w), .r(r_w));
 
     // ---- independent behavioural reference: ONE step of spec 5.3 -------------
@@ -74,8 +83,35 @@ module tb_sc_lfsr8;
         end
     endfunction
 
+    // ---- TC7 DUTs: the RNG blocks whose seed tables are verified -------------
+    wire [63:0]  rx0_unused, rw0_unused, rx2_unused, rw2_unused;
+    wire [127:0] rx16_unused, rw16_unused;
+    sc_rng #(.IL(8),  .RNG_MODE(0)) u_rng0  (.clk(clk), .rst(rst), .load(load), .adv(adv),
+                                             .rx(rx0_unused),  .rw(rw0_unused));
+    sc_rng #(.IL(8),  .RNG_MODE(2)) u_rng2  (.clk(clk), .rst(rst), .load(load), .adv(adv),
+                                             .rx(rx2_unused),  .rw(rw2_unused));
+    sc_rng #(.IL(16), .RNG_MODE(2)) u_rng16 (.clk(clk), .rst(rst), .load(load), .adv(adv),
+                                             .rx(rx16_unused), .rw(rw16_unused));
+    // Probe the full 16-bit LFSR states through the generate hierarchy.
+    wire [8*16-1:0]  st2_x, st2_w;
+    wire [16*16-1:0] st16_x, st16_w;
+    genvar g;
+    generate
+        for (g = 0; g < 8; g = g + 1) begin : g_p8
+            assign st2_x[16*g +: 16] = u_rng2.g_indep.g_lane[g].u_lfsr_x.state;
+            assign st2_w[16*g +: 16] = u_rng2.g_indep.g_lane[g].u_lfsr_w.state;
+        end
+        for (g = 0; g < 16; g = g + 1) begin : g_p16
+            assign st16_x[16*g +: 16] = u_rng16.g_indep.g_lane[g].u_lfsr_x.state;
+            assign st16_w[16*g +: 16] = u_rng16.g_indep.g_lane[g].u_lfsr_w.state;
+        end
+    endgenerate
+
     integer errors = 0;
     integer k;
+    // TC7 reference phases S(n) of the common m-sequence
+    reg [15:0] s_ref, s_x [0:15], s_w [0:15];
+    integer    n7, i7, e7;
     reg [15:0] ref_x, ref_w, first_x, first_w, hold_x, hold_w;
     integer period_x, period_w, zero_seen;
 
@@ -102,19 +138,55 @@ module tb_sc_lfsr8;
         // ---------------- TC6: reset -----------------------------------------
         @(posedge clk); @(posedge clk);
         #1;
-        check(st_x == ref_step8(16'hACE1) && st_w == ref_step8(16'h7A5C),
+        check(st_x == ref_step8(16'hACE1) && st_w == ref_step8(16'hF9DE),
               "TC6 reset value != leap8(seed)");
-        if (st_x == ref_step8(16'hACE1) && st_w == ref_step8(16'h7A5C))
+        if (st_x == ref_step8(16'hACE1) && st_w == ref_step8(16'hF9DE))
             $display("PASS: TC6 RESET state_x=0x%04h state_w=0x%04h", st_x, st_w);
+
+        // ---------------- TC7: rev B seed tables (still in reset) -------------
+        e7 = errors;
+        s_ref = 16'hACE1;                       // S(0)
+        for (n7 = 0; n7 < 65535; n7 = n7 + 1) begin
+            for (i7 = 0; i7 < 8; i7 = i7 + 1) begin
+                if (n7 == 4096 * i7)                s_x[i7]     = s_ref;
+                if (n7 == 32768 + 4096 * i7)        s_w[i7]     = s_ref;
+                if (n7 == 4096 * i7 + 2048)         s_x[8 + i7] = s_ref;
+                if (n7 == 32768 + 4096 * i7 + 2048) s_w[8 + i7] = s_ref;
+            end
+            s_ref = ref_step(s_ref);
+        end
+        check(s_ref == 16'hACE1, "TC7 reference period != 65535");
+        // spot-check against the published table of ARCHITECTURE.md 11
+        check(s_w[0] == 16'hF9DE && s_x[1] == 16'h357B && s_x[7] == 16'hC223 && s_w[7] == 16'h91AB,
+              "TC7 reference S(n) != ARCHITECTURE.md 11 values");
+        // modes 0/1: X = S(0), W = S(32768)
+        check(u_rng0.g_shared.u_lfsr_x.state == ref_step8(s_x[0]) &&
+              u_rng0.g_shared.u_lfsr_w.state == ref_step8(s_w[0]), "TC7 mode-0 seeds");
+        for (i7 = 0; i7 < 8; i7 = i7 + 1) begin
+            if (st2_x[16*i7 +: 16] !== ref_step8(s_x[i7]) || st2_w[16*i7 +: 16] !== ref_step8(s_w[i7])) begin
+                errors = errors + 1;
+                $display("FAIL: TC7 mode-2 lane %0d: X 0x%04h exp leap8(S(%0d)=0x%04h), W 0x%04h exp leap8(S(%0d)=0x%04h)",
+                         i7, st2_x[16*i7 +: 16], 4096 * i7, s_x[i7], st2_w[16*i7 +: 16], 32768 + 4096 * i7, s_w[i7]);
+            end
+        end
+        for (i7 = 0; i7 < 16; i7 = i7 + 1) begin
+            if (st16_x[16*i7 +: 16] !== ref_step8(s_x[i7]) || st16_w[16*i7 +: 16] !== ref_step8(s_w[i7])) begin
+                errors = errors + 1;
+                $display("FAIL: TC7 IL=16 lane %0d seeds", i7);
+            end
+        end
+        if (errors == e7)
+            $display("PASS: TC7 SEEDS rev B: mode 0/1 X=S(0)=0x%04h W=S(32768)=0x%04h; mode 2 X_i=S(4096i), W_i=S(32768+4096i) for i=0..7 (W_7=0x%04h); IL=16 half-way phases; reference period 65535",
+                     s_x[0], s_w[0], s_w[7]);
         rst = 1'b0;
 
         // ---------------- TC1: load ------------------------------------------
         load = 1'b1; @(posedge clk); #1; load = 1'b0;
         ref_x = ref_step8(16'hACE1);
-        ref_w = ref_step8(16'h7A5C);
+        ref_w = ref_step8(16'hF9DE);
         check(st_x == ref_x && st_w == ref_w, "TC1 load value");
         if (st_x == ref_x && st_w == ref_w)
-            $display("PASS: TC1 LOAD state_x=0x%04h (=8 steps of 0xACE1) state_w=0x%04h (=8 steps of 0x7A5C)",
+            $display("PASS: TC1 LOAD state_x=0x%04h (=8 steps of 0xACE1) state_w=0x%04h (=8 steps of 0xF9DE)",
                      st_x, st_w);
         first_x = st_x; first_w = st_w;
 

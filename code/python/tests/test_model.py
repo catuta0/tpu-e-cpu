@@ -1,9 +1,14 @@
-"""Unit tests of the SC-TPU golden model (task SW-01a, deliverable 5).
+"""Unit tests of the SC-TPU golden model (tasks SW-01a, SW-02).
 
-Spec: design/architecture/ARCHITECTURE.md rev A, sections 5.2-5.6 ([BIT-EXACT]).
+Spec: design/architecture/ARCHITECTURE.md sections 5.2-5.6 ([BIT-EXACT]) with
+the rev B seed rule of section 11 (ADR-008); INTERFACES.json revision B.
 Run: ``.venv/bin/python -m pytest -q code/python/tests``.
 
 Covered:
+* rev B seeds: S(n) recomputed here from 0xACE1 with literal single steps and
+  compared with the hex table of ARCHITECTURE.md 11 and INTERFACES.json;
+  pairwise stream-cycle lag >= 512 for all 16 mode-2 LFSRs
+  (lag_cycles = d * inv(8) mod 65535); rev A seeds still selectable;
 * leap-forward LFSR = 8 single steps, for every one of the 65536 states (5.3);
 * slow literal reference vs fast vectorised model on random cases, all
   RNG modes, K = 4..10 (5.3);
@@ -60,13 +65,107 @@ def test_stream_r_uses_state_after_8_steps() -> None:
         assert seq[k] == s & 0xFF
 
 
-def test_mode2_seeds() -> None:
-    """Mode-2 seeds follow (base + step*i) mod 2^16 and none is the lock-up state 0."""
-    sx, sw = M.lane_seeds(2)
+# Literal copy of the ARCHITECTURE.md section 11 table (independent of model.py).
+SPEC_REVB_X = [0xACE1, 0x357B, 0x6F4D, 0xEAD3, 0x0348, 0x70BC, 0xB617, 0xC223]
+SPEC_REVB_W = [0xF9DE, 0x71EC, 0xAA39, 0x520B, 0x9DB1, 0xF251, 0x5D8E, 0x91AB]
+PERIOD = 65535
+
+
+def _positions_from_origin() -> dict:
+    """{state: n} with state = S(n), walked here with literal lfsr.step (not model's cache)."""
+    pos, st = {}, 0xACE1
+    for n in range(PERIOD):
+        pos[st] = n
+        st = lfsr.step(st)
+    assert st == 0xACE1 and len(pos) == PERIOD  # full period, every non-zero state once
+    return pos
+
+
+def test_mode2_seeds_revA() -> None:
+    """Rev A (superseded) seeds: (base + step*i) mod 2^16, still selectable with spec_rev="A"."""
+    sx, sw = M.lane_seeds(2, "A")
     assert sx[0] == 0xACE1 and sw[0] == 0x7A5C
     assert sx[1] == (0xACE1 + 0x3C5A) & 0xFFFF and sw[7] == (0x7A5C + 7 * 0x2B67) & 0xFFFF
     assert 0 not in sx + sw
-    assert M.lane_seeds(0) == M.lane_seeds(1) == ([0xACE1], [0x7A5C])
+    assert M.lane_seeds(0, "A") == M.lane_seeds(1, "A") == ([0xACE1], [0x7A5C])
+
+
+def test_revB_seeds_equal_spec_table() -> None:
+    """Rev B seeds = S(4096 i), S(32768 + 4096 i) computed from 0xACE1 = spec hex table (11)."""
+    x_calc = [lfsr.step_n(0xACE1, 4096 * i) for i in range(8)]
+    w_calc = [lfsr.step_n(0xACE1, 32768 + 4096 * i) for i in range(8)]
+    assert x_calc == SPEC_REVB_X and w_calc == SPEC_REVB_W
+    assert lfsr.step_n(0xACE1, 32768) == 0xF9DE
+    # model (default = rev B) uses exactly these seeds
+    assert M.DEFAULT_SPEC_REV == "B" and M.DEFAULT_RNG_MODE == 2
+    assert M.lane_seeds(2) == M.lane_seeds(2, "B") == (SPEC_REVB_X, SPEC_REVB_W)
+    assert M.lane_seeds(0) == M.lane_seeds(1) == ([0xACE1], [0xF9DE])
+    assert 0 not in x_calc + w_calc
+    # INTERFACES.json revision B carries the same table
+    tpu = json.loads((ROOT / "management" / "INTERFACES.json").read_text())
+    assert tpu["revision"] == "B"
+    lf = tpu["tpu"]["lfsr"]
+    parse = lambda s: [int(v, 16) for v in s.split(":", 1)[1].split(",")]  # noqa: E731
+    assert parse(lf["seed_x_i_mode2"]) == SPEC_REVB_X and parse(lf["seed_w_i_mode2"]) == SPEC_REVB_W
+    assert lf["seed_x"].startswith("0xACE1") and lf["seed_w"].startswith("0xF9DE")
+    assert tpu["tpu"]["rng_mode_default"] == 2
+
+
+def _lag_cycles(pos: dict, a: int, b: int) -> int:
+    """lag_cycles = d * inv(8) mod 65535 with d = phase(b) - phase(a) in single steps."""
+    d = (pos[b] - pos[a]) % PERIOD
+    return d * pow(8, -1, PERIOD) % PERIOD
+
+
+def test_revB_pairwise_stream_lag_at_least_512() -> None:
+    """All 120 pairs of the 16 mode-2 LFSRs are >= 512 stream cycles apart (both directions)."""
+    pos = _positions_from_origin()
+    seeds = SPEC_REVB_X + SPEC_REVB_W
+    names = [f"X{i}" for i in range(8)] + [f"W{i}" for i in range(8)]
+    worst = PERIOD
+    for a in range(16):
+        for b in range(a + 1, 16):
+            m = _lag_cycles(pos, seeds[a], seeds[b])
+            dist = min(m, PERIOD - m)  # b lags a by m cycles, a lags b by 65535 - m
+            assert dist >= 512, (names[a], names[b], m)
+            worst = min(worst, dist)
+            # the lag really is a time shift of the r stream: r_b(k) = r_a(k + m)
+            if a == 0 and b in (1, 8):
+                ra = lfsr.stream_r_sequence(seeds[a], m + 40)
+                rb = lfsr.stream_r_sequence(seeds[b], 40)
+                assert rb == ra[m:m + 40]
+    assert worst == 512 == M.REVB_MIN_LAG_CYCLES
+    # operands multiplied together (X_i, W_i) are 4096 cycles apart; modes 0/1 X-W too
+    for i in range(8):
+        assert _lag_cycles(pos, SPEC_REVB_X[i], SPEC_REVB_W[i]) == 4096
+    assert M.stream_distance_cycles(0xACE1, 0xF9DE) == 4096
+    # model helper agrees with the in-test formula on every pair
+    for a in seeds:
+        for b in seeds:
+            assert M.stream_lag_cycles(a, b) == _lag_cycles(pos, a, b)
+
+
+def test_revA_lag_defect_documented() -> None:
+    """Rev A mode-2 seeds had a pair only 321 cycles apart (X0-W3): the reason for ADR-008."""
+    sx, sw = M.lane_seeds(2, "A")
+    seeds = sx + sw
+    d = min(M.stream_distance_cycles(seeds[a], seeds[b]) for a in range(16) for b in range(a + 1, 16))
+    assert d == 321 < 512
+    assert M.stream_distance_cycles(0xACE1, 0x7A5C) == 26829  # rev A modes 0/1 X-W
+
+
+def test_params_word() -> None:
+    """PARAMS = {version, RNG_MODE, IL=8, NL=16}; version 0x02 in rev B (5.4, 11)."""
+    assert M.params_word(2) == 0x02020810 and M.params_word(0) == 0x02000810
+    assert M.params_word(1, "A") == 0x01010810
+
+
+def test_spec_rev_validation() -> None:
+    """Unknown spec revisions are rejected."""
+    with pytest.raises(ValueError):
+        M.lane_seeds(2, "C")
+    with pytest.raises(ValueError):
+        M.SCEngine(4, 2, spec_rev="b")
 
 
 def test_rng_streams_modes() -> None:
@@ -79,7 +178,14 @@ def test_rng_streams_modes() -> None:
         assert [int(v) for v in rx1[i]] == [M.rotl8(int(v), i) for v in rx0[0]]
         assert [int(v) for v in rw1[i]] == [M.rotl8(int(v), i) for v in rw0[0]]
     assert list(rx2[0]) == list(rx0[0])  # lane 0 seed equals the shared seed
-    assert list(rx2[3]) == lfsr.stream_r_sequence((0xACE1 + 3 * 0x3C5A) & 0xFFFF, 20)
+    assert list(rx2[3]) == lfsr.stream_r_sequence(SPEC_REVB_X[3], 20)
+    _, rw2 = M.rng_streams(2, 20)
+    assert list(rw2[7]) == lfsr.stream_r_sequence(SPEC_REVB_W[7], 20)
+    # rev A still available
+    rx2a, _ = M.rng_streams(2, 20, spec_rev="A")
+    assert list(rx2a[3]) == lfsr.stream_r_sequence((0xACE1 + 3 * 0x3C5A) & 0xFFFF, 20)
+    _, rw0a = M.rng_streams(0, 20, spec_rev="A")
+    assert list(rw0a[0]) == lfsr.stream_r_sequence(0x7A5C, 20)
 
 
 def test_rotl8() -> None:
@@ -224,8 +330,9 @@ def _random_case(rng, extreme: bool = False):
     return x, ram, b
 
 
+@pytest.mark.parametrize("spec_rev", ["B", "A"])
 @pytest.mark.parametrize("mode", [0, 1, 2])
-def test_reference_vs_vectorised_random(mode: int) -> None:
+def test_reference_vs_vectorised_random(mode: int, spec_rev: str) -> None:
     """Bit-exact agreement (HIDDEN, SCORE, RESULT, acc, Dp) on random cases, K=4..10."""
     rng = np.random.default_rng(TEST_SEED + mode)
     mismatches = 0
@@ -236,8 +343,8 @@ def test_reference_vs_vectorised_random(mode: int) -> None:
                 continue  # keep runtime low; K>=9 covered by the random case
             x, ram, b = _random_case(rng, extreme)
             s = int(rng.integers(0, 8))
-            ref = M.sc_inference_reference(x, ram, b, K, s, mode)
-            fast = M.sc_inference(x, ram, b, K, s, mode)
+            ref = M.sc_inference_reference(x, ram, b, K, s, mode, spec_rev)
+            fast = M.sc_inference(x, ram, b, K, s, mode, spec_rev)
             cases += 1
             mismatches += sum(int(a != c) for a, c in zip(ref.hidden, fast.hidden))
             mismatches += sum(int(a != c) for a, c in zip(ref.score, fast.score))
@@ -362,12 +469,45 @@ def test_vector_files_recheck_with_reference() -> None:
         psets[n] = (np.array(M.words_to_bytes([int(t, 16) for t in _hexlines(DATA / "corner" / f"pset{n}_weights.hex")])),
                     [int(t, 16) - (65536 if int(t, 16) & 0x8000 else 0)
                      for t in _hexlines(DATA / "corner" / f"pset{n}_bias.hex")])
-    files = sorted(DATA.glob("tpu_vectors_*.txt"))
-    assert len(files) == 8
+    files = sorted(DATA.glob("tpu_vectors_*.txt")) + sorted((DATA / "revA").glob("tpu_vectors_*.txt"))
+    assert len(files) == 16
     for p in files:
+        rev = G.read_spec_rev(p)
+        assert rev == ("A" if p.parent.name == "revA" else "B"), p
         vecs = G.read_vectors(p)
         assert len(vecs) in (360, 16, 51)
         for v in (vecs[0], vecs[len(vecs) // 2], vecs[-1]):
             ram, b = psets[v["pset"]]
-            r = M.sc_inference_reference(v["inputs"], ram, b, v["K"], v["s"], v["mode"])
+            r = M.sc_inference_reference(v["inputs"], ram, b, v["K"], v["s"], v["mode"], rev)
             assert (r.hidden, r.score, r.result) == (v["hidden"], v["score"], v["result"]), p.name
+
+
+@pytest.mark.skipif(not (DATA / "tpu_rng_trace_mode2.txt").exists(), reason="run sctpu.gen_hex first")
+def test_rng_trace_files_rev_tags_and_seeds() -> None:
+    """Trace files: '# spec_rev B' header, seeds line and first states follow the rev B seeds."""
+    from sctpu import gen_hex as G
+    for mode in (0, 1, 2):
+        p = DATA / f"tpu_rng_trace_mode{mode}.txt"
+        assert G.read_spec_rev(p) == "B"
+        assert G.read_spec_rev(DATA / "revA" / p.name) == "A"
+        sx, sw = M.lane_seeds(mode)
+        rows = [ln.split() for ln in p.read_text().splitlines() if not ln.startswith("#")]
+        assert len(rows) == 64
+        n = len(sx)
+        assert [int(v, 16) for v in rows[0][1:1 + n]] == [lfsr.step_n(v, 8) for v in sx]
+        assert [int(v, 16) for v in rows[0][1 + n:1 + 2 * n]] == [lfsr.step_n(v, 8) for v in sw]
+
+
+@pytest.mark.skipif(not (DATA / "soc_expected.json").exists(), reason="run sctpu.gen_hex first")
+def test_soc_expected_matches_reference() -> None:
+    """soc_expected.json = slow reference on input.hex, K=8, s=0, mode 2, rev B."""
+    se = json.loads((DATA / "soc_expected.json").read_text())
+    assert (se["spec_rev"], se["K"], se["act_shift_s"], se["rng_mode"]) == ("B", 8, 0, 2)
+    mp = json.loads((DATA / "model_params.json").read_text())
+    ram = M.pack_weight_ram(np.array(mp["w1_codes"]), np.array(mp["w2_codes"]))
+    b = M.pack_biases(mp["b1_int16"], mp["b2_int16"])
+    x = M.words_to_bytes([int(t, 16) for t in _hexlines(DATA / "input.hex")])
+    r = M.sc_inference_reference(x, ram, b, 8, 0, 2, "B")
+    assert se["hidden_codes"] == r.hidden and se["score"] == r.score and se["result"] == r.result
+    assert se["score_words"] == [f"0x{w:08x}" for w in M.score_words(r.score)]
+    assert se["params_expected"] == "0x02020810" and se["reference_crosscheck_mismatching_fields"] == 0

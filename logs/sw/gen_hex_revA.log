@@ -1,0 +1,18 @@
+# command: cd code/python && ../../.venv/bin/python -m sctpu.gen_hex
+# gen_hex.py rev=d2ed476-dirty variant=qat_noise s=0 test images=360
+input.hex = test position 0 = load_digits row 1496, label 7
+tpu_vectors_mode0.txt: 360 vectors; reference cross-check 24 vectors, 0 mismatching fields
+tpu_vectors_mode1.txt: 360 vectors; reference cross-check 24 vectors, 0 mismatching fields
+tpu_vectors_mode2.txt: 360 vectors; reference cross-check 24 vectors, 0 mismatching fields
+tpu_vectors_K4_mode1.txt: 16 vectors; reference cross-check 16 vectors, 0 mismatching fields
+tpu_vectors_K10_mode1.txt: 16 vectors; reference cross-check 16 vectors, 0 mismatching fields
+tpu_vectors_corner_mode0.txt: 51 vectors; reference cross-check 51 vectors, 0 mismatching fields
+tpu_vectors_corner_mode1.txt: 51 vectors; reference cross-check 51 vectors, 0 mismatching fields
+tpu_vectors_corner_mode2.txt: 51 vectors; reference cross-check 51 vectors, 0 mismatching fields
+CROSSCHECK TOTAL: 257 vectors x 33 fields, mismatches = 0
+corner-case sanity assertions: PASS (pset1 hidden=255, pset5 full tie->0, pset6 tie 3/7->3)
+
+real	0m11.999s
+user	0m12.044s
+sys	0m0.334s
+exit=0

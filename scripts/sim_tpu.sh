@@ -12,7 +12,7 @@
 #      assignments in initial-block tasks, which are standard Verilog
 #      semantics for Icarus - the TBs are not meant for Verilator)
 #                                                            -> lint_tb.log
-#   3. unit TBs (Icarus): tb_sc_lfsr8, tb_sc_postproc, tb_sc_lane_array, plus their
+#   3. unit TBs (Icarus): tb_sc_lfsr8 (+ rev B seed tables of sc_rng, TC7), tb_sc_postproc, tb_sc_lane_array, plus their
 #      -DINJECT_FAULT negative runs, which MUST fail          -> tb_*.log
 #   4. tb_sc_tpu for RNG_MODE 0, 1, 2 (one compile per mode): directed tests
 #      D1..D11, RNG trace R1/R2, all golden vector files of sim/data/ for
@@ -87,7 +87,7 @@ if grep -q -E '^LINT_FAIL|%Warning|%Error' "$LOG/lint_rtl.log"; then fail "RTL l
 step "2. TB lint (verilator --timing, default warnings, -Wno-INITIALDLY)"
 {
     echo "# input revision: $REV"
-    for t in "tb_sc_lfsr8:$D/sc_lfsr8.v" "tb_sc_postproc:$D/sc_postproc.v" "tb_sc_lane_array:$D/sc_lane_array.v" "tb_sc_tpu:$RTL"; do
+    for t in "tb_sc_lfsr8:$D/sc_lfsr8.v $D/sc_rng.v" "tb_sc_postproc:$D/sc_postproc.v" "tb_sc_lane_array:$D/sc_lane_array.v" "tb_sc_tpu:$RTL"; do
         top=${t%%:*}; files=${t#*:}
         echo "# cmd: verilator --lint-only --timing -Wno-INITIALDLY $files tests/tpu/$top.v --top-module $top"
         if verilator --lint-only --timing -Wno-INITIALDLY $files tests/tpu/$top.v --top-module $top; then
@@ -118,11 +118,12 @@ run_tb() {  # run_tb <name> <log> <iverilog args...> -- <vvp plusargs...>
 }
 
 step "3. unit testbenches"
-run_tb tb_sc_lfsr8 "$LOG/tb_sc_lfsr8.log" "$D/sc_lfsr8.v" tests/tpu/tb_sc_lfsr8.v --
+run_tb tb_sc_lfsr8 "$LOG/tb_sc_lfsr8.log" "$D/sc_lfsr8.v" "$D/sc_rng.v" tests/tpu/tb_sc_lfsr8.v --
 require "$LOG/tb_sc_lfsr8.log" '^TEST PASSED$' "tb_sc_lfsr8 TEST PASSED"
 require "$LOG/tb_sc_lfsr8.log" '^SIM_EXIT=0$' "tb_sc_lfsr8 exit 0"
+require "$LOG/tb_sc_lfsr8.log" '^PASS: TC7 SEEDS rev B' "tb_sc_lfsr8 TC7 rev B seed tables"
 grep -E '^(PASS|FAIL)' "$LOG/tb_sc_lfsr8.log"
-run_tb tb_sc_lfsr8_fault "$LOG/tb_sc_lfsr8_inject_fault.log" -DINJECT_FAULT "$D/sc_lfsr8.v" tests/tpu/tb_sc_lfsr8.v --
+run_tb tb_sc_lfsr8_fault "$LOG/tb_sc_lfsr8_inject_fault.log" -DINJECT_FAULT "$D/sc_lfsr8.v" "$D/sc_rng.v" tests/tpu/tb_sc_lfsr8.v --
 require "$LOG/tb_sc_lfsr8_inject_fault.log" '^TEST FAILED$' "tb_sc_lfsr8 negative run TEST FAILED"
 require "$LOG/tb_sc_lfsr8_inject_fault.log" '^SIM_EXIT=[1-9]' "tb_sc_lfsr8 negative run non-zero exit"
 echo "negative run tb_sc_lfsr8 -DINJECT_FAULT: TEST FAILED as required"

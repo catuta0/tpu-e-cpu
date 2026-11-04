@@ -1,4 +1,13 @@
-"""Accuracy and stochastic-error study of the SC-TPU (task SW-01a, deliverable 3).
+"""Accuracy and stochastic-error study of the SC-TPU (tasks SW-01a, SW-02).
+
+SW-02: the study is parametrised by the LFSR seed rule (``--spec-rev``,
+default ``B`` = ARCHITECTURE.md section 11) and the ensemble size
+(``--ensemble-size``, default 20 >= REQ-AI-006). The network is NOT retrained:
+the weights are those of ``sim/data/model_params.json`` / ``trained_models.json``.
+Rev B output: ``reports/sw/accuracy_revB.json`` and the figures
+``fig_accuracy_vs_K.pdf`` / ``fig_rms_error_vs_K.pdf`` (rev A copies carry the
+suffix ``_revA``). ``--spec-rev A`` writes ``accuracy_revA_rerun.json`` and
+``*_revA_rerun.pdf`` (never overwrites the original rev A results).
 
 All numbers produced here are SIMULATION results of the Python golden model
 (``sctpu.model``), which is bit-exact with ARCHITECTURE.md section 5 by
@@ -13,8 +22,8 @@ Study
   K = 4..10 x RNG_MODE 0, 1, 2 (identical inputs for all configurations).
 * Error of the stochastic estimate Dp/L versus its expectation, per K and
   mode, measured and predicted by the analytical model below.
-* Design rule: smallest K whose SC accuracy is within 1 percentage point of
-  the expected-value model (K -> infinity), per mode.
+* Design rule: smallest K whose SC accuracy is within 1 (and 2) percentage
+  points of the expected-value model (K -> infinity), per mode.
 
 Analytical error model (also in reports/sw/error_model.md)
 ---------------------------------------------------------
@@ -53,6 +62,7 @@ same run (conditional error of layer 2 alone).
 
 from __future__ import annotations
 
+import argparse
 import json
 import math
 import sys
@@ -157,7 +167,7 @@ def predicted_variance(x: np.ndarray, w: np.ndarray, K: int, mode: int,
 # LFSR phase relations (supports assumption A2/A3)
 # ---------------------------------------------------------------------------
 
-def lfsr_lags() -> dict:
+def lfsr_lags(spec_rev: str = M.DEFAULT_SPEC_REV) -> dict:
     """Stream-cycle lags between all LFSRs (CALCULATION).
 
     All LFSRs share one m-sequence of period 65535. If seed b lies d single
@@ -166,23 +176,20 @@ def lfsr_lags() -> dict:
     other one. A lag shorter than the cycles of one layer can create
     correlations that the error model (A2) ignores.
     """
-    pos, st = {}, M.SEED_X
-    for n in range(lfsr.MAX_PERIOD):
-        pos[st] = n
-        st = lfsr.step(st)
-    inv8 = pow(8, -1, lfsr.MAX_PERIOD)
-
-    def lag(a, b):
-        m = ((pos[b] - pos[a]) % lfsr.MAX_PERIOD) * inv8 % lfsr.MAX_PERIOD
-        return int(min(m, lfsr.MAX_PERIOD - m))
-
-    sx, sw = M.lane_seeds(2)
+    lag = M.stream_distance_cycles  # min(m, 65535 - m), m = d * inv(8) mod 65535
+    sx, sw = M.lane_seeds(2, spec_rev)
+    (x01,), (w01,) = M.lane_seeds(0, spec_rev)
     names = [f"X{i}" for i in range(M.IL)] + [f"W{i}" for i in range(M.IL)]
     seeds = sx + sw
     pairs = sorted((lag(seeds[a], seeds[b]), names[a], names[b])
                    for a in range(16) for b in range(a + 1, 16))
-    return {"modes01_X_W_lag_cycles": lag(M.SEED_X, M.SEED_W),
+    return {"spec_rev": spec_rev,
+            "modes01_X_W_lag_cycles": lag(x01, w01),
             "mode2_smallest_lags": [{"lag_cycles": p[0], "pair": [p[1], p[2]]} for p in pairs[:8]],
+            "mode2_min_pairwise_lag_cycles": pairs[0][0],
+            "mode2_Xi_Wi_lag_cycles": [lag(sx[i], sw[i]) for i in range(M.IL)],
+            "cycles_per_layer1_by_K": {K: M.TILES[0] << K for K in K_RANGE},
+            "cycles_per_inference_by_K": {K: M.N_TILES_TOTAL << K for K in K_RANGE},
             "max_cycles_per_inference_K10": M.N_TILES_TOTAL << M.K_MAX,
             "label": "CALCULATION (exhaustive walk of the 65535-state m-sequence)"}
 
@@ -204,20 +211,36 @@ def hw_from_json(m: dict) -> dict:
             "biases": M.pack_biases(m["b1_int16"], m["b2_int16"]), "s": int(m["s"])}
 
 
-def design_rule(sc: dict, ev_acc: float, tol: float = 0.01) -> dict:
-    """Smallest K with acc_SC(K) >= acc_EV - tol (literal) and the monotone variant."""
+def design_rule(sc: dict, ev_acc: float, tols=(0.01, 0.02)) -> dict:
+    """Smallest K with acc_SC(K) >= acc_EV - tol (literal) and the monotone variant.
+
+    For every tolerance in ``tols`` (fractions; 0.01 = 1 pp) two keys are
+    returned: ``smallest_K_within_<n>pp`` (first K that meets the bound) and
+    ``smallest_K_within_<n>pp_for_all_larger_K`` (K_op of REQ-AI-005: the
+    bound holds for this K and every larger K up to 10). None = never met.
+    """
     ks = sorted(int(k) for k in sc)
-    first = next((k for k in ks if sc[k]["acc"] >= ev_acc - tol - 1e-12), None)
-    mono = None
-    for k in ks:
-        if all(sc[k2]["acc"] >= ev_acc - tol - 1e-12 for k2 in ks if k2 >= k):
-            mono = k
-            break
-    return {"smallest_K_within_1pp": first, "smallest_K_within_1pp_for_all_larger_K": mono}
+    out = {}
+    for tol in tols:
+        tag = f"{round(tol * 100)}pp"
+        first = next((k for k in ks if sc[k]["acc"] >= ev_acc - tol - 1e-12), None)
+        mono = None
+        for k in ks:
+            if all(sc[k2]["acc"] >= ev_acc - tol - 1e-12 for k2 in ks if k2 >= k):
+                mono = k
+                break
+        out[f"smallest_K_within_{tag}"] = first
+        out[f"smallest_K_within_{tag}_for_all_larger_K"] = mono
+    return out
 
 
-ENSEMBLE_SIZE = 16  #: number of analysis-only random LFSR start offsets
-ENSEMBLE_SEED = 0  #: numpy seed of the start offsets
+ENSEMBLE_SIZE = 20  #: number of analysis-only random LFSR start offsets (REQ-AI-006: >= 20)
+ENSEMBLE_SEED = 0  #: numpy seed of the start offsets (first 16 = the SW-01a rev A offsets)
+
+
+def ensemble_offsets(n: int = ENSEMBLE_SIZE, seed: int = ENSEMBLE_SEED) -> np.ndarray:
+    """Analysis-only LFSR start offsets (single steps, 1..65534), default_rng(seed)."""
+    return np.random.default_rng(seed).integers(1, lfsr.MAX_PERIOD, n)
 
 
 def error_arrays(r: dict, xc, w1, w2, b, K: int, mode: int, S) -> dict:
@@ -260,11 +283,20 @@ def error_entry(r: dict, xc, w1, w2, b, K: int, mode: int, S) -> dict:
     return ent
 
 
-def main() -> int:
-    """Run the full study, write reports/sw/accuracy.json and the PDF figures."""
+def main(argv=None) -> int:
+    """Run the full study, write reports/sw/accuracy_rev<X>.json and the PDF figures."""
+    ap = argparse.ArgumentParser(description="SC-TPU accuracy / error study (SIMULATION)")
+    ap.add_argument("--spec-rev", choices=M.SPEC_REVS, default=M.DEFAULT_SPEC_REV)
+    ap.add_argument("--ensemble-size", type=int, default=ENSEMBLE_SIZE)
+    args = ap.parse_args(argv)
+    spec_rev, n_ens = args.spec_rev, args.ensemble_size
+    suffix = "" if spec_rev == M.DEFAULT_SPEC_REV else "_revA_rerun"
+    out_json = REPORT_DIR / ("accuracy_revB.json" if spec_rev == "B" else "accuracy_revA_rerun.json")
     t0 = time.time()
     rev = T.git_rev()
-    print(f"# accuracy.py rev={rev} numpy={np.__version__}")
+    print(f"# accuracy.py rev={rev} numpy={np.__version__} spec_rev={spec_rev} ensemble_size={n_ens} "
+          f"ensemble_seed={ENSEMBLE_SEED}")
+    print("# weights NOT retrained: sim/data/model_params.json + reports/sw/trained_models.json (SW-01a)")
     sel, allm = load_models()
     d = T.load_split()
     te = np.array(sel["test_indices"])
@@ -275,10 +307,23 @@ def main() -> int:
 
     variants = ["qat", "qat_noise", "float"]
     hws = {v: hw_from_json(allm["models"][v]) for v in variants}
-    res = {"label": "SIMULATION (Python golden model sctpu.model, bit-exact per ARCHITECTURE.md 5)",
-           "command": "cd code/python && ../../.venv/bin/python -m sctpu.accuracy",
-           "git_rev": rev, "spec_rev": "ece09f0 (ARCHITECTURE.md rev A, unchanged at run time)",
-           "dataset": sel["dataset"], "split": sel["split"], "seeds": sel["seeds"],
+    res = {"label": "SIMULATION (Python golden model sctpu.model, bit-exact per ARCHITECTURE.md 5 + 11)",
+           "command": f"cd code/python && ../../.venv/bin/python -m sctpu.accuracy --spec-rev {spec_rev} "
+                      f"--ensemble-size {n_ens}",
+           "git_rev": rev,
+           "spec_rev": spec_rev,
+           "spec": ("ARCHITECTURE.md section 5 with the rev B phase-spaced seeds of section 11 (ADR-008), "
+                    "INTERFACES.json revision B (git 4e5c35a)") if spec_rev == "B" else
+                   "ARCHITECTURE.md section 5 rev A seeds (superseded; re-run for comparison)",
+           "seeds": {"modes01_x": f"0x{M.lane_seeds(0, spec_rev)[0][0]:04x}",
+                     "modes01_w": f"0x{M.lane_seeds(0, spec_rev)[1][0]:04x}",
+                     "mode2_x": [f"0x{v:04x}" for v in M.lane_seeds(2, spec_rev)[0]],
+                     "mode2_w": [f"0x{v:04x}" for v in M.lane_seeds(2, spec_rev)[1]]},
+           "retrained": False,
+           "weights_source": "sim/data/model_params.json (selected) and reports/sw/trained_models.json "
+                             "(all variants), trained in SW-01a; unchanged in SW-02",
+           "rng_seeds_of_study": None,
+           "dataset": sel["dataset"], "split": sel["split"], "training_seeds": sel["seeds"],
            "n_test": int(len(te)), "selected_variant": sel["variant"],
            "selected_s": sel["act_shift_s"], "K_range": K_RANGE, "modes": MODE_NAMES,
            "models": {}}
@@ -322,13 +367,14 @@ def main() -> int:
     hw_sel = hws[selv]
     w1, w2 = M.unpack_weight_ram(hw_sel["weight_ram"])
     b = hw_sel["biases"]
-    ens_rng = np.random.default_rng(ENSEMBLE_SEED)
-    ens_offsets = ens_rng.integers(1, lfsr.MAX_PERIOD, ENSEMBLE_SIZE)
+    ens_offsets = ensemble_offsets(n_ens, ENSEMBLE_SEED)
+    res["rng_seeds_of_study"] = {"ensemble_numpy_seed": ENSEMBLE_SEED, "ensemble_size": int(n_ens),
+                                 "ensemble_start_offsets_single_steps": [int(o) for o in ens_offsets]}
     ens_acc = {str(mo): {} for mo in MODES}
     for mode in MODES:
         S = spin_table(mode) if mode != 2 else None
         for K in K_RANGE:
-            eng = M.SCEngine(K, mode)  # not cached: ~10 MB per engine
+            eng = M.SCEngine(K, mode, spec_rev=spec_rev)  # not cached: ~10 MB per engine
             for v in variants:
                 hw = hws[v]
                 r = eng.run(xc, hw["weight_ram"], hw["biases"], hw["s"])
@@ -344,7 +390,7 @@ def main() -> int:
             pr = {k: [] for k in ("layer1", "layer2_real")}
             accs = []
             for off in ens_offsets:
-                ee = M.SCEngine(K, mode, start_offset=int(off)).run(
+                ee = M.SCEngine(K, mode, start_offset=int(off), spec_rev=spec_rev).run(
                     xc, hw_sel["weight_ram"], hw_sel["biases"], hw_sel["s"])
                 accs.append(float(np.mean(ee["result"] == y)))
                 raw = error_arrays(ee, xc, w1, w2, b, K, mode, S)
@@ -371,7 +417,7 @@ def main() -> int:
             del eng
     res["error_study"] = {"variant": selv, "quantity": "Dp/L - E[Dp]/L (B removed); units of the bipolar value",
                           "hardware_seeds": "rms_measured / mean_measured: the fixed seeds of 5.3 (one realisation)",
-                          "ensemble": f"{ENSEMBLE_SIZE} analysis-only LFSR start offsets, rng seed {ENSEMBLE_SEED}: "
+                          "ensemble": f"{n_ens} analysis-only LFSR start offsets, rng seed {ENSEMBLE_SEED}: "
                                       + ", ".join(str(int(o)) for o in ens_offsets),
                           "per_mode_K": err}
     res["models"][selv]["sc_ensemble_accuracy"] = ens_acc
@@ -382,14 +428,52 @@ def main() -> int:
         ev_acc = res["models"][v]["expected_value_Kinf"]["acc"]
         res["models"][v]["design_rule"] = {str(mo): design_rule(res["models"][v]["sc"][str(mo)], ev_acc)
                                            for mo in MODES}
-    res["lfsr_lags"] = lfsr_lags()
+    res["lfsr_lags"] = lfsr_lags(spec_rev)
     res["value_ranges"] = M.value_ranges()
+    res["requirement_checks"] = requirement_checks(res)
     REPORT_DIR.mkdir(parents=True, exist_ok=True)
-    (REPORT_DIR / "accuracy.json").write_text(json.dumps(res, indent=1) + "\n")
+    out_json.write_text(json.dumps(res, indent=1) + "\n")
     print_table(res)
-    make_figures(res)
-    print(f"# wrote {REPORT_DIR/'accuracy.json'} and figures ({time.time()-t0:.1f} s)")
+    make_figures(res, suffix)
+    print(f"# wrote {out_json} and figures (suffix '{suffix}') ({time.time()-t0:.1f} s)")
     return 0
+
+
+def requirement_checks(res: dict, mode: int = M.DEFAULT_RNG_MODE, K_req: int = 8) -> dict:
+    """Evaluate REQ-AI-004/005/006/009 for the selected model and ``mode`` (SIMULATION).
+
+    The pass/fail words are computed mechanically from the numbers of this
+    run; they are evidence for the manager, not a verdict on the requirement
+    (the requirement status is owned by the systems engineer).
+    """
+    selv = res["selected_variant"]
+    mr = res["models"][selv]
+    sc = mr["sc"][str(mode)]
+    ev = mr["expected_value_Kinf"]["acc"]
+    ens = mr["sc_ensemble_accuracy"][str(mode)][K_req]
+    dr = mr["design_rule"][str(mode)]
+    k_op = dr["smallest_K_within_2pp_for_all_larger_K"]
+    ratios = {K: res["error_study"]["per_mode_K"][str(mode)][K][lay]["ensemble_ratio"]
+              for K in K_RANGE if K >= 7 for lay in ("layer1",)}
+    ratios_hw = {K: res["error_study"]["per_mode_K"][str(mode)][K]["layer1"]["ratio_measured_over_eq2"]
+                 for K in K_RANGE if K >= 7}
+    dev = abs(sc[K_req]["acc"] - ens["mean"])
+    return {
+        "mode": mode, "variant": selv, "label": "SIMULATION (n = 360 test images)",
+        "REQ-AI-004": {"value": sc[K_req], "threshold": 0.90,
+                       "result": "PASS" if sc[K_req]["acc"] >= 0.90 else "FAIL"},
+        "REQ-AI-005": {"K_op": k_op, "ev_acc": ev,
+                       "gap_pp_by_K": {K: round((ev - sc[K]["acc"]) * 100, 3) for K in K_RANGE},
+                       "result": "PASS" if (k_op is not None and k_op <= 9) else "FAIL"},
+        "REQ-AI-006": {"n_realisations": ens["n_realisations"], "mean": ens["mean"], "std": ens["std"],
+                       "deployed": sc[K_req]["acc"], "abs_deviation_over_std": dev / ens["std"],
+                       "result": "PASS" if (ens["n_realisations"] >= 20 and ens["mean"] >= 0.90
+                                            and dev <= 2 * ens["std"]) else "FAIL"},
+        "REQ-AI-009": {"layer1_ensemble_ratio_measured_over_eq2_K_ge_7": ratios,
+                       "layer1_hardware_seed_ratio_K_ge_7": ratios_hw,
+                       "result": "PASS" if all(0.5 <= r <= 2.0 for r in list(ratios.values())
+                                               + list(ratios_hw.values())) else "FAIL"},
+    }
 
 
 def print_table(res: dict) -> None:
@@ -402,13 +486,34 @@ def print_table(res: dict) -> None:
         for K in K_RANGE:
             row = [mr["expected_value_finite_K"][K]["acc"]] + [mr["sc"][str(mo)][K]["acc"] for mo in MODES]
             print(f"{K:<3d} " + "  ".join(f"{a:.4f}" for a in row))
-        print("design rule (smallest K within 1 pp of EV; monotone):",
-              {mo: (dr["smallest_K_within_1pp"], dr["smallest_K_within_1pp_for_all_larger_K"])
+        print("design rule (smallest K within 1 pp of EV; monotone | within 2 pp; monotone):",
+              {mo: (dr["smallest_K_within_1pp"], dr["smallest_K_within_1pp_for_all_larger_K"],
+                    dr["smallest_K_within_2pp"], dr["smallest_K_within_2pp_for_all_larger_K"])
                for mo, dr in mr["design_rule"].items()})
+        if "sc_ensemble_accuracy" in mr:
+            print("ensemble (mean +- sd over offsets):")
+            for K in K_RANGE:
+                print(f"{K:<3d} " + "  ".join(
+                    f"m{mo} {mr['sc_ensemble_accuracy'][str(mo)][K]['mean']:.4f}+-"
+                    f"{mr['sc_ensemble_accuracy'][str(mo)][K]['std']:.4f}" for mo in MODES))
+            print("design rule on ensemble mean:", {mo: (d["smallest_K_within_1pp_for_all_larger_K"],
+                                                         d["smallest_K_within_2pp_for_all_larger_K"])
+                                                    for mo, d in mr["design_rule_ensemble_mean"].items()})
+    if "requirement_checks" in res:
+        rc = res["requirement_checks"]
+        print(f"\nrequirement evidence (mode {rc['mode']}): " + ", ".join(
+            f"{k}={v['result']}" for k, v in rc.items() if k.startswith("REQ")))
 
 
-def make_figures(res: dict) -> None:
-    """PDF figures: accuracy vs K, RMS error vs K (measured vs predicted), s sweep."""
+def make_figures(res: dict, suffix: str = "") -> None:
+    """PDF figures: accuracy vs K, RMS error vs K (measured vs predicted), s sweep.
+
+    ``suffix`` is appended to the file names (empty for the current rev B).
+    The s-sweep figure depends only on the rev A model-selection data
+    (s_sweep.json) and is redrawn only for a rev A run.
+    """
+    rev = res["spec_rev"]
+    n_ens = res["rng_seeds_of_study"]["ensemble_size"]
     import matplotlib
     matplotlib.use("Agg")
     import matplotlib.pyplot as plt
@@ -439,7 +544,7 @@ def make_figures(res: dict) -> None:
             if "sc_ensemble_accuracy" in mr:  # selected model: ensemble mean (analysis-only)
                 ea = [mr["sc_ensemble_accuracy"][str(mo)][K]["mean"] * 100 for K in K_RANGE]
                 ax.plot(K_RANGE, ea, color=col[mo], lw=1.2, ls="--",
-                        label=f"mode {mo} mean of 16 random LFSR offsets")
+                        label=f"mode {mo} mean of {n_ens} random LFSR offsets")
         ax.set_title(f"weights: {v} (s={mr['s']})")
         ax.set_xlabel("K = log2 L")
         ax.set_xticks(K_RANGE)
@@ -448,10 +553,10 @@ def make_figures(res: dict) -> None:
     handles, labels = axs[0].get_legend_handles_labels()
     labels = [lb.split(" (")[0] if lb.startswith(("expected", "float")) else lb for lb in labels]
     fig.legend(handles, labels, loc="lower center", ncol=5, fontsize=7, frameon=False)
-    fig.suptitle("SC-TPU accuracy vs stream length — SIMULATION (bit-exact golden model, "
-                 "digits test split seed 0, n=360); bands = 95 % Wilson CI", fontsize=9)
+    fig.suptitle(f"SC-TPU accuracy vs stream length, spec rev {rev} seeds — SIMULATION (bit-exact golden "
+                 "model, digits test split seed 0, n=360); bands = 95 % Wilson CI", fontsize=9)
     fig.tight_layout(rect=(0, 0.13, 1, 1))
-    fig.savefig(REPORT_DIR / "fig_accuracy_vs_K.pdf")
+    fig.savefig(REPORT_DIR / f"fig_accuracy_vs_K{suffix}.pdf")
     plt.close(fig)
 
     # 2. RMS error vs K, measured (markers) vs predicted (lines)
@@ -467,18 +572,20 @@ def make_figures(res: dict) -> None:
                     label=f"mode {mo} measured, hardware seeds")
             ens = [es[str(mo)][K][layer]["ensemble_rms_measured"] for K in K_RANGE]
             ax.plot(K_RANGE, ens, color=col[mo], marker=mk[mo], ms=8, lw=0, mfc="none", mew=1.5,
-                    label=f"mode {mo} measured, 16 random offsets")
+                    label=f"mode {mo} measured, {n_ens} random offsets")
         ax.set_yscale("log", base=2)
         ax.set_title(title)
         ax.set_xlabel("K = log2 L")
         ax.set_xticks(K_RANGE)
     axs[0].set_ylabel("RMS of Dp/L − E[Dp]/L")
     axs[1].legend(fontsize=6, frameon=False, loc="upper right", ncol=1)
-    fig.suptitle(f"Stochastic error, weights {res['error_study']['variant']} — SIMULATION vs analytical model",
-                 fontsize=9)
+    fig.suptitle(f"Stochastic error, weights {res['error_study']['variant']}, spec rev {rev} seeds — "
+                 "SIMULATION vs analytical model", fontsize=9)
     fig.tight_layout()
-    fig.savefig(REPORT_DIR / "fig_rms_error_vs_K.pdf")
+    fig.savefig(REPORT_DIR / f"fig_rms_error_vs_K{suffix}.pdf")
     plt.close(fig)
+    if rev != "A":
+        return
 
     # 3. s sweep (validation)
     sw = json.loads((REPORT_DIR / "s_sweep.json").read_text())
@@ -497,7 +604,7 @@ def make_figures(res: dict) -> None:
     fig.suptitle("Activation-shift sweep — SIMULATION (validation split of the 1437 training images)",
                  fontsize=9)
     fig.tight_layout()
-    fig.savefig(REPORT_DIR / "fig_s_sweep.pdf")
+    fig.savefig(REPORT_DIR / f"fig_s_sweep{suffix}.pdf")
     plt.close(fig)
 
 

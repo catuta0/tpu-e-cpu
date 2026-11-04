@@ -28,7 +28,8 @@
 // DIRECTED TESTS (+DIRECTED), each prints PASS/FAIL:
 //   D1 reset values (rev A.1): STATUS = 0, RESULT = 0, CYCLES = 0,
 //      CONFIG = 0x08, SCORE[0..15] = HIDDEN[0..3] = 0, CTRL reads 0.
-//   D2 PARAMS = {0x01, 6'b0, RNG_MODE, IL=8, NL=16}.
+//   D2 PARAMS = {0x02, 6'b0, RNG_MODE, IL=8, NL=16} (version 0x02 = rev B,
+//      ARCHITECTURE.md 11; rev A was 0x01).
 //   D3 CONFIG: write raw LOG2_L 0..15 with various ACT_SHIFT, read back the
 //      clamped value (0..3 -> 4, 11..15 -> 10) and ACT_SHIFT unchanged.
 //   D4 buffers: INPUT / BIAS / WEIGHT word writes, byte-strobe writes, read
@@ -76,7 +77,7 @@
 
 module tb_sc_tpu;
 
-    parameter integer RNG_MODE   = 1;
+    parameter integer RNG_MODE   = 2;   // rev B default (ADR-008)
     // INIT_FILES = 1: the DUT is elaborated with WEIGHT_INIT / BIAS_INIT /
     // INPUT_INIT = sim/data/{weights,bias,input}.hex (spec 5.6) for test D12.
     parameter integer INIT_FILES = 0;
@@ -433,9 +434,9 @@ module tb_sc_tpu;
 
             // ---------------- D2 PARAMS ----------------------------------------
             e0 = errors;
-            v = {8'h01, 6'd0, RNG_MODE[1:0], 8'd8, 8'd16};
+            v = {8'h02, 6'd0, RNG_MODE[1:0], 8'd8, 8'd16};   // rev B version 0x02
             expect_read(A_PARAMS, v, "D2 PARAMS");
-            if (errors == e0) $display("PASS: D2 PARAMS = 0x%08h (NL=16, IL=8, RNG_MODE=%0d, version 0x01)", v, RNG_MODE);
+            if (errors == e0) $display("PASS: D2 PARAMS = 0x%08h (NL=16, IL=8, RNG_MODE=%0d, version 0x02)", v, RNG_MODE);
             else              $display("FAIL: D2 PARAMS");
 
             // ---------------- D3 CONFIG clamp ----------------------------------
@@ -478,7 +479,7 @@ module tb_sc_tpu;
             bus_write(A_STATUS, 32'hFFFF_FFFF); expect_read(A_STATUS, 32'd0, "D4 STATUS is read-only");
             bus_write(A_RESULT, 32'hFFFF_FFFF); expect_read(A_RESULT, 32'd0, "D4 RESULT is read-only");
             bus_write(A_CYCLES, 32'hFFFF_FFFF); expect_read(A_CYCLES, 32'd0, "D4 CYCLES is read-only");
-            bus_write(A_PARAMS, 32'hFFFF_FFFF); expect_read(A_PARAMS, {8'h01, 6'd0, RNG_MODE[1:0], 8'd8, 8'd16}, "D4 PARAMS is read-only");
+            bus_write(A_PARAMS, 32'hFFFF_FFFF); expect_read(A_PARAMS, {8'h02, 6'd0, RNG_MODE[1:0], 8'd8, 8'd16}, "D4 PARAMS is read-only");
             bus_write(A_SCORE,  32'hFFFF_FFFF); expect_read(A_SCORE, 32'd0, "D4 SCORE is read-only");
             bus_write(A_HIDDEN, 32'hFFFF_FFFF); expect_read(A_HIDDEN, 32'd0, "D4 HIDDEN is read-only");
             expect_read(A_STATUS, 32'd0, "D4 no START from other writes");

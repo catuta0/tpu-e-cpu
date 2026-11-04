@@ -394,7 +394,8 @@ def test_tpu_stub():
         ebreak
     """, tpu=tpu)
     assert r.regs[3] == 0x7A and tpu.starts == 1
-    assert r.regs[4:10] == [1, 1, 2, 7, 1234, 0x01000810]
+    assert r.regs[4:10] == [1, 1, 2, 7, 1234, 0x02020810]  # rev B PARAMS (mode 2, version 0x02)
+    assert TpuStub(rng_mode=1, version=0x01).read(0x014) == 0x01010810  # rev A form still expressible
 
 
 def test_soc_demo_on_iss():

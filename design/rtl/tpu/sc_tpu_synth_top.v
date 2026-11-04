@@ -37,7 +37,7 @@
 module sc_tpu_synth_top #(
     parameter integer NL          = 16,
     parameter integer IL          = 8,
-    parameter integer RNG_MODE    = 1,
+    parameter integer RNG_MODE    = 2,          // rev B default (ADR-008)
     parameter         WEIGHT_INIT = "",
     parameter         BIAS_INIT   = "",
     parameter         INPUT_INIT  = ""

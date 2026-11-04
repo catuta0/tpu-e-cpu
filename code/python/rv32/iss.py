@@ -119,14 +119,16 @@ class TpuStub:
     * CONFIG (0x008) RW: [3:0] LOG2_L (reset 8, clamped to 4..10 on write),
       [6:4] ACT_SHIFT (reset 0); other bits read 0 (INTERFACES.json).
     * RESULT (0x00C) -> ``result & 0xF``; CYCLES (0x010) -> ``cycles``.
-    * PARAMS (0x014) -> NL=16, IL=8, RNG_MODE, version 0x01.
+    * PARAMS (0x014) -> NL=16, IL=8, RNG_MODE, version (rev B defaults: RNG_MODE 2,
+      version 0x02 -> 0x02020810, ARCHITECTURE.md 11 / ADR-008; SW-02).
     * Every other offset of the 4 KiB window is plain read/write storage
       (stands in for INPUT/SCORE/HIDDEN/BIAS/WEIGHT; no inference is done).
     """
     result: int = 0
     cycles: int = 0
     busy_polls: int = 0
-    rng_mode: int = 0
+    rng_mode: int = 2              # rev B default RNG_MODE (ARCHITECTURE.md 11)
+    version: int = 0x02            # PARAMS[31:24], rev B (was 0x01 in rev A)
     config: int = 0x08
     starts: int = 0
     config_writes: list[int] = field(default_factory=list)
@@ -147,7 +149,7 @@ class TpuStub:
         if off == TPU_CYCLES:
             return self.cycles & MASK32
         if off == TPU_PARAMS:
-            return (0x01 << 24) | ((self.rng_mode & 3) << 16) | (8 << 8) | 16
+            return ((self.version & 0xFF) << 24) | ((self.rng_mode & 3) << 16) | (8 << 8) | 16
         if off == TPU_CTRL:
             return 0                # CTRL is write-only
         return int.from_bytes(self._store[off:off + 4], "little")

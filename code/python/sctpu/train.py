@@ -65,6 +65,7 @@ TRAIN_SEED = 0  #: seed of weight init + minibatch order + noise
 N_TEST = 360
 N_VAL = 288
 K_TRAIN_NOISE = 8  #: L = 256, the CONFIG.LOG2_L reset value (5.4)
+TRAIN_SELECTION_SPEC_REV = "A"  #: seed rule used for the SC validation metric of model selection (SW-01a)
 
 HPARAMS = {"epochs": 300, "batch": 32, "lr": 0.005, "lr_final": 0.0002,
            "beta1": 0.9, "beta2": 0.999, "eps": 1e-8}
@@ -243,7 +244,11 @@ def evaluate(p: dict, codes: np.ndarray, y: np.ndarray, sc_cfgs=((8, 0), (8, 1),
     ev = M.ev_inference(codes, hw["weight_ram"], hw["biases"], hw["s"])
     out["ev"] = float(np.mean(ev["result"] == y))
     for K, mode in sc_cfgs:
-        r = M.sc_inference_batch(codes, hw["weight_ram"], hw["biases"], K, hw["s"], mode)
+        # SW-02: the model selection of SW-01a was made with the rev A seeds; it is
+        # pinned to rev A here so that re-running train.py reproduces the frozen
+        # model_params.json (REQ-AI-002). The network is NOT retrained for rev B.
+        r = M.sc_inference_batch(codes, hw["weight_ram"], hw["biases"], K, hw["s"], mode,
+                                 spec_rev=TRAIN_SELECTION_SPEC_REV)
         out[f"sc_K{K}_m{mode}"] = float(np.mean(r["result"] == y))
     return out
 
