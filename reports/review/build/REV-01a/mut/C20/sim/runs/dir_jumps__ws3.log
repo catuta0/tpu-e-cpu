@@ -1,0 +1,36 @@
+INFO: test=dir_jumps ws=3 rand_stall=0 seed=1 prog=sim/data/cpu_tests/dir_jumps.hex
+FAIL: watchdog: no stop after 200000 cycles (pc=00000060 halted=0)
+PASS: stop kind (0 tohost, 1 trap) : got 0x00000000 expected 0x00000000
+FAIL: TOHOST store pc : got 0x00000000 expected 0x00000518
+PASS: trap_cause : got 0x00000000 expected 0x00000000
+FAIL: instret (retire pulses) : got 0x0000822e expected 0x00000045
+FAIL: TOHOST written : got 0x00000000 expected 0x00000001
+FAIL: TOHOST value : got 0x00000000 expected 0x00000001
+PASS: bus_err : got 0x00000000 expected 0x00000000
+PASS: LED : got 0x00000000 expected 0x00000000
+PASS: UART byte count : got 0x00000000 expected 0x00000000
+PASS: UART bytes equal : got 0x00000001 expected 0x00000001
+FAIL: signature word 1 (addr 0x00000f04): got 0x00000000 expected 0x00000004
+FAIL: signature word 2 (addr 0x00000f08): got 0x00000000 expected 0x00000020
+FAIL: signature word 5 (addr 0x00000f14): got 0x00000000 expected 0x00000024
+FAIL: signature word 6 (addr 0x00000f18): got 0x00000000 expected 0x00000034
+FAIL: signature word 7 (addr 0x00000f1c): got 0x00000000 expected 0x00000040
+FAIL: signature word 8 (addr 0x00000f20): got 0x00000000 expected 0x00000050
+FAIL: signature word 10 (addr 0x00000f28): got 0x00000000 expected 0x00000001
+FAIL: signature word 11 (addr 0x00000f2c): got 0x00000000 expected 0x00000011
+FAIL: signature word 13 (addr 0x00000f34): got 0x00000000 expected 0x00000013
+FAIL: signature word 14 (addr 0x00000f38): got 0x00000000 expected 0x00000014
+FAIL: signature word 18 (addr 0x00000f48): got 0x00000000 expected 0x00000064
+FAIL: signature word 19 (addr 0x00000f4c): got 0x00000000 expected 0x00000080
+FAIL: signature word 20 (addr 0x00000f50): got 0x00000000 expected 0x00000074
+FAIL: signature word 22 (addr 0x00000f58): got 0x00000000 expected 0x00000022
+FAIL: signature word 23 (addr 0x00000f5c): got 0x00000000 expected 0x00000080
+FAIL: signature word 24 (addr 0x00000f60): got 0x00000000 expected 0x00000024
+FAIL: signature 0x0F00..0x0F7C (32 words) equal : got 0x00000000 expected 0x00000001
+PASS: bus-protocol violations : got 0x00000000 expected 0x00000000
+INFO: cycles=199972 instret=33326 fetch=33326 load=0 store=0 wait_cycles=99979
+RESULT name=dir_jumps ws=3 rand=0 status=FAIL cycles=199972 instret=33326 cpi=6.000 viol=0
+TEST FAILED (6 failing checks)
+FATAL: tests/cpu/tb_rv32i_core.v:491: 
+       Time: 2000076000  Scope: tb_rv32i_core
+VVP_EXIT=1

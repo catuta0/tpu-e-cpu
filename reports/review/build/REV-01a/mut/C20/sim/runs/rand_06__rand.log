@@ -1,0 +1,33 @@
+INFO: test=rand_06 ws=0 rand_stall=1 seed=18 prog=sim/data/cpu_tests/rand_06.hex
+PASS: stop kind (0 tohost, 1 trap) : got 0x00000000 expected 0x00000000
+PASS: TOHOST store pc : got 0x00000a94 expected 0x00000a94
+PASS: trap_cause : got 0x00000000 expected 0x00000000
+FAIL: instret (retire pulses) : got 0x000000f8 expected 0x00000104
+PASS: TOHOST written : got 0x00000001 expected 0x00000001
+PASS: TOHOST value : got 0x00000001 expected 0x00000001
+PASS: bus_err : got 0x00000000 expected 0x00000000
+PASS: LED : got 0x00000000 expected 0x00000000
+PASS: UART byte count : got 0x00000000 expected 0x00000000
+PASS: UART bytes equal : got 0x00000001 expected 0x00000001
+FAIL: signature word 1 (addr 0x00000f04): got 0x00000000 expected 0xfbc5aa00
+FAIL: signature word 5 (addr 0x00000f14): got 0x884c7174 expected 0x884c7170
+FAIL: signature word 6 (addr 0x00000f18): got 0x490ac260 expected 0xfffffffd
+FAIL: signature word 7 (addr 0x00000f1c): got 0xfeab8170 expected 0xfeab816c
+FAIL: signature word 13 (addr 0x00000f34): got 0xfffff975 expected 0xfffff971
+FAIL: signature word 14 (addr 0x00000f38): got 0x00000000 expected 0x00000001
+FAIL: signature word 16 (addr 0x00000f40): got 0x884c7175 expected 0x884c7171
+FAIL: signature word 21 (addr 0x00000f54): got 0xb6f50fe4 expected 0xb6f50d34
+FAIL: signature word 22 (addr 0x00000f58): got 0x000001ec expected 0x00000048
+FAIL: signature word 23 (addr 0x00000f5c): got 0xfeab81f6 expected 0xfeab81fe
+FAIL: signature word 24 (addr 0x00000f60): got 0x788c1ba5 expected 0x00000801
+FAIL: signature word 27 (addr 0x00000f6c): got 0x36ea2358 expected 0xb55b694c
+FAIL: signature word 29 (addr 0x00000f74): got 0xfeab8050 expected 0xfeab804c
+FAIL: signature word 31 (addr 0x00000f7c): got 0x1540bff7 expected 0xb098a7ca
+FAIL: signature 0x0F00..0x0F7C (32 words) equal : got 0x00000000 expected 0x00000001
+PASS: bus-protocol violations : got 0x00000000 expected 0x00000000
+INFO: cycles=2072 instret=248 fetch=248 load=17 store=49 wait_cycles=1093
+RESULT name=rand_06 ws=0 rand=1 status=FAIL cycles=2072 instret=248 cpi=8.355 viol=0
+TEST FAILED (2 failing checks)
+FATAL: tests/cpu/tb_rv32i_core.v:491: 
+       Time: 21116000  Scope: tb_rv32i_core
+VVP_EXIT=1

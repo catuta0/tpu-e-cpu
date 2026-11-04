@@ -1,0 +1,19 @@
+PASS: T1 reset values: LED/UART_STATUS/TOHOST = 0, TPU STATUS/RESULT/CYCLES = 0, CONFIG = 0x08, PARAMS = 0x03020810, led_n = 6'b111111
+PASS: T2 LED values 0x00/0x3F/0x15/0x2A read back and led_n = ~value; 6-bit register; byte-0 strobe required
+PASS: T3 TOHOST word and byte-lane writes
+PASS: T4 CYCLE read twice 1004 cycles apart differs by exactly 1004; write ignored
+PASS: T5 reserved peripheral offsets read 0 / ignore writes; alias 0x12345000 reads LED
+PASS: T6 RAM first/last word, byte and halfword lanes (little-endian), aliases
+PASS: T7 TPU WEIGHT first/last word, CONFIG, INPUT through the SoC decoder
+FAIL: T8 unmapped 0x30000000 reads 0: read 0x30000000 = 0xa5a50001, expected 0x00000000
+FAIL: T8 unmapped 0xF0000000 reads 0: read 0xf0000000 = 0xa5a50001, expected 0x00000000
+INFO: UART RX byte 0x00
+INFO: UART RX byte 0x55
+INFO: UART RX byte 0xa5
+INFO: UART RX byte 0xff
+PASS: T9 UART bytes 0x00 0x55 0xA5 0xFF decoded on the pin (real-time 115200 8N1 receiver); write while busy ignored; 4 frames, edges on multiples of 234 clocks, tx_busy 2340 clocks each
+PASS: T10 4753 BFM accesses, max latency 3 cycles (<= 4), ready protocol clean
+errors=2
+TEST FAILED
+FATAL: tests/soc/tb_soc_bfm.v:371: tb_soc_bfm failed
+       Time: 424140657  Scope: tb_soc_bfm

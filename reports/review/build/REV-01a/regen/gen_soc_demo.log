@@ -1,0 +1,3 @@
+gen_soc_demo: ACT_SHIFT=0 CONFIG=0x08 code=112 bytes -> reports/review/build/REV-01a/regen/soc_demo_prog.hex
+round-trip mismatches: 0
+ISS checks (RESULT 0..9 x busy_polls 0/3 = 20 runs): 0 errors

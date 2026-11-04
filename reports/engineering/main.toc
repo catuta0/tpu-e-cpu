@@ -1,0 +1,38 @@
+\contentsline {section}{\numberline {1}Scope, conventions and summary}{2}{section.1}%
+\contentsline {subsection}{\numberline {1.1}System}{2}{subsection.1.1}%
+\contentsline {subsection}{\numberline {1.2}Conventions}{2}{subsection.1.2}%
+\contentsline {subsection}{\numberline {1.3}Key results}{2}{subsection.1.3}%
+\contentsline {section}{\numberline {2}Requirements and verification status}{2}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Status matrix}{2}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}Evidence overview (not a status)}{2}{subsection.2.2}%
+\contentsline {section}{\numberline {3}Architecture and decisions}{4}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Block structure}{4}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Algorithm of one inference}{4}{subsection.3.2}%
+\contentsline {subsection}{\numberline {3.3}Architecture decision records}{4}{subsection.3.3}%
+\contentsline {section}{\numberline {4}Interfaces}{5}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Memory map}{5}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}Register maps}{5}{subsection.4.2}%
+\contentsline {subsection}{\numberline {4.3}Bus protocol}{5}{subsection.4.3}%
+\contentsline {subsection}{\numberline {4.4}Top-level ports and pins}{6}{subsection.4.4}%
+\contentsline {section}{\numberline {5}Analyses and their assumptions}{6}{section.5}%
+\contentsline {subsection}{\numberline {5.1}Resource budget versus result}{6}{subsection.5.1}%
+\contentsline {subsection}{\numberline {5.2}Latency}{6}{subsection.5.2}%
+\contentsline {subsection}{\numberline {5.3}Timing}{7}{subsection.5.3}%
+\contentsline {subsection}{\numberline {5.4}Power (estimate only)}{7}{subsection.5.4}%
+\contentsline {subsection}{\numberline {5.5}UART divider}{8}{subsection.5.5}%
+\contentsline {subsection}{\numberline {5.6}Accuracy study}{8}{subsection.5.6}%
+\contentsline {subsection}{\numberline {5.7}Error model}{9}{subsection.5.7}%
+\contentsline {subsection}{\numberline {5.8}Variant studies with identical inputs}{9}{subsection.5.8}%
+\contentsline {subsection}{\numberline {5.9}Stream length $L=2^K$ as a design rule}{10}{subsection.5.9}%
+\contentsline {subsection}{\numberline {5.10}Seed-rule study (rev A $\to $ B $\to $ C)}{10}{subsection.5.10}%
+\contentsline {section}{\numberline {6}Timing and utilisation (three seeds)}{11}{section.6}%
+\contentsline {section}{\numberline {7}Verification methodology and results per block}{12}{section.7}%
+\contentsline {section}{\numberline {8}Review findings}{13}{section.8}%
+\contentsline {section}{\numberline {9}Risks}{13}{section.9}%
+\contentsline {section}{\numberline {10}Limitations}{14}{section.10}%
+\contentsline {section}{\numberline {11}Physical validation plan}{14}{section.11}%
+\contentsline {subsection}{\numberline {11.1}Equipment}{14}{subsection.11.1}%
+\contentsline {subsection}{\numberline {11.2}Preconditions}{14}{subsection.11.2}%
+\contentsline {subsection}{\numberline {11.3}Test items}{15}{subsection.11.3}%
+\contentsline {subsection}{\numberline {11.4}Order and stop criteria}{16}{subsection.11.4}%
+\contentsline {section}{\numberline {12}Reproduction}{16}{section.12}%

@@ -1,0 +1,11 @@
+--- design/rtl/tpu/sc_lane_array.v	2026-11-04 03:54:33.812629432 +0000
++++ reports/review/build/REV-01b/mut/M13_wsng_le/rtl/sc_lane_array.v	2026-11-04 13:23:31.566787049 +0000
+@@ -131,7 +131,7 @@
+ 
+             for (i = 0; i < IL; i = i + 1) begin : g_mult
+                 // Weight SNG: bw = (r_w(i) < W[j][i]); W[j][i] = tile byte j*IL+i.
+-                assign bw[i] = (rw[8*i +: 8] < w_tile[8*(j*IL + i) +: 8]);
++                assign bw[i] = (rw[8*i +: 8] <= w_tile[8*(j*IL + i) +: 8]);
+                 // Bipolar multiply: XNOR of the two streams (1 when equal).
+                 assign p[i]  = ~(bx[i] ^ bw[i]);
+             end

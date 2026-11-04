@@ -1,0 +1,9 @@
+vec 0: pset=0 K=8 s=0 mode=2 idx=0 label=7 acc1[0..3]=[8228, 8114, 8349, 7944] acc2[0..3]=[1635, 1904, 1727, 2046] score[0..9]=[-696, -320, -1020, -166, -268, -618, -1442, 948, 238, 528] RESULT=7 expected=7 mismatching_fields=0
+vec 1: pset=0 K=8 s=0 mode=2 idx=1 label=6 acc1[0..3]=[7934, 8248, 8121, 8270] acc2[0..3]=[2041, 1970, 2249, 1830] score[0..9]=[116, -188, 24, -598, 4, -170, 1502, -940, -206, -768] RESULT=6 expected=6 mismatching_fields=0
+SUMMARY file=sim/data/tpu_vectors_mode2.txt vectors=4 fields=84 mismatching_fields=0
+vec 0: pset=1 K=4 s=0 mode=2 idx=0 label=15 acc1[0..3]=[1024, 1024, 1024, 1024] acc2[0..3]=[0, 0, 0, 0] score[0..9]=[-256, -256, -256, -256, -256, -256, -256, -256, -256, -256] RESULT=0 expected=0 mismatching_fields=0
+vec 1: pset=1 K=4 s=0 mode=2 idx=1 label=15 acc1[0..3]=[371, 371, 371, 371] acc2[0..3]=[120, 120, 120, 120] score[0..9]=[-16, -16, -16, -16, -16, -16, -16, -16, -16, -16] RESULT=0 expected=0 mismatching_fields=0
+SUMMARY file=sim/data/tpu_vectors_corner_mode2.txt vectors=4 fields=84 mismatching_fields=0
+vec 0: pset=0 K=4 s=0 mode=1 idx=0 label=7 acc1[0..3]=[515, 506, 516, 482] acc2[0..3]=[113, 120, 114, 139] score[0..9]=[-22, -18, -52, 11, -8, 29, -25, 21, 5, 3] RESULT=5 expected=5 mismatching_fields=0
+vec 1: pset=0 K=4 s=0 mode=1 idx=1 label=6 acc1[0..3]=[499, 504, 494, 500] acc2[0..3]=[123, 122, 132, 121] score[0..9]=[-2, -14, -16, -25, -12, 25, 39, -39, 21, -37] RESULT=6 expected=6 mismatching_fields=0
+SUMMARY file=sim/data/tpu_vectors_K4_mode1.txt vectors=4 fields=84 mismatching_fields=0

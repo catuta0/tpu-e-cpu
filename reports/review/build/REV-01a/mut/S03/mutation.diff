@@ -1,0 +1,11 @@
+--- /home/user/tpu-e-cpu/design/rtl/soc/soc_periph.v	2026-11-04 07:07:34.698983093 +0000
++++ /home/user/tpu-e-cpu/reports/review/build/REV-01a/mut/S03/soc/soc_periph.v	2026-11-04 13:20:07.189297202 +0000
+@@ -85,7 +85,7 @@
+ 
+     // Width of the UART bit-time down-counter (234 needs 8 bits).
+     localparam integer DIVW = (UART_DIV > 255) ? 16 : 8;
+-    localparam integer    DIV_M1     = UART_DIV - 1;
++    localparam integer    DIV_M1     = UART_DIV - 2;
+     localparam [DIVW-1:0] DIV_RELOAD = DIV_M1[DIVW-1:0];   // explicit truncation
+ 
+     // -------------------------------------------------------------------------

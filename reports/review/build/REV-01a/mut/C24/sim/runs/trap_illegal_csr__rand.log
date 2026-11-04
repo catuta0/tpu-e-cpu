@@ -1,0 +1,21 @@
+INFO: test=trap_illegal_csr ws=0 rand_stall=1 seed=36 prog=sim/data/cpu_tests/trap_illegal_csr.hex
+PASS: stop kind (0 tohost, 1 trap) : got 0x00000001 expected 0x00000001
+PASS: halt pc : got 0x000000ac expected 0x000000ac
+PASS: trap_cause : got 0x00000003 expected 0x00000003
+PASS: instret (retire pulses) : got 0x0000002b expected 0x0000002b
+PASS: TOHOST written : got 0x00000000 expected 0x00000000
+PASS: TOHOST value : got 0x00000000 expected 0x00000000
+PASS: bus_err : got 0x00000000 expected 0x00000000
+PASS: LED : got 0x00000000 expected 0x00000000
+PASS: UART byte count : got 0x00000000 expected 0x00000000
+PASS: UART bytes equal : got 0x00000001 expected 0x00000001
+FAIL: signature word 5 (addr 0x00000f14): got 0x5a5a525a expected 0x5a5a5a5a
+FAIL: signature word 6 (addr 0x00000f18): got 0x00000000 expected 0x00000800
+FAIL: signature 0x0F00..0x0F7C (32 words) equal : got 0x00000000 expected 0x00000001
+PASS: bus-protocol violations : got 0x00000000 expected 0x00000000
+INFO: cycles=452 instret=43 fetch=44 load=1 store=33 wait_cycles=281
+RESULT name=trap_illegal_csr ws=0 rand=1 status=FAIL cycles=452 instret=43 cpi=10.512 viol=0
+TEST FAILED (1 failing checks)
+FATAL: tests/cpu/tb_rv32i_core.v:491: 
+       Time: 4916000  Scope: tb_rv32i_core
+VVP_EXIT=1

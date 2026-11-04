@@ -1,0 +1,202 @@
+Info: Using uarch 'gowin' for device 'GW1NR-LV9QN88PC6/I5'
+
+Info: Cell O_psram_ck[0] not found
+Info: Cell O_psram_ck[1] not found
+Info: Cell O_psram_ck_n[0] not found
+Info: Cell O_psram_ck_n[1] not found
+Info: Cell O_psram_cs_n[0] not found
+Info: Cell O_psram_cs_n[1] not found
+Info: Cell O_psram_reset_n[0] not found
+Info: Cell O_psram_reset_n[1] not found
+Info: Cell IO_psram_dq[0] not found
+Info: Cell IO_psram_dq[1] not found
+Info: Cell IO_psram_dq[2] not found
+Info: Cell IO_psram_dq[3] not found
+Info: Cell IO_psram_dq[4] not found
+Info: Cell IO_psram_dq[5] not found
+Info: Cell IO_psram_dq[6] not found
+Info: Cell IO_psram_dq[7] not found
+Info: Cell IO_psram_dq[8] not found
+Info: Cell IO_psram_dq[9] not found
+Info: Cell IO_psram_dq[10] not found
+Info: Cell IO_psram_dq[11] not found
+Info: Cell IO_psram_dq[12] not found
+Info: Cell IO_psram_dq[13] not found
+Info: Cell IO_psram_dq[14] not found
+Info: Cell IO_psram_dq[15] not found
+Info: Cell IO_psram_rwds[0] not found
+Info: Cell IO_psram_rwds[1] not found
+Info: Reading constraints...
+Info: Cell btn_s2_n not found
+Info: Cell btn_s2_n not found
+Info: Create constant nets...
+Info: Modify LUTs...
+Info: Pack IOBs...
+Info: Pack I3C IOs...
+Info: Pack MIPI IOs...
+Info: Pack diff IOBs...
+Info: Pack FFs into IO cells...
+Info: Pack IODELAY...
+Info: Pack Input Edge Monitors...
+Info: Pack IO logic...
+Info: Pack DESER16 logic...
+Info: Pack GSR...
+Info: Pack HCLK cells...
+Info: Pack DLLDLYs...
+Info: Pack wide LUTs...
+Info: Packed MUX2_LUT8:0, MUX2_LU7:0, MUX2_LUT6:0, MUX2_LUT5:0
+Info: Pack ALUs...
+Info: Pack SSRAMs...
+Info: Constrained 1030 LUTFF pairs.
+Info: Pack PLL...
+Info: Pack ADC...
+Info: Pack BSRAMs...
+Info: Pack DSP...
+Info: Pack INV...
+Info: Pack buffered nets...
+Info: Pack EMCU and UserFlash cells...
+Info: Pack UserFlash cells...
+Info: Pack DQCE cells...
+Info: Pack DCS cells...
+Info: Checksum: 0x53197664
+
+Info: Device utilisation:
+Info: 	                 VCC:       1/      1   100%
+Info: 	                 IOB:      10/    276     3%
+Info: 	                LUT4:    5628/   8640    65%
+Info: 	              OSER16:       0/     80     0%
+Info: 	              IDES16:       0/     80     0%
+Info: 	            IOLOGICI:       0/    276     0%
+Info: 	            IOLOGICO:       0/    276     0%
+Info: 	           MUX2_LUT5:       0/   4320     0%
+Info: 	           MUX2_LUT6:       0/   2160     0%
+Info: 	           MUX2_LUT7:       0/   1080     0%
+Info: 	           MUX2_LUT8:       0/   1080     0%
+Info: 	                 ALU:    1976/   6480    30%
+Info: 	                 GND:       1/      1   100%
+Info: 	                 DFF:    2803/   6480    43%
+Info: 	           RAM16SDP4:      16/    270     5%
+Info: 	               BSRAM:       5/     26    19%
+Info: 	              ALU54D:       0/     10     0%
+Info: 	     MULTADDALU18X18:       0/     10     0%
+Info: 	        MULTALU18X18:       0/     10     0%
+Info: 	        MULTALU36X18:       0/     10     0%
+Info: 	           MULT36X36:       0/      5     0%
+Info: 	           MULT18X18:       0/     20     0%
+Info: 	             MULT9X9:       0/     40     0%
+Info: 	              PADD18:       0/     20     0%
+Info: 	               PADD9:       0/     40     0%
+Info: 	                 GSR:       1/      1   100%
+Info: 	                 OSC:       0/      1     0%
+Info: 	                rPLL:       0/      2     0%
+Info: 	           FLASH608K:       0/      1     0%
+Info: 	                BUFG:       0/     22     0%
+Info: 	                DQCE:       0/     24     0%
+Info: 	                 DCS:       0/      8     0%
+Info: 	               DHCEN:       0/     24     0%
+Info: 	              CLKDIV:       0/      8     0%
+Info: 	             CLKDIV2:       0/     16     0%
+Info: 	           MIPI_IBUF:       0/     22     0%
+Info: 	           MIPI_OBUF:       0/     20     0%
+
+Info: Running custom HCLK placer...
+Info: Placed 0 cells based on constraints.
+Info: Creating initial analytic placement for 5398 cells, random placement wirelen = 198942.
+Info:     at initial placer iter 0, wirelen = 1990
+Info:     at initial placer iter 1, wirelen = 1971
+Info:     at initial placer iter 2, wirelen = 1970
+Info:     at initial placer iter 3, wirelen = 1970
+Info: Running main analytical placer, max placement attempts per cell = 13626810.
+Info:     at iteration #1, type ALL: wirelen solved = 1963, spread = 55219, legal = 151646; time = 8.98s
+Info:     at iteration #2, type ALL: wirelen solved = 4615, spread = 48511, legal = 107734; time = 3.32s
+Info:     at iteration #3, type ALL: wirelen solved = 8997, spread = 43399, legal = 90080; time = 2.38s
+Info:     at iteration #4, type ALL: wirelen solved = 11515, spread = 37362, legal = 74792; time = 1.95s
+Info:     at iteration #5, type ALL: wirelen solved = 13111, spread = 43649, legal = 81173; time = 1.68s
+Info:     at iteration #6, type ALL: wirelen solved = 15030, spread = 39294, legal = 72781; time = 1.83s
+Info:     at iteration #7, type ALL: wirelen solved = 16954, spread = 42270, legal = 68119; time = 1.81s
+Info:     at iteration #8, type ALL: wirelen solved = 17921, spread = 39345, legal = 59962; time = 1.22s
+Info:     at iteration #9, type ALL: wirelen solved = 19897, spread = 40452, legal = 57282; time = 1.34s
+Info:     at iteration #10, type ALL: wirelen solved = 21902, spread = 44214, legal = 64709; time = 1.71s
+Info:     at iteration #11, type ALL: wirelen solved = 23930, spread = 37739, legal = 58485; time = 1.42s
+Info:     at iteration #12, type ALL: wirelen solved = 23964, spread = 41290, legal = 59971; time = 1.47s
+Info:     at iteration #13, type ALL: wirelen solved = 26682, spread = 41087, legal = 60758; time = 1.53s
+Info:     at iteration #14, type ALL: wirelen solved = 27364, spread = 37644, legal = 59687; time = 1.39s
+Info: HeAP Placer Time: 34.14s
+Info:   of which solving equations: 6.14s
+Info:   of which spreading cells: 0.37s
+Info:   of which strict legalisation: 26.87s
+
+Info: Running simulated annealing placer for refinement.
+Info:   at iteration #1: temp = 0.000000, timing cost = 111, wirelen = 57282
+Info:   at iteration #5: temp = 0.000000, timing cost = 186, wirelen = 47184
+Info:   at iteration #10: temp = 0.000000, timing cost = 151, wirelen = 44637
+Info:   at iteration #15: temp = 0.000000, timing cost = 132, wirelen = 43333
+Info:   at iteration #20: temp = 0.000000, timing cost = 127, wirelen = 42355
+Info:   at iteration #25: temp = 0.000000, timing cost = 126, wirelen = 42039
+Info:   at iteration #30: temp = 0.000000, timing cost = 131, wirelen = 41891
+Info:   at iteration #30: temp = 0.000000, timing cost = 131, wirelen = 41895 
+Info: SA placement time 24.36s
+
+Info: Max frequency for clock 'u_bus.clk': 62.21 MHz (PASS at 27.00 MHz)
+
+Info: Slack histogram:
+Info:  legend: * represents 19 endpoint(s)
+Info:          + represents [1,19) endpoint(s)
+Info: [ 20962,  21741) |+
+Info: [ 21741,  22520) |+
+Info: [ 22520,  23299) |+
+Info: [ 23299,  24078) |+
+Info: [ 24078,  24857) |***+
+Info: [ 24857,  25636) |***+
+Info: [ 25636,  26415) |***+
+Info: [ 26415,  27194) |***+
+Info: [ 27194,  27973) |*+
+Info: [ 27973,  28752) |**+
+Info: [ 28752,  29531) |*****+
+Info: [ 29531,  30310) |************+
+Info: [ 30310,  31089) |*************************+
+Info: [ 31089,  31868) |******************+
+Info: [ 31868,  32647) |*****************+
+Info: [ 32647,  33426) |*******************+
+Info: [ 33426,  34205) |*********************+
+Info: [ 34205,  34984) |************************+
+Info: [ 34984,  35763) |***************************+
+Info: [ 35763,  36542) |************************************************************ 
+Info: Checksum: 0x1f2e480c
+Info: Routing globals...
+Info:     'u_bus.clk' net was routed using global resources only.
+Info:     'u_cpu.state_DFF_Q_1_D_LUT3_F_I2_LUT3_F_I2_LUT4_F_I2_LUT2_I1_F_LUT4_I1_F[2]' is routed using segments.
+Info:     'u_cpu.alu_q_DFFRE_Q_17_D_LUT2_F_I1_LUT4_F_I3_ALU_SUM_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_SUM_LUT4_I3_F_LUT4_F_I3[0]' is routed using segments.
+Info:     'u_cpu.alu_q_DFFRE_Q_17_D_LUT2_F_I1_LUT4_F_I3_ALU_SUM_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_SUM_LUT4_I3_F[0]' is routed using segments.
+Info:     'u_tpu.cfg_k[1]' is routed using segments.
+Info:     'u_tpu.score_DFFRE_Q_304_D_LUT3_F_I2[1]' is routed using segments.
+Info:     'u_tpu.pp_in_idx[2]' is routed using segments.
+Info:     'u_tpu.cfg_k[3]' is routed using segments.
+Info:     'u_tpu.reg_rdata_q_DFFRE_Q_10_D_LUT4_F_I1_LUT3_F_I1[2]' is routed using segments.
+Info:     'u_cpu.state[0]' is routed using segments.
+Info:     'mem_instr_LUT4_I2_I3_LUT4_F_I3_LUT4_I3_F_LUT4_I3_F[2]' is routed using segments.
+Info:     'mem_instr_LUT4_I2_F[2]' is routed using segments.
+Info:     'u_tpu.ctl_x_raddr[1]' is routed using segments.
+Info:     'u_tpu.score_DFFRE_Q_130_D_LUT3_F_I2_LUT2_F_I1_LUT2_I1_F[1]' is routed using segments.
+Info:     'u_cpu.alu_q_DFFRE_Q_17_D_LUT2_F_I1_LUT4_F_I3_ALU_SUM_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_SUM_LUT3_F_I2[0]' is routed using segments.
+Info:     'u_cpu.alu_q_DFFRE_Q_17_D_LUT2_F_I1_LUT4_F_I3_ALU_SUM_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_SUM_LUT4_I3_F_LUT4_F_I3[1]' is routed using segments.
+Info:     'u_tpu.rw[23]' is routed using segments.
+Info:     'u_tpu.rw[22]' is routed using segments.
+Info:     'u_tpu.rw[20]' is routed using segments.
+Info:     'u_cpu.alu_q_DFFRE_Q_17_D_LUT2_F_I1_LUT4_F_I3[0]' is routed using segments.
+Info:     'u_cpu.state[5]' is routed using segments.
+Info:     'u_tpu.reg_rdata_q_DFFRE_Q_25_D_LUT3_F_I1[3]' is routed using segments.
+Info:     'mem_instr_LUT4_I2_I3_LUT2_I1_F[2]' is routed using segments.
+Info:     'u_cpu.alu_q_DFFRE_Q_17_D_LUT2_F_I1_LUT4_F_I3_ALU_SUM_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_I0_LUT2_I0_F_LUT3_F_1_I2[1]' is routed using segments.
+Info:     'u_tpu.acc_DFFRE_Q_169_D_LUT4_F_I3_LUT3_F_I2_LUT4_F_I3' is routed using segments.
+Info:     'u_tpu.acc_DFFRE_Q_169_D_LUT4_F_I3_LUT3_F_I2_LUT4_F_I2' is routed using segments.
+Info:     'u_tpu.ctl_b_raddr[4]' is routed using segments.
+Info:     'u_cpu.state_DFF_Q_1_D_LUT3_F_I2_LUT3_F_I2_LUT4_F_I2_LUT2_I1_F_LUT4_I1_F[0]' is routed using segments.
+Info:     'u_tpu.pp_out_idx[0]' is routed using segments.
+Info:     'u_cpu.alu_q_DFFRE_Q_17_D_LUT2_F_I1_LUT4_F_I3_ALU_SUM_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_SUM_LUT3_F_I2_LUT4_F_I2[3]' is routed using segments.
+Info:     'u_tpu.rw[62]' is routed using segments.
+Info:     'u_tpu.score_DFFRE_Q_80_D_LUT3_F_I1[1]' is routed using segments.
+Info:     'u_tpu.score_DFFRE_Q_128_D_LUT3_F_I2_LUT2_F_I1_LUT2_I1_F[1]' is routed using segments.
+Info:     'mem_instr_LUT3_I2_1_F[0]' is routed using segments.
+Info:     'mem_wdata[3]' is routed using segments.
+Info:     'mem_wdata[0]' is routed using segments.

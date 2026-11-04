@@ -1,0 +1,11 @@
+--- /home/user/tpu-e-cpu/design/rtl/cpu/rv32i_core.v	2026-11-04 03:32:21.806412789 +0000
++++ /home/user/tpu-e-cpu/reports/review/build/REV-01a/mut/C20/rtl/rv32i_core.v	2026-11-04 13:15:12.327329143 +0000
+@@ -303,7 +303,7 @@
+     // Operand B: DECODE -> imm;  EXECUTE -> imm or rs2 (decoder b_is_imm).
+     // Operation: DECODE -> ADD;  EXECUTE -> decoder alu_op.
+     wire        in_decode = (state == S_DECODE);
+-    wire [31:0] alu_a  = in_decode ? (d_lui ? 32'd0 : pc) : rs1_q;
++    wire [31:0] alu_a  = in_decode ? (d_lui ? 32'd0 : pc_plus4) : rs1_q;
+     wire [31:0] alu_b  = (in_decode | d_b_is_imm) ? d_imm : rs2_q;
+     wire [3:0]  alu_op = in_decode ? 4'b0000 : d_alu_op;
+     wire [31:0] alu_y;

@@ -1,0 +1,11 @@
+--- /home/user/tpu-e-cpu/design/rtl/cpu/rv32i_core.v	2026-11-04 03:32:21.806412789 +0000
++++ /home/user/tpu-e-cpu/reports/review/build/REV-01a/mut/C05/rtl/rv32i_core.v	2026-11-04 13:14:02.215064192 +0000
+@@ -343,7 +343,7 @@
+     reg [3:0] st_strb;
+     always @(*) begin
+         case (d_funct3[1:0])
+-            2'b00:   st_strb = 4'b0001 << ma_lo;                  // SB
++            2'b00:   st_strb = 4'b0001 << {ma_lo[0], ma_lo[1]};                  // SB
+             2'b01:   st_strb = ma_lo[1] ? 4'b1100 : 4'b0011;      // SH
+             default: st_strb = 4'b1111;                           // SW
+         endcase

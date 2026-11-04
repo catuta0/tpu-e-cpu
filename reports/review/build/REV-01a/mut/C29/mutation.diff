@@ -1,0 +1,11 @@
+--- /home/user/tpu-e-cpu/design/rtl/cpu/rv32i_core.v	2026-11-04 03:32:21.806412789 +0000
++++ /home/user/tpu-e-cpu/reports/review/build/REV-01a/mut/C29/rtl/rv32i_core.v	2026-11-04 13:24:57.872107970 +0000
+@@ -274,7 +274,7 @@
+     //           leave rd unchanged).
+     wire wb_trap_misf = is_jump & alu_q[1];
+     wire rf_we = (state == S_CLEAR) |
+-                 ((state == S_WB) & d_writes_rd & (d_rd != 5'd0) & ~wb_trap_misf);
++                 ((state == S_WB) & d_writes_rd & (d_rd != 5'd0));
+ 
+     // pc + 4: dedicated incrementer (pc[1:0] = 00, so only bits 31:2 count).
+     wire [31:0] pc_plus4 = {pc[31:2] + 30'd1, 2'b00};

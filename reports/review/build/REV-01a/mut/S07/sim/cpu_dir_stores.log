@@ -1,0 +1,22 @@
+INFO: tb_soc MODE=cpu PROG_HEX=sim/data/cpu_tests/dir_stores.hex UART_DIV(DUT)=234 expected divider 234
+FAIL: R1 power-up reset release not on the 2nd edge
+INFO: edges=1
+FAIL: R2 reset assertion latency
+PASS: R3 during reset led_n = 6'b111111 (all LEDs off), uart_tx = 1 (idle)
+FAIL: R4 reset release latency
+PASS: R5 first bus request after reset release is a fetch of 0x00000000 (at cycle 31 after rst fell; CPU CLEAR state = 32 cycles)
+PASS: C1 TOHOST stop at PC 0x00000138 (cycle 508)
+PASS: C2 instret = 79
+PASS: C3 TOHOST value as expected
+PASS: C4 signature 0x0F00..0x0F7C (32 words) equal to the ISS
+PASS: C5 bus_err = 0
+PASS: C6 led_n = 6'b111111 = ~LED (LED 0)
+PASS: C7 UART 0 bytes as expected
+PASS: C8 0 protocol violations, max latency 2 cycles
+INFO: stop at cycle 508 after reset release, instret 79
+PASS: U1 UART timing: 0 frames, every edge on a multiple of 234 clocks, tx_busy = 2340 clocks per frame, real-time receiver: 0 framing/stability errors
+INFO: bus transactions RAM 323 (max latency 2), PERIPH 1 (2), TPU 0 (0), unmapped 0 (0); protocol violations 0
+errors=3
+TEST FAILED
+FATAL: tests/soc/tb_soc.v:654: tb_soc failed
+       Time: 45835525  Scope: tb_soc

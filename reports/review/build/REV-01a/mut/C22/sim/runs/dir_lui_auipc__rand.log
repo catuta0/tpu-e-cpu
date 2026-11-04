@@ -1,0 +1,29 @@
+INFO: test=dir_lui_auipc ws=0 rand_stall=1 seed=1 prog=sim/data/cpu_tests/dir_lui_auipc.hex
+PROTOCOL VIOLATION #1 at cycle 122: request changed while waiting for mem_ready (valid=1 instr=1 addr=0000002c wdata=00000000 wstrb=0000 ready=0 pc=0000002c)
+PROTOCOL VIOLATION #2 at cycle 202: request changed while waiting for mem_ready (valid=1 instr=1 addr=00000054 wdata=00000000 wstrb=0000 ready=1 pc=00000054)
+PROTOCOL VIOLATION #3 at cycle 211: request changed while waiting for mem_ready (valid=1 instr=1 addr=0000005c wdata=00000000 wstrb=0000 ready=0 pc=0000005c)
+PROTOCOL VIOLATION #4 at cycle 223: request changed while waiting for mem_ready (valid=1 instr=1 addr=00000060 wdata=00000000 wstrb=0000 ready=0 pc=00000060)
+PROTOCOL VIOLATION #5 at cycle 249: request changed while waiting for mem_ready (valid=1 instr=1 addr=00000068 wdata=10101010 wstrb=0000 ready=0 pc=00000068)
+PROTOCOL VIOLATION #6 at cycle 261: request changed while waiting for mem_ready (valid=1 instr=1 addr=0000006c wdata=14141414 wstrb=0000 ready=0 pc=0000006c)
+PROTOCOL VIOLATION #7 at cycle 275: request changed while waiting for mem_ready (valid=1 instr=1 addr=00000070 wdata=18181818 wstrb=0000 ready=0 pc=00000070)
+PROTOCOL VIOLATION #8 at cycle 293: request changed while waiting for mem_ready (valid=1 instr=1 addr=00000078 wdata=ffffffff wstrb=0000 ready=0 pc=00000078)
+PROTOCOL VIOLATION #9 at cycle 310: request changed while waiting for mem_ready (valid=1 instr=1 addr=0000007c wdata=ffffffff wstrb=0000 ready=0 pc=0000007c)
+PROTOCOL VIOLATION #10 at cycle 333: request changed while waiting for mem_ready (valid=1 instr=1 addr=00000084 wdata=00000000 wstrb=0000 ready=1 pc=00000084)
+PASS: stop kind (0 tohost, 1 trap) : got 0x00000000 expected 0x00000000
+PASS: TOHOST store pc : got 0x000000e4 expected 0x000000e4
+PASS: trap_cause : got 0x00000000 expected 0x00000000
+PASS: instret (retire pulses) : got 0x0000003a expected 0x0000003a
+PASS: TOHOST written : got 0x00000001 expected 0x00000001
+PASS: TOHOST value : got 0x00000001 expected 0x00000001
+PASS: bus_err : got 0x00000000 expected 0x00000000
+PASS: LED : got 0x00000000 expected 0x00000000
+PASS: UART byte count : got 0x00000000 expected 0x00000000
+PASS: UART bytes equal : got 0x00000001 expected 0x00000001
+PASS: signature 0x0F00..0x0F7C (32 words) equal : got 0x00000001 expected 0x00000001
+FAIL: bus-protocol violations : got 0x0000000f expected 0x00000000
+INFO: cycles=562 instret=58 fetch=58 load=1 store=34 wait_cycles=344
+RESULT name=dir_lui_auipc ws=0 rand=1 status=FAIL cycles=562 instret=58 cpi=9.690 viol=15
+TEST FAILED (1 failing checks)
+FATAL: tests/cpu/tb_rv32i_core.v:491: 
+       Time: 6016000  Scope: tb_rv32i_core
+VVP_EXIT=1

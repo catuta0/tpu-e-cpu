@@ -1,0 +1,19 @@
+INFO: test=hand_h1 ws=3 rand_stall=0 seed=1 prog=reports/review/build/REV-01a/hand/data/hand_h1.hex
+PASS: stop kind (0 tohost, 1 trap) : got 0x00000000 expected 0x00000000
+FAIL: TOHOST store pc : got 0x00000920 expected 0x00001920
+PASS: trap_cause : got 0x00000000 expected 0x00000000
+PASS: instret (retire pulses) : got 0x0000004d expected 0x0000004d
+PASS: TOHOST written : got 0x00000001 expected 0x00000001
+PASS: TOHOST value : got 0x00000001 expected 0x00000001
+PASS: bus_err : got 0x00000000 expected 0x00000000
+PASS: LED : got 0x00000000 expected 0x00000000
+PASS: UART byte count : got 0x00000000 expected 0x00000000
+PASS: UART bytes equal : got 0x00000001 expected 0x00000001
+FAIL: signature word 28 (addr 0x00000f70): got 0x00000884 expected 0x00001884
+FAIL: signature 0x0F00..0x0F7C (32 words) equal : got 0x00000000 expected 0x00000001
+PASS: bus-protocol violations : got 0x00000000 expected 0x00000000
+INFO: cycles=654 instret=77 fetch=77 load=5 store=35 wait_cycles=352
+RESULT name=hand_h1 ws=3 rand=0 status=FAIL cycles=654 instret=77 cpi=8.494 viol=0
+TEST FAILED (2 failing checks)
+FATAL: tests/cpu/tb_rv32i_core.v:491: 
+       Time: 6936000  Scope: tb_rv32i_core

@@ -1,0 +1,20 @@
+INFO: test=rand_13 ws=3 rand_stall=0 seed=1 prog=sim/data/cpu_tests/rand_13.hex
+PASS: stop kind (0 tohost, 1 trap) : got 0x00000000 expected 0x00000000
+PASS: TOHOST store pc : got 0x00000a94 expected 0x00000a94
+PASS: trap_cause : got 0x00000000 expected 0x00000000
+PASS: instret (retire pulses) : got 0x00000115 expected 0x00000115
+PASS: TOHOST written : got 0x00000001 expected 0x00000001
+PASS: TOHOST value : got 0x00000001 expected 0x00000001
+PASS: bus_err : got 0x00000000 expected 0x00000000
+PASS: LED : got 0x00000000 expected 0x00000000
+PASS: UART byte count : got 0x00000000 expected 0x00000000
+PASS: UART bytes equal : got 0x00000001 expected 0x00000001
+FAIL: signature word 15 (addr 0x00000f3c): got 0xffffdb53 expected 0x0000db53
+FAIL: signature 0x0F00..0x0F7C (32 words) equal : got 0x00000000 expected 0x00000001
+PASS: bus-protocol violations : got 0x00000000 expected 0x00000000
+INFO: cycles=2273 instret=277 fetch=277 load=29 store=56 wait_cycles=1087
+RESULT name=rand_13 ws=3 rand=0 status=FAIL cycles=2273 instret=277 cpi=8.206 viol=0
+TEST FAILED (1 failing checks)
+FATAL: tests/cpu/tb_rv32i_core.v:491: 
+       Time: 23126000  Scope: tb_rv32i_core
+VVP_EXIT=1

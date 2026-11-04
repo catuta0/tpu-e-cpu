@@ -1,0 +1,11 @@
+--- design/rtl/tpu/sc_tpu.v	2026-11-04 07:03:18.645401765 +0000
++++ reports/review/build/REV-01b/mut/M08_no_reload/rtl/sc_tpu.v	2026-11-04 13:20:56.999307318 +0000
+@@ -340,7 +340,7 @@
+     wire [NL*AW-1:0] acc;
+ 
+     sc_rng #(.IL(IL), .RNG_MODE(RNG_MODE)) u_rng (
+-        .clk(clk), .rst(rst), .load(lfsr_load), .adv(stream_en),
++        .clk(clk), .rst(rst), .load(1'b0), .adv(stream_en),
+         .rx(rx), .rw(rw));
+ 
+     sc_lane_array #(.NL(NL), .IL(IL), .AW(AW)) u_array (

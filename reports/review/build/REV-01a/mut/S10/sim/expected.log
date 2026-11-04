@@ -1,0 +1,14 @@
+vector file sim/data/tpu_vectors_mode2.txt sha256 8b603e07b13e2a6879295e39cb004b36c0eefbe5d87bd27db76f2ddbe4708fe7
+vector file '# spec_rev C' header: present
+input.hex == INPUT words of the idx-0 vector: yes
+source: sim/data/soc_expected.json (sha256 907e51c6e3b5057edf32f728ee8880705db05dfa4a661e68f67dfe42b9a8e7a9), generator code/python/sctpu/gen_hex.py (tasks SW-02, SW-03), git_rev ba9dfb9-dirty
+input.hex sha256 matches soc_expected.json
+weights.hex sha256 matches soc_expected.json
+bias.hex sha256 matches soc_expected.json
+cross-check soc_expected.json == tpu_vectors_mode2.txt idx 0 (HIDDEN, SCORE, RESULT): OK
+EXPECTED RESULT=7 LED=7 TOHOST=1 K=8 UART=['0x37', '0xa']
+EXPECTED HIDDEN=['0x80fe94cb', '0x80ffe4ff', '0xffcd80ff', '0x8d80ff80']
+EXPECTED SCORE=[-696, -320, -1020, -166, -268, -618, -1442, 948, 238, 528, -80, -80, -80, -80, -80, -80]
+PARAMS_EXPECTED=03020810
+wrote /home/user/tpu-e-cpu/reports/review/build/REV-01a/mut/S10/sim/soc_expected.hex
+EXPECTATION_OK

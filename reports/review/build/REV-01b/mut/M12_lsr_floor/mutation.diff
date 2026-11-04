@@ -1,0 +1,11 @@
+--- design/rtl/tpu/sc_postproc.v	2026-11-04 03:54:33.812857668 +0000
++++ reports/review/build/REV-01b/mut/M12_lsr_floor/rtl/sc_postproc.v	2026-11-04 13:23:00.298032924 +0000
+@@ -128,7 +128,7 @@
+     wire [3:0]  up_sh = {1'b0, s1} + 4'd7;                   // s + 7 = 7..14
+     wire [33:0] wide  = {{(34-DPW){dp1[DPW-1]}}, dp1} << up_sh;
+     // Floor division by 2^K = arithmetic right shift ($signed + >>>).
+-    wire [33:0] u     = $signed(wide) >>> k1;
++    wire [33:0] u     = wide >> k1;
+     // Clip to 0..127: negative -> 0 (u[33] is the sign), >= 128 -> 127.
+     wire        u_neg = u[33];
+     wire        u_big = |u[32:7];

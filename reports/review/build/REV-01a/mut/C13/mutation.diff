@@ -1,0 +1,11 @@
+--- /home/user/tpu-e-cpu/design/rtl/cpu/rv32i_decode.v	2026-11-04 03:18:38.131907824 +0000
++++ /home/user/tpu-e-cpu/reports/review/build/REV-01a/mut/C13/rtl/rv32i_decode.v	2026-11-04 13:14:38.282773706 +0000
+@@ -129,7 +129,7 @@
+     assign is_load   = op_load & ld_ok;
+     assign is_store  = op_store & st_ok;
+     assign is_alu    = (op_opimm & opimm_ok) | (op_op & op_ok);
+-    assign is_fence  = op_misc & (funct3 == 3'b000);
++    assign is_fence  = op_misc & (funct3[2:1] == 2'b00);
+     assign is_ecall  = (ir == 32'h0000_0073);
+     assign is_ebreak = (ir == 32'h0010_0073);
+     assign illegal   = ~(is_lui | is_auipc | is_jal | is_jalr | is_branch | is_load |

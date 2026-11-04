@@ -1,0 +1,11 @@
+--- design/rtl/tpu/sc_tpu.v	2026-11-04 07:03:18.645401765 +0000
++++ reports/review/build/REV-01b/mut/M22_hidword/rtl/sc_tpu.v	2026-11-04 13:27:56.592931670 +0000
+@@ -310,7 +310,7 @@
+     // arrives with the same 1-cycle latency as the INPUT RAM word.
+     reg  [31:0] hid_word_q;
+     always @(posedge clk)
+-        hid_word_q <= hidden[32*ctl_x_raddr[1:0] +: 32];
++        hid_word_q <= hidden[32*(~ctl_x_raddr[1:0]) +: 32];
+ 
+     wire [31:0] x_src_word = layer2 ? hid_word_q : inram_q;
+ 

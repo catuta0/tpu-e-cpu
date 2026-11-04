@@ -1,0 +1,11 @@
+--- /home/user/tpu-e-cpu/design/rtl/cpu/rv32i_decode.v	2026-11-04 03:18:38.131907824 +0000
++++ /home/user/tpu-e-cpu/reports/review/build/REV-01a/mut/C15/rtl/rv32i_decode.v	2026-11-04 13:14:48.099123132 +0000
+@@ -124,7 +124,7 @@
+     assign is_lui    = op_lui;
+     assign is_auipc  = op_auipc;
+     assign is_jal    = op_jal;
+-    assign is_jalr   = op_jalr & (funct3 == 3'b000);
++    assign is_jalr   = op_jalr;
+     assign is_branch = op_branch & br_ok;
+     assign is_load   = op_load & ld_ok;
+     assign is_store  = op_store & st_ok;

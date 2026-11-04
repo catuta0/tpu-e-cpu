@@ -1,0 +1,31 @@
+INFO: test=rand_13 ws=3 rand_stall=0 seed=1 prog=sim/data/cpu_tests/rand_13.hex
+PASS: stop kind (0 tohost, 1 trap) : got 0x00000000 expected 0x00000000
+PASS: TOHOST store pc : got 0x00000a94 expected 0x00000a94
+PASS: trap_cause : got 0x00000000 expected 0x00000000
+FAIL: instret (retire pulses) : got 0x00000109 expected 0x00000115
+PASS: TOHOST written : got 0x00000001 expected 0x00000001
+PASS: TOHOST value : got 0x00000001 expected 0x00000001
+PASS: bus_err : got 0x00000000 expected 0x00000000
+PASS: LED : got 0x00000000 expected 0x00000000
+PASS: UART byte count : got 0x00000000 expected 0x00000000
+PASS: UART bytes equal : got 0x00000001 expected 0x00000001
+FAIL: signature word 1 (addr 0x00000f04): got 0x00000000 expected 0xffffc984
+FAIL: signature word 2 (addr 0x00000f08): got 0x01004201 expected 0x01004205
+FAIL: signature word 6 (addr 0x00000f18): got 0x000003aa expected 0x000003b6
+FAIL: signature word 8 (addr 0x00000f20): got 0x00003a26 expected 0x00003a32
+FAIL: signature word 9 (addr 0x00000f24): got 0x00006ee8 expected 0x00000000
+FAIL: signature word 10 (addr 0x00000f28): got 0xfffffceb expected 0xffffffff
+FAIL: signature word 17 (addr 0x00000f44): got 0x00000208 expected 0x00000000
+FAIL: signature word 18 (addr 0x00000f48): got 0x00000270 expected 0x0000026c
+FAIL: signature word 24 (addr 0x00000f60): got 0x7627adbc expected 0x7627adb8
+FAIL: signature word 26 (addr 0x00000f68): got 0x7627adbd expected 0x7627adb9
+FAIL: signature word 30 (addr 0x00000f78): got 0xfffffceb expected 0xffffffff
+FAIL: signature word 31 (addr 0x00000f7c): got 0x89d85a43 expected 0x89d85a47
+FAIL: signature 0x0F00..0x0F7C (32 words) equal : got 0x00000000 expected 0x00000001
+PASS: bus-protocol violations : got 0x00000000 expected 0x00000000
+INFO: cycles=2178 instret=265 fetch=265 load=29 store=53 wait_cycles=1042
+RESULT name=rand_13 ws=3 rand=0 status=FAIL cycles=2178 instret=265 cpi=8.219 viol=0
+TEST FAILED (2 failing checks)
+FATAL: tests/cpu/tb_rv32i_core.v:491: 
+       Time: 22176000  Scope: tb_rv32i_core
+VVP_EXIT=1

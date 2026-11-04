@@ -1,0 +1,11 @@
+--- design/rtl/tpu/sc_rng.v	2026-11-04 07:03:12.150333450 +0000
++++ reports/review/build/REV-01b/mut/M02_rot_right/rtl/sc_rng.v	2026-11-04 13:17:31.910381392 +0000
+@@ -128,7 +128,7 @@
+         input integer n;
+         begin
+             if (n == 0) rotl8 = v;
+-            else        rotl8 = (v << n) | (v >> (8 - n));
++            else        rotl8 = (v >> n) | (v << (8 - n));
+         end
+     endfunction
+ 

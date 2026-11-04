@@ -1,0 +1,13 @@
+--- /home/user/tpu-e-cpu/design/rtl/soc/soc_ram.v	2026-11-04 06:07:50.153567625 +0000
++++ /home/user/tpu-e-cpu/reports/review/build/REV-01a/mut/S05/soc/soc_ram.v	2026-11-04 13:20:12.852961158 +0000
+@@ -91,8 +91,8 @@
+     // required, see no_rw_check above).
+     always @(posedge clk) begin
+         if (we[0]) mem[word][7:0]   <= mem_wdata[7:0];
+-        if (we[1]) mem[word][15:8]  <= mem_wdata[15:8];
+-        if (we[2]) mem[word][23:16] <= mem_wdata[23:16];
++        if (we[2]) mem[word][15:8]  <= mem_wdata[15:8];
++        if (we[1]) mem[word][23:16] <= mem_wdata[23:16];
+         if (we[3]) mem[word][31:24] <= mem_wdata[31:24];
+         q <= mem[word];
+     end

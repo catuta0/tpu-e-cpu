@@ -1,0 +1,11 @@
+--- design/rtl/tpu/sc_tpu_ctrl.v	2026-11-04 03:54:40.643520692 +0000
++++ reports/review/build/REV-01b/mut/M19_cycles_p1/rtl/sc_tpu_ctrl.v	2026-11-04 13:26:35.433493525 +0000
+@@ -264,7 +264,7 @@
+         if (rst)
+             cycles <= 32'd0;
+         else if (lfsr_load)          // START accepted (edge E0)
+-            cycles <= 32'd0;
++            cycles <= 32'd1;
+         else if (busy)               // every edge E0+1 .. E1
+             cycles <= cycles + 32'd1;
+     end

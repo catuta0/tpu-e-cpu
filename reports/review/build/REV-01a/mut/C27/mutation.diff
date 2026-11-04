@@ -1,0 +1,11 @@
+--- /home/user/tpu-e-cpu/design/rtl/cpu/rv32i_core.v	2026-11-04 03:32:21.806412789 +0000
++++ /home/user/tpu-e-cpu/reports/review/build/REV-01a/mut/C27/rtl/rv32i_core.v	2026-11-04 13:16:00.908833035 +0000
+@@ -453,7 +453,7 @@
+                 S_DECODE: begin
+                     alu_q <= alu_y;
+                     if (d_ecall) begin
+-                        trap_q <= T_ECALL;   state <= S_HALT;
++                        trap_q <= T_EBREAK;   state <= S_HALT;
+                     end else if (d_ebreak) begin
+                         trap_q <= T_EBREAK;  state <= S_HALT;
+                     end else if (d_illegal) begin

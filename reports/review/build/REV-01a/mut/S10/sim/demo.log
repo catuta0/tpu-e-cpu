@@ -1,0 +1,21 @@
+INFO: tb_soc MODE=demo PROG_HEX=sim/data/soc_demo_prog.hex UART_DIV(DUT)=234 expected divider 234
+PASS: R1 power-up reset: rst released on rising edge 2 after configuration
+PASS: R2 button press -> rst asserted on rising edge 2 (2..3 required)
+PASS: R3 during reset led_n = 6'b111111 (all LEDs off), uart_tx = 1 (idle)
+PASS: R4 button release -> rst released on rising edge 2 (2..3 required)
+INFO: UART RX byte 0 = 0x37 ('7') at cycle 5334
+INFO: UART RX byte 1 = 0x0a ('.') at cycle 7697
+PASS: R5 first bus request after reset release is a fetch of 0x00000000 (at cycle 31 after rst fell; CPU CLEAR state = 32 cycles)
+PASS: D1 TOHOST = 1 written by the store at PC 0x00000068, cycle 5441 after reset release
+PASS: D2 CPU-observed RESULT (load from 0x2000000C) = 0x00000007 = golden class 7; TPU RESULT register = 7
+PASS: D3 TPU storage bit-exact vs golden: HIDDEN[0..15] (4 words) and SCORE[0..15] (16 words), e.g. SCORE[7] = 948
+PASS: D4 led_n = 6'b111000 = ~LED (LED register 7 = class), 1 LED write
+PASS: D5 UART pin decoded (115200 8N1, real-time receiver) 2 bytes: 0x37 0x0a = "7\n"; 2 frames
+PASS: D6 CYCLES stored at 0x0E00 = 2928 = 10*2^8+368 (formula) = TB-measured BUSY cycles 2928 = TPU CYCLES register
+PASS: D7 bus_err = 0, CPU not halted, 0 protocol violations, max latency 3 cycles
+INFO: end-to-end: reset release -> TOHOST write = 5441 cycles (201.5 us at 27 MHz); START at cycle 62, RESULT read at cycle 3010 (START->RESULT read 2948 cycles), TPU BUSY 2928 cycles, 173 STATUS polls
+INFO: instructions retired up to TOHOST 981; UART_STATUS polls 148; last UART byte received at cycle ~7698
+PASS: U1 UART timing: 2 frames, every edge on a multiple of 234 clocks, tx_busy = 2340 clocks per frame, real-time receiver: 0 framing/stability errors
+INFO: bus transactions RAM 1722 (max latency 2), PERIPH 152 (2), TPU 177 (3), unmapped 0 (0); protocol violations 0
+TEST PASSED
+tests/soc/tb_soc.v:650: $finish called at 312212821 (1ps)

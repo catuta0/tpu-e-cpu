@@ -1,0 +1,20 @@
+INFO: test=rand_07 ws=1 rand_stall=0 seed=1 prog=sim/data/cpu_tests/rand_07.hex
+PASS: stop kind (0 tohost, 1 trap) : got 0x00000000 expected 0x00000000
+PASS: TOHOST store pc : got 0x00000a94 expected 0x00000a94
+PASS: trap_cause : got 0x00000000 expected 0x00000000
+FAIL: instret (retire pulses) : got 0x00000111 expected 0x00000112
+PASS: TOHOST written : got 0x00000001 expected 0x00000001
+PASS: TOHOST value : got 0x00000001 expected 0x00000001
+PASS: bus_err : got 0x00000000 expected 0x00000000
+PASS: LED : got 0x00000000 expected 0x00000000
+PASS: UART byte count : got 0x00000000 expected 0x00000000
+PASS: UART bytes equal : got 0x00000001 expected 0x00000001
+FAIL: signature word 10 (addr 0x00000f28): got 0x000000e8 expected 0xffffffe8
+FAIL: signature 0x0F00..0x0F7C (32 words) equal : got 0x00000000 expected 0x00000001
+PASS: bus-protocol violations : got 0x00000000 expected 0x00000000
+INFO: cycles=1540 instret=273 fetch=273 load=39 store=50 wait_cycles=363
+RESULT name=rand_07 ws=1 rand=0 status=FAIL cycles=1540 instret=273 cpi=5.641 viol=0
+TEST FAILED (2 failing checks)
+FATAL: tests/cpu/tb_rv32i_core.v:491: 
+       Time: 15796000  Scope: tb_rv32i_core
+VVP_EXIT=1

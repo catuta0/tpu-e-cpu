@@ -1,0 +1,11 @@
+--- design/rtl/tpu/sc_rng.v	2026-11-04 07:03:12.150333450 +0000
++++ reports/review/build/REV-01b/mut/M01_seed_x5/rtl/sc_rng.v	2026-11-04 13:17:00.008897508 +0000
+@@ -106,7 +106,7 @@
+     // ---- Mode 2 (rev C): seed_x_i = 0xACE1 + 0x3C5A*i, seed_w_i = 0x7A5C + 0x2B67*i
+     // Packed 16 bits per lane, lane i at [16i +: 16] (lane 0 rightmost).
+     localparam [8*16-1:0] SEEDS_X_SPEC = {
+-        16'h5357, 16'h16FD, 16'hDAA3, 16'h9E49,     // lanes 7 6 5 4
++        16'h5357, 16'h16FD, 16'hDAA2, 16'h9E49,     // lanes 7 6 5 4
+         16'h61EF, 16'h2595, 16'hE93B, 16'hACE1 };   // lanes 3 2 1 0
+     localparam [8*16-1:0] SEEDS_W_SPEC = {
+         16'hAA2D, 16'h7EC6, 16'h535F, 16'h27F8,     // lanes 7 6 5 4

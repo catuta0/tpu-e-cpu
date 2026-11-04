@@ -1,0 +1,18 @@
+INFO: test=rand_06 ws=0 rand_stall=0 seed=1 prog=sim/data/cpu_tests/rand_06.hex
+PASS: stop kind (0 tohost, 1 trap) : got 0x00000000 expected 0x00000000
+PASS: TOHOST store pc : got 0x00000a94 expected 0x00000a94
+PASS: trap_cause : got 0x00000000 expected 0x00000000
+PASS: instret (retire pulses) : got 0x00000104 expected 0x00000104
+PASS: TOHOST written : got 0x00000001 expected 0x00000001
+PASS: TOHOST value : got 0x00000001 expected 0x00000001
+PASS: bus_err : got 0x00000000 expected 0x00000000
+PASS: LED : got 0x00000000 expected 0x00000000
+PASS: UART byte count : got 0x00000000 expected 0x00000000
+PASS: UART bytes equal : got 0x00000001 expected 0x00000001
+PASS: signature 0x0F00..0x0F7C (32 words) equal : got 0x00000001 expected 0x00000001
+PASS: bus-protocol violations : got 0x00000000 expected 0x00000000
+INFO: cycles=1033 instret=260 fetch=261 load=19 store=52 wait_cycles=0
+RESULT name=rand_06 ws=0 rand=0 status=PASS cycles=1033 instret=260 cpi=3.973 viol=0
+TEST PASSED
+tests/cpu/tb_rv32i_core.v:488: $finish called at 10726000 (1ps)
+VVP_EXIT=0

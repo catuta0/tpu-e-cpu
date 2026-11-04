@@ -1,0 +1,27 @@
+INFO: test=dir_mmio ws=1 rand_stall=0 seed=1 prog=sim/data/cpu_tests/dir_mmio.hex
+PROTOCOL VIOLATION #1 at cycle 48: request changed while waiting for mem_ready (valid=1 instr=1 addr=0000000c wdata=2a2a2a2a wstrb=0000 ready=1 pc=0000000c)
+PROTOCOL VIOLATION #2 at cycle 72: request changed while waiting for mem_ready (valid=1 instr=1 addr=0000001c wdata=2a2a2a2a wstrb=0000 ready=1 pc=0000001c)
+PROTOCOL VIOLATION #3 at cycle 85: request changed while waiting for mem_ready (valid=1 instr=1 addr=00000024 wdata=00000000 wstrb=0000 ready=1 pc=00000024)
+PROTOCOL VIOLATION #4 at cycle 95: request changed while waiting for mem_ready (valid=1 instr=1 addr=0000002c wdata=2a2a2a2a wstrb=0000 ready=1 pc=0000002c)
+PROTOCOL VIOLATION #5 at cycle 101: request changed while waiting for mem_ready (valid=1 instr=1 addr=00000030 wdata=2a2a2a2a wstrb=0000 ready=1 pc=00000030)
+PROTOCOL VIOLATION #6 at cycle 113: request changed while waiting for mem_ready (valid=1 instr=1 addr=00000038 wdata=00000000 wstrb=0000 ready=1 pc=00000038)
+PROTOCOL VIOLATION #7 at cycle 282: request changed while waiting for mem_ready (valid=1 instr=1 addr=000000a8 wdata=00000000 wstrb=0000 ready=1 pc=000000a8)
+PROTOCOL VIOLATION #8 at cycle 303: request changed while waiting for mem_ready (valid=1 instr=1 addr=000000b8 wdata=01010101 wstrb=0000 ready=1 pc=000000b8)
+PASS: stop kind (0 tohost, 1 trap) : got 0x00000000 expected 0x00000000
+PASS: TOHOST store pc : got 0x000000b4 expected 0x000000b4
+PASS: trap_cause : got 0x00000000 expected 0x00000000
+PASS: instret (retire pulses) : got 0x0000002e expected 0x0000002e
+PASS: TOHOST written : got 0x00000001 expected 0x00000001
+PASS: TOHOST value : got 0x00000001 expected 0x00000001
+PASS: bus_err : got 0x00000001 expected 0x00000001
+PASS: LED : got 0x0000002a expected 0x0000002a
+PASS: UART byte count : got 0x00000000 expected 0x00000000
+PASS: UART bytes equal : got 0x00000001 expected 0x00000001
+PASS: signature 0x0F00..0x0F7C (32 words) equal : got 0x00000001 expected 0x00000001
+FAIL: bus-protocol violations : got 0x00000008 expected 0x00000000
+INFO: cycles=271 instret=46 fetch=46 load=4 store=36 wait_cycles=87
+RESULT name=dir_mmio ws=1 rand=0 status=FAIL cycles=271 instret=46 cpi=5.891 viol=8
+TEST FAILED (1 failing checks)
+FATAL: tests/cpu/tb_rv32i_core.v:491: 
+       Time: 3106000  Scope: tb_rv32i_core
+VVP_EXIT=1

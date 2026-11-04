@@ -1,0 +1,11 @@
+--- design/rtl/tpu/sc_tpu_ctrl.v	2026-11-04 03:54:40.643520692 +0000
++++ reports/review/build/REV-01b/mut/M03_stream_Lp1/rtl/sc_tpu_ctrl.v	2026-11-04 13:18:01.187746635 +0000
+@@ -149,7 +149,7 @@
+     reg  [DPW-1:0] best_dp; // running maximum score (signed)
+ 
+     // L - 1 = 2^K - 1 (K clamped to 4..10, so this is 15..1023).
+-    wire [10:0] l_last    = (11'd1 << cfg_k) - 11'd1;
++    wire [10:0] l_last    = (11'd1 << cfg_k);
+     wire [3:0]  tile_last = layer2 ? T2_LAST : T1_LAST;
+ 
+     // ---- combinational control outputs -----------------------------------------

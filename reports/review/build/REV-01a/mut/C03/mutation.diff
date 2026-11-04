@@ -1,0 +1,11 @@
+--- /home/user/tpu-e-cpu/design/rtl/cpu/rv32i_core.v	2026-11-04 03:32:21.806412789 +0000
++++ /home/user/tpu-e-cpu/reports/review/build/REV-01a/mut/C03/rtl/rv32i_core.v	2026-11-04 13:13:53.644636272 +0000
+@@ -272,7 +272,7 @@
+     //   WB    : write rd if the instruction writes rd, rd != 0 (x0 hard-wired)
+     //           and a JAL/JALR target is not misaligned (trapping jumps must
+     //           leave rd unchanged).
+-    wire wb_trap_misf = is_jump & alu_q[1];
++    wire wb_trap_misf = is_jump & (alu_q[1] | (d_jalr & alu_q[0]));
+     wire rf_we = (state == S_CLEAR) |
+                  ((state == S_WB) & d_writes_rd & (d_rd != 5'd0) & ~wb_trap_misf);
+ 

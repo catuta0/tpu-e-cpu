@@ -1,0 +1,27 @@
+INFO: test=dir_stores ws=3 rand_stall=0 seed=1 prog=sim/data/cpu_tests/dir_stores.hex
+PROTOCOL VIOLATION #1 at cycle 95: store strobe does not match size/address (valid=1 instr=0 addr=00000901 wdata=44444444 wstrb=0100 ready=0 pc=0000001c)
+PROTOCOL VIOLATION #2 at cycle 123: store strobe does not match size/address (valid=1 instr=0 addr=00000902 wdata=abababab wstrb=0010 ready=0 pc=00000028)
+PROTOCOL VIOLATION #3 at cycle 273: store strobe does not match size/address (valid=1 instr=0 addr=00000909 wdata=00000000 wstrb=0100 ready=0 pc=00000064)
+PASS: stop kind (0 tohost, 1 trap) : got 0x00000000 expected 0x00000000
+PASS: TOHOST store pc : got 0x00000138 expected 0x00000138
+PASS: trap_cause : got 0x00000000 expected 0x00000000
+PASS: instret (retire pulses) : got 0x0000004f expected 0x0000004f
+PASS: TOHOST written : got 0x00000001 expected 0x00000001
+PASS: TOHOST value : got 0x00000001 expected 0x00000001
+PASS: bus_err : got 0x00000000 expected 0x00000000
+PASS: LED : got 0x00000000 expected 0x00000000
+PASS: UART byte count : got 0x00000000 expected 0x00000000
+PASS: UART bytes equal : got 0x00000001 expected 0x00000001
+FAIL: signature word 5 (addr 0x00000f14): got 0x00440044 expected 0x00004444
+FAIL: signature word 7 (addr 0x00000f1c): got 0xab44ab44 expected 0xabab4444
+FAIL: signature word 15 (addr 0x00000f3c): got 0x11003344 expected 0x11220044
+FAIL: signature word 16 (addr 0x00000f40): got 0x00003344 expected 0x00000044
+FAIL: signature word 23 (addr 0x00000f5c): got 0xab44ab44 expected 0xabab4444
+FAIL: signature 0x0F00..0x0F7C (32 words) equal : got 0x00000000 expected 0x00000001
+FAIL: bus-protocol violations : got 0x00000003 expected 0x00000000
+INFO: cycles=775 instret=79 fetch=79 load=19 store=50 wait_cycles=445
+RESULT name=dir_stores ws=3 rand=0 status=FAIL cycles=775 instret=79 cpi=9.810 viol=3
+TEST FAILED (2 failing checks)
+FATAL: tests/cpu/tb_rv32i_core.v:491: 
+       Time: 8146000  Scope: tb_rv32i_core
+VVP_EXIT=1

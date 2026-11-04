@@ -1,0 +1,11 @@
+--- /home/user/tpu-e-cpu/design/rtl/soc/soc_top.v	2026-11-04 07:07:34.702208770 +0000
++++ /home/user/tpu-e-cpu/reports/review/build/REV-01a/mut/S01/soc/soc_top.v	2026-11-04 13:20:01.663338719 +0000
+@@ -220,7 +220,7 @@
+     // LED pins: register bit 1 = lit, board LEDs are active-low.
+     // led is a flip-flop output (soc_periph), so the pins are glitch-free.
+     // =========================================================================
+-    assign led_n = ~led;
++    assign led_n = led;
+ 
+     // Debug-only nets (see header): no pin, no logic. Collected so that lint
+     // documents them as intentionally unused (Verilator "unused" idiom).

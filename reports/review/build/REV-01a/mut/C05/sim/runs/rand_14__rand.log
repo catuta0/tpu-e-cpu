@@ -1,0 +1,22 @@
+INFO: test=rand_14 ws=0 rand_stall=1 seed=26 prog=sim/data/cpu_tests/rand_14.hex
+PROTOCOL VIOLATION #1 at cycle 672: store strobe does not match size/address (valid=1 instr=0 addr=00000936 wdata=00000000 wstrb=0010 ready=0 pc=00000150)
+PROTOCOL VIOLATION #2 at cycle 1046: store strobe does not match size/address (valid=1 instr=0 addr=000008a6 wdata=00000000 wstrb=0010 ready=0 pc=0000020c)
+PROTOCOL VIOLATION #3 at cycle 1250: store strobe does not match size/address (valid=1 instr=0 addr=000008cd wdata=01010101 wstrb=0100 ready=1 pc=0000027c)
+PASS: stop kind (0 tohost, 1 trap) : got 0x00000000 expected 0x00000000
+PASS: TOHOST store pc : got 0x00000a94 expected 0x00000a94
+PASS: trap_cause : got 0x00000000 expected 0x00000000
+PASS: instret (retire pulses) : got 0x00000108 expected 0x00000108
+PASS: TOHOST written : got 0x00000001 expected 0x00000001
+PASS: TOHOST value : got 0x00000001 expected 0x00000001
+PASS: bus_err : got 0x00000000 expected 0x00000000
+PASS: LED : got 0x00000000 expected 0x00000000
+PASS: UART byte count : got 0x00000000 expected 0x00000000
+PASS: UART bytes equal : got 0x00000001 expected 0x00000001
+PASS: signature 0x0F00..0x0F7C (32 words) equal : got 0x00000001 expected 0x00000001
+FAIL: bus-protocol violations : got 0x00000003 expected 0x00000000
+INFO: cycles=2273 instret=264 fetch=265 load=23 store=46 wait_cycles=1152
+RESULT name=rand_14 ws=0 rand=1 status=FAIL cycles=2273 instret=264 cpi=8.610 viol=3
+TEST FAILED (1 failing checks)
+FATAL: tests/cpu/tb_rv32i_core.v:491: 
+       Time: 23126000  Scope: tb_rv32i_core
+VVP_EXIT=1

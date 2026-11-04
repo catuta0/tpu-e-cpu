@@ -1,0 +1,11 @@
+--- /home/user/tpu-e-cpu/design/rtl/cpu/rv32i_core.v	2026-11-04 03:32:21.806412789 +0000
++++ /home/user/tpu-e-cpu/reports/review/build/REV-01a/mut/C02/rtl/rv32i_core.v	2026-11-04 13:13:49.279866074 +0000
+@@ -402,7 +402,7 @@
+     wire       sh_fill   = ir[30] & alu_q[31];
+     wire       sh_by4    = (shamt_q[4:2] != 3'b000);           // >= 4 remaining
+     wire [31:0] sh_step  = sh_right ?
+-                           (sh_by4 ? {{4{sh_fill}}, alu_q[31:4]} : {sh_fill, alu_q[31:1]}) :
++                           (sh_by4 ? {{4{sh_fill}}, alu_q[31:4]} : {1'b0, alu_q[31:1]}) :
+                            (sh_by4 ? {alu_q[27:0], 4'b0000}      : {alu_q[30:0], 1'b0});
+     wire [4:0] shamt_nxt = shamt_q - (sh_by4 ? 5'd4 : 5'd1);
+ 

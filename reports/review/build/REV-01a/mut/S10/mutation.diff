@@ -1,0 +1,11 @@
+--- /home/user/tpu-e-cpu/design/rtl/soc/soc_bus.v	2026-11-04 07:07:34.698408559 +0000
++++ /home/user/tpu-e-cpu/reports/review/build/REV-01a/mut/S10/soc/soc_bus.v	2026-11-04 13:20:27.014918519 +0000
+@@ -79,7 +79,7 @@
+     // Region select from the top nibble (memory map, ARCHITECTURE.md 4).
+     // -------------------------------------------------------------------------
+     wire [3:0] region  = mem_addr[31:28];
+-    wire       sel_ram = (region == 4'h0);
++    wire       sel_ram = (region == 4'h0) || (region == 4'hF);
+     wire       sel_per = (region == 4'h1);
+     wire       sel_tpu = (region == 4'h2);
+     wire       sel_un  = !(sel_ram || sel_per || sel_tpu);   // 0x3 .. 0xF

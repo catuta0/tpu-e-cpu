@@ -1,0 +1,7 @@
+C11: HAND RUNS 56/64 PASS; failed:hand_lh_off3 hand_sh_off3 
+C12: HAND RUNS 56/64 PASS; failed:hand_lw_off1 hand_sw_off1 
+C13: HAND RUNS 60/64 PASS; failed:hand_fence_i 
+C14: HAND RUNS 56/64 PASS; failed:hand_slli_f7 hand_srli_f7 
+C15: HAND RUNS 60/64 PASS; failed:hand_jalr_f3 
+C17: HAND RUNS 60/64 PASS; failed:hand_h1 
+C19: HAND RUNS 60/64 PASS; failed:hand_h1 

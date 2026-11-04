@@ -1,0 +1,11 @@
+--- design/rtl/tpu/sc_rng.v	2026-11-04 07:03:12.150333450 +0000
++++ reports/review/build/REV-01b/mut/M21_seedw01/rtl/sc_rng.v	2026-11-04 13:27:34.895818682 +0000
+@@ -101,7 +101,7 @@
+     // =========================================================================
+     // ---- Modes 0/1: the two shared LFSRs (ARCHITECTURE.md 12, = rev B) -------
+     localparam [15:0] SEED_X = 16'hACE1;   // S(0)
+-    localparam [15:0] SEED_W = 16'hF9DE;   // S(32768): half a period from X
++    localparam [15:0] SEED_W = 16'h7A5C;   // S(32768): half a period from X
+ 
+     // ---- Mode 2 (rev C): seed_x_i = 0xACE1 + 0x3C5A*i, seed_w_i = 0x7A5C + 0x2B67*i
+     // Packed 16 bits per lane, lane i at [16i +: 16] (lane 0 rightmost).

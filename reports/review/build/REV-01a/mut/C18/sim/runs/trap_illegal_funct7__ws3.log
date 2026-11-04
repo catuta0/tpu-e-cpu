@@ -1,0 +1,18 @@
+INFO: test=trap_illegal_funct7 ws=3 rand_stall=0 seed=1 prog=sim/data/cpu_tests/trap_illegal_funct7.hex
+PASS: stop kind (0 tohost, 1 trap) : got 0x00000001 expected 0x00000001
+PASS: halt pc : got 0x000000ac expected 0x000000ac
+PASS: trap_cause : got 0x00000003 expected 0x00000003
+PASS: instret (retire pulses) : got 0x0000002b expected 0x0000002b
+PASS: TOHOST written : got 0x00000000 expected 0x00000000
+PASS: TOHOST value : got 0x00000000 expected 0x00000000
+PASS: bus_err : got 0x00000000 expected 0x00000000
+PASS: LED : got 0x00000000 expected 0x00000000
+PASS: UART byte count : got 0x00000000 expected 0x00000000
+PASS: UART bytes equal : got 0x00000001 expected 0x00000001
+PASS: signature 0x0F00..0x0F7C (32 words) equal : got 0x00000001 expected 0x00000001
+PASS: bus-protocol violations : got 0x00000000 expected 0x00000000
+INFO: cycles=405 instret=43 fetch=44 load=1 store=33 wait_cycles=234
+RESULT name=trap_illegal_funct7 ws=3 rand=0 status=PASS cycles=405 instret=43 cpi=9.419 viol=0
+TEST PASSED
+tests/cpu/tb_rv32i_core.v:488: $finish called at 4446000 (1ps)
+VVP_EXIT=0

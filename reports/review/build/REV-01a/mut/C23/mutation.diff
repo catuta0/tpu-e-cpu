@@ -1,0 +1,11 @@
+--- /home/user/tpu-e-cpu/design/rtl/cpu/rv32i_decode.v	2026-11-04 03:18:38.131907824 +0000
++++ /home/user/tpu-e-cpu/reports/review/build/REV-01a/mut/C23/rtl/rv32i_decode.v	2026-11-04 13:15:44.250761606 +0000
+@@ -146,7 +146,7 @@
+         else if (op_branch)
+             imm = {{19{ir[31]}}, ir[31], ir[7], ir[30:25], ir[11:8], 1'b0};   // B
+         else if (op_store)
+-            imm = {{20{ir[31]}}, ir[31:25], ir[11:7]};                       // S
++            imm = {{20{ir[31]}}, ir[30], ir[30:25], ir[11:7]};                       // S
+         else
+             imm = {{20{ir[31]}}, ir[31:20]};                                 // I
+     end

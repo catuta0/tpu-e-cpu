@@ -1,0 +1,11 @@
+--- /home/user/tpu-e-cpu/design/rtl/cpu/rv32i_core.v	2026-11-04 03:32:21.806412789 +0000
++++ /home/user/tpu-e-cpu/reports/review/build/REV-01a/mut/C21/rtl/rv32i_core.v	2026-11-04 13:15:35.025150014 +0000
+@@ -511,7 +511,7 @@
+                             state <= S_WB;
+                         end else begin
+                             pc       <= pc_plus4;    // store complete
+-                            retire_q <= 1'b1;
++                            retire_q <= 1'b0;
+                             state    <= S_FETCH;
+                         end
+                     end

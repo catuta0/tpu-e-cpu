@@ -1,0 +1,3 @@
+n_images=1437 L=256
+layer1 sum_i x^2 w^2: mean=4.298 min=0.241 max=9.624; fraction with 1-sum<=0 (train noise = 0): 0.938
+layer1 RMS noise std: train.py=0.0117  eq.(3)=0.4829  ratio=41.2x

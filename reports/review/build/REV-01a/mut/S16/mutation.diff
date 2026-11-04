@@ -1,0 +1,11 @@
+--- /home/user/tpu-e-cpu/design/rtl/soc/soc_periph.v	2026-11-04 07:07:34.698983093 +0000
++++ /home/user/tpu-e-cpu/reports/review/build/REV-01a/mut/S16/soc/soc_periph.v	2026-11-04 13:20:47.858734382 +0000
+@@ -113,7 +113,7 @@
+     reg [5:0] led_q;
+     always @(posedge clk) begin
+         if (rst)                              led_q <= 6'd0;
+-        else if (wr && sel_led && mem_wstrb[0]) led_q <= mem_wdata[5:0];
++        else if (wr && sel_led && mem_wstrb[0]) led_q <= mem_wdata[13:8];
+     end
+     assign led = led_q;
+ 

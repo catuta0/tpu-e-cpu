@@ -1,0 +1,44 @@
+INFO: test=rand_00 ws=0 rand_stall=1 seed=12 prog=sim/data/cpu_tests/rand_00.hex
+FAIL: stop kind (0 tohost, 1 trap) : got 0x00000001 expected 0x00000000
+FAIL: TOHOST store pc : got 0x00000000 expected 0x00000a94
+FAIL: trap_cause : got 0x00000003 expected 0x00000000
+FAIL: instret (retire pulses) : got 0x000000b3 expected 0x000000e8
+FAIL: TOHOST written : got 0x00000000 expected 0x00000001
+FAIL: TOHOST value : got 0x00000000 expected 0x00000001
+PASS: bus_err : got 0x00000000 expected 0x00000000
+PASS: LED : got 0x00000000 expected 0x00000000
+PASS: UART byte count : got 0x00000000 expected 0x00000000
+PASS: UART bytes equal : got 0x00000001 expected 0x00000001
+FAIL: signature word 2 (addr 0x00000f08): got 0x00000000 expected 0xe88cd5fb
+FAIL: signature word 3 (addr 0x00000f0c): got 0x00000000 expected 0xc60a57f6
+FAIL: signature word 4 (addr 0x00000f10): got 0x00000000 expected 0x00000029
+FAIL: signature word 5 (addr 0x00000f14): got 0x00000000 expected 0xfffffe33
+FAIL: signature word 6 (addr 0x00000f18): got 0x00000000 expected 0x90569379
+FAIL: signature word 7 (addr 0x00000f1c): got 0x00000000 expected 0x00000800
+FAIL: signature word 8 (addr 0x00000f20): got 0x00000000 expected 0x0000d657
+FAIL: signature word 9 (addr 0x00000f24): got 0x00000000 expected 0x000000a8
+FAIL: signature word 10 (addr 0x00000f28): got 0x00000000 expected 0xe88cd5fb
+FAIL: signature word 12 (addr 0x00000f30): got 0x00000000 expected 0xfffffa3f
+FAIL: signature word 14 (addr 0x00000f38): got 0x00000000 expected 0x6b8f5f91
+FAIL: signature word 16 (addr 0x00000f40): got 0x00000000 expected 0x86c80380
+FAIL: signature word 17 (addr 0x00000f44): got 0x00000000 expected 0xa1ff6338
+FAIL: signature word 18 (addr 0x00000f48): got 0x00000000 expected 0xe88ccdfb
+FAIL: signature word 19 (addr 0x00000f4c): got 0x00000000 expected 0x5660eb6e
+FAIL: signature word 21 (addr 0x00000f54): got 0x00000000 expected 0x000003c4
+FAIL: signature word 22 (addr 0x00000f58): got 0x00000000 expected 0x003224ea
+FAIL: signature word 23 (addr 0x00000f5c): got 0x00000000 expected 0xe88cd47b
+FAIL: signature word 24 (addr 0x00000f60): got 0x00000000 expected 0xc284b1d4
+FAIL: signature word 25 (addr 0x00000f64): got 0x00000000 expected 0x000000a8
+FAIL: signature word 26 (addr 0x00000f68): got 0x00000000 expected 0x6b8f5f91
+FAIL: signature word 27 (addr 0x00000f6c): got 0x00000000 expected 0x0000005d
+FAIL: signature word 28 (addr 0x00000f70): got 0x00000000 expected 0x0000036c
+FAIL: signature word 30 (addr 0x00000f78): got 0x00000000 expected 0xfffffef7
+FAIL: signature word 31 (addr 0x00000f7c): got 0x00000000 expected 0xacc1d6dd
+FAIL: signature 0x0F00..0x0F7C (32 words) equal : got 0x00000000 expected 0x00000001
+PASS: bus-protocol violations : got 0x00000000 expected 0x00000000
+INFO: cycles=1479 instret=179 fetch=180 load=16 store=13 wait_cycles=717
+RESULT name=rand_00 ws=0 rand=1 status=FAIL cycles=1479 instret=179 cpi=8.263 viol=0
+TEST FAILED (7 failing checks)
+FATAL: tests/cpu/tb_rv32i_core.v:491: 
+       Time: 15186000  Scope: tb_rv32i_core
+VVP_EXIT=1

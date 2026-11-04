@@ -1,0 +1,24 @@
+INFO: tb_soc MODE=cpu PROG_HEX=sim/data/cpu_tests/trap_misaligned_sw.hex UART_DIV(DUT)=234 expected divider 234
+PASS: R1 power-up reset: rst released on rising edge 2 after configuration
+PASS: R2 button press -> rst asserted on rising edge 2 (2..3 required)
+PASS: R3 during reset led_n = 6'b111111 (all LEDs off), uart_tx = 1 (idle)
+PASS: R4 button release -> rst released on rising edge 2 (2..3 required)
+PASS: R5 first bus request after reset release is a fetch of 0x00000000 (at cycle 31 after rst fell; CPU CLEAR state = 32 cycles)
+PASS: C1 trap stop: cause 6 at PC 0x000000ac
+PASS: C2 instret = 43
+PASS: C3 TOHOST not written (as expected)
+FAIL: C4 signature word 5 = 0x00000000 expected 0x5a5a5a5a
+FAIL: C4 signature word 6 = 0x00000000 expected 0x00000800
+FAIL: C4 signature word 7 = 0x00000000 expected 0xdeadbeef
+FAIL: C4 signature word 31 = 0x00000000 expected 0x31313131
+PASS: C5 bus_err = 0
+PASS: C6 led_n = 6'b111111 = ~LED (LED 0)
+PASS: C7 UART 0 bytes as expected
+PASS: C8 0 protocol violations, max latency 2 cycles
+INFO: stop at cycle 280 after reset release, instret 43
+PASS: U1 UART timing: 0 frames, every edge on a multiple of 234 clocks, tx_busy = 2340 clocks per frame, real-time receiver: 0 framing/stability errors
+INFO: bus transactions RAM 78 (max latency 2), PERIPH 0 (0), TPU 0 (0), unmapped 0 (0); protocol violations 0
+errors=1
+TEST FAILED
+FATAL: tests/soc/tb_soc.v:654: tb_soc failed
+       Time: 37501975  Scope: tb_soc

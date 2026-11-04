@@ -1,0 +1,11 @@
+--- /home/user/tpu-e-cpu/design/rtl/cpu/rv32i_core.v	2026-11-04 03:32:21.806412789 +0000
++++ /home/user/tpu-e-cpu/reports/review/build/REV-01a/mut/C11/rtl/rv32i_core.v	2026-11-04 13:14:29.378146024 +0000
+@@ -333,7 +333,7 @@
+     // alu_y = rs1 + imm), so a misaligned access traps BEFORE MEM and never
+     // appears on the bus.
+     wire [1:0] ea_lo      = alu_y[1:0];
+-    wire       misaligned = ((d_funct3[1:0] == 2'b01) & ea_lo[0]) |           // half
++    wire       misaligned = ((d_funct3[1:0] == 2'b01) & (ea_lo == 2'b01)) |           // half
+                             ((d_funct3[1:0] == 2'b10) & (ea_lo != 2'b00));     // word
+ 
+     // In MEM the address is in alu_q; its low bits steer the lanes.

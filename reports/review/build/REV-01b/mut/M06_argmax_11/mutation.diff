@@ -1,0 +1,11 @@
+--- design/rtl/tpu/sc_tpu_ctrl.v	2026-11-04 03:54:40.643520692 +0000
++++ reports/review/build/REV-01b/mut/M06_argmax_11/rtl/sc_tpu_ctrl.v	2026-11-04 13:19:36.784708238 +0000
+@@ -277,7 +277,7 @@
+         if (rst) begin
+             best_idx <= 4'd0;
+             best_dp  <= {DPW{1'b0}};
+-        end else if (pp_out_valid && pp_out_layer2 && (pp_out_idx < 4'd10)) begin
++        end else if (pp_out_valid && pp_out_layer2 && (pp_out_idx < 4'd11)) begin
+             if ((pp_out_idx == 4'd0) || ($signed(pp_out_dp) > $signed(best_dp))) begin
+                 best_idx <= pp_out_idx;
+                 best_dp  <= pp_out_dp;

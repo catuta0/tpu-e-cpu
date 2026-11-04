@@ -1,0 +1,28 @@
+INFO: test=dir_branches ws=0 rand_stall=1 seed=5 prog=sim/data/cpu_tests/dir_branches.hex
+PASS: stop kind (0 tohost, 1 trap) : got 0x00000000 expected 0x00000000
+PASS: TOHOST store pc : got 0x00000450 expected 0x00000450
+PASS: trap_cause : got 0x00000000 expected 0x00000000
+FAIL: instret (retire pulses) : got 0x000006ee expected 0x000000ae
+PASS: TOHOST written : got 0x00000001 expected 0x00000001
+FAIL: TOHOST value : got 0x00000141 expected 0x00000001
+PASS: bus_err : got 0x00000000 expected 0x00000000
+PASS: LED : got 0x00000000 expected 0x00000000
+PASS: UART byte count : got 0x00000000 expected 0x00000000
+PASS: UART bytes equal : got 0x00000001 expected 0x00000001
+FAIL: signature word 0 (addr 0x00000f00): got 0x00000140 expected 0x00000000
+FAIL: signature word 10 (addr 0x00000f28): got 0x00000140 expected 0x00000000
+FAIL: signature word 12 (addr 0x00000f30): got 0x00000142 expected 0x00000002
+FAIL: signature word 13 (addr 0x00000f34): got 0x00000142 expected 0x00000002
+FAIL: signature word 16 (addr 0x00000f40): got 0x00000143 expected 0x00000003
+FAIL: signature word 17 (addr 0x00000f44): got 0x00000144 expected 0x00000004
+FAIL: signature word 19 (addr 0x00000f4c): got 0x00000144 expected 0x00000004
+FAIL: signature word 20 (addr 0x00000f50): got 0x0000013f expected 0xffffffff
+FAIL: signature word 27 (addr 0x00000f6c): got 0x00000167 expected 0x00000027
+FAIL: signature 0x0F00..0x0F7C (32 words) equal : got 0x00000000 expected 0x00000001
+PASS: bus-protocol violations : got 0x00000000 expected 0x00000000
+INFO: cycles=12755 instret=1774 fetch=1774 load=1 store=34 wait_cycles=6333
+RESULT name=dir_branches ws=0 rand=1 status=FAIL cycles=12755 instret=1774 cpi=7.190 viol=0
+TEST FAILED (3 failing checks)
+FATAL: tests/cpu/tb_rv32i_core.v:491: 
+       Time: 127946000  Scope: tb_rv32i_core
+VVP_EXIT=1

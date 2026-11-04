@@ -1,0 +1,18 @@
+INFO: test=trap_misaligned_jalr ws=0 rand_stall=1 seed=42 prog=sim/data/cpu_tests/trap_misaligned_jalr.hex
+PASS: stop kind (0 tohost, 1 trap) : got 0x00000001 expected 0x00000001
+PASS: halt pc : got 0x000000b4 expected 0x000000b4
+PASS: trap_cause : got 0x00000004 expected 0x00000004
+PASS: instret (retire pulses) : got 0x0000002d expected 0x0000002d
+PASS: TOHOST written : got 0x00000000 expected 0x00000000
+PASS: TOHOST value : got 0x00000000 expected 0x00000000
+PASS: bus_err : got 0x00000000 expected 0x00000000
+PASS: LED : got 0x00000000 expected 0x00000000
+PASS: UART byte count : got 0x00000000 expected 0x00000000
+PASS: UART bytes equal : got 0x00000001 expected 0x00000001
+PASS: signature 0x0F00..0x0F7C (32 words) equal : got 0x00000001 expected 0x00000001
+PASS: bus-protocol violations : got 0x00000000 expected 0x00000000
+INFO: cycles=493 instret=45 fetch=46 load=1 store=33 wait_cycles=313
+RESULT name=trap_misaligned_jalr ws=0 rand=1 status=PASS cycles=493 instret=45 cpi=10.956 viol=0
+TEST PASSED
+tests/cpu/tb_rv32i_core.v:488: $finish called at 5326000 (1ps)
+VVP_EXIT=0

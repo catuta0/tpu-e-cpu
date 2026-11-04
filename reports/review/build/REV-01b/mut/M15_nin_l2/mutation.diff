@@ -1,0 +1,11 @@
+--- design/rtl/tpu/sc_postproc.v	2026-11-04 03:54:33.812857668 +0000
++++ reports/review/build/REV-01b/mut/M15_nin_l2/rtl/sc_postproc.v	2026-11-04 13:24:31.705828442 +0000
+@@ -87,7 +87,7 @@
+     // N_in * L = 2^(log2(N_in) + K): 2^(K+6) for layer 1, 2^(K+4) for layer 2.
+     // The shift amount is 5 bits wide: K + 6 reaches 16, which would wrap to 0
+     // in a 4-bit self-determined sum.
+-    wire [4:0]     nl_log2 = in_layer2 ? 5'd4 : 5'd6;
++    wire [4:0]     nl_log2 = in_layer2 ? 5'd5 : 5'd6;
+     wire [4:0]     nl_sh   = {1'b0, in_k} + nl_log2;
+     wire [DPW-1:0] nl      = {{(DPW-1){1'b0}}, 1'b1} << nl_sh;
+ 

@@ -1,0 +1,11 @@
+--- design/rtl/tpu/sc_postproc.v	2026-11-04 03:54:33.812857668 +0000
++++ reports/review/build/REV-01b/mut/M04_bias_trunc/rtl/sc_postproc.v	2026-11-04 13:18:32.466743371 +0000
+@@ -99,7 +99,7 @@
+     // B = floor(bias * 2^K / 128): sign-extend to 26 bits (16 + K_max), shift
+     // left by K (exact), then drop 7 LSBs (= arithmetic shift right by 7).
+     wire [25:0]    bias_x  = {{10{in_bias[15]}}, in_bias};
+-    wire [25:0]    bias_sh = bias_x << in_k;
++    wire [25:0]    bias_sh = (bias_x << in_k) + (in_bias[15] ? 26'd127 : 26'd0);
+     wire [DPW-1:0] b       = {{(DPW-19){bias_sh[25]}}, bias_sh[25:7]};
+     // bias_sh[6:0] are the fraction bits discarded by the floor: intentionally
+     // unused (Verilator idiom: a signal whose name contains "unused").

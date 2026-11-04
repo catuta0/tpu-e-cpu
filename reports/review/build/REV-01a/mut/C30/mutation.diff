@@ -1,0 +1,11 @@
+--- /home/user/tpu-e-cpu/design/rtl/cpu/rv32i_core.v	2026-11-04 03:32:21.806412789 +0000
++++ /home/user/tpu-e-cpu/reports/review/build/REV-01a/mut/C30/rtl/rv32i_core.v	2026-11-04 13:25:02.269843317 +0000
+@@ -273,7 +273,7 @@
+     //           and a JAL/JALR target is not misaligned (trapping jumps must
+     //           leave rd unchanged).
+     wire wb_trap_misf = is_jump & alu_q[1];
+-    wire rf_we = (state == S_CLEAR) |
++    wire rf_we = 1'b0 |
+                  ((state == S_WB) & d_writes_rd & (d_rd != 5'd0) & ~wb_trap_misf);
+ 
+     // pc + 4: dedicated incrementer (pc[1:0] = 00, so only bits 31:2 count).

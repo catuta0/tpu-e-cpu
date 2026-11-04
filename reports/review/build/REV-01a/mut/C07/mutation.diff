@@ -1,0 +1,11 @@
+--- /home/user/tpu-e-cpu/design/rtl/cpu/rv32i_core.v	2026-11-04 03:32:21.806412789 +0000
++++ /home/user/tpu-e-cpu/reports/review/build/REV-01a/mut/C07/rtl/rv32i_core.v	2026-11-04 13:14:11.849202442 +0000
+@@ -379,7 +379,7 @@
+     wire [15:0] ld_half = ma_lo[1] ? mem_rdata[31:16] : mem_rdata[15:0];
+     wire        ld_is_b = (d_funct3[1:0] == 2'b00);
+     wire        ld_is_w = (d_funct3[1:0] == 2'b10);
+-    wire        ld_sign = ~d_funct3[2] & (d_funct3[0] ? ld_half[15] : ld_byte[7]);
++    wire        ld_sign = ~d_funct3[2] & (d_funct3[0] ? ld_half[15] : 1'b0);
+     // For LW, ld_half = mem_rdata[15:0] because addr[1] = 0 (aligned).
+     wire [31:0] ld_data = {
+         ld_is_w ? mem_rdata[31:16] : {16{ld_sign}},

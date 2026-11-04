@@ -1,0 +1,11 @@
+--- design/rtl/tpu/sc_tpu.v	2026-11-04 07:03:18.645401765 +0000
++++ reports/review/build/REV-01b/mut/M20_wr_busy/rtl/sc_tpu.v	2026-11-04 13:27:04.996217767 +0000
+@@ -163,7 +163,7 @@
+     wire accept   = mem_valid && (bstate == B_IDLE) &&
+                     !(is_read && sel_mem && port_busy);
+     // Every write is ignored while BUSY (5.4); START is only seen when idle.
+-    wire wr_ok    = accept && !is_read && !busy;
++    wire wr_ok    = accept && !is_read;
+     wire start    = wr_ok && sel_ctrl && mem_wstrb[0] && mem_wdata[0];
+ 
+     // Read source selected at acceptance, used one cycle later.

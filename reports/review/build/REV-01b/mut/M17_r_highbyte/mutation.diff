@@ -1,0 +1,11 @@
+--- design/rtl/tpu/sc_lfsr8.v	2026-11-04 03:54:33.812106464 +0000
++++ reports/review/build/REV-01b/mut/M17_r_highbyte/rtl/sc_lfsr8.v	2026-11-04 13:25:33.762313013 +0000
+@@ -133,7 +133,7 @@
+     end
+ 
+     // r = low byte of the (look-ahead) state = r of the current stream cycle.
+-    assign r = state[7:0];
++    assign r = state[15:8];
+ 
+ endmodule
+ 

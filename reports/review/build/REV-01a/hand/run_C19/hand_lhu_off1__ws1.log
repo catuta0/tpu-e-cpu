@@ -1,0 +1,17 @@
+INFO: test=hand_lhu_off1 ws=1 rand_stall=0 seed=1 prog=reports/review/build/REV-01a/hand/data/hand_lhu_off1.hex
+PASS: stop kind (0 tohost, 1 trap) : got 0x00000001 expected 0x00000001
+PASS: halt pc : got 0x00000010 expected 0x00000010
+PASS: trap_cause : got 0x00000005 expected 0x00000005
+PASS: instret (retire pulses) : got 0x00000004 expected 0x00000004
+PASS: TOHOST written : got 0x00000000 expected 0x00000000
+PASS: TOHOST value : got 0x00000000 expected 0x00000000
+PASS: bus_err : got 0x00000000 expected 0x00000000
+PASS: LED : got 0x00000000 expected 0x00000000
+PASS: UART byte count : got 0x00000000 expected 0x00000000
+PASS: UART bytes equal : got 0x00000001 expected 0x00000001
+PASS: signature 0x0F00..0x0F7C (32 words) equal : got 0x00000001 expected 0x00000001
+PASS: bus-protocol violations : got 0x00000000 expected 0x00000000
+INFO: cycles=23 instret=4 fetch=5 load=0 store=0 wait_cycles=5
+RESULT name=hand_lhu_off1 ws=1 rand=0 status=PASS cycles=23 instret=4 cpi=5.750 viol=0
+TEST PASSED
+tests/cpu/tb_rv32i_core.v:488: $finish called at 626000 (1ps)

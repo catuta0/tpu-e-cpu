@@ -1,0 +1,11 @@
+--- /home/user/tpu-e-cpu/design/rtl/soc/soc_periph.v	2026-11-04 07:07:34.698983093 +0000
++++ /home/user/tpu-e-cpu/reports/review/build/REV-01a/mut/S15/soc/soc_periph.v	2026-11-04 13:20:45.191307521 +0000
+@@ -138,7 +138,7 @@
+     reg [31:0] cycle_q;
+     always @(posedge clk) begin
+         if (rst) cycle_q <= 32'd0;
+-        else     cycle_q <= cycle_q + 32'd1;
++        else     cycle_q <= cycle_q + 32'd2;
+     end
+ 
+     // -------------------------------------------------------------------------

@@ -1,0 +1,11 @@
+--- /home/user/tpu-e-cpu/design/rtl/cpu/rv32i_core.v	2026-11-04 03:32:21.806412789 +0000
++++ /home/user/tpu-e-cpu/reports/review/build/REV-01a/mut/C01/rtl/rv32i_core.v	2026-11-04 13:13:43.936012904 +0000
+@@ -399,7 +399,7 @@
+     // Direction: funct3[2] = 0 left (SLL), 1 right. SRA: instr[30] = 1, the
+     // vacated bits get the sign bit.
+     wire       sh_right  = d_funct3[2];
+-    wire       sh_fill   = ir[30] & alu_q[31];
++    wire       sh_fill   = 1'b0;
+     wire       sh_by4    = (shamt_q[4:2] != 3'b000);           // >= 4 remaining
+     wire [31:0] sh_step  = sh_right ?
+                            (sh_by4 ? {{4{sh_fill}}, alu_q[31:4]} : {sh_fill, alu_q[31:1]}) :

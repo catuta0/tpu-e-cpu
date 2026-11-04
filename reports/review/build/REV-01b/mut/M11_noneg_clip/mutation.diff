@@ -1,0 +1,11 @@
+--- design/rtl/tpu/sc_postproc.v	2026-11-04 03:54:33.812857668 +0000
++++ reports/review/build/REV-01b/mut/M11_noneg_clip/rtl/sc_postproc.v	2026-11-04 13:22:29.323914958 +0000
+@@ -130,7 +130,7 @@
+     // Floor division by 2^K = arithmetic right shift ($signed + >>>).
+     wire [33:0] u     = $signed(wide) >>> k1;
+     // Clip to 0..127: negative -> 0 (u[33] is the sign), >= 128 -> 127.
+-    wire        u_neg = u[33];
++    wire        u_neg = 1'b0;
+     wire        u_big = |u[32:7];
+     wire [6:0]  h     = u_neg ? 7'd0 : (u_big ? 7'd127 : u[6:0]);
+ 

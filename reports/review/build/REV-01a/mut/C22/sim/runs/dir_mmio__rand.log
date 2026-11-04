@@ -1,0 +1,25 @@
+INFO: test=dir_mmio ws=0 rand_stall=1 seed=11 prog=sim/data/cpu_tests/dir_mmio.hex
+PROTOCOL VIOLATION #1 at cycle 60: request changed while waiting for mem_ready (valid=1 instr=1 addr=0000000c wdata=2a2a2a2a wstrb=0000 ready=0 pc=0000000c)
+PROTOCOL VIOLATION #2 at cycle 104: request changed while waiting for mem_ready (valid=1 instr=1 addr=0000001c wdata=2a2a2a2a wstrb=0000 ready=0 pc=0000001c)
+PROTOCOL VIOLATION #3 at cycle 122: request changed while waiting for mem_ready (valid=1 instr=1 addr=00000024 wdata=00000000 wstrb=0000 ready=0 pc=00000024)
+PROTOCOL VIOLATION #4 at cycle 137: request changed while waiting for mem_ready (valid=1 instr=1 addr=0000002c wdata=2a2a2a2a wstrb=0000 ready=0 pc=0000002c)
+PROTOCOL VIOLATION #5 at cycle 175: request changed while waiting for mem_ready (valid=1 instr=1 addr=00000038 wdata=00000000 wstrb=0000 ready=0 pc=00000038)
+PROTOCOL VIOLATION #6 at cycle 483: request changed while waiting for mem_ready (valid=1 instr=1 addr=000000a8 wdata=00000000 wstrb=0000 ready=0 pc=000000a8)
+PASS: stop kind (0 tohost, 1 trap) : got 0x00000000 expected 0x00000000
+PASS: TOHOST store pc : got 0x000000b4 expected 0x000000b4
+PASS: trap_cause : got 0x00000000 expected 0x00000000
+PASS: instret (retire pulses) : got 0x0000002e expected 0x0000002e
+PASS: TOHOST written : got 0x00000001 expected 0x00000001
+PASS: TOHOST value : got 0x00000001 expected 0x00000001
+PASS: bus_err : got 0x00000001 expected 0x00000001
+PASS: LED : got 0x0000002a expected 0x0000002a
+PASS: UART byte count : got 0x00000000 expected 0x00000000
+PASS: UART bytes equal : got 0x00000001 expected 0x00000001
+PASS: signature 0x0F00..0x0F7C (32 words) equal : got 0x00000001 expected 0x00000001
+FAIL: bus-protocol violations : got 0x00000006 expected 0x00000000
+INFO: cycles=494 instret=46 fetch=47 load=4 store=36 wait_cycles=309
+RESULT name=dir_mmio ws=0 rand=1 status=FAIL cycles=494 instret=46 cpi=10.739 viol=6
+TEST FAILED (1 failing checks)
+FATAL: tests/cpu/tb_rv32i_core.v:491: 
+       Time: 5336000  Scope: tb_rv32i_core
+VVP_EXIT=1

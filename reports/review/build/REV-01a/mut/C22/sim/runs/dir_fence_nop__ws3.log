@@ -1,0 +1,25 @@
+INFO: test=dir_fence_nop ws=3 rand_stall=0 seed=1 prog=sim/data/cpu_tests/dir_fence_nop.hex
+PROTOCOL VIOLATION #1 at cycle 102: request changed while waiting for mem_ready (valid=1 instr=1 addr=00000028 wdata=03030303 wstrb=0000 ready=0 pc=00000028)
+PROTOCOL VIOLATION #2 at cycle 129: request changed while waiting for mem_ready (valid=1 instr=1 addr=00000034 wdata=03030303 wstrb=0000 ready=0 pc=00000034)
+PROTOCOL VIOLATION #3 at cycle 145: request changed while waiting for mem_ready (valid=1 instr=1 addr=0000003c wdata=00000000 wstrb=0000 ready=0 pc=0000003c)
+PROTOCOL VIOLATION #4 at cycle 155: request changed while waiting for mem_ready (valid=1 instr=1 addr=00000040 wdata=03030303 wstrb=0000 ready=0 pc=00000040)
+PROTOCOL VIOLATION #5 at cycle 456: request changed while waiting for mem_ready (valid=1 instr=1 addr=000000b8 wdata=03030303 wstrb=0000 ready=0 pc=000000b8)
+PROTOCOL VIOLATION #6 at cycle 489: request changed while waiting for mem_ready (valid=1 instr=1 addr=000000c8 wdata=01010101 wstrb=0000 ready=0 pc=000000c8)
+PASS: stop kind (0 tohost, 1 trap) : got 0x00000000 expected 0x00000000
+PASS: TOHOST store pc : got 0x000000c4 expected 0x000000c4
+PASS: trap_cause : got 0x00000000 expected 0x00000000
+PASS: instret (retire pulses) : got 0x00000032 expected 0x00000032
+PASS: TOHOST written : got 0x00000001 expected 0x00000001
+PASS: TOHOST value : got 0x00000001 expected 0x00000001
+PASS: bus_err : got 0x00000000 expected 0x00000000
+PASS: LED : got 0x00000000 expected 0x00000000
+PASS: UART byte count : got 0x00000000 expected 0x00000000
+PASS: UART bytes equal : got 0x00000001 expected 0x00000001
+PASS: signature 0x0F00..0x0F7C (32 words) equal : got 0x00000001 expected 0x00000001
+FAIL: bus-protocol violations : got 0x00000006 expected 0x00000000
+INFO: cycles=457 instret=50 fetch=50 load=2 store=35 wait_cycles=262
+RESULT name=dir_fence_nop ws=3 rand=0 status=FAIL cycles=457 instret=50 cpi=9.140 viol=6
+TEST FAILED (1 failing checks)
+FATAL: tests/cpu/tb_rv32i_core.v:491: 
+       Time: 4966000  Scope: tb_rv32i_core
+VVP_EXIT=1

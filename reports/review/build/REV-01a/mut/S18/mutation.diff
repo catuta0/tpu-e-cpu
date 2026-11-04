@@ -1,0 +1,11 @@
+--- /home/user/tpu-e-cpu/design/rtl/soc/soc_ram.v	2026-11-04 06:07:50.153567625 +0000
++++ /home/user/tpu-e-cpu/reports/review/build/REV-01a/mut/S18/soc/soc_ram.v	2026-11-04 13:20:53.523810967 +0000
+@@ -77,7 +77,7 @@
+         else for (n = 0; n < 1024; n = n + 1) mem[n] = 32'd0;
+     end
+ 
+-    wire [9:0] word = mem_addr[11:2];
++    wire [9:0] word = {1'b0, mem_addr[10:2]};
+     // Upper and lower address bits are intentionally not decoded here.
+     wire       addr_unused = &{1'b0, mem_addr[31:12], mem_addr[1:0]};
+ 

@@ -1,0 +1,19 @@
+INFO: test=dir_shifts ws=0 rand_stall=1 seed=4 prog=sim/data/cpu_tests/dir_shifts.hex
+PASS: stop kind (0 tohost, 1 trap) : got 0x00000000 expected 0x00000000
+PASS: TOHOST store pc : got 0x00000114 expected 0x00000114
+PASS: trap_cause : got 0x00000000 expected 0x00000000
+FAIL: instret (retire pulses) : got 0x00000025 expected 0x00000046
+PASS: TOHOST written : got 0x00000001 expected 0x00000001
+PASS: TOHOST value : got 0x00000001 expected 0x00000001
+PASS: bus_err : got 0x00000000 expected 0x00000000
+PASS: LED : got 0x00000000 expected 0x00000000
+PASS: UART byte count : got 0x00000000 expected 0x00000000
+PASS: UART bytes equal : got 0x00000001 expected 0x00000001
+PASS: signature 0x0F00..0x0F7C (32 words) equal : got 0x00000001 expected 0x00000001
+PASS: bus-protocol violations : got 0x00000000 expected 0x00000000
+INFO: cycles=700 instret=37 fetch=72 load=1 store=34 wait_cycles=339
+RESULT name=dir_shifts ws=0 rand=1 status=FAIL cycles=700 instret=37 cpi=18.919 viol=0
+TEST FAILED (1 failing checks)
+FATAL: tests/cpu/tb_rv32i_core.v:491: 
+       Time: 7396000  Scope: tb_rv32i_core
+VVP_EXIT=1

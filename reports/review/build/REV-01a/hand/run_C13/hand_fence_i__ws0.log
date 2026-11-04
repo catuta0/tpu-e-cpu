@@ -1,0 +1,18 @@
+INFO: test=hand_fence_i ws=0 rand_stall=0 seed=1 prog=reports/review/build/REV-01a/hand/data/hand_fence_i.hex
+PASS: stop kind (0 tohost, 1 trap) : got 0x00000001 expected 0x00000001
+FAIL: halt pc : got 0x00000018 expected 0x00000010
+PASS: trap_cause : got 0x00000003 expected 0x00000003
+FAIL: instret (retire pulses) : got 0x00000006 expected 0x00000004
+PASS: TOHOST written : got 0x00000000 expected 0x00000000
+PASS: TOHOST value : got 0x00000000 expected 0x00000000
+PASS: bus_err : got 0x00000000 expected 0x00000000
+PASS: LED : got 0x00000000 expected 0x00000000
+PASS: UART byte count : got 0x00000000 expected 0x00000000
+PASS: UART bytes equal : got 0x00000001 expected 0x00000001
+PASS: signature 0x0F00..0x0F7C (32 words) equal : got 0x00000001 expected 0x00000001
+PASS: bus-protocol violations : got 0x00000000 expected 0x00000000
+INFO: cycles=24 instret=6 fetch=7 load=0 store=1 wait_cycles=0
+RESULT name=hand_fence_i ws=0 rand=0 status=FAIL cycles=24 instret=6 cpi=4.000 viol=0
+TEST FAILED (2 failing checks)
+FATAL: tests/cpu/tb_rv32i_core.v:491: 
+       Time: 636000  Scope: tb_rv32i_core

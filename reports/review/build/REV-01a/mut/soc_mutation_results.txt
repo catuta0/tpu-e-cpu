@@ -1,0 +1,18 @@
+S01 | LED pins not inverted | KILLED | demo=FAIL bfm=FAIL cpu_dir_mmio=FAIL cpu_dir_stores=FAIL cpu_rand_00=FAIL cpu_trap_misaligned_sw=FAIL
+S02 | UART sends MSB first | KILLED | demo=FAIL bfm=FAIL cpu_dir_mmio=PASS cpu_dir_stores=PASS cpu_rand_00=PASS cpu_trap_misaligned_sw=PASS
+S03 | UART 233 clocks per bit | KILLED | demo=FAIL bfm=FAIL cpu_dir_mmio=PASS cpu_dir_stores=PASS cpu_rand_00=PASS cpu_trap_misaligned_sw=PASS
+S04 | UART frame ends after d7 (no full stop bit) | KILLED | demo=FAIL bfm=FAIL cpu_dir_mmio=PASS cpu_dir_stores=PASS cpu_rand_00=PASS cpu_trap_misaligned_sw=PASS
+S05 | RAM byte enables of lanes 1 and 2 swapped | KILLED | demo=PASS bfm=FAIL cpu_dir_mmio=PASS cpu_dir_stores=FAIL cpu_rand_00=FAIL cpu_trap_misaligned_sw=PASS
+S06 | bus_err not sticky | KILLED | demo=PASS bfm=FAIL cpu_dir_mmio=FAIL cpu_dir_stores=PASS cpu_rand_00=PASS cpu_trap_misaligned_sw=PASS
+S07 | reset synchroniser reduced to 1 FF | KILLED | demo=FAIL bfm=PASS cpu_dir_mmio=FAIL cpu_dir_stores=FAIL cpu_rand_00=FAIL cpu_trap_misaligned_sw=FAIL
+S08 | UART_TX write while busy restarts the frame | KILLED | demo=PASS bfm=FAIL cpu_dir_mmio=PASS cpu_dir_stores=PASS cpu_rand_00=PASS cpu_trap_misaligned_sw=PASS
+S09 | CYCLE counter reset value 5 | SURVIVED | demo=PASS bfm=PASS cpu_dir_mmio=PASS cpu_dir_stores=PASS cpu_rand_00=PASS cpu_trap_misaligned_sw=PASS
+S10 | region 0xF decoded as RAM | KILLED | demo=PASS bfm=FAIL cpu_dir_mmio=PASS cpu_dir_stores=PASS cpu_rand_00=PASS cpu_trap_misaligned_sw=PASS
+S11 | UART_STATUS always reads 0 | KILLED | demo=FAIL bfm=FAIL cpu_dir_mmio=PASS cpu_dir_stores=PASS cpu_rand_00=PASS cpu_trap_misaligned_sw=PASS
+S12 | periph accepts again in its ready cycle (double ready) | KILLED | demo=FAIL bfm=FAIL cpu_dir_mmio=FAIL cpu_dir_stores=FAIL cpu_rand_00=FAIL cpu_trap_misaligned_sw=PASS
+S13 | RAM writes all lanes on any strobe | KILLED | demo=PASS bfm=FAIL cpu_dir_mmio=PASS cpu_dir_stores=FAIL cpu_rand_00=PASS cpu_trap_misaligned_sw=PASS
+S14 | TOHOST reset value 1 | KILLED | demo=PASS bfm=FAIL cpu_dir_mmio=PASS cpu_dir_stores=PASS cpu_rand_00=PASS cpu_trap_misaligned_sw=PASS
+S15 | CYCLE counts 2 per clock | KILLED | demo=PASS bfm=FAIL cpu_dir_mmio=PASS cpu_dir_stores=PASS cpu_rand_00=PASS cpu_trap_misaligned_sw=PASS
+S16 | LED register written without byte-0 strobe check, from lane 1 | KILLED | demo=FAIL bfm=FAIL cpu_dir_mmio=FAIL cpu_dir_stores=PASS cpu_rand_00=PASS cpu_trap_misaligned_sw=PASS
+S17 | unmapped read returns RAM data | KILLED | demo=PASS bfm=FAIL cpu_dir_mmio=FAIL cpu_dir_stores=PASS cpu_rand_00=PASS cpu_trap_misaligned_sw=PASS
+S18 | RAM ignores addr bit 11 (2 KiB) | KILLED | demo=FAIL bfm=PASS cpu_dir_mmio=FAIL cpu_dir_stores=FAIL cpu_rand_00=FAIL cpu_trap_misaligned_sw=FAIL

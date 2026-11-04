@@ -1,0 +1,11 @@
+--- /home/user/tpu-e-cpu/design/rtl/cpu/rv32i_core.v	2026-11-04 03:32:21.806412789 +0000
++++ /home/user/tpu-e-cpu/reports/review/build/REV-01a/mut/C04/rtl/rv32i_core.v	2026-11-04 13:13:57.536278700 +0000
+@@ -322,7 +322,7 @@
+     // Branch condition from funct3 (B-type):
+     //   000 BEQ eq   001 BNE !eq   100 BLT lt   101 BGE !lt
+     //   110 BLTU ltu 111 BGEU !ltu  (bit 0 inverts the base condition)
+-    wire br_base  = d_funct3[2] ? (d_funct3[1] ? alu_ltu : alu_lt) : alu_eq;
++    wire br_base  = d_funct3[2] ? (d_funct3[1] ? alu_lt : alu_lt) : alu_eq;
+     wire br_taken = br_base ^ d_funct3[0];
+ 
+     // =========================================================================

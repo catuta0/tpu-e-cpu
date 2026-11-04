@@ -1,0 +1,11 @@
+--- /home/user/tpu-e-cpu/design/rtl/cpu/rv32i_core.v	2026-11-04 03:32:21.806412789 +0000
++++ /home/user/tpu-e-cpu/reports/review/build/REV-01a/mut/C06/rtl/rv32i_core.v	2026-11-04 13:14:07.118283853 +0000
+@@ -371,7 +371,7 @@
+     always @(*) begin
+         case (ma_lo)
+             2'b00:   ld_byte = mem_rdata[7:0];
+-            2'b01:   ld_byte = mem_rdata[15:8];
++            2'b01:   ld_byte = mem_rdata[23:16];
+             2'b10:   ld_byte = mem_rdata[23:16];
+             default: ld_byte = mem_rdata[31:24];
+         endcase

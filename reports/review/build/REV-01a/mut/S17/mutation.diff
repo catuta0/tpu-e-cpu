@@ -1,0 +1,11 @@
+--- /home/user/tpu-e-cpu/design/rtl/soc/soc_bus.v	2026-11-04 07:07:34.698408559 +0000
++++ /home/user/tpu-e-cpu/reports/review/build/REV-01a/mut/S17/soc/soc_bus.v	2026-11-04 13:20:50.562372872 +0000
+@@ -121,7 +121,7 @@
+                     (sel_tpu && tpu_ready) || (sel_un  && un_ready_q);
+         mem_rdata = ({32{sel_ram}} & ram_rdata) |
+                     ({32{sel_per}} & per_rdata) |
+-                    ({32{sel_tpu}} & tpu_rdata);      // sel_un: 0
++                    ({32{sel_tpu}} & tpu_rdata) | ({32{sel_un}} & ram_rdata);
+     end
+ 
+ endmodule

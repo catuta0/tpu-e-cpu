@@ -1,0 +1,25 @@
+PASS: T1 reset values: LED/UART_STATUS/TOHOST = 0, TPU STATUS/RESULT/CYCLES = 0, CONFIG = 0x08, PARAMS = 0x03020810, led_n = 6'b111111
+FAIL: T2 LED read-back: read 0x10000000 = 0x00000000, expected 0x0000003f
+FAIL: T2 LED 0x0000003f: led_n = 6'b111111, expected 6'b000000
+FAIL: T2 LED read-back: read 0x10000000 = 0x00000000, expected 0x00000015
+FAIL: T2 LED 0x00000015: led_n = 6'b111111, expected 6'b101010
+FAIL: T2 LED read-back: read 0x10000000 = 0x00000000, expected 0x0000002a
+FAIL: T2 LED 0x0000002a: led_n = 6'b111111, expected 6'b010101
+FAIL: T2 LED is 6 bits: read 0x10000000 = 0x00000000, expected 0x0000003f
+FAIL: T2 LED needs byte-0 strobe: read 0x10000000 = 0x00000000, expected 0x0000003f
+PASS: T3 TOHOST word and byte-lane writes
+PASS: T4 CYCLE read twice 1004 cycles apart differs by exactly 1004; write ignored
+FAIL: T5 alias 0x12345000 = LED: read 0x12345000 = 0x00000000, expected 0x00000015
+PASS: T6 RAM first/last word, byte and halfword lanes (little-endian), aliases
+PASS: T7 TPU WEIGHT first/last word, CONFIG, INPUT through the SoC decoder
+FAIL: T8 LED unchanged: read 0x10000000 = 0x00000000, expected 0x00000015
+INFO: UART RX byte 0x00
+INFO: UART RX byte 0x55
+INFO: UART RX byte 0xa5
+INFO: UART RX byte 0xff
+PASS: T9 UART bytes 0x00 0x55 0xA5 0xFF decoded on the pin (real-time 115200 8N1 receiver); write while busy ignored; 4 frames, edges on multiples of 234 clocks, tx_busy 2340 clocks each
+PASS: T10 4753 BFM accesses, max latency 3 cycles (<= 4), ready protocol clean
+errors=10
+TEST FAILED
+FATAL: tests/soc/tb_soc_bfm.v:371: tb_soc_bfm failed
+       Time: 424140657  Scope: tb_soc_bfm

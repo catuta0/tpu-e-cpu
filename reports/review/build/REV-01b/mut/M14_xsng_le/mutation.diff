@@ -1,0 +1,11 @@
+--- design/rtl/tpu/sc_lane_array.v	2026-11-04 03:54:33.812629432 +0000
++++ reports/review/build/REV-01b/mut/M14_xsng_le/rtl/sc_lane_array.v	2026-11-04 13:24:02.131829720 +0000
+@@ -116,7 +116,7 @@
+     genvar i, j;
+     generate
+         for (i = 0; i < IL; i = i + 1) begin : g_xsng
+-            assign bx[i] = (rx[8*i +: 8] < x_tile[8*i +: 8]);
++            assign bx[i] = (rx[8*i +: 8] <= x_tile[8*i +: 8]);
+         end
+     endgenerate
+ 

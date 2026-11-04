@@ -1,0 +1,11 @@
+--- /home/user/tpu-e-cpu/design/rtl/soc/soc_periph.v	2026-11-04 07:07:34.698983093 +0000
++++ /home/user/tpu-e-cpu/reports/review/build/REV-01a/mut/S11/soc/soc_periph.v	2026-11-04 13:20:29.832401322 +0000
+@@ -189,7 +189,7 @@
+     always @(*) begin
+         rd_mux = 32'd0;                    // UART_TX (W only) and reserved: 0
+         if (sel_led)    rd_mux = {26'd0, led_q};
+-        if (sel_status) rd_mux = {31'd0, tx_busy};
++        if (sel_status) rd_mux = 32'd0;
+         if (sel_cycle)  rd_mux = cycle_q;
+         if (sel_tohost) rd_mux = tohost_q;
+     end

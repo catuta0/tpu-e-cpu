@@ -1,0 +1,6 @@
+period 65535 OK; S(32768)=F9DE
+X lanes 0..15: ACE1 E93B 2595 61EF 9E49 DAA3 16FD 5357 8FB1 CC0B 0865 44BF 8119 BD73 F9CD 3627
+W lanes 0..15: 7A5C A5C3 D12A FC91 27F8 535F 7EC6 AA2D D594 00FB 2C62 57C9 8330 AE97 D9FE 0565
+min pairwise stream-cycle lag (mode 2, lanes 0..7): (321, 'X0', 'W3')
+R1 pair offsets distinct: True
+leap8 row weights (bit0..15): [4, 4, 4, 4, 4, 4, 4, 4, 1, 1, 1, 1, 1, 1, 1, 1]

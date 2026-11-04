@@ -1,22 +1,31 @@
 #!/usr/bin/env python3
-"""Generate the vector figures of the scientific article (task DOC-01).
+"""Generate the vector figures of the scientific article and of the
+engineering report (tasks DOC-01, DOC-02).
 
-Every plotted value is read from the project evidence file
-``reports/sw/accuracy.json`` (SIMULATION of the Python golden model
-``sctpu.model``, written by task SW-01a).  Nothing is typed in by hand: the
-script only reads, plots and prints the data it plotted, so the printed table
-can be compared with the article text.
+Every plotted value is read from project evidence files (SIMULATION of the
+Python golden model ``sctpu.model``):
+  * ``reports/sw/accuracy_revC.json``      (task SW-03, spec rev C, current);
+  * ``reports/sw/revABC_comparison.json``  (task SW-03, rev A/B/C comparison).
+Nothing is typed in by hand: the script only reads, plots and prints the data
+it plotted, so the printed table can be compared with the document text.
 
 Outputs (vector PDF, next to this script):
   * ``article_acc_vs_k.pdf``  -- test accuracy versus K = log2(L) for the three
-    RNG modes; (a) the fixed hardware seeds of spec rev A with 95 % Wilson
-    confidence intervals, (b) the mean +/- one standard deviation over the 16
-    analysis-only LFSR start offsets.  The expected-value (K -> infinity)
-    accuracy is drawn as a grey reference band (its own Wilson CI).
+    RNG modes; (a) the deployed (rev C) hardware seeds with 95 % Wilson
+    confidence intervals, (b) the mean +/- one standard deviation over the
+    analysis-only LFSR start offsets (20 in rev C).  The expected-value
+    (K -> infinity) accuracy is drawn as a grey reference band (its own CI).
   * ``article_rms_vs_k.pdf``  -- RMS stochastic error of Dp/L versus K for
     layer 1 and layer 2: ensemble measurement (filled markers), the analytical
     prediction eq. (2) of ``reports/sw/error_model.md`` (lines) and the single
     hardware-seed realisation (open markers).
+  * ``article_revBC.pdf``     -- design iteration rev B -> rev C, RNG mode 2:
+    (a) deployed-seed accuracy versus K with Wilson CIs for rev B (phase-spaced
+    seeds) and rev C, (b) layer-1 ensemble RMS / eq. (2) ratio, annotated with
+    the number of identical (tile, lane) count-table pairs of rev B.
+
+History: DOC-01 plotted reports/sw/accuracy.json (rev A, 16 offsets); DOC-02
+switched to rev C (accuracy_revC.json, 20 offsets) and added article_revBC.pdf.
 
 Usage (from the repository root):
     .venv/bin/python reports/figures/article_figures.py
@@ -36,7 +45,11 @@ import matplotlib.pyplot as plt  # noqa: E402  (backend must be set first)
 # ---------------------------------------------------------------------------
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.abspath(os.path.join(HERE, "..", ".."))
-EVIDENCE = os.path.join(ROOT, "reports", "sw", "accuracy.json")
+EVIDENCE = os.path.join(ROOT, "reports", "sw", "accuracy_revC.json")
+EVIDENCE_ABC = os.path.join(ROOT, "reports", "sw", "revABC_comparison.json")
+
+# Label of the deployed seed set in the evidence file (printed in the axes).
+SEED_LABEL = "rev C"
 
 # Selected network variant (SW-01a: chosen on the validation split).
 VARIANT = "qat_noise"
@@ -72,10 +85,15 @@ plt.rcParams.update({
 })
 
 
-def load():
+def load(path=EVIDENCE):
     """Return the parsed evidence JSON (fails loudly if it is missing)."""
-    with open(EVIDENCE, "r", encoding="utf-8") as fh:
+    with open(path, "r", encoding="utf-8") as fh:
         return json.load(fh)
+
+
+def n_offsets(model):
+    """Number of ensemble realisations stored in the evidence (16 or 20)."""
+    return model["sc_ensemble_accuracy"]["2"]["8"]["n_realisations"]
 
 
 def style_axes(ax):
@@ -129,15 +147,16 @@ def fig_accuracy(data, out_path):
                   f"{100*e['mean']:5.1f} {100*e['std']:4.1f} "
                   f"{e['n_realisations']}")
 
-    axes[0].set_ylabel("accuracy, rev A seeds (%)")
-    axes[1].set_ylabel("accuracy, 16-offset mean (%)")
+    nr = n_offsets(model)
+    axes[0].set_ylabel(f"accuracy, {SEED_LABEL} seeds (%)")
+    axes[1].set_ylabel(f"accuracy, {nr}-offset mean (%)")
     axes[1].set_xlabel(r"$K = \log_2 L$ (stream length $L = 2^K$)")
     axes[1].set_xticks(ks)
     for ax in axes:
         ax.set_ylim(20, 100)
     axes[0].text(4.0, 23, "(a) fixed hardware seeds, 95 % Wilson CI",
                  fontsize=7, color=TEXT)
-    axes[1].text(4.0, 23, "(b) mean $\\pm$ 1 s.d. over 16 LFSR offsets",
+    axes[1].text(4.0, 23, f"(b) mean $\\pm$ 1 s.d. over {nr} LFSR offsets",
                  fontsize=7, color=TEXT)
     for ax in axes:
         ax.text(3.85, 100 * ev["acc"] + 0.9,
@@ -190,11 +209,90 @@ def fig_rms(data, out_path):
                       markersize=3.5),
            plt.Line2D([], [], color="#52514e", marker="o", linestyle="none",
                       markersize=3.5, markerfacecolor="white")]
-    l_enc = ["eq. (2)", "16-offset ens.", "rev A seeds"]
+    nr = n_offsets(data["models"][VARIANT])
+    l_enc = ["eq. (2)", f"{nr}-offset ens.", f"{SEED_LABEL} seeds"]
     fig.legend(h_mode + enc, l_mode + l_enc, loc="lower center", ncol=2,
                frameon=False, fontsize=6.5, bbox_to_anchor=(0.53, -0.2),
                columnspacing=0.8, handletextpad=0.3)
     fig.tight_layout(w_pad=0.4)
+    fig.savefig(out_path, bbox_inches="tight")
+    plt.close(fig)
+    print(f"wrote {out_path}")
+
+
+# Colours of the two seed revisions in the design-iteration figure: rev B is
+# the negative result (warm), rev C the adopted set (mode-2 green as above).
+REV_STYLE = {
+    "B": {"name": "rev B (phase-spaced, violates R1)", "color": "#eb6834",
+          "marker": "s"},
+    "C": {"name": "rev C (= rev A mode-2 seeds)", "color": "#1baf7a",
+          "marker": "^"},
+}
+
+
+def fig_rev_bc(abc, out_path):
+    """Design iteration rev B -> rev C for RNG mode 2 (deployed seeds).
+
+    (a) test accuracy of the deployed seeds versus K with 95 % Wilson CIs and
+        the EV reference; (b) layer-1 RMS error, ensemble / eq. (2), with the
+        number of identical (tile, lane) count-table pairs of rev B printed
+        next to each rev B point (rev C has 0 at every K).
+    """
+    # K = 6..10: rev B's translated pair streams produce identical count
+    # tables from K = 6 on; K = 4, 5 (accuracy < 80 %) are in Fig. acc.
+    ks = [k for k in sorted(int(k) for k in abc["per_rev"]["C"]["2"].keys())
+          if k >= 6]
+    ev = 100 * abc["ev_Kinf_acc"]
+    fig, axes = plt.subplots(1, 2, figsize=(3.45, 1.9))
+    print("# rev B/C figure (mode 2): rev K acc% k ci_lo ci_hi "
+          "identical_pairs rms_ratio")
+    offs = {"B": -0.08, "C": 0.08}
+    style_axes(axes[0])
+    style_axes(axes[1])
+    axes[0].axhline(ev, color=REF_GREY, linewidth=1.0, linestyle="--")
+    axes[1].axhline(1.0, color=REF_GREY, linewidth=1.0, linestyle="--")
+    for rev, st in REV_STYLE.items():
+        rows = [abc["per_rev"][rev]["2"][str(k)] for k in ks]
+        acc = [100 * r["deployed"]["acc"] for r in rows]
+        lo = [100 * (r["deployed"]["acc"] - r["deployed"]["ci95"][0])
+              for r in rows]
+        hi = [100 * (r["deployed"]["ci95"][1] - r["deployed"]["acc"])
+              for r in rows]
+        x = [k + offs[rev] for k in ks]
+        axes[0].errorbar(x, acc, yerr=[lo, hi], color=st["color"],
+                         marker=st["marker"], markersize=3.5, capsize=1.5,
+                         elinewidth=0.8, label=st["name"])
+        ratio = [r["layer1_rms_ensemble_over_eq2"] for r in rows]
+        axes[1].plot(ks, ratio, color=st["color"], marker=st["marker"],
+                     markersize=3.5, linewidth=1.0)
+        for k, r in zip(ks, rows):
+            d = r["deployed"]
+            print(f"{rev} {k:2d} {100*d['acc']:5.1f} {d['n_correct']:3d} "
+                  f"{100*d['ci95'][0]:5.1f} {100*d['ci95'][1]:5.1f} "
+                  f"{r['identical_table_pairs']} "
+                  f"{r['layer1_rms_ensemble_over_eq2']:.2f}")
+            if rev == "B" and r["identical_table_pairs"]:
+                axes[1].annotate(str(r["identical_table_pairs"]),
+                                 (k, r["layer1_rms_ensemble_over_eq2"]),
+                                 textcoords="offset points", xytext=(0, 5),
+                                 ha="center", fontsize=5.5, color=st["color"])
+    axes[0].set_ylim(80, 98)
+    axes[1].set_ylim(0.8, 1.7)
+    axes[1].set_xlim(5.6, 10.4)
+    axes[0].set_xticks(ks)
+    axes[1].set_xticks(ks)
+    axes[0].set_xlabel(r"$K$")
+    axes[1].set_xlabel(r"$K$")
+    axes[0].set_ylabel("accuracy, mode 2 (%)")
+    axes[1].set_ylabel("L1 RMS / eq. (2)")
+    axes[0].set_title("(a) deployed seeds, 95 % CI", fontsize=7)
+    axes[1].set_title("(b) ensemble error ratio", fontsize=7)
+    axes[0].text(ks[0] - 0.2, ev + 0.8, "EV", fontsize=6, color="#52514e",
+                 va="bottom")
+    fig.legend(*axes[0].get_legend_handles_labels(), loc="lower center",
+               ncol=1, frameon=False, fontsize=6.5,
+               bbox_to_anchor=(0.5, -0.17), handletextpad=0.3)
+    fig.tight_layout(w_pad=1.2)
     fig.savefig(out_path, bbox_inches="tight")
     plt.close(fig)
     print(f"wrote {out_path}")
@@ -206,6 +304,10 @@ def main():
           f"(git_rev field: {data.get('git_rev')}, label: {data.get('label')})")
     fig_accuracy(data, os.path.join(HERE, "article_acc_vs_k.pdf"))
     fig_rms(data, os.path.join(HERE, "article_rms_vs_k.pdf"))
+    abc = load(EVIDENCE_ABC)
+    print(f"# evidence: {os.path.relpath(EVIDENCE_ABC, ROOT)} "
+          f"(git_rev field: {abc.get('git_rev')}, label: {abc.get('label')})")
+    fig_rev_bc(abc, os.path.join(HERE, "article_revBC.pdf"))
     return 0
 
 

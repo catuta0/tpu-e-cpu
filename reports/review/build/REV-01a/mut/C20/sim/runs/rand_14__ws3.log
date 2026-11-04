@@ -1,0 +1,32 @@
+INFO: test=rand_14 ws=3 rand_stall=0 seed=1 prog=sim/data/cpu_tests/rand_14.hex
+PASS: stop kind (0 tohost, 1 trap) : got 0x00000000 expected 0x00000000
+PASS: TOHOST store pc : got 0x00000a94 expected 0x00000a94
+PASS: trap_cause : got 0x00000000 expected 0x00000000
+FAIL: instret (retire pulses) : got 0x00000104 expected 0x00000108
+PASS: TOHOST written : got 0x00000001 expected 0x00000001
+PASS: TOHOST value : got 0x00000001 expected 0x00000001
+PASS: bus_err : got 0x00000000 expected 0x00000000
+PASS: LED : got 0x00000000 expected 0x00000000
+PASS: UART byte count : got 0x00000000 expected 0x00000000
+PASS: UART bytes equal : got 0x00000001 expected 0x00000001
+FAIL: signature word 1 (addr 0x00000f04): got 0x00000000 expected 0xffffcff0
+FAIL: signature word 3 (addr 0x00000f0c): got 0x2f115665 expected 0x00000126
+FAIL: signature word 11 (addr 0x00000f2c): got 0xfffe68fb expected 0x00000d27
+FAIL: signature word 14 (addr 0x00000f38): got 0x00000000 expected 0x12e13779
+FAIL: signature word 18 (addr 0x00000f48): got 0x00000a25 expected 0x00000368
+FAIL: signature word 21 (addr 0x00000f54): got 0x00000001 expected 0x00000368
+FAIL: signature word 22 (addr 0x00000f58): got 0xfffe68fb expected 0xd276d204
+FAIL: signature word 24 (addr 0x00000f60): got 0x00000018 expected 0x9108570b
+FAIL: signature word 25 (addr 0x00000f64): got 0x53a08ed5 expected 0x4dbe3624
+FAIL: signature word 26 (addr 0x00000f68): got 0x910853a3 expected 0xa3e98b1c
+FAIL: signature word 27 (addr 0x00000f6c): got 0x05e22acc expected 0x00000024
+FAIL: signature word 29 (addr 0x00000f74): got 0x4dbe6409 expected 0x4dbe3600
+FAIL: signature word 30 (addr 0x00000f78): got 0x00000000 expected 0x00000001
+FAIL: signature 0x0F00..0x0F7C (32 words) equal : got 0x00000000 expected 0x00000001
+PASS: bus-protocol violations : got 0x00000000 expected 0x00000000
+INFO: cycles=2099 instret=260 fetch=260 load=22 store=46 wait_cycles=985
+RESULT name=rand_14 ws=3 rand=0 status=FAIL cycles=2099 instret=260 cpi=8.073 viol=0
+TEST FAILED (2 failing checks)
+FATAL: tests/cpu/tb_rv32i_core.v:491: 
+       Time: 21386000  Scope: tb_rv32i_core
+VVP_EXIT=1

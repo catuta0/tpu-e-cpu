@@ -1,0 +1,127 @@
+# REV-01b mutation M19_cycles_p1 mode 2 rev 99ee941
+# cmd: iverilog -g2005 -P tb_sc_tpu.RNG_MODE=2 <mutated rtl> tests/tpu/tb_sc_tpu.v; vvp +DATA=sim/data +DIRECTED +CLAMP +VEC1=sim/data/tpu_vectors_corner_mode2.txt
+INFO: tb_sc_tpu RNG_MODE=2 DATA=sim/data
+PASS: D1 reset values STATUS/RESULT/CYCLES/SCORE/HIDDEN = 0, CONFIG = 0x08, CTRL reads 0
+PASS: D2 PARAMS = 0x03020810 (NL=16, IL=8, RNG_MODE=2, version 0x03)
+PASS: D3 CONFIG LOG2_L raw 0..15 read back clamped to 4..10, ACT_SHIFT kept
+PASS: D4 INPUT/BIAS/WEIGHT read-back incl. byte strobes, BIAS sign-extension, unmapped = 0, read-only regs
+PASS: D4b 0x55555555/0xAAAAAAAA (xor index) on all 16 INPUT, 32 BIAS, 512 WEIGHT words and CONFIG; R registers unchanged
+PASS: D6 first inference: BUSY=1/DONE=0 while busy; reads while BUSY return current storage (HIDDEN = layer-1 codes, SCORE = reset 0)
+FAIL: D8 CYCLES reg 2929, measured busy cycles 2928, formula 2928, busy pulses 1
+PASS: D9 after DONE: RESULT = 7, HIDDEN[0] = 0x80fe94cb, SCORE[0] = 0xfffffd48
+PASS: D10 STATUS = DONE (0x2) and RESULT unchanged after 1000 idle cycles
+FAIL: D7 START while busy: CYCLES 2929 vs 2929, busy pulses 1
+FAIL: D7 busy behaviour
+PASS: D11 rst during a stream phase: all registers at reset values after 1 cycle; re-run bit-exact with inference A
+PASS: D5 analytic zero-code test (acc = 64L, Dp = floor(d_j L/128)), K = 4/7/10, s = 0/7, 16 neurons each
+FAIL: vec pset 1 idx 0: CYCLES 529, measured 528, formula 528
+FAIL: vec pset 1 idx 0: CYCLES 529, measured 528, formula 528
+FAIL: vec pset 1 idx 1: CYCLES 529, measured 528, formula 528
+FAIL: vec pset 1 idx 1: CYCLES 529, measured 528, formula 528
+FAIL: vec pset 1 idx 0: CYCLES 529, measured 528, formula 528
+FAIL: vec pset 1 idx 0: CYCLES 529, measured 528, formula 528
+FAIL: vec pset 1 idx 1: CYCLES 529, measured 528, formula 528
+FAIL: vec pset 1 idx 1: CYCLES 529, measured 528, formula 528
+FAIL: vec pset 1 idx 0: CYCLES 529, measured 528, formula 528
+FAIL: vec pset 1 idx 0: CYCLES 529, measured 528, formula 528
+FAIL: vec pset 1 idx 1: CYCLES 529, measured 528, formula 528
+FAIL: vec pset 1 idx 1: CYCLES 529, measured 528, formula 528
+FAIL: vec pset 2 idx 0: CYCLES 529, measured 528, formula 528
+FAIL: vec pset 2 idx 0: CYCLES 529, measured 528, formula 528
+FAIL: vec pset 2 idx 1: CYCLES 529, measured 528, formula 528
+FAIL: vec pset 2 idx 1: CYCLES 529, measured 528, formula 528
+FAIL: vec pset 2 idx 0: CYCLES 529, measured 528, formula 528
+FAIL: vec pset 2 idx 0: CYCLES 529, measured 528, formula 528
+FAIL: vec pset 2 idx 1: CYCLES 529, measured 528, formula 528
+FAIL: vec pset 2 idx 1: CYCLES 529, measured 528, formula 528
+FAIL: vec pset 2 idx 0: CYCLES 529, measured 528, formula 528
+FAIL: vec pset 2 idx 0: CYCLES 529, measured 528, formula 528
+FAIL: vec pset 2 idx 1: CYCLES 529, measured 528, formula 528
+FAIL: vec pset 2 idx 1: CYCLES 529, measured 528, formula 528
+FAIL: vec pset 3 idx 0: CYCLES 529, measured 528, formula 528
+FAIL: vec pset 3 idx 0: CYCLES 529, measured 528, formula 528
+FAIL: vec pset 3 idx 1: CYCLES 529, measured 528, formula 528
+FAIL: vec pset 3 idx 1: CYCLES 529, measured 528, formula 528
+FAIL: vec pset 3 idx 0: CYCLES 529, measured 528, formula 528
+FAIL: vec pset 3 idx 0: CYCLES 529, measured 528, formula 528
+FAIL: vec pset 3 idx 1: CYCLES 529, measured 528, formula 528
+FAIL: vec pset 3 idx 1: CYCLES 529, measured 528, formula 528
+FAIL: vec pset 3 idx 0: CYCLES 529, measured 528, formula 528
+FAIL: vec pset 3 idx 0: CYCLES 529, measured 528, formula 528
+FAIL: vec pset 3 idx 1: CYCLES 529, measured 528, formula 528
+FAIL: vec pset 3 idx 1: CYCLES 529, measured 528, formula 528
+FAIL: vec pset 4 idx 0: CYCLES 529, measured 528, formula 528
+FAIL: vec pset 4 idx 0: CYCLES 529, measured 528, formula 528
+FAIL: vec pset 4 idx 1: CYCLES 529, measured 528, formula 528
+FAIL: vec pset 4 idx 1: CYCLES 529, measured 528, formula 528
+FAIL: vec pset 4 idx 0: CYCLES 529, measured 528, formula 528
+FAIL: vec pset 4 idx 0: CYCLES 529, measured 528, formula 528
+FAIL: vec pset 4 idx 1: CYCLES 529, measured 528, formula 528
+FAIL: vec pset 4 idx 1: CYCLES 529, measured 528, formula 528
+FAIL: vec pset 4 idx 0: CYCLES 529, measured 528, formula 528
+FAIL: vec pset 4 idx 0: CYCLES 529, measured 528, formula 528
+FAIL: vec pset 4 idx 1: CYCLES 529, measured 528, formula 528
+FAIL: vec pset 4 idx 1: CYCLES 529, measured 528, formula 528
+FAIL: vec pset 5 idx 0: CYCLES 529, measured 528, formula 528
+FAIL: vec pset 5 idx 0: CYCLES 529, measured 528, formula 528
+FAIL: vec pset 5 idx 1: CYCLES 529, measured 528, formula 528
+FAIL: vec pset 5 idx 1: CYCLES 529, measured 528, formula 528
+FAIL: vec pset 5 idx 0: CYCLES 529, measured 528, formula 528
+FAIL: vec pset 5 idx 0: CYCLES 529, measured 528, formula 528
+FAIL: vec pset 5 idx 1: CYCLES 529, measured 528, formula 528
+FAIL: vec pset 5 idx 1: CYCLES 529, measured 528, formula 528
+FAIL: vec pset 5 idx 0: CYCLES 529, measured 528, formula 528
+FAIL: vec pset 5 idx 0: CYCLES 529, measured 528, formula 528
+FAIL: vec pset 5 idx 1: CYCLES 529, measured 528, formula 528
+FAIL: vec pset 5 idx 1: CYCLES 529, measured 528, formula 528
+FAIL: vec pset 6 idx 0: CYCLES 529, measured 528, formula 528
+FAIL: vec pset 6 idx 0: CYCLES 529, measured 528, formula 528
+FAIL: vec pset 6 idx 1: CYCLES 529, measured 528, formula 528
+FAIL: vec pset 6 idx 1: CYCLES 529, measured 528, formula 528
+FAIL: vec pset 6 idx 0: CYCLES 529, measured 528, formula 528
+FAIL: vec pset 6 idx 0: CYCLES 529, measured 528, formula 528
+FAIL: vec pset 6 idx 1: CYCLES 529, measured 528, formula 528
+FAIL: vec pset 6 idx 1: CYCLES 529, measured 528, formula 528
+FAIL: vec pset 6 idx 0: CYCLES 529, measured 528, formula 528
+FAIL: vec pset 6 idx 0: CYCLES 529, measured 528, formula 528
+FAIL: vec pset 6 idx 1: CYCLES 529, measured 528, formula 528
+FAIL: vec pset 6 idx 1: CYCLES 529, measured 528, formula 528
+FAIL: vec pset 7 idx 0: CYCLES 529, measured 528, formula 528
+FAIL: vec pset 7 idx 0: CYCLES 529, measured 528, formula 528
+FAIL: vec pset 7 idx 1: CYCLES 529, measured 528, formula 528
+FAIL: vec pset 7 idx 1: CYCLES 529, measured 528, formula 528
+FAIL: vec pset 7 idx 2: CYCLES 529, measured 528, formula 528
+FAIL: vec pset 7 idx 2: CYCLES 529, measured 528, formula 528
+FAIL: vec pset 7 idx 0: CYCLES 529, measured 528, formula 528
+FAIL: vec pset 7 idx 0: CYCLES 529, measured 528, formula 528
+FAIL: vec pset 7 idx 1: CYCLES 529, measured 528, formula 528
+FAIL: vec pset 7 idx 1: CYCLES 529, measured 528, formula 528
+FAIL: vec pset 7 idx 2: CYCLES 529, measured 528, formula 528
+FAIL: vec pset 7 idx 2: CYCLES 529, measured 528, formula 528
+FAIL: vec pset 7 idx 0: CYCLES 529, measured 528, formula 528
+FAIL: vec pset 7 idx 0: CYCLES 529, measured 528, formula 528
+FAIL: vec pset 7 idx 1: CYCLES 529, measured 528, formula 528
+FAIL: vec pset 7 idx 1: CYCLES 529, measured 528, formula 528
+FAIL: vec pset 7 idx 2: CYCLES 529, measured 528, formula 528
+FAIL: vec pset 7 idx 2: CYCLES 529, measured 528, formula 528
+FAIL: vec pset 8 idx 0: CYCLES 529, measured 528, formula 528
+FAIL: vec pset 8 idx 0: CYCLES 529, measured 528, formula 528
+FAIL: vec pset 8 idx 1: CYCLES 529, measured 528, formula 528
+FAIL: vec pset 8 idx 1: CYCLES 529, measured 528, formula 528
+FAIL: vec pset 8 idx 0: CYCLES 529, measured 528, formula 528
+FAIL: vec pset 8 idx 0: CYCLES 529, measured 528, formula 528
+FAIL: vec pset 8 idx 1: CYCLES 529, measured 528, formula 528
+FAIL: vec pset 8 idx 1: CYCLES 529, measured 528, formula 528
+FAIL: vec pset 8 idx 0: CYCLES 529, measured 528, formula 528
+FAIL: vec pset 8 idx 0: CYCLES 529, measured 528, formula 528
+FAIL: vec pset 8 idx 1: CYCLES 529, measured 528, formula 528
+FAIL: vec pset 8 idx 1: CYCLES 529, measured 528, formula 528
+FAIL: VECFILE sim/data/tpu_vectors_corner_mode2.txt : vectors 51 (+51 clamp re-runs), mismatching inferences 102, mismatching fields 102
+PASS: R1/R2 RNG trace: 7168 stream cycles x 8 lanes compared with the golden trace (64 rows), 0 mismatches; LFSR frozen in all 78712 non-stream cycles
+INFO: golden vectors total 51 (+51 clamp re-runs), mismatching inferences 102, mismatching fields 102
+INFO: bus protocol errors 0, longest valid->ready 35 cycles
+errors=104
+TEST FAILED
+FATAL: tests/tpu/tb_sc_tpu.v:886: tb_sc_tpu failed
+       Time: 4701164500  Scope: tb_sc_tpu
+SIM_EXIT=1

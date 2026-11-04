@@ -1,0 +1,11 @@
+--- /home/user/tpu-e-cpu/design/rtl/soc/soc_ram.v	2026-11-04 06:07:50.153567625 +0000
++++ /home/user/tpu-e-cpu/reports/review/build/REV-01a/mut/S13/soc/soc_ram.v	2026-11-04 13:20:39.595835470 +0000
+@@ -85,7 +85,7 @@
+     reg [31:0] q;
+     // Accept = first cycle of the request (see TIMING).
+     wire       accept = mem_valid && !ready_q;
+-    wire [3:0] we     = accept ? mem_wstrb : 4'b0000;
++    wire [3:0] we     = accept ? {4{|mem_wstrb}} : 4'b0000;
+ 
+     // BSRAM port: byte-enabled write, registered read (read-first is not
+     // required, see no_rw_check above).

@@ -1,0 +1,29 @@
+INFO: test=rand_00 ws=3 rand_stall=0 seed=1 prog=sim/data/cpu_tests/rand_00.hex
+PROTOCOL VIOLATION #1 at cycle 85: request changed while waiting for mem_ready (valid=1 instr=1 addr=00000020 wdata=25252525 wstrb=0000 ready=0 pc=00000020)
+PROTOCOL VIOLATION #2 at cycle 98: request changed while waiting for mem_ready (valid=1 instr=1 addr=00000028 wdata=a2a2a2a2 wstrb=0000 ready=0 pc=00000028)
+PROTOCOL VIOLATION #3 at cycle 156: request changed while waiting for mem_ready (valid=1 instr=1 addr=0000004c wdata=95959595 wstrb=0000 ready=0 pc=0000004c)
+PROTOCOL VIOLATION #4 at cycle 201: request changed while waiting for mem_ready (valid=1 instr=1 addr=00000068 wdata=00000000 wstrb=0000 ready=0 pc=00000068)
+PROTOCOL VIOLATION #5 at cycle 227: request changed while waiting for mem_ready (valid=1 instr=1 addr=00000078 wdata=fbfbfbfb wstrb=0000 ready=0 pc=00000078)
+PROTOCOL VIOLATION #6 at cycle 266: request changed while waiting for mem_ready (valid=1 instr=1 addr=00000090 wdata=fbfbfbfb wstrb=0000 ready=0 pc=00000090)
+PROTOCOL VIOLATION #7 at cycle 292: request changed while waiting for mem_ready (valid=1 instr=1 addr=000000a0 wdata=91919191 wstrb=0000 ready=0 pc=000000a0)
+PROTOCOL VIOLATION #8 at cycle 305: request changed while waiting for mem_ready (valid=1 instr=1 addr=000000a8 wdata=d4d4d4d4 wstrb=0000 ready=0 pc=000000a8)
+PROTOCOL VIOLATION #9 at cycle 325: request changed while waiting for mem_ready (valid=1 instr=1 addr=000000b4 wdata=25252525 wstrb=0000 ready=0 pc=000000b4)
+PROTOCOL VIOLATION #10 at cycle 338: request changed while waiting for mem_ready (valid=1 instr=1 addr=000000bc wdata=01010101 wstrb=0000 ready=0 pc=000000bc)
+PASS: stop kind (0 tohost, 1 trap) : got 0x00000000 expected 0x00000000
+PASS: TOHOST store pc : got 0x00000a94 expected 0x00000a94
+PASS: trap_cause : got 0x00000000 expected 0x00000000
+PASS: instret (retire pulses) : got 0x000000e8 expected 0x000000e8
+PASS: TOHOST written : got 0x00000001 expected 0x00000001
+PASS: TOHOST value : got 0x00000001 expected 0x00000001
+PASS: bus_err : got 0x00000000 expected 0x00000000
+PASS: LED : got 0x00000000 expected 0x00000000
+PASS: UART byte count : got 0x00000000 expected 0x00000000
+PASS: UART bytes equal : got 0x00000001 expected 0x00000001
+PASS: signature 0x0F00..0x0F7C (32 words) equal : got 0x00000001 expected 0x00000001
+FAIL: bus-protocol violations : got 0x00000067 expected 0x00000000
+INFO: cycles=1868 instret=232 fetch=232 load=18 store=47 wait_cycles=892
+RESULT name=rand_00 ws=3 rand=0 status=FAIL cycles=1868 instret=232 cpi=8.052 viol=103
+TEST FAILED (1 failing checks)
+FATAL: tests/cpu/tb_rv32i_core.v:491: 
+       Time: 19076000  Scope: tb_rv32i_core
+VVP_EXIT=1

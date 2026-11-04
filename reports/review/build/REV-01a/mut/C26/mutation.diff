@@ -1,0 +1,11 @@
+--- /home/user/tpu-e-cpu/design/rtl/cpu/rv32i_core.v	2026-11-04 03:32:21.806412789 +0000
++++ /home/user/tpu-e-cpu/reports/review/build/REV-01a/mut/C26/rtl/rv32i_core.v	2026-11-04 13:15:56.619757627 +0000
+@@ -395,7 +395,7 @@
+     // amount is operand B [4:0] (imm[4:0] = shamt for the I-form, rs2[4:0]
+     // for the R-form; the upper bits are ignored as RV32I requires).
+     wire       is_shift  = (d_funct3[1:0] == 2'b01) & ~d_branch & ~d_load & ~d_store & ~is_jump;
+-    wire [4:0] shamt_new = alu_b[4:0];
++    wire [4:0] shamt_new = {1'b0, alu_b[3:0]};
+     // Direction: funct3[2] = 0 left (SLL), 1 right. SRA: instr[30] = 1, the
+     // vacated bits get the sign bit.
+     wire       sh_right  = d_funct3[2];

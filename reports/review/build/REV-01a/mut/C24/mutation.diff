@@ -1,0 +1,11 @@
+--- /home/user/tpu-e-cpu/design/rtl/cpu/rv32i_decode.v	2026-11-04 03:18:38.131907824 +0000
++++ /home/user/tpu-e-cpu/reports/review/build/REV-01a/mut/C24/rtl/rv32i_decode.v	2026-11-04 13:15:48.715840839 +0000
+@@ -148,7 +148,7 @@
+         else if (op_store)
+             imm = {{20{ir[31]}}, ir[31:25], ir[11:7]};                       // S
+         else
+-            imm = {{20{ir[31]}}, ir[31:20]};                                 // I
++            imm = {{20{ir[31]}}, ir[30], ir[30:20]};                                 // I
+     end
+ 
+     // ---- EXECUTE-state ALU control ----------------------------------------------------

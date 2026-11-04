@@ -1,0 +1,25 @@
+INFO: test=dir_alu_imm ws=0 rand_stall=0 seed=1 prog=sim/data/cpu_tests/dir_alu_imm.hex
+PASS: stop kind (0 tohost, 1 trap) : got 0x00000000 expected 0x00000000
+PASS: TOHOST store pc : got 0x000000f4 expected 0x000000f4
+PASS: trap_cause : got 0x00000000 expected 0x00000000
+PASS: instret (retire pulses) : got 0x0000003e expected 0x0000003e
+PASS: TOHOST written : got 0x00000001 expected 0x00000001
+PASS: TOHOST value : got 0x00000001 expected 0x00000001
+PASS: bus_err : got 0x00000000 expected 0x00000000
+PASS: LED : got 0x00000000 expected 0x00000000
+PASS: UART byte count : got 0x00000000 expected 0x00000000
+PASS: UART bytes equal : got 0x00000001 expected 0x00000001
+FAIL: signature word 1 (addr 0x00000f04): got 0x00000000 expected 0x00000001
+FAIL: signature word 7 (addr 0x00000f1c): got 0x00000fff expected 0x000007ff
+FAIL: signature word 8 (addr 0x00000f20): got 0xfffff000 expected 0xfffff800
+FAIL: signature word 16 (addr 0x00000f40): got 0xfffff000 expected 0xfffff800
+FAIL: signature word 17 (addr 0x00000f44): got 0x00000fff expected 0x000007ff
+FAIL: signature word 19 (addr 0x00000f4c): got 0x00000d54 expected 0x00000554
+FAIL: signature 0x0F00..0x0F7C (32 words) equal : got 0x00000000 expected 0x00000001
+PASS: bus-protocol violations : got 0x00000000 expected 0x00000000
+INFO: cycles=247 instret=62 fetch=63 load=1 store=34 wait_cycles=0
+RESULT name=dir_alu_imm ws=0 rand=0 status=FAIL cycles=247 instret=62 cpi=3.984 viol=0
+TEST FAILED (1 failing checks)
+FATAL: tests/cpu/tb_rv32i_core.v:491: 
+       Time: 2866000  Scope: tb_rv32i_core
+VVP_EXIT=1

@@ -1,0 +1,11 @@
+--- /home/user/tpu-e-cpu/design/rtl/cpu/rv32i_alu.v	2026-11-04 03:27:05.782020978 +0000
++++ /home/user/tpu-e-cpu/reports/review/build/REV-01a/mut/C25/rtl/rv32i_alu.v	2026-11-04 13:15:52.212220239 +0000
+@@ -106,7 +106,7 @@
+             3'b000:  result = sum;                  // ADD / SUB
+             3'b001:  result = a;                    // SLL: operand to the core shifter
+             3'b010:  result = {31'd0, lt};          // SLT
+-            3'b011:  result = {31'd0, ltu};         // SLTU
++            3'b011:  result = {31'd0, lt};         // SLTU
+             3'b100:  result = x_xor;                // XOR
+             3'b101:  result = a;                    // SRL/SRA: operand to the core shifter
+             3'b110:  result = a | b;                // OR

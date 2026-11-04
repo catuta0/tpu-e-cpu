@@ -1,0 +1,12 @@
+--- /home/user/tpu-e-cpu/design/rtl/cpu/rv32i_decode.v	2026-11-04 03:18:38.131907824 +0000
++++ /home/user/tpu-e-cpu/reports/review/build/REV-01a/mut/C14/rtl/rv32i_decode.v	2026-11-04 13:14:43.148865980 +0000
+@@ -111,8 +111,7 @@
+     // (In RV32I a set shamt[5] = ir[25] is reserved -> covered by funct7.)
+     wire f7_zero  = (funct7 == 7'b0000000);
+     wire f7_alt   = (funct7 == 7'b0100000);
+-    wire opimm_ok = (funct3 == 3'b001) ? f7_zero :
+-                    (funct3 == 3'b101) ? (f7_zero | f7_alt) : 1'b1;
++    wire opimm_ok = 1'b1;
+     // OP: funct7 0000000 for all funct3, 0100000 only for SUB (000) and SRA (101).
+     wire op_ok    = f7_zero | (f7_alt & ((funct3 == 3'b000) | (funct3 == 3'b101)));
+ 

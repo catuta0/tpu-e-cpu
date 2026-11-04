@@ -1,0 +1,27 @@
+INFO: test=rand_13 ws=0 rand_stall=1 seed=25 prog=sim/data/cpu_tests/rand_13.hex
+PROTOCOL VIOLATION #1 at cycle 730: store strobe does not match size/address (valid=1 instr=0 addr=00000996 wdata=e8e8e8e8 wstrb=0010 ready=0 pc=0000017c)
+PROTOCOL VIOLATION #2 at cycle 766: store strobe does not match size/address (valid=1 instr=0 addr=0000098d wdata=00000000 wstrb=0100 ready=0 pc=00000188)
+PROTOCOL VIOLATION #3 at cycle 1079: store strobe does not match size/address (valid=1 instr=0 addr=0000096e wdata=00000000 wstrb=0010 ready=0 pc=00000224)
+PROTOCOL VIOLATION #4 at cycle 1276: store strobe does not match size/address (valid=1 instr=0 addr=000008e6 wdata=b1b1b1b1 wstrb=0010 ready=0 pc=00000280)
+PROTOCOL VIOLATION #5 at cycle 1543: store strobe does not match size/address (valid=1 instr=0 addr=0000088e wdata=23232323 wstrb=0010 ready=1 pc=000002f4)
+PROTOCOL VIOLATION #6 at cycle 1764: store strobe does not match size/address (valid=1 instr=0 addr=000008ce wdata=84848484 wstrb=0010 ready=1 pc=00000370)
+PROTOCOL VIOLATION #7 at cycle 1794: store strobe does not match size/address (valid=1 instr=0 addr=000008c9 wdata=00000000 wstrb=0100 ready=0 pc=0000037c)
+PASS: stop kind (0 tohost, 1 trap) : got 0x00000000 expected 0x00000000
+PASS: TOHOST store pc : got 0x00000a94 expected 0x00000a94
+PASS: trap_cause : got 0x00000000 expected 0x00000000
+PASS: instret (retire pulses) : got 0x00000115 expected 0x00000115
+PASS: TOHOST written : got 0x00000001 expected 0x00000001
+PASS: TOHOST value : got 0x00000001 expected 0x00000001
+PASS: bus_err : got 0x00000000 expected 0x00000000
+PASS: LED : got 0x00000000 expected 0x00000000
+PASS: UART byte count : got 0x00000000 expected 0x00000000
+PASS: UART bytes equal : got 0x00000001 expected 0x00000001
+FAIL: signature word 23 (addr 0x00000f5c): got 0x00006eb4 expected 0x00006ee0
+FAIL: signature 0x0F00..0x0F7C (32 words) equal : got 0x00000000 expected 0x00000001
+FAIL: bus-protocol violations : got 0x00000007 expected 0x00000000
+INFO: cycles=2442 instret=277 fetch=277 load=29 store=56 wait_cycles=1256
+RESULT name=rand_13 ws=0 rand=1 status=FAIL cycles=2442 instret=277 cpi=8.816 viol=7
+TEST FAILED (2 failing checks)
+FATAL: tests/cpu/tb_rv32i_core.v:491: 
+       Time: 24816000  Scope: tb_rv32i_core
+VVP_EXIT=1

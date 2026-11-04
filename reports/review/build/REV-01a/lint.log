@@ -1,0 +1,3 @@
+Verilator 5.020 2024-01-01 rev (Debian 5.020-1)
+LINT_SOC_EXIT=0
+LINT_CPU_EXIT=0

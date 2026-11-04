@@ -1,0 +1,11 @@
+--- design/rtl/tpu/sc_tpu.v	2026-11-04 07:03:18.645401765 +0000
++++ reports/review/build/REV-01b/mut/M10_score_zext/rtl/sc_tpu.v	2026-11-04 13:21:58.521548113 +0000
+@@ -384,7 +384,7 @@
+                 default: reg_rdata = 32'd0;                               // CTRL (W only), unmapped
+             endcase
+         end else if (sel_score) begin
+-            reg_rdata = {{(32-DPW){score_sel[DPW-1]}}, score_sel};        // sign-extend
++            reg_rdata = {{(32-DPW){1'b0}}, score_sel};        // sign-extend
+         end else if (sel_hidden) begin
+             reg_rdata = hidden[32*reg_idx[1:0] +: 32];
+         end

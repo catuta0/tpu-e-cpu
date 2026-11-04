@@ -1,0 +1,11 @@
+--- /home/user/tpu-e-cpu/design/rtl/soc/soc_periph.v	2026-11-04 07:07:34.698983093 +0000
++++ /home/user/tpu-e-cpu/reports/review/build/REV-01a/mut/S12/soc/soc_periph.v	2026-11-04 13:20:36.727607057 +0000
+@@ -103,7 +103,7 @@
+ 
+     reg        ready_q;
+     reg [31:0] rdata_q;
+-    wire       accept = mem_valid && !ready_q;
++    wire       accept = mem_valid;
+     wire       is_wr  = (mem_wstrb != 4'b0000);
+     wire       wr     = accept && is_wr;
+ 

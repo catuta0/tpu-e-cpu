@@ -1,0 +1,11 @@
+--- /home/user/tpu-e-cpu/design/rtl/soc/soc_bus.v	2026-11-04 07:07:34.698408559 +0000
++++ /home/user/tpu-e-cpu/reports/review/build/REV-01a/mut/S06/soc/soc_bus.v	2026-11-04 13:20:15.980717101 +0000
+@@ -108,7 +108,7 @@
+             // ready in the 2nd cycle of the request, exactly one cycle long
+             un_ready_q <= un_valid && !un_ready_q;
+             // sticky: set on the first cycle of any unmapped request
+-            if (un_valid) bus_err <= 1'b1;
++            bus_err <= un_valid;
+         end
+     end
+ 

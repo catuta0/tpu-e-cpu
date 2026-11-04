@@ -1,0 +1,5 @@
+INFO: UART byte 0 = 0x37 at 196413000 ns
+INFO: UART byte 1 = 0x0a at 283933000 ns
+INFO: led_n = 111000
+GL TEST PASSED
+reports/review/build/REV-01a/gl/tb_gl_pins.v:43: $finish called at 284285169 (1ps)
