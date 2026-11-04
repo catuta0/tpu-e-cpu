@@ -6,7 +6,7 @@
 // Reqs      : REQ-SYS-007 (valid/ready protocol), REQ-SYS-009 (memory map and
 //             decoding), REQ-SYS-010 (unmapped access behaviour)
 // Task      : RTL-SOC (fpga-engineer)
-// Spec      : ARCHITECTURE.md 3 (bus), 4 (memory map); INTERFACES.json rev B
+// Spec      : ARCHITECTURE.md 3 (bus), 4 (memory map); INTERFACES.json rev C
 //             "bus", "memory_map".
 //
 // PURPOSE

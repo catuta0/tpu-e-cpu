@@ -118,3 +118,15 @@ are the documented seed rules. Test split afterwards (SIMULATION, n=360): mode 2
 deployed K8/K9/K10 = 94.4/94.4/95.3 %, ensemble means 92.8/94.4/94.8 % vs EV 95.0 %.
 Net effect of the B->C iteration: the RTL default seeds return to the rev A values,
 now justified by an explicit rule and validation evidence instead of by accident.
+
+## ADR-011 — Requirement adjustments after RTL-SOC
+- REQ-SYS-005(b) first fetch within 8 cycles of reset release -> relaxed to 40
+  cycles: the register file is in BSRAM (saves ~1000 FF) and is cleared by a 32-cycle
+  CLEAR state after reset (measured first fetch at cycle 31, SIMULATION). The bound
+  was an unjustified guess; the trade-off favours area.
+- REQ-TIM-005 (end-to-end latency including input load and CYCLE read) stays
+  PARTIAL: the demo program does not load the 64 inputs; START->RESULT-read
+  measured 2948 cycles, reset->TOHOST 5441 cycles (SIMULATION). Accepted for V1,
+  listed as a limitation.
+- Synthesis flow fixed to `synth_gowin -nowidelut` (5628 vs 6130 LUT4, worst Fmax
+  47.46 vs 42.80 MHz, SIMULATION of P&R, 3 seeds).

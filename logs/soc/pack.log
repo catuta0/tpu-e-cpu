@@ -1,4 +1,4 @@
 # cmd: gowin_pack -d GW1N-9C -o sim/soc/build/soc_top.fs sim/soc/build/soc_top_nwl_pnr_s2.json   (route proof only, never programmed)
 PACK_EXIT=0
--rw-r--r-- 1 root root 3556680 Nov  4 07:01 sim/soc/build/soc_top.fs
-346445416c565a9439562432ebbb7bda14d478adf4d3f21035b809e412ba69f5  sim/soc/build/soc_top.fs
+-rw-r--r-- 1 root root 3556680 Nov  4 08:18 sim/soc/build/soc_top.fs
+152d3c6dada6338e0b98a8fc19557ec95f4e40479e4f264411c72caa85b76258  sim/soc/build/soc_top.fs

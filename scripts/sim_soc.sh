@@ -10,7 +10,7 @@
 #      tests/soc/tb_soc.v and tests/soc/tb_soc_bfm.v              -> lint_tb.log
 #   3. Expectation file for the demo: sim/data/soc_expected.json (SW-02,
 #      golden model) -> sim/soc/build/soc_expected.hex. Cross-checks: spec_rev
-#      B; sha256 of input/weights/bias.hex equal to the ones recorded in the
+#      == $SPEC_REV (default C); sha256 of input/weights/bias.hex equal to the ones recorded in the
 #      JSON; HIDDEN/SCORE/RESULT equal to the test-position-0 line of
 #      sim/data/tpu_vectors_mode2.txt (K=8, s=0, mode 2). If the JSON is
 #      missing, the expectation is taken from that vector line instead
@@ -40,6 +40,7 @@ LOG=logs/soc
 B=sim/soc/build
 mkdir -p "$LOG/cpu" "$B/meta"
 CPU_ALL=${CPU_ALL:-1}
+SPEC_REV=${SPEC_REV:-C}   # required spec revision of the golden data (ARCHITECTURE.md 12)
 T=design/rtl/tpu; C=design/rtl/cpu; S=design/rtl/soc
 CPU_RTL="$C/rv32i_core.v $C/rv32i_decode.v $C/rv32i_alu.v $C/rv32i_regfile.v"
 TPU_RTL="$T/sc_lfsr8.v $T/sc_rng.v $T/sc_lane_array.v $T/sc_postproc.v $T/sc_tpu_ctrl.v $T/sc_tpu.v"
@@ -94,7 +95,7 @@ if grep -q -E '^LINT_TB_FAIL|%Warning|%Error' "$LOG/lint_tb.log"; then fail "TB 
 
 # ---------------------------------------------------------------- 3. expectation
 step "3. demo expectation (sim/data/soc_expected.json, SW-02)"
-python3 -I - "$DATA" "$B/soc_expected.hex" > "$LOG/expected.log" 2>&1 <<'PY' || { cat "$LOG/expected.log"; fail "expectation generation"; }
+python3 -I - "$DATA" "$B/soc_expected.hex" "$SPEC_REV" > "$LOG/expected.log" 2>&1 <<'PY' || { cat "$LOG/expected.log"; fail "expectation generation"; }
 """Build sim/soc/build/soc_expected.hex for tests/soc/tb_soc.v.
 Layout (one 32-bit hex word per line): 0 RESULT, 1 TOHOST, 2 LED, 3 K,
 4..7 HIDDEN words, 8..23 SCORE words, 24 number of UART bytes, 25.. bytes,
@@ -108,9 +109,11 @@ sha = lambda p: hashlib.sha256(p.read_bytes()).hexdigest()
 vf = data / "tpu_vectors_mode2.txt"
 lines = vf.read_text().splitlines()
 print(f"vector file {vf} sha256 {sha(vf)}")
-print("vector file spec_rev header:", "present" if any(l.strip() == "# spec_rev B" for l in lines[:5]) else "MISSING")
-if not any(l.strip() == "# spec_rev B" for l in lines[:5]):
-    sys.exit("vector file is not spec_rev B")
+REV = sys.argv[3]   # required spec revision (SPEC_REV of the shell script)
+hdr = f"# spec_rev {REV}"
+print(f"vector file '{hdr}' header:", "present" if any(l.strip() == hdr for l in lines[:5]) else "MISSING")
+if not any(l.strip() == hdr for l in lines[:5]):
+    sys.exit(f"vector file is not spec_rev {REV}")
 vec = None
 for l in lines:
     if not l.strip() or l.startswith("#"):
@@ -129,7 +132,7 @@ j = data / "soc_expected.json"
 if j.exists():
     e = json.loads(j.read_text())
     print(f"source: {j} (sha256 {sha(j)}), generator {e.get('generator')}, git_rev {e.get('git_rev')}")
-    assert e["spec_rev"] == "B", "soc_expected.json is not spec_rev B"
+    assert e["spec_rev"] == REV, f"soc_expected.json is not spec_rev {REV}"
     assert e["K"] == 8 and e["act_shift_s"] == 0 and e["rng_mode"] == 2
     for k, fname in (("input_sha256", "input.hex"), ("weights_sha256", "weights.hex"), ("bias_sha256", "bias.hex")):
         assert e[k] == sha(data / fname), f"{fname} sha256 differs from soc_expected.json"
@@ -151,7 +154,7 @@ out.write_text("".join(f"{x & 0xFFFFFFFF:08x}\n" for x in w))
 print(f"EXPECTED RESULT={res} LED={led} TOHOST={tohost} K={K} UART={[hex(u) for u in uart]}")
 print(f"EXPECTED HIDDEN={[hex(x) for x in hid]}")
 print(f"EXPECTED SCORE={[x - (1 << 32) if x >> 31 else x for x in sc]}")
-params = e.get("params_expected", "0x02020810") if j.exists() else "0x02020810"
+params = e["params_expected"] if j.exists() else {"B": "0x02020810", "C": "0x03020810"}[REV]
 print(f"PARAMS_EXPECTED={int(params, 16):08x}")
 print(f"wrote {out}")
 print("EXPECTATION_OK")
@@ -188,7 +191,7 @@ must_fail() {  # must_fail <log> <what>
 }
 
 # ---------------------------------------------------------------- 4. demo
-step "4. tb_soc: SoC demo program on the real CPU + TPU (rev B, RNG_MODE 2)"
+step "4. tb_soc: SoC demo program on the real CPU + TPU (spec rev $SPEC_REV, RNG_MODE 2)"
 L="$LOG/tb_soc_demo.log"
 run_sim "$L" $SOC_RTL tests/soc/tb_soc.v -- +MODE=demo +EXP=$B/soc_expected.hex
 sha256sum "$DATA/soc_demo_prog.hex" "$DATA/weights.hex" "$DATA/bias.hex" "$DATA/input.hex" "$DATA/soc_expected.json" >> "$L" 2>/dev/null || true

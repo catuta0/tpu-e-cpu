@@ -19,8 +19,8 @@ How (no new model code: the expected values come from the project golden model)
   script aborts if the two disagree on any field;
 * line format: ``code/python/sctpu/gen_hex.py`` ``vector_line`` (43 hex fields).
 
-Spec revision: rev B (ARCHITECTURE.md 11, ADR-008: phase-spaced seeds) is passed
-EXPLICITLY (``spec_rev=SPEC_REV``) and written as a ``# spec_rev B`` first line,
+Spec revision: rev C (ARCHITECTURE.md 12, ADR-010: current seed tables) is passed
+EXPLICITLY (``spec_rev=SPEC_REV``) and written as a ``# spec_rev C`` first line,
 the same header convention as the SW-02 files in sim/data/ (task RTL-SOC update).
 
 Output: ``sim/tpu/vectors/tpu_vectors_sweep_mode{0,1,2}.txt`` (one file per mode,
@@ -48,7 +48,7 @@ OUT = ROOT / "sim" / "tpu" / "vectors"
 K_LIST = range(4, 11)                 # every legal K
 S_LIST = (0, 3, 7)                    # ACT_SHIFT values of REQ-TPU-013 (b)
 N_IMG = 3                             # images (test positions 0..2)
-SPEC_REV = "B"                        # ARCHITECTURE.md 11 (rev B seeds)
+SPEC_REV = "C"                        # ARCHITECTURE.md 12 (rev C seeds, current)
 
 
 def read_hex(path: Path) -> list[int]:

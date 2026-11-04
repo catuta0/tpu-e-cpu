@@ -7,7 +7,7 @@
 //             115200 Bd, divider 234), REQ-SYS-013 (LED register)
 // Task      : RTL-SOC (fpga-engineer)
 // Spec      : ARCHITECTURE.md 4.1 (+ 9: reset values LED = 0, TOHOST = 0);
-//             INTERFACES.json rev B "periph_regs", "uart".
+//             INTERFACES.json rev C "periph_regs", "uart".
 //
 // REGISTER MAP (base 0x1000_0000; the block decodes mem_addr[11:2])
 //   0x00 LED          RW  [5:0] 1 = LED lit (soc_top inverts for the active-

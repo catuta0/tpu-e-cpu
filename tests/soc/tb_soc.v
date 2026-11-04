@@ -2,7 +2,7 @@
 // File    : tests/soc/tb_soc.v
 // Purpose : Self-checking system testbench of the complete SoC
 //           design/rtl/soc/soc_top.v = real rv32i_core + soc_bus + soc_ram +
-//           soc_periph + real sc_tpu (rev B, RNG_MODE 2), driven ONLY through
+//           soc_periph + real sc_tpu (rev C, RNG_MODE 2), driven ONLY through
 //           the board pins (clk, btn_rst_n) - the CPU executes a program from
 //           the RAM init file, exactly as on the Tang Nano 9K.
 // Task    : RTL-SOC (fpga-engineer)

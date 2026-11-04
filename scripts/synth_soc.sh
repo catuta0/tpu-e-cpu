@@ -20,7 +20,7 @@
 # Yosys `check` (latches, combinational loops, multiple drivers) is run in
 # both flows (REQ-TIM-002).
 #
-# Usage   : bash scripts/synth_soc.sh              (both flows, ~? min)
+# Usage   : bash scripts/synth_soc.sh              (both flows, ~45 min single-thread)
 #           FLOWS=nwl bash scripts/synth_soc.sh    (chosen flow only)
 #           REPORT_ONLY=1 bash scripts/synth_soc.sh (rebuild the report from logs)
 # Logs    : logs/soc/synth_<flow>.log, logs/soc/pnr_<flow>_s<seed>.log,
@@ -120,6 +120,7 @@ for fl in flows:
         crit = []
         cp = t.rfind("Critical path report for clock")
         if cp >= 0:
+            cp = t.rfind("\n", 0, cp) + 1          # start of that "Info: ..." line
             for l in t[cp:].splitlines():
                 if not l.startswith("Info:"):
                     break

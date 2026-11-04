@@ -1,17 +1,17 @@
-# input revision: 4060bd9-dirty
+# input revision: ac0f0a0-dirty
 # cmd: iverilog -g2005 -Wall -DINJECT_FAULT design/rtl/tpu/sc_lfsr8.v design/rtl/tpu/sc_rng.v tests/tpu/tb_sc_lfsr8.v -o sim/tpu/build/tb_sc_lfsr8_fault.vvp && vvp -n sim/tpu/build/tb_sc_lfsr8_fault.vvp 
 FAIL: TC6 reset value != leap8(seed)
 FAIL: TC7 reference period != 65535
-FAIL: TC7 reference S(n) != ARCHITECTURE.md 11 values
+FAIL: TC7 S(32768) != 0xF9DE (modes 0/1 W seed)
 FAIL: TC7 mode-0 seeds
-FAIL: TC7 mode-2 lane 0: X 0xe1e4 exp leap8(S(0)=0xace1), W 0xdeeb exp leap8(S(32768)=0xa585)
-FAIL: TC7 mode-2 lane 1: X 0x7be4 exp leap8(S(4096)=0x414d), W 0xec04 exp leap8(S(36864)=0x0149)
-FAIL: TC7 mode-2 lane 2: X 0x4d41 exp leap8(S(8192)=0x0a63), W 0x3914 exp leap8(S(40960)=0xa6a8)
-FAIL: TC7 mode-2 lane 3: X 0xd34d exp leap8(S(12288)=0x9b5a), W 0x0bcb exp leap8(S(45056)=0x0ef0)
-FAIL: TC7 mode-2 lane 4: X 0x487d exp leap8(S(16384)=0xcf67), W 0xb1b0 exp leap8(S(49152)=0x27fa)
-FAIL: TC7 mode-2 lane 5: X 0xbc20 exp leap8(S(20480)=0x03e4), W 0x51e3 exp leap8(S(53248)=0xee4c)
-FAIL: TC7 mode-2 lane 6: X 0x171c exp leap8(S(24576)=0xd56d), W 0x8e76 exp leap8(S(57344)=0xc71d)
-FAIL: TC7 mode-2 lane 7: X 0x239f exp leap8(S(28672)=0x8090), W 0xab6f exp leap8(S(61440)=0x367e)
+FAIL: TC7 mode-2 lane 0: X 0xe1e4 exp leap8(0xace1), W 0x5c0a exp leap8(0x7a5c)
+FAIL: TC7 mode-2 lane 1: X 0x3b23 exp leap8(0xe93b), W 0xc3a4 exp leap8(0xa5c3)
+FAIL: TC7 mode-2 lane 2: X 0x952d exp leap8(0x2595), W 0x2a39 exp leap8(0xd12a)
+FAIL: TC7 mode-2 lane 3: X 0xefd4 exp leap8(0x61ef), W 0x9178 exp leap8(0xfc91)
+FAIL: TC7 mode-2 lane 4: X 0x49dc exp leap8(0x9e49), W 0xf878 exp leap8(0x27f8)
+FAIL: TC7 mode-2 lane 5: X 0xa331 exp leap8(0xdaa3), W 0x5fef exp leap8(0x535f)
+FAIL: TC7 mode-2 lane 6: X 0xfd25 exp leap8(0x16fd), W 0xc6ab exp leap8(0x7ec6)
+FAIL: TC7 mode-2 lane 7: X 0x57ee exp leap8(0x5357), W 0x2d16 exp leap8(0xaa2d)
 FAIL: TC7 IL=16 lane 0 seeds
 FAIL: TC7 IL=16 lane 1 seeds
 FAIL: TC7 IL=16 lane 2 seeds
@@ -34,6 +34,6 @@ PASS: TC4 FREEZE state unchanged for 100 cycles with adv=0
 PASS: TC5 RELOAD load+adv -> state_x=0xe1e4 state_w=0xdeeb (load wins)
 errors=70029
 TEST FAILED
-FATAL: tests/tpu/tb_sc_lfsr8.v:242: tb_sc_lfsr8 failed
+FATAL: tests/tpu/tb_sc_lfsr8.v:250: tb_sc_lfsr8 failed
        Time: 701036000  Scope: tb_sc_lfsr8
 SIM_EXIT=1

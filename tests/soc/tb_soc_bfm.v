@@ -27,7 +27,7 @@
 // TESTS (each prints PASS/FAIL)
 //   T1 reset values through the bus: LED 0, UART_STATUS 0, TOHOST 0;
 //      TPU STATUS 0, RESULT 0, CYCLES 0, CONFIG 0x08, PARAMS = EXP_PARAMS
-//      (rev B: 0x02020810 = version 2, RNG_MODE 2, IL 8, NL 16); led_n = 6'b111111.
+//      (rev C: 0x03020810 = version 3, RNG_MODE 2, IL 8, NL 16); led_n = 6'b111111.
 //   T2 LED: 0x00, 0x3F, 0x15, 0x2A -> read-back and led_n = ~value; 0xFF
 //      reads back 0x3F (6-bit register); a write without byte-0 strobe is
 //      ignored.
@@ -61,10 +61,10 @@
 module tb_soc_bfm;
 
     localparam integer EXP_DIV = 234;
-    // Expected TPU PARAMS (rev B: version 0x02, RNG_MODE 2, IL 8, NL 16).
+    // Expected TPU PARAMS (rev C: version 0x03, RNG_MODE 2, IL 8, NL 16).
     // scripts/sim_soc.sh passes the value of sim/data/soc_expected.json
     // "params_expected" with -P, so a seed-table revision needs no TB edit.
-    parameter [31:0] EXP_PARAMS = 32'h0202_0810;
+    parameter [31:0] EXP_PARAMS = 32'h0302_0810;
     localparam real    BIT_NS  = 1.0e9 / 115200.0;
 
     reg clk = 1'b0;

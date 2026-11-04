@@ -1,4 +1,4 @@
-# input revision: 1e853f7-dirty
+# input revision: ac0f0a0-dirty
 # cmd: iverilog -g2005 -Wall -P tb_sc_tpu.RNG_MODE=2 -P tb_sc_tpu.INIT_FILES=1 design/rtl/tpu/sc_lfsr8.v design/rtl/tpu/sc_rng.v design/rtl/tpu/sc_lane_array.v design/rtl/tpu/sc_postproc.v design/rtl/tpu/sc_tpu_ctrl.v design/rtl/tpu/sc_tpu.v tests/tpu/tb_sc_tpu.v -o sim/tpu/build/tb_sc_tpu_init_m2.vvp && vvp -n sim/tpu/build/tb_sc_tpu_init_m2.vvp +DATA=sim/data +INITVEC=sim/data/tpu_vectors_mode2.txt
 INFO: tb_sc_tpu RNG_MODE=2 DATA=sim/data
 PASS: D12 $readmemh init: 512 WEIGHT, 32 BIAS, 16 INPUT words equal the files; inference without any bus load bit-exact with sim/data/tpu_vectors_mode2.txt vector 0 (RESULT 7)
@@ -6,5 +6,5 @@ PASS: R1/R2 RNG trace: 64 stream cycles x 8 lanes compared with the golden trace
 INFO: golden vectors total 0 (+0 clamp re-runs), mismatching inferences 0, mismatching fields 0
 INFO: bus protocol errors 0, longest valid->ready 3 cycles
 TEST PASSED
-tests/tpu/tb_sc_tpu.v:878: $finish called at 173511500 (1ps)
+tests/tpu/tb_sc_tpu.v:882: $finish called at 173511500 (1ps)
 SIM_EXIT=0

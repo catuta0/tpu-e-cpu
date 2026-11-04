@@ -1,4 +1,4 @@
-# input revision: ba9dfb9-dirty
+# input revision: ac0f0a0-dirty
 # cmd: iverilog -g2005 -Wall design/rtl/cpu/rv32i_core.v design/rtl/cpu/rv32i_decode.v design/rtl/cpu/rv32i_alu.v design/rtl/cpu/rv32i_regfile.v design/rtl/tpu/sc_lfsr8.v design/rtl/tpu/sc_rng.v design/rtl/tpu/sc_lane_array.v design/rtl/tpu/sc_postproc.v design/rtl/tpu/sc_tpu_ctrl.v design/rtl/tpu/sc_tpu.v design/rtl/soc/soc_bus.v design/rtl/soc/soc_ram.v design/rtl/soc/soc_periph.v design/rtl/soc/soc_top.v tests/soc/tb_soc.v -o sim/soc/build/tb_soc_demo.vvp && vvp -n sim/soc/build/tb_soc_demo.vvp +MODE=demo +EXP=sim/soc/build/soc_expected.hex
 INFO: tb_soc MODE=demo PROG_HEX=sim/data/soc_demo_prog.hex UART_DIV(DUT)=234 expected divider 234
 PASS: R1 power-up reset: rst released on rising edge 2 after configuration
@@ -10,7 +10,7 @@ INFO: UART RX byte 1 = 0x0a ('.') at cycle 7697
 PASS: R5 first bus request after reset release is a fetch of 0x00000000 (at cycle 31 after rst fell; CPU CLEAR state = 32 cycles)
 PASS: D1 TOHOST = 1 written by the store at PC 0x00000068, cycle 5441 after reset release
 PASS: D2 CPU-observed RESULT (load from 0x2000000C) = 0x00000007 = golden class 7; TPU RESULT register = 7
-PASS: D3 TPU storage bit-exact vs golden: HIDDEN[0..15] (4 words) and SCORE[0..15] (16 words), e.g. SCORE[7] = 1304
+PASS: D3 TPU storage bit-exact vs golden: HIDDEN[0..15] (4 words) and SCORE[0..15] (16 words), e.g. SCORE[7] = 948
 PASS: D4 led_n = 6'b111000 = ~LED (LED register 7 = class), 1 LED write
 PASS: D5 UART pin decoded (115200 8N1, real-time receiver) 2 bytes: 0x37 0x0a = "7\n"; 2 frames
 PASS: D6 CYCLES stored at 0x0E00 = 2928 = 10*2^8+368 (formula) = TB-measured BUSY cycles 2928 = TPU CYCLES register
@@ -26,4 +26,4 @@ bbb6912f44f0218631107a9fa5d2dbae703249ee94a46db9568023c87e402411  sim/data/soc_d
 b743fe71eb3d379fa4d628ad1a8fad90c5c0855432f8e771080d32f4932c51c8  sim/data/weights.hex
 1d1e138fd2653fcff598d8af0cc0264c2b78c62eee5bff3e7a761632c1a1da83  sim/data/bias.hex
 4eeb1ae6d1c50515e5e891aa1ad266fac55678edbbf95a477ff90a2b992c1c9a  sim/data/input.hex
-fabe61ca68f5a2b07354f8b8454314db8541aef13a1acacc4a2dc85739c29060  sim/data/soc_expected.json
+907e51c6e3b5057edf32f728ee8880705db05dfa4a661e68f67dfe42b9a8e7a9  sim/data/soc_expected.json

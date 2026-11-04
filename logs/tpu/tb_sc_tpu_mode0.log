@@ -1,8 +1,8 @@
-# input revision: 4060bd9-dirty
-# cmd: iverilog -g2005 -Wall -P tb_sc_tpu.RNG_MODE=0 design/rtl/tpu/sc_lfsr8.v design/rtl/tpu/sc_rng.v design/rtl/tpu/sc_lane_array.v design/rtl/tpu/sc_postproc.v design/rtl/tpu/sc_tpu_ctrl.v design/rtl/tpu/sc_tpu.v tests/tpu/tb_sc_tpu.v -o sim/tpu/build/tb_sc_tpu_m0.vvp && vvp -n sim/tpu/build/tb_sc_tpu_m0.vvp +DATA=sim/data +DIRECTED +CLAMP +VEC1=sim/data/tpu_vectors_corner_mode0.txt +VEC2=sim/tpu/vectors/tpu_vectors_sweep_mode0.txt
+# input revision: ac0f0a0-dirty
+# cmd: iverilog -g2005 -Wall -P tb_sc_tpu.RNG_MODE=0 design/rtl/tpu/sc_lfsr8.v design/rtl/tpu/sc_rng.v design/rtl/tpu/sc_lane_array.v design/rtl/tpu/sc_postproc.v design/rtl/tpu/sc_tpu_ctrl.v design/rtl/tpu/sc_tpu.v tests/tpu/tb_sc_tpu.v -o sim/tpu/build/tb_sc_tpu_m0.vvp && vvp -n sim/tpu/build/tb_sc_tpu_m0.vvp +DATA=sim/data +DIRECTED +CLAMP +VEC1=sim/data/tpu_vectors_mode0.txt +VEC2=sim/data/tpu_vectors_corner_mode0.txt +VEC3=sim/tpu/vectors/tpu_vectors_sweep_mode0.txt
 INFO: tb_sc_tpu RNG_MODE=0 DATA=sim/data
 PASS: D1 reset values STATUS/RESULT/CYCLES/SCORE/HIDDEN = 0, CONFIG = 0x08, CTRL reads 0
-PASS: D2 PARAMS = 0x02000810 (NL=16, IL=8, RNG_MODE=0, version 0x02)
+PASS: D2 PARAMS = 0x03000810 (NL=16, IL=8, RNG_MODE=0, version 0x03)
 PASS: D3 CONFIG LOG2_L raw 0..15 read back clamped to 4..10, ACT_SHIFT kept
 PASS: D4 INPUT/BIAS/WEIGHT read-back incl. byte strobes, BIAS sign-extension, unmapped = 0, read-only regs
 PASS: D4b 0x55555555/0xAAAAAAAA (xor index) on all 16 INPUT, 32 BIAS, 512 WEIGHT words and CONFIG; R registers unchanged
@@ -13,13 +13,15 @@ PASS: D10 STATUS = DONE (0x2) and RESULT unchanged after 1000 idle cycles
 PASS: D7 DONE cleared by START; START/INPUT/BIAS/WEIGHT/CONFIG writes while BUSY ignored (1 busy pulse, CYCLES 2928 unchanged, results identical); memory reads while busy stall (31 cycles) and return correct data
 PASS: D11 rst during a stream phase: all registers at reset values after 1 cycle; re-run bit-exact with inference A
 PASS: D5 analytic zero-code test (acc = 64L, Dp = floor(d_j L/128)), K = 4/7/10, s = 0/7, 16 neurons each
+PASS: VECFILE sim/data/tpu_vectors_mode0.txt : vectors 360 (+0 clamp re-runs), mismatching inferences 0, mismatching fields 0
 PASS: VECFILE sim/data/tpu_vectors_corner_mode0.txt : vectors 51 (+51 clamp re-runs), mismatching inferences 0, mismatching fields 0
 PASS: VECFILE sim/tpu/vectors/tpu_vectors_sweep_mode0.txt : vectors 63 (+18 clamp re-runs), mismatching inferences 0, mismatching fields 0
-PASS: R1/R2 RNG trace: 12352 stream cycles x 8 lanes compared with the golden trace (64 rows), 0 mismatches; LFSR frozen in all 120007 non-stream cycles
-INFO: golden vectors total 114 (+69 clamp re-runs), mismatching inferences 0, mismatching fields 0
+PASS: R1/R2 RNG trace: 35392 stream cycles x 8 lanes compared with the golden trace (64 rows), 0 mismatches; LFSR frozen in all 298039 non-stream cycles
+INFO: golden vectors total 474 (+69 clamp re-runs), mismatching inferences 0, mismatching fields 0
 INFO: bus protocol errors 0, longest valid->ready 35 cycles
 TEST PASSED
-tests/tpu/tb_sc_tpu.v:879: $finish called at 16461836500 (1ps)
+tests/tpu/tb_sc_tpu.v:882: $finish called at 57161540500 (1ps)
 SIM_EXIT=0
-e58eb9f5ead8098796a3cea4e870f06a5255914ec9c621c5214836b000f0cbac  sim/data/tpu_vectors_corner_mode0.txt
-93e479e00b5a32a7cadf2827c5b365e104c35a2d9624a37acc1b7bcbb2b0fdb0  sim/tpu/vectors/tpu_vectors_sweep_mode0.txt
+39db6384df3f111c531aaee671d13872c88601790e4bd2f09a9bc3635e67803f  sim/data/tpu_vectors_mode0.txt
+7f0ccd40de65e3709019443edb11dbcec263ae210452396b88d1619f594af93d  sim/data/tpu_vectors_corner_mode0.txt
+31fdc520e4f8764cdbc9890acb9e09ea0a18f5886f14dbe876b52f6b44bb63b5  sim/tpu/vectors/tpu_vectors_sweep_mode0.txt

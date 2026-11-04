@@ -1,4 +1,4 @@
-# input revision: 4060bd9-dirty
+# input revision: ac0f0a0-dirty
 # cmd: iverilog -g2005 -Wall -P tb_soc.PROG_HEX="sim/data/cpu_tests/rand_02.hex" design/rtl/cpu/rv32i_core.v design/rtl/cpu/rv32i_decode.v design/rtl/cpu/rv32i_alu.v design/rtl/cpu/rv32i_regfile.v design/rtl/tpu/sc_lfsr8.v design/rtl/tpu/sc_rng.v design/rtl/tpu/sc_lane_array.v design/rtl/tpu/sc_postproc.v design/rtl/tpu/sc_tpu_ctrl.v design/rtl/tpu/sc_tpu.v design/rtl/soc/soc_bus.v design/rtl/soc/soc_ram.v design/rtl/soc/soc_periph.v design/rtl/soc/soc_top.v tests/soc/tb_soc.v -o sim/soc/build/rand_02.vvp && vvp -n sim/soc/build/rand_02.vvp +MODE=cpu +META=sim/soc/build/meta/rand_02.tbmeta.hex +SIG=sim/data/cpu_tests/rand_02.sig
 INFO: tb_soc MODE=cpu PROG_HEX=sim/data/cpu_tests/rand_02.hex UART_DIV(DUT)=234 expected divider 234
 PASS: R1 power-up reset: rst released on rising edge 2 after configuration

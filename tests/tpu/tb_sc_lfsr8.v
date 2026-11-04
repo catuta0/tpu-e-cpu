@@ -4,7 +4,7 @@
 //           (task RTL-TPU; spec ARCHITECTURE.md 5.3 RNG paragraph [BIT-EXACT]).
 //
 // What is checked (two DUT instances, seeds 0xACE1 = LFSR_X and 0xF9DE =
-// LFSR_W of spec 5.3 / rev B section 11; rev A used 0x7A5C for LFSR_W):
+// LFSR_W of modes 0/1 since rev B, kept in rev C section 12; rev A used 0x7A5C):
 //   TC1 LOAD      : after load, state == 8 single steps of the seed
 //                   (look-ahead convention: the register holds the state
 //                   whose low byte is r of stream cycle 0).
@@ -23,15 +23,20 @@
 //   TC5 RELOAD    : a load in the middle of the run restores the TC1 value,
 //                   and load has priority over a simultaneous adv.
 //   TC6 RESET     : rst gives the same value as load.
-//   TC7 SEEDS     : (rev B, ARCHITECTURE.md 11) the seed tables of sc_rng.v
-//                   are re-derived here from first principles: a 1-step
-//                   reference LFSR is started at 0xACE1 and stepped 65535
-//                   times; S(n) is captured at n = 4096 i (X), 32768 + 4096 i
-//                   (W) and, for the IL=16 study build, at the half-way points
-//                   +2048. Every LFSR inside three sc_rng instances (mode 0
-//                   IL 8, mode 2 IL 8, mode 2 IL 16) must hold leap8(S(n))
-//                   after reset (look-ahead convention). Also checks that the
-//                   reference returns to 0xACE1 after exactly 65535 steps.
+//   TC7 SEEDS     : (rev C, ARCHITECTURE.md 12) the seed tables of sc_rng.v
+//                   are re-derived here from the spec formulas, independently
+//                   of the RTL constants:
+//                     modes 0/1: X = 0xACE1 = S(0), W = 0xF9DE = S(32768), where
+//                       S(n) = state of the 1-step reference LFSR started at
+//                       0xACE1 after n steps (stepped 65535 times here; also
+//                       checks the period 65535 and S(32768) = 0xF9DE);
+//                     mode 2: X_i = (0xACE1 + 0x3C5A*i) mod 2^16,
+//                             W_i = (0x7A5C + 0x2B67*i) mod 2^16, i = 0..7
+//                       (and i = 8..15 for the IL=16 study build, same formula).
+//                   Every LFSR inside three sc_rng instances (mode 0 IL 8,
+//                   mode 2 IL 8, mode 2 IL 16) must hold leap8(seed) after
+//                   reset (look-ahead convention); spot values are compared
+//                   with the hex table of ARCHITECTURE.md 12.
 //
 // Negative check: compiling with -DINJECT_FAULT uses a wrong tap in the
 // reference model; the TB must then print TEST FAILED and exit non-zero
@@ -109,8 +114,9 @@ module tb_sc_lfsr8;
 
     integer errors = 0;
     integer k;
-    // TC7 reference phases S(n) of the common m-sequence
-    reg [15:0] s_ref, s_x [0:15], s_w [0:15];
+    // TC7 reference seeds (re-derived from the spec formulas)
+    reg [15:0] s_ref, s_half, s_x [0:15], s_w [0:15];
+    reg [31:0] seed32;   // only [15:0] used (mod 2^16)
     integer    n7, i7, e7;
     reg [15:0] ref_x, ref_w, first_x, first_w, hold_x, hold_w;
     integer period_x, period_w, zero_seen;
@@ -143,30 +149,32 @@ module tb_sc_lfsr8;
         if (st_x == ref_step8(16'hACE1) && st_w == ref_step8(16'hF9DE))
             $display("PASS: TC6 RESET state_x=0x%04h state_w=0x%04h", st_x, st_w);
 
-        // ---------------- TC7: rev B seed tables (still in reset) -------------
+        // ---------------- TC7: rev C seed tables (still in reset) -------------
         e7 = errors;
         s_ref = 16'hACE1;                       // S(0)
         for (n7 = 0; n7 < 65535; n7 = n7 + 1) begin
-            for (i7 = 0; i7 < 8; i7 = i7 + 1) begin
-                if (n7 == 4096 * i7)                s_x[i7]     = s_ref;
-                if (n7 == 32768 + 4096 * i7)        s_w[i7]     = s_ref;
-                if (n7 == 4096 * i7 + 2048)         s_x[8 + i7] = s_ref;
-                if (n7 == 32768 + 4096 * i7 + 2048) s_w[8 + i7] = s_ref;
-            end
+            if (n7 == 32768) s_half = s_ref;    // S(32768)
             s_ref = ref_step(s_ref);
         end
         check(s_ref == 16'hACE1, "TC7 reference period != 65535");
-        // spot-check against the published table of ARCHITECTURE.md 11
-        check(s_w[0] == 16'hF9DE && s_x[1] == 16'h357B && s_x[7] == 16'hC223 && s_w[7] == 16'h91AB,
-              "TC7 reference S(n) != ARCHITECTURE.md 11 values");
-        // modes 0/1: X = S(0), W = S(32768)
-        check(u_rng0.g_shared.u_lfsr_x.state == ref_step8(s_x[0]) &&
-              u_rng0.g_shared.u_lfsr_w.state == ref_step8(s_w[0]), "TC7 mode-0 seeds");
+        check(s_half == 16'hF9DE, "TC7 S(32768) != 0xF9DE (modes 0/1 W seed)");
+        for (i7 = 0; i7 < 16; i7 = i7 + 1) begin
+            seed32  = 32'h0000_ACE1 + 32'h0000_3C5A * i7;   // then mod 2^16
+            s_x[i7] = seed32[15:0];
+            seed32  = 32'h0000_7A5C + 32'h0000_2B67 * i7;
+            s_w[i7] = seed32[15:0];
+        end
+        // spot-check against the published table of ARCHITECTURE.md 12
+        check(s_x[1] == 16'hE93B && s_x[7] == 16'h5357 && s_w[3] == 16'hFC91 && s_w[7] == 16'hAA2D,
+              "TC7 formula values != ARCHITECTURE.md 12 table");
+        // modes 0/1: X = S(0) = 0xACE1, W = S(32768) = 0xF9DE
+        check(u_rng0.g_shared.u_lfsr_x.state == ref_step8(16'hACE1) &&
+              u_rng0.g_shared.u_lfsr_w.state == ref_step8(s_half), "TC7 mode-0 seeds");
         for (i7 = 0; i7 < 8; i7 = i7 + 1) begin
             if (st2_x[16*i7 +: 16] !== ref_step8(s_x[i7]) || st2_w[16*i7 +: 16] !== ref_step8(s_w[i7])) begin
                 errors = errors + 1;
-                $display("FAIL: TC7 mode-2 lane %0d: X 0x%04h exp leap8(S(%0d)=0x%04h), W 0x%04h exp leap8(S(%0d)=0x%04h)",
-                         i7, st2_x[16*i7 +: 16], 4096 * i7, s_x[i7], st2_w[16*i7 +: 16], 32768 + 4096 * i7, s_w[i7]);
+                $display("FAIL: TC7 mode-2 lane %0d: X 0x%04h exp leap8(0x%04h), W 0x%04h exp leap8(0x%04h)",
+                         i7, st2_x[16*i7 +: 16], s_x[i7], st2_w[16*i7 +: 16], s_w[i7]);
             end
         end
         for (i7 = 0; i7 < 16; i7 = i7 + 1) begin
@@ -176,8 +184,8 @@ module tb_sc_lfsr8;
             end
         end
         if (errors == e7)
-            $display("PASS: TC7 SEEDS rev B: mode 0/1 X=S(0)=0x%04h W=S(32768)=0x%04h; mode 2 X_i=S(4096i), W_i=S(32768+4096i) for i=0..7 (W_7=0x%04h); IL=16 half-way phases; reference period 65535",
-                     s_x[0], s_w[0], s_w[7]);
+            $display("PASS: TC7 SEEDS rev C: mode 0/1 X=0x%04h W=S(32768)=0x%04h; mode 2 X_i=0xACE1+0x3C5A*i, W_i=0x7A5C+0x2B67*i for i=0..7 (W_7=0x%04h); IL=16 lanes 8..15 same formula; reference period 65535",
+                     s_x[0], s_half, s_w[7]);
         rst = 1'b0;
 
         // ---------------- TC1: load ------------------------------------------

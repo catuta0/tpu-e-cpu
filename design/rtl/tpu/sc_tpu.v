@@ -3,11 +3,12 @@
 // Module    : sc_tpu   (top of the stochastic-computing TPU)
 // Project   : SC-TPU + RV32I SoC on Tang Nano 9K (GW1NR-LV9QN88PC6/I5)
 // Reqs      : requirements/REQUIREMENTS.md REQ-TPU-002 (register map, reset values), REQ-TPU-003 (PARAMS), REQ-TPU-007 (LOG2_L clamp), REQ-TPU-011 (writes while BUSY), REQ-TPU-012 (init files), REQ-TPU-015 (reserved offsets), REQ-SYS bus rules (ARCHITECTURE.md 3)
-// Task      : RTL-TPU (rev A), RTL-SOC (rev B update) - fpga-engineer
+// Task      : RTL-TPU (rev A), RTL-SOC (rev B / rev C update) - fpga-engineer
 // Spec      : ARCHITECTURE.md rev A: 3 (bus), 5.1-5.6 (SC-TPU; 5.2, 5.3, 5.5
 //             are [BIT-EXACT]) + 9 (A.1) + 10 (A.2) + 11 (rev B, ADR-008:
-//             default RNG_MODE 2, phase-spaced seeds in sc_rng.v, PARAMS
-//             version 0x02); management/INTERFACES.json rev B "bus", "tpu".
+//             default RNG_MODE 2) + 12 (REV C, ADR-010, current: seed tables
+//             in sc_rng.v, PARAMS version 0x03); management/INTERFACES.json
+//             rev C "bus", "tpu".
 //
 // PURPOSE
 //   Memory-mapped stochastic-computing accelerator for the MLP 64-16-10:
@@ -41,8 +42,8 @@
 //                     inference (ARCHITECTURE.md 10); counts live while BUSY;
 //                     reset 0. Closed-form value in sc_tpu_ctrl.v.
 //   0x014 PARAMS  R   [7:0] NL, [15:8] IL, [17:16] RNG_MODE, [31:24] version.
-//                     version = 0x02 since rev B (ARCHITECTURE.md 11; 0x01 in
-//                     rev A). Rev B default build: 0x0202_0810.
+//                     version = 0x03 = rev C (ARCHITECTURE.md 12; 0x01 rev A,
+//                     0x02 rev B). Rev C default build: 0x0302_0810.
 //   0x040-0x07F INPUT  RW 64 codes, 4 per word, little-endian, byte writes OK.
 //   0x080-0x0BF SCORE  R  16 x signed 32-bit (Dp sign-extended from 20 bits).
 //   0x0C0-0x0CF HIDDEN R  16 codes, 4 per word.
@@ -99,7 +100,7 @@
 module sc_tpu #(
     parameter integer NL          = 16,
     parameter integer IL          = 8,
-    parameter integer RNG_MODE    = 2,          // rev B default (ADR-008)
+    parameter integer RNG_MODE    = 2,          // default since rev B (ADR-008), rev C
     parameter         WEIGHT_INIT = "",
     parameter         BIAS_INIT   = "",
     parameter         INPUT_INIT  = ""
@@ -125,7 +126,7 @@ module sc_tpu #(
     localparam [7:0] P_NL      = NL[7:0];
     localparam [7:0] P_IL      = IL[7:0];
     localparam [1:0] P_MODE    = RNG_MODE[1:0];
-    localparam [7:0] P_VERSION = 8'h02;   // rev B (ARCHITECTURE.md 11); rev A was 0x01
+    localparam [7:0] P_VERSION = 8'h03;   // rev C (ARCHITECTURE.md 12); rev A 0x01, rev B 0x02
 
     // =========================================================================
     // Address decode (combinational, on the bus address)

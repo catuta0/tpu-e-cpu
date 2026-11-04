@@ -12,7 +12,7 @@
 #      assignments in initial-block tasks, which are standard Verilog
 #      semantics for Icarus - the TBs are not meant for Verilator)
 #                                                            -> lint_tb.log
-#   3. unit TBs (Icarus): tb_sc_lfsr8 (+ rev B seed tables of sc_rng, TC7), tb_sc_postproc, tb_sc_lane_array, plus their
+#   3. unit TBs (Icarus): tb_sc_lfsr8 (+ rev C seed tables of sc_rng, TC7), tb_sc_postproc, tb_sc_lane_array, plus their
 #      -DINJECT_FAULT negative runs, which MUST fail          -> tb_*.log
 #   4. tb_sc_tpu for RNG_MODE 0, 1, 2 (one compile per mode): directed tests
 #      D1..D11, RNG trace R1/R2, all golden vector files of sim/data/ for
@@ -41,7 +41,7 @@ D=design/rtl/tpu
 RTL="$D/sc_lfsr8.v $D/sc_rng.v $D/sc_lane_array.v $D/sc_postproc.v $D/sc_tpu_ctrl.v $D/sc_tpu.v"
 DATA=sim/data
 QUICK=${QUICK:-0}
-SPEC_REV=${SPEC_REV:-B}     # required "# spec_rev" header of every golden file
+SPEC_REV=${SPEC_REV:-C}     # required "# spec_rev" header of every golden file
 
 REV="$(git rev-parse --short HEAD 2>/dev/null || echo no-commit)"
 if [ -n "$(git status --porcelain -- design/rtl/tpu tests/tpu 2>/dev/null)" ]; then REV="${REV}-dirty"; fi
@@ -122,7 +122,7 @@ step "3. unit testbenches"
 run_tb tb_sc_lfsr8 "$LOG/tb_sc_lfsr8.log" "$D/sc_lfsr8.v" "$D/sc_rng.v" tests/tpu/tb_sc_lfsr8.v --
 require "$LOG/tb_sc_lfsr8.log" '^TEST PASSED$' "tb_sc_lfsr8 TEST PASSED"
 require "$LOG/tb_sc_lfsr8.log" '^SIM_EXIT=0$' "tb_sc_lfsr8 exit 0"
-require "$LOG/tb_sc_lfsr8.log" '^PASS: TC7 SEEDS rev B' "tb_sc_lfsr8 TC7 rev B seed tables"
+require "$LOG/tb_sc_lfsr8.log" '^PASS: TC7 SEEDS rev C' "tb_sc_lfsr8 TC7 rev C seed tables"
 grep -E '^(PASS|FAIL)' "$LOG/tb_sc_lfsr8.log"
 run_tb tb_sc_lfsr8_fault "$LOG/tb_sc_lfsr8_inject_fault.log" -DINJECT_FAULT "$D/sc_lfsr8.v" "$D/sc_rng.v" tests/tpu/tb_sc_lfsr8.v --
 require "$LOG/tb_sc_lfsr8_inject_fault.log" '^TEST FAILED$' "tb_sc_lfsr8 negative run TEST FAILED"

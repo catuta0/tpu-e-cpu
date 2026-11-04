@@ -151,6 +151,70 @@
    "label": "SIMULATION",
    "revision": "ba9dfb9",
    "evidence": "reports/sw/accuracy_revC.json"
+  },
+  {
+   "name": "soc_lut4",
+   "value": 5628,
+   "unit": "LUT4",
+   "label": "SIMULATION",
+   "revision": "ac0f0a0",
+   "evidence": "reports/fpga/soc/soc_impl.md"
+  },
+  {
+   "name": "soc_lut4_pct",
+   "value": 65,
+   "unit": "%",
+   "label": "SIMULATION",
+   "revision": "ac0f0a0",
+   "evidence": "reports/fpga/soc/soc_impl.md"
+  },
+  {
+   "name": "soc_dff",
+   "value": 2803,
+   "unit": "DFF",
+   "label": "SIMULATION",
+   "revision": "ac0f0a0",
+   "evidence": "reports/fpga/soc/soc_impl.md"
+  },
+  {
+   "name": "soc_bsram",
+   "value": 5,
+   "unit": "blocks",
+   "label": "SIMULATION",
+   "revision": "ac0f0a0",
+   "evidence": "reports/fpga/soc/soc_impl.md"
+  },
+  {
+   "name": "soc_fmax_worst_seed",
+   "value": 47.46,
+   "unit": "MHz",
+   "label": "SIMULATION",
+   "revision": "ac0f0a0",
+   "evidence": "reports/fpga/soc/soc_impl.md"
+  },
+  {
+   "name": "soc_e2e_cycles",
+   "value": 5441,
+   "unit": "cycles",
+   "label": "SIMULATION",
+   "revision": "ac0f0a0",
+   "evidence": "reports/fpga/soc/soc_impl.md"
+  },
+  {
+   "name": "tpu_cycles_K8_revC",
+   "value": 2928,
+   "unit": "cycles",
+   "label": "SIMULATION",
+   "revision": "ac0f0a0",
+   "evidence": "reports/fpga/soc/soc_impl.md"
+  },
+  {
+   "name": "tpu_bitexact_mismatches_revC",
+   "value": 0,
+   "unit": "fields",
+   "label": "SIMULATION",
+   "revision": "ac0f0a0",
+   "evidence": "logs/tpu/sim_tpu_console.log"
   }
  ]
 }

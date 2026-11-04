@@ -8,7 +8,7 @@
 //             REQ-TIM-002/003 (synchronous design, asynchronous inputs)
 // Task      : RTL-SOC (fpga-engineer)
 // Spec      : ARCHITECTURE.md 1 (block diagram), 2 (clock/reset), 4 (memory
-//             map), 7 (ports); INTERFACES.json rev B "top_ports", "reset",
+//             map), 7 (ports); INTERFACES.json rev C "top_ports", "reset",
 //             "memory_map", "init_files"; pins: design/constraints/tangnano9k.cst
 //
 // BLOCK DIAGRAM
@@ -75,7 +75,7 @@
 //                 default sim/data/{weights,bias,input}.hex. Paths are
 //                 relative to the project root (Icarus and Yosys are both run
 //                 from there).
-//   RNG_MODE    : SC-TPU RNG mode, default 2 (rev B, ADR-008).
+//   RNG_MODE    : SC-TPU RNG mode, default 2 (since rev B, ADR-008; rev C ADR-010).
 //   UART_DIV    : clocks per UART bit, default 234 (115200 Bd at 27 MHz).
 // =============================================================================
 `timescale 1ns/1ps

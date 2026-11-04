@@ -1,4 +1,4 @@
-# input revision: 4060bd9-dirty
+# input revision: ac0f0a0-dirty
 # cmd: verilator --lint-only -Wall design/rtl/tpu/sc_lfsr8.v --top-module sc_lfsr8 
 LINT_OK sc_lfsr8 
 # cmd: verilator --lint-only -Wall design/rtl/tpu/sc_lfsr8.v design/rtl/tpu/sc_rng.v --top-module sc_rng -GRNG_MODE=0

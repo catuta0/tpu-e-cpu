@@ -28,8 +28,8 @@
 // DIRECTED TESTS (+DIRECTED), each prints PASS/FAIL:
 //   D1 reset values (rev A.1): STATUS = 0, RESULT = 0, CYCLES = 0,
 //      CONFIG = 0x08, SCORE[0..15] = HIDDEN[0..3] = 0, CTRL reads 0.
-//   D2 PARAMS = {0x02, 6'b0, RNG_MODE, IL=8, NL=16} (version 0x02 = rev B,
-//      ARCHITECTURE.md 11; rev A was 0x01).
+//   D2 PARAMS = {EXP_VERSION, 6'b0, RNG_MODE, IL=8, NL=16} (version 0x03 =
+//      rev C, ARCHITECTURE.md 12; rev A 0x01, rev B 0x02).
 //   D3 CONFIG: write raw LOG2_L 0..15 with various ACT_SHIFT, read back the
 //      clamped value (0..3 -> 4, 11..15 -> 10) and ACT_SHIFT unchanged.
 //   D4 buffers: INPUT / BIAS / WEIGHT word writes, byte-strobe writes, read
@@ -77,10 +77,10 @@
 
 module tb_sc_tpu;
 
-    parameter integer RNG_MODE   = 2;   // rev B default (ADR-008)
-    // Expected PARAMS.version: 0x02 = rev B (ARCHITECTURE.md 11). Single place
+    parameter integer RNG_MODE   = 2;   // default since rev B (ADR-008), kept in rev C
+    // Expected PARAMS.version: 0x03 = rev C (ARCHITECTURE.md 12). Single place
     // to change for a later spec revision (must equal sc_tpu.v P_VERSION).
-    parameter [7:0]   EXP_VERSION = 8'h02;
+    parameter [7:0]   EXP_VERSION = 8'h03;
     // INIT_FILES = 1: the DUT is elaborated with WEIGHT_INIT / BIAS_INIT /
     // INPUT_INIT = sim/data/{weights,bias,input}.hex (spec 5.6) for test D12.
     parameter integer INIT_FILES = 0;

@@ -1,6 +1,6 @@
-# input revision: ba9dfb9-dirty
+# input revision: ac0f0a0-dirty
 # cmd: iverilog -g2005 -Wall -DINJECT_FAULT design/rtl/cpu/rv32i_core.v design/rtl/cpu/rv32i_decode.v design/rtl/cpu/rv32i_alu.v design/rtl/cpu/rv32i_regfile.v design/rtl/tpu/sc_lfsr8.v design/rtl/tpu/sc_rng.v design/rtl/tpu/sc_lane_array.v design/rtl/tpu/sc_postproc.v design/rtl/tpu/sc_tpu_ctrl.v design/rtl/tpu/sc_tpu.v design/rtl/soc/soc_bus.v design/rtl/soc/soc_ram.v design/rtl/soc/soc_periph.v design/rtl/soc/soc_top.v tests/soc/tb_soc_bfm.v -o sim/soc/build/neg_tb_soc_bfm_inject_fault.vvp && vvp -n sim/soc/build/neg_tb_soc_bfm_inject_fault.vvp 
-PASS: T1 reset values: LED/UART_STATUS/TOHOST = 0, TPU STATUS/RESULT/CYCLES = 0, CONFIG = 0x08, PARAMS = 0x02020810, led_n = 6'b111111
+PASS: T1 reset values: LED/UART_STATUS/TOHOST = 0, TPU STATUS/RESULT/CYCLES = 0, CONFIG = 0x08, PARAMS = 0x03020810, led_n = 6'b111111
 FAIL: T2 LED 0x00000000: led_n = 6'b111111, expected 6'b000000
 FAIL: T2 LED 0x0000003f: led_n = 6'b000000, expected 6'b111111
 FAIL: T2 LED 0x00000015: led_n = 6'b101010, expected 6'b010101

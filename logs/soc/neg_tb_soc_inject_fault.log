@@ -1,4 +1,4 @@
-# input revision: ba9dfb9-dirty
+# input revision: ac0f0a0-dirty
 # cmd: iverilog -g2005 -Wall -DINJECT_FAULT design/rtl/cpu/rv32i_core.v design/rtl/cpu/rv32i_decode.v design/rtl/cpu/rv32i_alu.v design/rtl/cpu/rv32i_regfile.v design/rtl/tpu/sc_lfsr8.v design/rtl/tpu/sc_rng.v design/rtl/tpu/sc_lane_array.v design/rtl/tpu/sc_postproc.v design/rtl/tpu/sc_tpu_ctrl.v design/rtl/tpu/sc_tpu.v design/rtl/soc/soc_bus.v design/rtl/soc/soc_ram.v design/rtl/soc/soc_periph.v design/rtl/soc/soc_top.v tests/soc/tb_soc.v -o sim/soc/build/neg_tb_soc_inject_fault.vvp && vvp -n sim/soc/build/neg_tb_soc_inject_fault.vvp +MODE=demo +EXP=sim/soc/build/soc_expected.hex
 INFO: tb_soc MODE=demo PROG_HEX=sim/data/soc_demo_prog.hex UART_DIV(DUT)=234 expected divider 234
 NOTE: INJECT_FAULT active (expected SCORE[0] bit 0 flipped)
@@ -11,7 +11,7 @@ INFO: UART RX byte 1 = 0x0a ('.') at cycle 7697
 PASS: R5 first bus request after reset release is a fetch of 0x00000000 (at cycle 31 after rst fell; CPU CLEAR state = 32 cycles)
 PASS: D1 TOHOST = 1 written by the store at PC 0x00000068, cycle 5441 after reset release
 PASS: D2 CPU-observed RESULT (load from 0x2000000C) = 0x00000007 = golden class 7; TPU RESULT register = 7
-FAIL: D3 SCORE[0] = 0xfffffe58 (-424) expected 0xfffffe59 (-423)
+FAIL: D3 SCORE[0] = 0xfffffd48 (-696) expected 0xfffffd49 (-695)
 FAIL: D3 1 mismatching words
 PASS: D4 led_n = 6'b111000 = ~LED (LED register 7 = class), 1 LED write
 PASS: D5 UART pin decoded (115200 8N1, real-time receiver) 2 bytes: 0x37 0x0a = "7\n"; 2 frames

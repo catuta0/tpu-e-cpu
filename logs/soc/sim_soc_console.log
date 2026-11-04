@@ -1,4 +1,4 @@
-# RTL-SOC simulation regression  2026-11-04T06:17:32+00:00  input revision: 4060bd9-dirty
+# RTL-SOC simulation regression  2026-11-04T07:07:34+00:00  input revision: ac0f0a0-dirty
 verilator : Verilator 5.020 2024-01-01 rev (Debian 5.020-1)
 iverilog  : Icarus Verilog version 12.0 (stable) ()
 
@@ -14,21 +14,22 @@ LINT_TB_OK tb_soc
 LINT_TB_OK tb_soc_bfm
 
 ==== 3. demo expectation (sim/data/soc_expected.json, SW-02) ====
-vector file sim/data/tpu_vectors_mode2.txt sha256 8207fd233bf743103d883dda8c7893d38a75de6ed87ee90af0f68ef3ef0f550e
-vector file spec_rev header: present
+vector file sim/data/tpu_vectors_mode2.txt sha256 8b603e07b13e2a6879295e39cb004b36c0eefbe5d87bd27db76f2ddbe4708fe7
+vector file '# spec_rev C' header: present
 input.hex == INPUT words of the idx-0 vector: yes
-source: sim/data/soc_expected.json (sha256 8d8aa0ee05cf684d2559aed1ca5718f9fd7260c9be49e5939ffe0cf891b1e721), generator code/python/sctpu/gen_hex.py (task SW-02), git_rev 9f91914-dirty
+source: sim/data/soc_expected.json (sha256 907e51c6e3b5057edf32f728ee8880705db05dfa4a661e68f67dfe42b9a8e7a9), generator code/python/sctpu/gen_hex.py (tasks SW-02, SW-03), git_rev ba9dfb9-dirty
 input.hex sha256 matches soc_expected.json
 weights.hex sha256 matches soc_expected.json
 bias.hex sha256 matches soc_expected.json
 cross-check soc_expected.json == tpu_vectors_mode2.txt idx 0 (HIDDEN, SCORE, RESULT): OK
 EXPECTED RESULT=7 LED=7 TOHOST=1 K=8 UART=['0x37', '0xa']
-EXPECTED HIDDEN=['0x80c280e8', '0x80ff94fe', '0x81d480ff', '0x8080ff80']
-EXPECTED SCORE=[-424, -264, -940, -364, -22, -108, -904, 1304, -214, -10, -100, -100, -100, -100, -100, -100]
+EXPECTED HIDDEN=['0x80fe94cb', '0x80ffe4ff', '0xffcd80ff', '0x8d80ff80']
+EXPECTED SCORE=[-696, -320, -1020, -166, -268, -618, -1442, 948, 238, 528, -80, -80, -80, -80, -80, -80]
+PARAMS_EXPECTED=03020810
 wrote sim/soc/build/soc_expected.hex
 EXPECTATION_OK
 
-==== 4. tb_soc: SoC demo program on the real CPU + TPU (rev B, RNG_MODE 2) ====
+==== 4. tb_soc: SoC demo program on the real CPU + TPU (spec rev C, RNG_MODE 2) ====
 PASS: R1 power-up reset: rst released on rising edge 2 after configuration
 PASS: R2 button press -> rst asserted on rising edge 2 (2..3 required)
 PASS: R3 during reset led_n = 6'b111111 (all LEDs off), uart_tx = 1 (idle)
@@ -36,7 +37,7 @@ PASS: R4 button release -> rst released on rising edge 2 (2..3 required)
 PASS: R5 first bus request after reset release is a fetch of 0x00000000 (at cycle 31 after rst fell; CPU CLEAR state = 32 cycles)
 PASS: D1 TOHOST = 1 written by the store at PC 0x00000068, cycle 5441 after reset release
 PASS: D2 CPU-observed RESULT (load from 0x2000000C) = 0x00000007 = golden class 7; TPU RESULT register = 7
-PASS: D3 TPU storage bit-exact vs golden: HIDDEN[0..15] (4 words) and SCORE[0..15] (16 words), e.g. SCORE[7] = 1304
+PASS: D3 TPU storage bit-exact vs golden: HIDDEN[0..15] (4 words) and SCORE[0..15] (16 words), e.g. SCORE[7] = 948
 PASS: D4 led_n = 6'b111000 = ~LED (LED register 7 = class), 1 LED write
 PASS: D5 UART pin decoded (115200 8N1, real-time receiver) 2 bytes: 0x37 0x0a = "7\n"; 2 frames
 PASS: D6 CYCLES stored at 0x0E00 = 2928 = 10*2^8+368 (formula) = TB-measured BUSY cycles 2928 = TPU CYCLES register
@@ -68,7 +69,7 @@ PASS: U1 UART timing: 0 frames, every edge on a multiple of 234 clocks, tx_busy 
 INFO: bus transactions RAM 256 (max latency 2), PERIPH 4 (2), TPU 0 (0), unmapped 2 (2); protocol violations 0
 
 ==== 6. tb_soc_bfm: directed fabric tests inside soc_top ====
-PASS: T1 reset values: LED/UART_STATUS/TOHOST = 0, TPU STATUS/RESULT/CYCLES = 0, CONFIG = 0x08, PARAMS = 0x02020810, led_n = 6'b111111
+PASS: T1 reset values: LED/UART_STATUS/TOHOST = 0, TPU STATUS/RESULT/CYCLES = 0, CONFIG = 0x08, PARAMS = 0x03020810, led_n = 6'b111111
 PASS: T2 LED values 0x00/0x3F/0x15/0x2A read back and led_n = ~value; 6-bit register; byte-0 strobe required
 PASS: T3 TOHOST word and byte-lane writes
 PASS: T4 CYCLE read twice 1004 cycles apart differs by exactly 1004; write ignored
@@ -82,7 +83,7 @@ TEST PASSED
 
 ==== 7. negative runs (must fail) ====
 NOTE: INJECT_FAULT active (expected SCORE[0] bit 0 flipped)
-FAIL: D3 SCORE[0] = 0xfffffe58 (-424) expected 0xfffffe59 (-423)
+FAIL: D3 SCORE[0] = 0xfffffd48 (-696) expected 0xfffffd49 (-695)
 FAIL: D3 1 mismatching words
 negative run tb_soc -DINJECT_FAULT: TEST FAILED as required
 FAIL: tx_busy lasted 2400 cycles (expected 2340)
@@ -93,4 +94,4 @@ PROTOCOL VIOLATION #1 at cycle 2000: P2 mem_ready without mem_valid (addr 0x0000
 negative run tb_soc -DINJECT_PROTO_FAULT: TEST FAILED as required
 negative run tb_soc_bfm -DINJECT_FAULT: TEST FAILED as required
 
-SIM_SOC ALL PASSED (revision 4060bd9-dirty)
+SIM_SOC ALL PASSED (revision ac0f0a0-dirty)

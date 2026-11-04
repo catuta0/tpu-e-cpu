@@ -1,12 +1,12 @@
-# input revision: 4060bd9-dirty
+# input revision: ac0f0a0-dirty
 # cmd: iverilog -g2005 -Wall design/rtl/tpu/sc_lfsr8.v design/rtl/tpu/sc_rng.v tests/tpu/tb_sc_lfsr8.v -o sim/tpu/build/tb_sc_lfsr8.vvp && vvp -n sim/tpu/build/tb_sc_lfsr8.vvp 
 PASS: TC6 RESET state_x=0xe1e4 state_w=0xdeeb
-PASS: TC7 SEEDS rev B: mode 0/1 X=S(0)=0xace1 W=S(32768)=0xf9de; mode 2 X_i=S(4096i), W_i=S(32768+4096i) for i=0..7 (W_7=0x91ab); IL=16 half-way phases; reference period 65535
+PASS: TC7 SEEDS rev C: mode 0/1 X=0xace1 W=S(32768)=0xf9de; mode 2 X_i=0xACE1+0x3C5A*i, W_i=0x7A5C+0x2B67*i for i=0..7 (W_7=0xaa2d); IL=16 lanes 8..15 same formula; reference period 65535
 PASS: TC1 LOAD state_x=0xe1e4 (=8 steps of 0xACE1) state_w=0xdeeb (=8 steps of 0xF9DE)
 PASS: TC2 LEAP==8x1 70000 cycles, 0 mismatches (state and r, both seeds)
 PASS: TC3 PERIOD x=65535 w=65535 leap cycles (expected 65535), zero state never reached
 PASS: TC4 FREEZE state unchanged for 100 cycles with adv=0
 PASS: TC5 RELOAD load+adv -> state_x=0xe1e4 state_w=0xdeeb (load wins)
 TEST PASSED
-tests/tpu/tb_sc_lfsr8.v:238: $finish called at 701036000 (1ps)
+tests/tpu/tb_sc_lfsr8.v:246: $finish called at 701036000 (1ps)
 SIM_EXIT=0

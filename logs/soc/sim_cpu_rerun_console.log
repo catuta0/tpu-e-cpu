@@ -1,6 +1,6 @@
 
 ==== 1. verilator lint ====
-# 2026-11-04T06:36:11+00:00 revision ba9dfb9-dirty
+# 2026-11-04T08:19:38+00:00 revision ac0f0a0-dirty
 # Verilator 5.020 2024-01-01 rev (Debian 5.020-1)
 # cmd: verilator --lint-only -Wall design/rtl/cpu/rv32i_core.v design/rtl/cpu/rv32i_decode.v design/rtl/cpu/rv32i_alu.v design/rtl/cpu/rv32i_regfile.v --top-module rv32i_core
 LINT_RTL_EXIT=0

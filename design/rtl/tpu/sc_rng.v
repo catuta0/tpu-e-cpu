@@ -3,10 +3,11 @@
 // Module    : sc_rng
 // Project   : SC-TPU + RV32I SoC on Tang Nano 9K (GW1NR-LV9QN88PC6/I5)
 // Reqs      : requirements/REQUIREMENTS.md REQ-TPU-005, REQ-TPU-006 (RNG modes)
-// Task      : RTL-TPU (rev A), RTL-SOC (rev B seed update) - fpga-engineer
+// Task      : RTL-TPU (rev A), RTL-SOC (rev B, then rev C seed update) - fpga-engineer
 // Spec      : ARCHITECTURE.md 5.3 [BIT-EXACT] (RNG, RNG_MODE) as amended by
-//             section 11 (rev B, ADR-008: phase-spaced seeds, default mode 2);
-//             INTERFACES.json rev B tpu.lfsr / tpu.rng_modes; ADR-003, ADR-005.
+//             section 12 (REV C, ADR-010: CURRENT seed tables, default mode 2;
+//             supersedes the seed text of 5.3 and of section 11 / rev B);
+//             INTERFACES.json rev C tpu.lfsr / tpu.rng_modes; ADR-003, ADR-005.
 //
 // PURPOSE
 //   Random-number source of the SC-TPU. Produces, for every input lane
@@ -31,42 +32,39 @@
 //   of the golden model; for IL > 8 the rotation is taken mod 8 (rotl8 by 8
 //   is the identity), identical to code/python/sctpu/model.py rotl8().
 //
-// SEEDS - REV B "PHASE-SPACED" (ARCHITECTURE.md 11, ADR-008)
+// SEEDS - REV C (ARCHITECTURE.md 12, ADR-010; CURRENT)
 //   All 16 LFSRs use the SAME primitive polynomial, so each of them walks the
 //   SAME m-sequence of period 65535; a seed only selects the starting PHASE.
-//   Two LFSRs started n single steps apart produce the same r values, n/8
-//   stream cycles apart (one stream cycle = 8 steps). If n/8 is small, the
-//   "independent" streams are in fact delayed copies of each other (rev A:
-//   seeds 0xACE1 + 0x3C5A*i put X_0 and W_3 only 321 stream cycles apart,
-//   SW-01a). Rev B therefore defines every seed as a point of the common
-//   sequence:
-//       S(n) = state of the LFSR started at 0xACE1 after n single steps
-//       modes 0/1 : seed_x   = S(0)            = 0xACE1
-//                   seed_w   = S(32768)        = 0xF9DE   (half a period)
-//       mode 2    : seed_x_i = S(4096*i)
-//                   seed_w_i = S(32768 + 4096*i)          (i = 0..7)
-//   so the 16 mode-2 LFSRs sit at the 16 equally spaced phases 0, 4096, ...,
-//   61440 of the period: any two are >= 4096 steps = 512 stream cycles apart
-//   (4096 is a multiple of 8, so the spacing is an integer number of stream
-//   cycles), and the multiplied pair X_i / W_i is 32768 steps = 4096 stream
-//   cycles apart - longer than a whole inference at K <= 8
-//   (10 tiles x 256 = 2560 stream cycles), so within one inference no
-//   operand pair ever sees overlapping random numbers.
-//   The tables below are EXPLICIT constants (not computed at elaboration).
-//   Derivation (CALCULATION, reproducible): python3 -c "s=0xACE1
-//   S=[]
-//   for n in range(65535): S.append(s); s=((s<<1)|(((s>>15)^(s>>13)^(s>>12)^(s>>10))&1))&0xFFFF
-//   print([hex(S[4096*i]) for i in range(8)], [hex(S[32768+4096*i]) for i in range(8)])"
-//   and the values are re-derived by simulation in tests/tpu/tb_sc_lfsr8.v
-//   (TC7: a 1-step reference LFSR is run from 0xACE1 and compared with every
-//   instantiated seed of this module) and checked bit-exactly against the
-//   golden RNG traces sim/data/tpu_rng_trace_mode<m>.txt (tb_sc_tpu R1).
+//   Two LFSRs started n single steps apart produce the same r values n/8
+//   stream cycles apart (one stream cycle = 8 steps).
+//   History (why the table is what it is):
+//     rev A : mode 2 seed_x_i = 0xACE1 + 0x3C5A*i, seed_w_i = 0x7A5C + 0x2B67*i
+//             (mod 2^16), modes 0/1 X = 0xACE1, W = 0x7A5C.
+//     rev B : maximally phase-spaced seeds S(4096 i) / S(32768 + 4096 i)
+//             (ADR-008). SW-02 then showed that equal spacing makes the
+//             operand-pair streams of different lanes TRANSLATES of each
+//             other (lag_x(i)-lag_x(j) == lag_w(i)-lag_w(j)), a structural
+//             correlation that cost accuracy at K = 9.
+//     rev C : seed rules R1 (no two lanes' operand-pair streams are
+//             translates) and R2 (no direct or swapped shared-bit lag between
+//             operand pairs); among 5 candidate sets the rev A mode-2 seeds had
+//             the best worst-case validation accuracy (SW-03,
+//             reports/sw/seed_selection_revC.md). Modes 0/1 keep the rev B
+//             pair X = 0xACE1 = S(0), W = 0xF9DE = S(32768) (half a period).
+//   Rev C values (lane 0..7), CALCULATION (mod 2^16):
+//       seed_x_i = 0xACE1 + 0x3C5A*i : ACE1 E93B 2595 61EF 9E49 DAA3 16FD 5357
+//       seed_w_i = 0x7A5C + 0x2B67*i : 7A5C A5C3 D12A FC91 27F8 535F 7EC6 AA2D
+//   (minimum pairwise lag on the common sequence: 321 stream cycles, X0-W3).
+//   The tables below are EXPLICIT constants (not computed at elaboration);
+//   tests/tpu/tb_sc_lfsr8.v TC7 re-derives them from the formulas and checks
+//   every instantiated LFSR, and tb_sc_tpu R1 checks the r values against the
+//   golden RNG traces sim/data/tpu_rng_trace_mode<m>.txt (spec_rev C).
 //   All seeds are non-zero (0 is the LFSR lock-up state).
 //
 //   IL = 16 (synthesis study only, NOT part of the spec): lanes 8..15 use the
-//   half-way phases S(4096*(i-8) + 2048) and S(32768 + 4096*(i-8) + 2048), so
-//   all 32 LFSRs remain 2048 steps (256 stream cycles) apart and lanes 0..7
-//   keep exactly the spec seeds.
+//   SAME formulas continued to i = 8..15 (0xACE1 + 0x3C5A*i, 0x7A5C +
+//   0x2B67*i, mod 2^16; all non-zero), so lanes 0..7 keep exactly the spec
+//   seeds.
 //
 // INTERFACE / TIMING
 //   load : START accepted -> every LFSR re-loaded (look-ahead seed, see
@@ -78,7 +76,7 @@
 //
 // PARAMETERS
 //   IL       : input lanes (8 in the spec; 4/16 only for the synthesis study)
-//   RNG_MODE : 0, 1 or 2 as above (default 2 since rev B, ADR-008)
+//   RNG_MODE : 0, 1 or 2 as above (default 2 since rev B, ADR-008; kept in rev C)
 // =============================================================================
 `timescale 1ns/1ps
 `default_nettype none
@@ -99,30 +97,27 @@ module sc_rng #(
     // SEED TABLES - the ONLY place where LFSR seeds are defined in the RTL.
     // A future seed revision changes only the constants in this block (and
     // PARAMS.version in sc_tpu.v); tests/tpu/tb_sc_lfsr8.v TC7 re-derives the
-    // rev B rule and must be updated together with it.
+    // rev C rule and must be updated together with it.
     // =========================================================================
-    // ---- Modes 0/1: the two shared LFSRs (ARCHITECTURE.md 11) ----------------
+    // ---- Modes 0/1: the two shared LFSRs (ARCHITECTURE.md 12, = rev B) -------
     localparam [15:0] SEED_X = 16'hACE1;   // S(0)
     localparam [15:0] SEED_W = 16'hF9DE;   // S(32768): half a period from X
 
-    // ---- Mode 2: per-lane seeds = equally spaced phases of the m-sequence -----
-    //   lane i     : 0       1       2       3       4       5       6       7
-    //   phase n_x  : 0       4096    8192    12288   16384   20480   24576   28672
-    //   phase n_w  : 32768   36864   40960   45056   49152   53248   57344   61440
+    // ---- Mode 2 (rev C): seed_x_i = 0xACE1 + 0x3C5A*i, seed_w_i = 0x7A5C + 0x2B67*i
     // Packed 16 bits per lane, lane i at [16i +: 16] (lane 0 rightmost).
     localparam [8*16-1:0] SEEDS_X_SPEC = {
-        16'hC223, 16'hB617, 16'h70BC, 16'h0348,     // S(28672) S(24576) S(20480) S(16384)
-        16'hEAD3, 16'h6F4D, 16'h357B, 16'hACE1 };   // S(12288) S( 8192) S( 4096) S(    0)
+        16'h5357, 16'h16FD, 16'hDAA3, 16'h9E49,     // lanes 7 6 5 4
+        16'h61EF, 16'h2595, 16'hE93B, 16'hACE1 };   // lanes 3 2 1 0
     localparam [8*16-1:0] SEEDS_W_SPEC = {
-        16'h91AB, 16'h5D8E, 16'hF251, 16'h9DB1,     // S(61440) S(57344) S(53248) S(49152)
-        16'h520B, 16'hAA39, 16'h71EC, 16'hF9DE };   // S(45056) S(40960) S(36864) S(32768)
-    // IL = 16 study only (not spec): half-way phases 4096*(i-8) + 2048 (+32768 for W).
+        16'hAA2D, 16'h7EC6, 16'h535F, 16'h27F8,     // lanes 7 6 5 4
+        16'hFC91, 16'hD12A, 16'hA5C3, 16'h7A5C };   // lanes 3 2 1 0
+    // IL = 16 study only (not spec): the same formulas for i = 8..15.
     localparam [8*16-1:0] SEEDS_X_EXT = {
-        16'h0A33, 16'h3EC9, 16'hD08C, 16'h6B1C,     // S(30720) S(26624) S(22528) S(18432)
-        16'h44BB, 16'h6F61, 16'h0F25, 16'hA932 };   // S(14336) S(10240) S( 6144) S( 2048)
+        16'h3627, 16'hF9CD, 16'hBD73, 16'h8119,     // lanes 15 14 13 12
+        16'h44BF, 16'h0865, 16'hCC0B, 16'h8FB1 };   // lanes 11 10  9  8
     localparam [8*16-1:0] SEEDS_W_EXT = {
-        16'hF26F, 16'hBCC8, 16'hD5B8, 16'hCFA4,     // S(63488) S(59392) S(55296) S(51200)
-        16'hE90C, 16'h582E, 16'h89DF, 16'h2389 };   // S(47104) S(43008) S(38912) S(34816)
+        16'h0565, 16'hD9FE, 16'hAE97, 16'h8330,     // lanes 15 14 13 12
+        16'h57C9, 16'h2C62, 16'h00FB, 16'hD594 };   // lanes 11 10  9  8
     localparam [16*16-1:0] SEEDS_X = {SEEDS_X_EXT, SEEDS_X_SPEC};
     localparam [16*16-1:0] SEEDS_W = {SEEDS_W_EXT, SEEDS_W_SPEC};
     // ======================== end of the seed tables ===========================
