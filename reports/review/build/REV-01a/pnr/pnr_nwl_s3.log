@@ -129,3 +129,5 @@ Info:   at iteration #1: temp = 0.000000, timing cost = 209, wirelen = 58725
 Info:   at iteration #5: temp = 0.000000, timing cost = 173, wirelen = 47840
 Info:   at iteration #10: temp = 0.000000, timing cost = 158, wirelen = 45721
 Info:   at iteration #15: temp = 0.000000, timing cost = 160, wirelen = 44430
+Info:   at iteration #20: temp = 0.000000, timing cost = 147, wirelen = 43635
+Info:   at iteration #25: temp = 0.000000, timing cost = 146, wirelen = 43387
