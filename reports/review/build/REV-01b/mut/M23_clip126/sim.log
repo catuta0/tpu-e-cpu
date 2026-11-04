@@ -1,0 +1,2 @@
+# REV-01b mutation M23_clip126 mode 2 rev 7e978be
+# cmd: iverilog -g2005 -P tb_sc_tpu.RNG_MODE=2 <mutated rtl> tests/tpu/tb_sc_tpu.v; vvp +DATA=sim/data +DIRECTED +CLAMP +VEC1=sim/data/tpu_vectors_corner_mode2.txt

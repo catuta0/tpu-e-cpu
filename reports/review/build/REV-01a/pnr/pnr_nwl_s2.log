@@ -200,3 +200,12 @@ Info:     'u_tpu.score_DFFRE_Q_128_D_LUT3_F_I2_LUT2_F_I1_LUT2_I1_F[1]' is routed
 Info:     'mem_instr_LUT3_I2_1_F[0]' is routed using segments.
 Info:     'mem_wdata[3]' is routed using segments.
 Info:     'mem_wdata[0]' is routed using segments.
+Info:     'mem_instr_LUT3_I2_1_F_LUT2_I1_1_F[2]' is routed using segments.
+Info:     'u_tpu.pp_out_hcode[0]' is routed using segments.
+Info:     'u_tpu.cfg_k[0]' is routed using segments.
+Info:     'u_tpu.rw[21]' is routed using segments.
+Info:     'u_cpu.state_DFF_Q_1_D_LUT3_F_I2_LUT3_I2_F_LUT4_F_2_I1_LUT4_I2_I3_LUT3_I2_F' is routed using segments.
+Info:     'u_cpu.state_DFF_Q_1_D_LUT3_F_I2_LUT3_I2_F_LUT4_F_2_I1_LUT4_I2_F_LUT4_I2_F' is routed using segments.
+Info:     'u_cpu.alu_q_DFFRE_Q_17_D_LUT2_F_I1_LUT4_F_I3_ALU_SUM_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_SUM_LUT3_I2_F_LUT4_F_I1[0]' is routed using segments.
+Info:     'tpu_rdata_DFFR_Q_D_LUT3_F_I2[0]' is routed using segments.
+Info:     'u_tpu.rw[18]' is routed using segments.
