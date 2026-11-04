@@ -111,3 +111,74 @@ Info:     at initial placer iter 1, wirelen = 1041
 Info:     at initial placer iter 2, wirelen = 1040
 Info:     at initial placer iter 3, wirelen = 1041
 Info: Running main analytical placer, max placement attempts per cell = 6056940.
+Info:     at iteration #1, type ALL: wirelen solved = 1040, spread = 23600, legal = 43502; time = 2.46s
+Info:     at iteration #2, type ALL: wirelen solved = 2269, spread = 18631, legal = 33923; time = 1.99s
+Info:     at iteration #3, type ALL: wirelen solved = 3565, spread = 15169, legal = 32726; time = 2.46s
+Info:     at iteration #4, type ALL: wirelen solved = 4489, spread = 12745, legal = 30336; time = 1.48s
+Info:     at iteration #5, type ALL: wirelen solved = 5369, spread = 12392, legal = 29907; time = 1.12s
+Info:     at iteration #6, type ALL: wirelen solved = 6082, spread = 13380, legal = 28717; time = 1.39s
+Info:     at iteration #7, type ALL: wirelen solved = 6670, spread = 14013, legal = 26554; time = 0.87s
+Info:     at iteration #8, type ALL: wirelen solved = 7093, spread = 12382, legal = 23934; time = 0.77s
+Info:     at iteration #9, type ALL: wirelen solved = 7341, spread = 13013, legal = 24847; time = 0.72s
+Info:     at iteration #10, type ALL: wirelen solved = 7361, spread = 15028, legal = 23648; time = 1.94s
+Info:     at iteration #11, type ALL: wirelen solved = 8083, spread = 13714, legal = 20619; time = 0.85s
+Info:     at iteration #12, type ALL: wirelen solved = 8221, spread = 12634, legal = 21249; time = 0.56s
+Info:     at iteration #13, type ALL: wirelen solved = 8293, spread = 14038, legal = 20769; time = 0.45s
+Info:     at iteration #14, type ALL: wirelen solved = 8651, spread = 13137, legal = 19861; time = 0.45s
+Info:     at iteration #15, type ALL: wirelen solved = 8942, spread = 12518, legal = 21235; time = 0.92s
+Info:     at iteration #16, type ALL: wirelen solved = 9026, spread = 14219, legal = 19961; time = 0.39s
+Info:     at iteration #17, type ALL: wirelen solved = 9162, spread = 15825, legal = 19153; time = 0.39s
+Info:     at iteration #18, type ALL: wirelen solved = 9410, spread = 12817, legal = 19748; time = 0.36s
+Info:     at iteration #19, type ALL: wirelen solved = 9567, spread = 14482, legal = 19781; time = 0.39s
+Info:     at iteration #20, type ALL: wirelen solved = 9954, spread = 15297, legal = 18856; time = 0.51s
+Info:     at iteration #21, type ALL: wirelen solved = 10057, spread = 14850, legal = 18396; time = 0.39s
+Info:     at iteration #22, type ALL: wirelen solved = 10332, spread = 13441, legal = 19768; time = 0.36s
+Info:     at iteration #23, type ALL: wirelen solved = 10763, spread = 15729, legal = 20587; time = 0.36s
+Info:     at iteration #24, type ALL: wirelen solved = 11123, spread = 13945, legal = 18467; time = 0.26s
+Info:     at iteration #25, type ALL: wirelen solved = 10670, spread = 14440, legal = 19506; time = 0.28s
+Info:     at iteration #26, type ALL: wirelen solved = 11308, spread = 14566, legal = 19341; time = 0.32s
+Info: HeAP Placer Time: 23.49s
+Info:   of which solving equations: 3.79s
+Info:   of which spreading cells: 0.24s
+Info:   of which strict legalisation: 18.80s
+
+Info: Running simulated annealing placer for refinement.
+Info:   at iteration #1: temp = 0.000000, timing cost = 751, wirelen = 18396
+Info:   at iteration #5: temp = 0.000000, timing cost = 669, wirelen = 16032
+Info:   at iteration #10: temp = 0.000000, timing cost = 722, wirelen = 15129
+Info:   at iteration #15: temp = 0.000000, timing cost = 666, wirelen = 14824
+Info:   at iteration #20: temp = 0.000000, timing cost = 668, wirelen = 14708
+Info:   at iteration #25: temp = 0.000000, timing cost = 666, wirelen = 14633
+Info:   at iteration #30: temp = 0.000000, timing cost = 667, wirelen = 14602
+Info:   at iteration #32: temp = 0.000000, timing cost = 666, wirelen = 14594 
+Info: SA placement time 9.03s
+
+Info: Max frequency for clock 'u.clk': 69.79 MHz (PASS at 27.00 MHz)
+
+Info: Slack histogram:
+Info:  legend: * represents 9 endpoint(s)
+Info:          + represents [1,9) endpoint(s)
+Info: [ 22708,  23382) |**+
+Info: [ 23382,  24056) |*****+
+Info: [ 24056,  24730) |*****+
+Info: [ 24730,  25404) |*******+
+Info: [ 25404,  26078) |*****+
+Info: [ 26078,  26752) |*+
+Info: [ 26752,  27426) |+
+Info: [ 27426,  28100) |+
+Info: [ 28100,  28774) |**+
+Info: [ 28774,  29448) |+
+Info: [ 29448,  30122) |+
+Info: [ 30122,  30796) |*******+
+Info: [ 30796,  31470) |*******************+
+Info: [ 31470,  32144) |*****************************************+
+Info: [ 32144,  32818) |*******************************+
+Info: [ 32818,  33492) |*****************+
+Info: [ 33492,  34166) |****************************+
+Info: [ 34166,  34840) |***************************+
+Info: [ 34840,  35514) |******************+
+Info: [ 35514,  36188) |************************************************************ 
+Info: Checksum: 0xd83a4660
+Info: Routing globals...
+Warning: Failed to route net 'u.g_indep.g_lane[0].u_lw.load' from X0Y14/F6 to X1Y14/B3 using dedicated routing.
+Info:     'u.clk' net was routed using global resources only.
