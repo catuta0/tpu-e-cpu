@@ -1,7 +1,7 @@
 {
  "label": "SIMULATION (Python golden model code/python/sctpu/model.py; not a hardware measurement)",
  "generator": "code/python/sctpu/gen_hex.py (task SW-02)",
- "git_rev": "9f91914-dirty",
+ "git_rev": "4060bd9-dirty",
  "spec_rev": "B",
  "spec": "design/architecture/ARCHITECTURE.md section 5 + section 11 (ADR-008); INTERFACES.json revision B",
  "input_file": "sim/data/input.hex",

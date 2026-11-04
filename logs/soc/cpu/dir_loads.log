@@ -1,0 +1,22 @@
+# input revision: 4060bd9-dirty
+# cmd: iverilog -g2005 -Wall -P tb_soc.PROG_HEX="sim/data/cpu_tests/dir_loads.hex" design/rtl/cpu/rv32i_core.v design/rtl/cpu/rv32i_decode.v design/rtl/cpu/rv32i_alu.v design/rtl/cpu/rv32i_regfile.v design/rtl/tpu/sc_lfsr8.v design/rtl/tpu/sc_rng.v design/rtl/tpu/sc_lane_array.v design/rtl/tpu/sc_postproc.v design/rtl/tpu/sc_tpu_ctrl.v design/rtl/tpu/sc_tpu.v design/rtl/soc/soc_bus.v design/rtl/soc/soc_ram.v design/rtl/soc/soc_periph.v design/rtl/soc/soc_top.v tests/soc/tb_soc.v -o sim/soc/build/dir_loads.vvp && vvp -n sim/soc/build/dir_loads.vvp +MODE=cpu +META=sim/soc/build/meta/dir_loads.tbmeta.hex +SIG=sim/data/cpu_tests/dir_loads.sig
+INFO: tb_soc MODE=cpu PROG_HEX=sim/data/cpu_tests/dir_loads.hex UART_DIV(DUT)=234 expected divider 234
+PASS: R1 power-up reset: rst released on rising edge 2 after configuration
+PASS: R2 button press -> rst asserted on rising edge 2 (2..3 required)
+PASS: R3 during reset led_n = 6'b111111 (all LEDs off), uart_tx = 1 (idle)
+PASS: R4 button release -> rst released on rising edge 2 (2..3 required)
+PASS: R5 first bus request after reset release is a fetch of 0x00000000 (at cycle 31 after rst fell; CPU CLEAR state = 32 cycles)
+PASS: C1 TOHOST stop at PC 0x00000994 (cycle 426)
+PASS: C2 instret = 64
+PASS: C3 TOHOST value as expected
+PASS: C4 signature 0x0F00..0x0F7C (32 words) equal to the ISS
+PASS: C5 bus_err = 0
+PASS: C6 led_n = 6'b111111 = ~LED (LED 0)
+PASS: C7 UART 0 bytes as expected
+PASS: C8 0 protocol violations, max latency 2 cycles
+INFO: stop at cycle 426 after reset release, instret 64
+PASS: U1 UART timing: 0 frames, every edge on a multiple of 234 clocks, tx_busy = 2340 clocks per frame, real-time receiver: 0 framing/stability errors
+INFO: bus transactions RAM 296 (max latency 2), PERIPH 1 (2), TPU 0 (0), unmapped 0 (0); protocol violations 0
+TEST PASSED
+tests/soc/tb_soc.v:650: $finish called at 42909523 (1ps)
+SIM_EXIT=0

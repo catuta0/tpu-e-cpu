@@ -159,6 +159,11 @@ for m in 0 1 2; do
     VECS+=("+VEC$n=$DATA/tpu_vectors_corner_mode$m.txt"); n=$((n+1))
     VECS+=("+VEC$n=sim/tpu/vectors/tpu_vectors_sweep_mode$m.txt")
     for f in "${VECS[@]}"; do [ -s "${f#*=}" ] || fail "vector file ${f#*=} missing"; done
+    # Rev B guard (RTL-SOC): every golden file must carry the "# spec_rev B"
+    # header of SW-02 (sim/data/README.md), so stale rev-A vectors cannot pass.
+    for f in "${VECS[@]}" "+TRACE=$DATA/tpu_rng_trace_mode$m.txt"; do
+        grep -q -x '# spec_rev B' "${f#*=}" || fail "${f#*=} has no '# spec_rev B' header (rev A vectors?)"
+    done
     L="$LOG/tb_sc_tpu_mode$m.log"
     run_tb tb_sc_tpu_m$m "$L" -P tb_sc_tpu.RNG_MODE=$m $RTL tests/tpu/tb_sc_tpu.v -- \
         +DATA=$DATA +DIRECTED +CLAMP "${VECS[@]}"

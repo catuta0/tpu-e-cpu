@@ -40,3 +40,20 @@ B  mode 1 K=10 hw acc=0.9500 ens=0.9529+-0.0054 ident_pairs=None rms1 ens/eq2=0.
 B  mode 2 K= 4 hw acc=0.5278 ens=0.5932+-0.1048 ident_pairs=0 rms1 ens/eq2=0.943
 B  mode 2 K= 5 hw acc=0.7000 ens=0.7336+-0.0862 ident_pairs=0 rms1 ens/eq2=0.910
 B  mode 2 K= 6 hw acc=0.8306 ens=0.8453+-0.0567 ident_pairs=14 rms1 ens/eq2=0.906
+B  mode 2 K= 7 hw acc=0.8861 ens=0.9168+-0.0232 ident_pairs=54 rms1 ens/eq2=0.906
+B  mode 2 K= 8 hw acc=0.9389 ens=0.9328+-0.0152 ident_pairs=120 rms1 ens/eq2=1.063
+B  mode 2 K= 9 hw acc=0.8972 ens=0.9396+-0.0118 ident_pairs=196 rms1 ens/eq2=1.301
+B  mode 2 K=10 hw acc=0.9472 ens=0.9419+-0.0113 ident_pairs=100 rms1 ens/eq2=1.551
+C1 mode 2 K= 4 hw acc=0.5361 ens=0.5611+-0.0975 ident_pairs=0 rms1 ens/eq2=1.055
+C1 mode 2 K= 5 hw acc=0.8556 ens=0.7514+-0.0999 ident_pairs=0 rms1 ens/eq2=0.955
+C1 mode 2 K= 6 hw acc=0.7306 ens=0.8571+-0.0356 ident_pairs=0 rms1 ens/eq2=0.919
+C1 mode 2 K= 7 hw acc=0.8833 ens=0.9079+-0.0227 ident_pairs=0 rms1 ens/eq2=0.963
+C1 mode 2 K= 8 hw acc=0.9083 ens=0.9332+-0.0136 ident_pairs=0 rms1 ens/eq2=0.985
+C1 mode 2 K= 9 hw acc=0.9361 ens=0.9417+-0.0087 ident_pairs=0 rms1 ens/eq2=0.941
+C1 mode 2 K=10 hw acc=0.9444 ens=0.9451+-0.0077 ident_pairs=0 rms1 ens/eq2=1.062
+# wrote reports/sw/revA_vs_revB.json/.md and fig_revA_vs_revB.pdf (128.6 s)
+
+real	2m9.554s
+user	2m2.320s
+sys	0m6.490s
+EXIT=0

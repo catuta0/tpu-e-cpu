@@ -1,0 +1,24 @@
+# input revision: 4060bd9-dirty
+# cmd: iverilog -g2005 -Wall -DINJECT_FAULT design/rtl/cpu/rv32i_core.v design/rtl/cpu/rv32i_decode.v design/rtl/cpu/rv32i_alu.v design/rtl/cpu/rv32i_regfile.v design/rtl/tpu/sc_lfsr8.v design/rtl/tpu/sc_rng.v design/rtl/tpu/sc_lane_array.v design/rtl/tpu/sc_postproc.v design/rtl/tpu/sc_tpu_ctrl.v design/rtl/tpu/sc_tpu.v design/rtl/soc/soc_bus.v design/rtl/soc/soc_ram.v design/rtl/soc/soc_periph.v design/rtl/soc/soc_top.v tests/soc/tb_soc_bfm.v -o sim/soc/build/neg_tb_soc_bfm_inject_fault.vvp && vvp -n sim/soc/build/neg_tb_soc_bfm_inject_fault.vvp 
+PASS: T1 reset values: LED/UART_STATUS/TOHOST = 0, TPU STATUS/RESULT/CYCLES = 0, CONFIG = 0x08, PARAMS = 0x02020810, led_n = 6'b111111
+FAIL: T2 LED 0x00000000: led_n = 6'b111111, expected 6'b000000
+FAIL: T2 LED 0x0000003f: led_n = 6'b000000, expected 6'b111111
+FAIL: T2 LED 0x00000015: led_n = 6'b101010, expected 6'b010101
+FAIL: T2 LED 0x0000002a: led_n = 6'b010101, expected 6'b101010
+PASS: T3 TOHOST word and byte-lane writes
+PASS: T4 CYCLE read twice 1004 cycles apart differs by exactly 1004; write ignored
+PASS: T5 reserved peripheral offsets read 0 / ignore writes; alias 0x12345000 reads LED
+PASS: T6 RAM first/last word, byte and halfword lanes (little-endian), aliases
+PASS: T7 TPU WEIGHT first/last word, CONFIG, INPUT through the SoC decoder
+PASS: T8 unmapped 0x30000000/0xF0000000 read 0 in 2 cycles, write ignored, bus_err sticky until reset
+INFO: UART RX byte 0x00
+INFO: UART RX byte 0x55
+INFO: UART RX byte 0xa5
+INFO: UART RX byte 0xff
+PASS: T9 UART bytes 0x00 0x55 0xA5 0xFF decoded on the pin (real-time 115200 8N1 receiver); write while busy ignored; 4 frames, edges on multiples of 234 clocks, tx_busy 2340 clocks each
+PASS: T10 4753 BFM accesses, max latency 3 cycles (<= 4), ready protocol clean
+errors=4
+TEST FAILED
+FATAL: tests/soc/tb_soc_bfm.v:367: tb_soc_bfm failed
+       Time: 424140657  Scope: tb_soc_bfm
+SIM_EXIT=1

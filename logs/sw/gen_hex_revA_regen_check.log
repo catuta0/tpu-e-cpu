@@ -1,0 +1,18 @@
+# SW-02 check: rev A option reproduces the SW-01a files
+# command: cd code/python && ../../.venv/bin/python -m sctpu.gen_hex --spec-rev A --out <scratch>/revA_regen ; diff of non-'#' lines vs sim/data/revA/*
+# gen_hex.py rev=4060bd9-dirty spec_rev=A out=/tmp/claude-0/-home-user-tpu-e-cpu/8b3c4029-a3fd-5876-9466-e5b089bf9869/scratchpad/revA_regen variant=qat_noise s=0 test images=360
+# seeds modes 0/1: X ace1 W 7a5c; mode 2: X ace1 e93b 2595 61ef 9e49 daa3 16fd 5357 / W 7a5c a5c3 d12a fc91 27f8 535f 7ec6 aa2d
+input.hex = test position 0 = load_digits row 1496, label 7
+tpu_vectors_mode0.txt: 360 vectors; reference cross-check 24 vectors, 0 mismatching fields
+tpu_vectors_mode1.txt: 360 vectors; reference cross-check 24 vectors, 0 mismatching fields
+tpu_vectors_mode2.txt: 360 vectors; reference cross-check 360 vectors, 0 mismatching fields
+tpu_vectors_K4_mode1.txt: 16 vectors; reference cross-check 16 vectors, 0 mismatching fields
+tpu_vectors_K10_mode1.txt: 16 vectors; reference cross-check 16 vectors, 0 mismatching fields
+tpu_vectors_corner_mode0.txt: 51 vectors; reference cross-check 51 vectors, 0 mismatching fields
+tpu_vectors_corner_mode1.txt: 51 vectors; reference cross-check 51 vectors, 0 mismatching fields
+tpu_vectors_corner_mode2.txt: 51 vectors; reference cross-check 51 vectors, 0 mismatching fields
+CROSSCHECK TOTAL: 593 vectors x 33 fields, mismatches = 0
+corner-case sanity assertions: PASS (pset1 hidden=255, pset5 full tie->0, pset6 tie 3/7->3)
+FINAL MISMATCH COUNT (vectors + soc_expected): 0
+EXIT=0
+REV A REGENERATION: 30 files compared, files with differing data lines = 0

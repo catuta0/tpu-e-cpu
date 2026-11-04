@@ -1,20 +1,39 @@
-# input revision: 1e853f7-dirty
-# cmd: iverilog -g2005 -Wall -DINJECT_FAULT design/rtl/tpu/sc_lfsr8.v tests/tpu/tb_sc_lfsr8.v -o sim/tpu/build/tb_sc_lfsr8_fault.vvp && vvp -n sim/tpu/build/tb_sc_lfsr8_fault.vvp 
+# input revision: 4060bd9-dirty
+# cmd: iverilog -g2005 -Wall -DINJECT_FAULT design/rtl/tpu/sc_lfsr8.v design/rtl/tpu/sc_rng.v tests/tpu/tb_sc_lfsr8.v -o sim/tpu/build/tb_sc_lfsr8_fault.vvp && vvp -n sim/tpu/build/tb_sc_lfsr8_fault.vvp 
 FAIL: TC6 reset value != leap8(seed)
+FAIL: TC7 reference period != 65535
+FAIL: TC7 reference S(n) != ARCHITECTURE.md 11 values
+FAIL: TC7 mode-0 seeds
+FAIL: TC7 mode-2 lane 0: X 0xe1e4 exp leap8(S(0)=0xace1), W 0xdeeb exp leap8(S(32768)=0xa585)
+FAIL: TC7 mode-2 lane 1: X 0x7be4 exp leap8(S(4096)=0x414d), W 0xec04 exp leap8(S(36864)=0x0149)
+FAIL: TC7 mode-2 lane 2: X 0x4d41 exp leap8(S(8192)=0x0a63), W 0x3914 exp leap8(S(40960)=0xa6a8)
+FAIL: TC7 mode-2 lane 3: X 0xd34d exp leap8(S(12288)=0x9b5a), W 0x0bcb exp leap8(S(45056)=0x0ef0)
+FAIL: TC7 mode-2 lane 4: X 0x487d exp leap8(S(16384)=0xcf67), W 0xb1b0 exp leap8(S(49152)=0x27fa)
+FAIL: TC7 mode-2 lane 5: X 0xbc20 exp leap8(S(20480)=0x03e4), W 0x51e3 exp leap8(S(53248)=0xee4c)
+FAIL: TC7 mode-2 lane 6: X 0x171c exp leap8(S(24576)=0xd56d), W 0x8e76 exp leap8(S(57344)=0xc71d)
+FAIL: TC7 mode-2 lane 7: X 0x239f exp leap8(S(28672)=0x8090), W 0xab6f exp leap8(S(61440)=0x367e)
+FAIL: TC7 IL=16 lane 0 seeds
+FAIL: TC7 IL=16 lane 1 seeds
+FAIL: TC7 IL=16 lane 2 seeds
+FAIL: TC7 IL=16 lane 3 seeds
+FAIL: TC7 IL=16 lane 4 seeds
+FAIL: TC7 IL=16 lane 5 seeds
+FAIL: TC7 IL=16 lane 6 seeds
+FAIL: TC7 IL=16 lane 7 seeds
+FAIL: TC7 IL=16 lane 8 seeds
+FAIL: TC7 IL=16 lane 9 seeds
+FAIL: TC7 IL=16 lane 10 seeds
+FAIL: TC7 IL=16 lane 11 seeds
+FAIL: TC7 IL=16 lane 12 seeds
+FAIL: TC7 IL=16 lane 13 seeds
+FAIL: TC7 IL=16 lane 14 seeds
+FAIL: TC7 IL=16 lane 15 seeds
 FAIL: TC1 load value
-FAIL: TC2 cycle 1 dut_x=0xe455 ref_x=0x403e dut_w=0x0a4d ref_w=0xd6fc
-FAIL: TC2 cycle 2 dut_x=0x55dd ref_x=0x3e4e dut_w=0x4d38 ref_w=0xfc85
-FAIL: TC2 cycle 3 dut_x=0xdd17 ref_x=0x4ea6 dut_w=0x38b7 ref_w=0x85cb
-FAIL: TC2 cycle 4 dut_x=0x17e3 ref_x=0xa6a8 dut_w=0xb709 ref_w=0xcbce
-FAIL: TC2 cycle 5 dut_x=0xe30b ref_x=0xa8a3 dut_w=0x0932 ref_w=0xce49
-FAIL: TC2 cycle 6 dut_x=0x0b16 ref_x=0xa367 dut_w=0x3242 ref_w=0x4917
-FAIL: TC2 cycle 7 dut_x=0x161d ref_x=0x67ec dut_w=0x4221 ref_w=0x1760
-FAIL: TC2 cycle 8 dut_x=0x1d3d ref_x=0xec3c dut_w=0x211f ref_w=0x6029
 PASS: TC3 PERIOD x=65535 w=65535 leap cycles (expected 65535), zero state never reached
 PASS: TC4 FREEZE state unchanged for 100 cycles with adv=0
-PASS: TC5 RELOAD load+adv -> state_x=0xe1e4 state_w=0x5c0a (load wins)
-errors=70002
+PASS: TC5 RELOAD load+adv -> state_x=0xe1e4 state_w=0xdeeb (load wins)
+errors=70029
 TEST FAILED
-FATAL: tests/tpu/tb_sc_lfsr8.v:170: tb_sc_lfsr8 failed
+FATAL: tests/tpu/tb_sc_lfsr8.v:242: tb_sc_lfsr8 failed
        Time: 701036000  Scope: tb_sc_lfsr8
 SIM_EXIT=1

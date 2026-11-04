@@ -1,4 +1,4 @@
-# input revision: 1e853f7-dirty
+# input revision: 4060bd9-dirty
 # cmd: iverilog -g2005 -Wall -DINJECT_FAULT design/rtl/tpu/sc_lane_array.v tests/tpu/tb_sc_lane_array.v -o sim/tpu/build/tb_sc_lane_array_fault.vvp && vvp -n sim/tpu/build/tb_sc_lane_array_fault.vvp 
 FAIL: TC1 neuron 0 acc 5 expected 1
 FAIL: TC1 neuron 1 acc 4 expected 1

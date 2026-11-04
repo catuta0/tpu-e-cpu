@@ -1,6 +1,6 @@
 # command: cd code/python && ../../.venv/bin/python -m sctpu.gen_hex   (default --spec-rev B, out sim/data)
-# date: 2026-11-04T06:06:37+00:00  python: Python 3.13.18  numpy: 2.5.4
-# gen_hex.py rev=9f91914-dirty spec_rev=B out=/home/user/tpu-e-cpu/sim/data variant=qat_noise s=0 test images=360
+# date: 2026-11-04T06:18:48+00:00  python: Python 3.13.18  numpy: 2.5.4
+# gen_hex.py rev=4060bd9-dirty spec_rev=B out=/home/user/tpu-e-cpu/sim/data variant=qat_noise s=0 test images=360
 # seeds modes 0/1: X ace1 W f9de; mode 2: X ace1 357b 6f4d ead3 0348 70bc b617 c223 / W f9de 71ec aa39 520b 9db1 f251 5d8e 91ab
 input.hex = test position 0 = load_digits row 1496, label 7
 tpu_vectors_mode0.txt: 360 vectors; reference cross-check 24 vectors, 0 mismatching fields

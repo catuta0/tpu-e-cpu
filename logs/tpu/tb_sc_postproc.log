@@ -1,4 +1,4 @@
-# input revision: 1e853f7-dirty
+# input revision: 4060bd9-dirty
 # cmd: iverilog -g2005 -Wall design/rtl/tpu/sc_postproc.v tests/tpu/tb_sc_postproc.v -o sim/tpu/build/tb_sc_postproc.vvp && vvp -n sim/tpu/build/tb_sc_postproc.vvp 
 PASS: TC1 DIRECTED GRID 11760 vectors (2 layers x K 4..10 x s 0..7 x 7 acc x 15 bias)
 PASS: TC2 NEAR-THRESHOLD 1568 vectors

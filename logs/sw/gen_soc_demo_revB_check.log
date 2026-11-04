@@ -1,0 +1,9 @@
+# SW-02 check: regenerate the SoC demo into scratch and compare with sim/data/soc_demo_prog.* (no write to sim/data)
+# command: .venv/bin/python code/python/rv32/gen_soc_demo.py --act-shift 0 --out <scratch>/soc_demo_prog.hex ; cmp
+gen_soc_demo: ACT_SHIFT=0 CONFIG=0x08 code=112 bytes -> /tmp/claude-0/-home-user-tpu-e-cpu/8b3c4029-a3fd-5876-9466-e5b089bf9869/scratchpad/soc_demo_prog.hex
+round-trip mismatches: 0
+ISS checks (RESULT 0..9 x busy_polls 0/3 = 20 runs): 0 errors
+EXIT=0
+soc_demo_prog.hex: byte-identical
+soc_demo_prog.lst: byte-identical
+soc_demo_prog.meta.json: byte-identical

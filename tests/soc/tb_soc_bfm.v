@@ -329,7 +329,7 @@ module tb_soc_bfm;
         if (dut.bus_err !== 1'b1) fail("T8 bus_err not sticky");
         reset_button;
         if (dut.bus_err !== 1'b0) fail("T8 bus_err not cleared by reset");
-        if (errors == e0) $display("PASS: T8 unmapped 0x30000000/0xF00000000 read 0 in %0d cycles, write ignored, bus_err sticky until reset", n);
+        if (errors == e0) $display("PASS: T8 unmapped 0x30000000/0xF0000000 read 0 in %0d cycles, write ignored, bus_err sticky until reset", n);
 
         // ---------------- T9 UART -----------------------------------------------------
         e0 = errors;

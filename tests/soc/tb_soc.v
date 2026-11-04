@@ -92,6 +92,8 @@
 // NEGATIVE RUNS (scripts/sim_soc.sh, must end in TEST FAILED):
 //   -DINJECT_FAULT : bit 0 of the expected SCORE[0] is flipped -> D3 fails.
 //   -P tb_soc.UART_DIV=240 : DUT UART 2.5 % slow -> bit-timing checker fails.
+//   -DINJECT_PROTO_FAULT : mem_ready forced high for one cycle without
+//                          mem_valid -> protocol checker P2 fails.
 //
 // Output: PASS/FAIL per check, INFO lines with measurements, final
 //   "TEST PASSED" or "TEST FAILED" + $fatal(1).
@@ -250,6 +252,22 @@ module tb_soc;
         p_addr  <= mem_addr;  p_wdata <= mem_wdata;
         p_wstrb <= mem_wstrb; p_instr <= mem_instr;
     end
+
+`ifdef INJECT_PROTO_FAULT
+    // Negative run of the protocol checker: 2000 cycles after reset release,
+    // pulse mem_ready for one cycle in a cycle without mem_valid (P2).
+    initial begin
+        wait (cyc == 2000);
+        while (mem_valid !== 1'b0) @(negedge clk);
+        @(negedge clk);
+        if (mem_valid === 1'b0) begin
+            force dut.mem_ready = 1'b1;
+            @(negedge clk);
+            release dut.mem_ready;
+            $display("NOTE: INJECT_PROTO_FAULT: mem_ready forced for one cycle without mem_valid");
+        end
+    end
+`endif
 
     // =========================================================================
     // Transaction monitor (completed transactions only)
@@ -538,7 +556,7 @@ module tb_soc;
             else fail("D4 LED pins");
             // D5 UART
             begin : d5
-                integer okb;
+                reg okb;
                 okb = (n_uart_rx == expv[24]) && (uart_frame_err == 0);
                 for (i = 0; i < expv[24] && i < n_uart_rx; i = i + 1)
                     if (uart_rx_bytes[i] !== expv[25 + i][7:0]) okb = 0;
@@ -602,7 +620,7 @@ module tb_soc;
             if (led_n === ~meta[7][5:0]) $display("PASS: C6 led_n = 6'b%06b = ~LED (LED %0d)", led_n, meta[7]);
             else fail("C6 LED pins");
             begin : c7
-                integer okb;
+                reg okb;
                 okb = (n_uart_rx == meta[8]) && (uart_frame_err == 0);
                 for (i = 0; i < meta[8] && i < n_uart_rx; i = i + 1)
                     if (uart_rx_bytes[i] !== meta[9 + i][7:0]) okb = 0;

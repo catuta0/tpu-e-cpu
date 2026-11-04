@@ -101,3 +101,31 @@ few degrees of freedom. This explains the non-monotonic mode-0 accuracy versus K
   (CALCULATION, `accuracy.json` key `lfsr_lags`). The ensemble agreement for mode 2 (0.89–1.06)
   suggests the effect is small for this workload.
 * The model is per layer; it does not propagate layer-1 errors through the clipped ReLU.
+
+## Rev B addendum (task SW-02, 2026-11-04)
+
+Spec rev B (ARCHITECTURE.md 11, ADR-008) changes only the LFSR seeds. Same model, same
+weights (not retrained). Rev B results: `reports/sw/accuracy_revB.json` key `error_study`,
+figure `fig_rms_error_vs_K.pdf` (rev A copy: `fig_rms_error_vs_K_revA.pdf`), comparison
+`reports/sw/revA_vs_revB.md` section 4. Log: `logs/sw/accuracy_revB.log`, `logs/sw/compare_revs.log`.
+
+**Assumption A4 (independent lanes in mode 2) is violated by the rev B seeds for K >= 6.**
+X_i and W_i are both advanced by the same 4096 single steps per lane, so the joint random
+pair of lane i+1 is the pair of lane i delayed by 512 stream cycles. When 512 cycles are a
+whole number of tiles (K <= 9) or a tile is a whole number of 512-cycle blocks (K = 10),
+whole XNOR count tables repeat across (tile, lane) slots (CALCULATION from the model's
+tables: 14 / 54 / 120 / 196 / 100 identical slot pairs of 3160 at K = 6 / 7 / 8 / 9 / 10;
+rev A: 0). The errors of those slots are then identical functions of the codes and add
+coherently. Measured (SIMULATION, 360 test images, 20 start offsets, `qat_noise`), mode 2,
+layer 1, ensemble RMS / eq. (2):
+
+| K | 7 | 8 | 9 | 10 |
+|---|---|---|---|---|
+| rev A | 0.98 | 1.01 | 0.90 | 0.98 |
+| rev B | 0.91 | 1.06 | 1.30 | 1.55 |
+| C1 (analysis-only: rev B with W lanes reversed) | 0.96 | 0.99 | 0.94 | 1.06 |
+
+With the rev B hardware seeds the layer-1 RMS at K = 9 is 0.741 vs 0.342 predicted (ratio
+2.17) and at K = 10 0.442 vs 0.242 (1.83); the error no longer falls as 1/sqrt(L) above K = 8.
+Eq. (2) therefore remains adequate for rev B modes 0/1 (ensemble ratios 0.77–1.01 for K >= 7) and for mode 2 at K <= 8, but
+under-predicts mode 2 at K = 9, 10.

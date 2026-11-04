@@ -1,3 +1,3 @@
-# RTL-TPU simulation regression  2026-11-04T04:57:46+00:00  input revision: 1e853f7-dirty
+# RTL-TPU simulation regression  2026-11-04T06:19:10+00:00  input revision: 4060bd9-dirty
 verilator : Verilator 5.020 2024-01-01 rev (Debian 5.020-1)
 iverilog  : Icarus Verilog version 12.0 (stable) ()

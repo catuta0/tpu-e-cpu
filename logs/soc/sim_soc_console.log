@@ -1,0 +1,96 @@
+# RTL-SOC simulation regression  2026-11-04T06:17:32+00:00  input revision: 4060bd9-dirty
+verilator : Verilator 5.020 2024-01-01 rev (Debian 5.020-1)
+iverilog  : Icarus Verilog version 12.0 (stable) ()
+
+==== 1. RTL lint (verilator -Wall) ====
+LINT_OK soc_top 
+LINT_OK soc_bus 
+LINT_OK soc_ram 
+LINT_OK soc_periph 
+LINT_OK soc_periph -GUART_DIV=240
+
+==== 2. TB lint (verilator --timing, default warnings) ====
+LINT_TB_OK tb_soc
+LINT_TB_OK tb_soc_bfm
+
+==== 3. demo expectation (sim/data/soc_expected.json, SW-02) ====
+vector file sim/data/tpu_vectors_mode2.txt sha256 8207fd233bf743103d883dda8c7893d38a75de6ed87ee90af0f68ef3ef0f550e
+vector file spec_rev header: present
+input.hex == INPUT words of the idx-0 vector: yes
+source: sim/data/soc_expected.json (sha256 8d8aa0ee05cf684d2559aed1ca5718f9fd7260c9be49e5939ffe0cf891b1e721), generator code/python/sctpu/gen_hex.py (task SW-02), git_rev 9f91914-dirty
+input.hex sha256 matches soc_expected.json
+weights.hex sha256 matches soc_expected.json
+bias.hex sha256 matches soc_expected.json
+cross-check soc_expected.json == tpu_vectors_mode2.txt idx 0 (HIDDEN, SCORE, RESULT): OK
+EXPECTED RESULT=7 LED=7 TOHOST=1 K=8 UART=['0x37', '0xa']
+EXPECTED HIDDEN=['0x80c280e8', '0x80ff94fe', '0x81d480ff', '0x8080ff80']
+EXPECTED SCORE=[-424, -264, -940, -364, -22, -108, -904, 1304, -214, -10, -100, -100, -100, -100, -100, -100]
+wrote sim/soc/build/soc_expected.hex
+EXPECTATION_OK
+
+==== 4. tb_soc: SoC demo program on the real CPU + TPU (rev B, RNG_MODE 2) ====
+PASS: R1 power-up reset: rst released on rising edge 2 after configuration
+PASS: R2 button press -> rst asserted on rising edge 2 (2..3 required)
+PASS: R3 during reset led_n = 6'b111111 (all LEDs off), uart_tx = 1 (idle)
+PASS: R4 button release -> rst released on rising edge 2 (2..3 required)
+PASS: R5 first bus request after reset release is a fetch of 0x00000000 (at cycle 31 after rst fell; CPU CLEAR state = 32 cycles)
+PASS: D1 TOHOST = 1 written by the store at PC 0x00000068, cycle 5441 after reset release
+PASS: D2 CPU-observed RESULT (load from 0x2000000C) = 0x00000007 = golden class 7; TPU RESULT register = 7
+PASS: D3 TPU storage bit-exact vs golden: HIDDEN[0..15] (4 words) and SCORE[0..15] (16 words), e.g. SCORE[7] = 1304
+PASS: D4 led_n = 6'b111000 = ~LED (LED register 7 = class), 1 LED write
+PASS: D5 UART pin decoded (115200 8N1, real-time receiver) 2 bytes: 0x37 0x0a = "7\n"; 2 frames
+PASS: D6 CYCLES stored at 0x0E00 = 2928 = 10*2^8+368 (formula) = TB-measured BUSY cycles 2928 = TPU CYCLES register
+PASS: D7 bus_err = 0, CPU not halted, 0 protocol violations, max latency 3 cycles
+INFO: end-to-end: reset release -> TOHOST write = 5441 cycles (201.5 us at 27 MHz); START at cycle 62, RESULT read at cycle 3010 (START->RESULT read 2948 cycles), TPU BUSY 2928 cycles, 173 STATUS polls
+INFO: instructions retired up to TOHOST 981; UART_STATUS polls 148; last UART byte received at cycle ~7698
+PASS: U1 UART timing: 2 frames, every edge on a multiple of 234 clocks, tx_busy = 2340 clocks per frame, real-time receiver: 0 framing/stability errors
+INFO: bus transactions RAM 1722 (max latency 2), PERIPH 152 (2), TPU 177 (3), unmapped 0 (0); protocol violations 0
+TEST PASSED
+
+==== 5. tb_soc: SW-01b CPU tests on the SoC ====
+# CPU tests on the SoC: 44 / 44 PASS
+INFO: tb_soc MODE=cpu PROG_HEX=sim/data/cpu_tests/dir_mmio.hex UART_DIV(DUT)=234 expected divider 234
+PASS: R1 power-up reset: rst released on rising edge 2 after configuration
+PASS: R2 button press -> rst asserted on rising edge 2 (2..3 required)
+PASS: R3 during reset led_n = 6'b111111 (all LEDs off), uart_tx = 1 (idle)
+PASS: R4 button release -> rst released on rising edge 2 (2..3 required)
+PASS: R5 first bus request after reset release is a fetch of 0x00000000 (at cycle 31 after rst fell; CPU CLEAR state = 32 cycles)
+PASS: C1 TOHOST stop at PC 0x000000b4 (cycle 300)
+PASS: C2 instret = 46
+PASS: C3 TOHOST value as expected
+PASS: C4 signature 0x0F00..0x0F7C (32 words) equal to the ISS
+PASS: C5 bus_err = 1
+PASS: C6 led_n = 6'b010101 = ~LED (LED 42)
+PASS: C7 UART 0 bytes as expected
+PASS: C8 0 protocol violations, max latency 2 cycles
+INFO: stop at cycle 300 after reset release, instret 46
+PASS: U1 UART timing: 0 frames, every edge on a multiple of 234 clocks, tx_busy = 2340 clocks per frame, real-time receiver: 0 framing/stability errors
+INFO: bus transactions RAM 256 (max latency 2), PERIPH 4 (2), TPU 0 (0), unmapped 2 (2); protocol violations 0
+
+==== 6. tb_soc_bfm: directed fabric tests inside soc_top ====
+PASS: T1 reset values: LED/UART_STATUS/TOHOST = 0, TPU STATUS/RESULT/CYCLES = 0, CONFIG = 0x08, PARAMS = 0x02020810, led_n = 6'b111111
+PASS: T2 LED values 0x00/0x3F/0x15/0x2A read back and led_n = ~value; 6-bit register; byte-0 strobe required
+PASS: T3 TOHOST word and byte-lane writes
+PASS: T4 CYCLE read twice 1004 cycles apart differs by exactly 1004; write ignored
+PASS: T5 reserved peripheral offsets read 0 / ignore writes; alias 0x12345000 reads LED
+PASS: T6 RAM first/last word, byte and halfword lanes (little-endian), aliases
+PASS: T7 TPU WEIGHT first/last word, CONFIG, INPUT through the SoC decoder
+PASS: T8 unmapped 0x30000000/0xF0000000 read 0 in 2 cycles, write ignored, bus_err sticky until reset
+PASS: T9 UART bytes 0x00 0x55 0xA5 0xFF decoded on the pin (real-time 115200 8N1 receiver); write while busy ignored; 4 frames, edges on multiples of 234 clocks, tx_busy 2340 clocks each
+PASS: T10 4753 BFM accesses, max latency 3 cycles (<= 4), ready protocol clean
+TEST PASSED
+
+==== 7. negative runs (must fail) ====
+NOTE: INJECT_FAULT active (expected SCORE[0] bit 0 flipped)
+FAIL: D3 SCORE[0] = 0xfffffe58 (-424) expected 0xfffffe59 (-423)
+FAIL: D3 1 mismatching words
+negative run tb_soc -DINJECT_FAULT: TEST FAILED as required
+FAIL: tx_busy lasted 2400 cycles (expected 2340)
+FAIL: tx_busy lasted 2400 cycles (expected 2340)
+FAIL: U1 UART timing errors 12, frame errors 0
+negative run tb_soc UART_DIV=240: TEST FAILED as required
+PROTOCOL VIOLATION #1 at cycle 2000: P2 mem_ready without mem_valid (addr 0x00000018)
+negative run tb_soc -DINJECT_PROTO_FAULT: TEST FAILED as required
+negative run tb_soc_bfm -DINJECT_FAULT: TEST FAILED as required
+
+SIM_SOC ALL PASSED (revision 4060bd9-dirty)

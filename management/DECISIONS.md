@@ -89,3 +89,17 @@ LFSRs of one polynomial). Rejected: different polynomials per lane (more
 verification effort, rev C candidate); double-buffered weight tiles (OD-3, latency
 only, rev C candidate).
 Re-run required: golden vectors + accuracy (software), TPU regression (fpga).
+
+## ADR-009 — Rev B found defective; rev C seed selection on validation data
+Evidence (SW-02, reports/sw/revA_vs_revB.md, SIMULATION, 360 test images):
+rev B mode 2 K=9 accuracy 89.7 % vs rev A 94.4 % (McNemar exact p = 0.0015);
+cause: X and W seeds advance by the same 4096 steps per lane, so lane i's (r_x, r_w)
+pair stream is lane i-1's delayed by 512 stream cycles = an integer number of tiles
+at K <= 9 -> identical count tables repeat and errors add coherently.
+Lesson: maximal phase spacing is not sufficient; the requirement is that no two
+lanes' operand-pair streams are translates of each other:
+(lag_x(i) - lag_x(j)) != (lag_w(i) - lag_w(j)) for i != j.
+Decision: rev C seeds chosen by a protocol fixed in advance (SW-03): candidates
+C0..C4 on the 288-image validation subset only; select the highest worst-case
+deployed accuracy over K in {8,9,10}; test split evaluated only afterwards.
+Rev B is kept in the record as a negative result (also reported in the article).
