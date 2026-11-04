@@ -1,6 +1,6 @@
 {
-  "revision": "C",
-  "status": "FROZEN rev C (2026-11-04, ADR-010); rev A/B superseded",
+  "revision": "D",
+  "status": "FROZEN rev D (2026-11-04, CR-001): deterministic TPU is the product; tpu_sc = comparison design (rev C)",
   "spec": "design/architecture/ARCHITECTURE.md",
   "clock": {
     "name": "clk",
@@ -122,7 +122,34 @@
     "format": "8N1",
     "divider_clocks_per_bit": 234
   },
-  "tpu": {
+  "init_files": {
+    "weights.hex": "512 x 32-bit",
+    "bias.hex": "32 x 16-bit",
+    "input.hex": "16 x 32-bit",
+    "prog.hex": "1024 x 32-bit",
+    "location": "sim/data/"
+  },
+  "cpu": {
+    "isa": "RV32I (37 base instr + FENCE as NOP)",
+    "traps": {
+      "0": "none",
+      "1": "ecall",
+      "2": "ebreak",
+      "3": "illegal",
+      "4": "misaligned fetch",
+      "5": "misaligned load",
+      "6": "misaligned store"
+    },
+    "trap_behaviour": "halt (halted=1, trap_cause set)",
+    "reset_pc": "0x00000000",
+    "debug_ports": [
+      "halted",
+      "trap_cause[3:0]",
+      "dbg_pc[31:0]",
+      "retire"
+    ]
+  },
+  "tpu_sc": {
     "geometry": {
       "NL": 16,
       "IL": 8
@@ -239,31 +266,100 @@
     "busy_writes": "CPU writes to INPUT/BIAS/WEIGHT/CONFIG while BUSY are ignored",
     "rng_mode_default": 2
   },
-  "init_files": {
-    "weights.hex": "512 x 32-bit",
-    "bias.hex": "32 x 16-bit",
-    "input.hex": "16 x 32-bit",
-    "prog.hex": "1024 x 32-bit",
-    "location": "sim/data/"
-  },
-  "cpu": {
-    "isa": "RV32I (37 base instr + FENCE as NOP)",
-    "traps": {
-      "0": "none",
-      "1": "ecall",
-      "2": "ebreak",
-      "3": "illegal",
-      "4": "misaligned fetch",
-      "5": "misaligned load",
-      "6": "misaligned store"
+  "tpu": {
+    "kind": "deterministic int8 (DT-TPU)",
+    "spec": "ARCHITECTURE.md section 14",
+    "geometry": {
+      "NL": 16,
+      "inputs_per_cycle": 1
     },
-    "trap_behaviour": "halt (halted=1, trap_cause set)",
-    "reset_pc": "0x00000000",
-    "debug_ports": [
-      "halted",
-      "trap_cause[3:0]",
-      "dbg_pc[31:0]",
-      "retire"
-    ]
+    "network": {
+      "layers": [
+        64,
+        16,
+        10
+      ],
+      "tiles": [
+        8,
+        2
+      ],
+      "hidden_activation": "clipped ReLU",
+      "output": "argmax over lanes 0..9, ties->lowest"
+    },
+    "code": {
+      "width": 8,
+      "signed_value": "q(c) = c - 128"
+    },
+    "arith": {
+      "acc": "sum q(x_i)*q(W_ji) exact",
+      "Dp": "acc + 128*bias",
+      "hidden": "code = 128 + clip(floor(Dp*2^s/128), 0, 127)",
+      "score": "Dp sign-extended to 32 bits",
+      "argmax": "lanes 0..9, ties->lowest"
+    },
+    "regs": {
+      "CTRL": {
+        "offset": "0x000",
+        "access": "W",
+        "bits": "[0] START"
+      },
+      "STATUS": {
+        "offset": "0x004",
+        "access": "R",
+        "bits": "[0] BUSY [1] DONE"
+      },
+      "CONFIG": {
+        "offset": "0x008",
+        "access": "RW",
+        "bits": "[6:4] ACT_SHIFT (reset 0); [3:0] reserved read 0"
+      },
+      "RESULT": {
+        "offset": "0x00C",
+        "access": "R",
+        "bits": "[3:0] class"
+      },
+      "CYCLES": {
+        "offset": "0x010",
+        "access": "R",
+        "bits": "[31:0]"
+      },
+      "PARAMS": {
+        "offset": "0x014",
+        "access": "R",
+        "bits": "[7:0] NL=16 [15:8] inputs/cycle=1 [23:20] TPU_KIND=1 [31:24] version=0x10"
+      },
+      "INPUT": {
+        "offset": "0x040",
+        "size": 64,
+        "access": "RW",
+        "packing": "4 codes/word little-endian"
+      },
+      "SCORE": {
+        "offset": "0x080",
+        "size": 64,
+        "access": "R",
+        "packing": "16 x int32"
+      },
+      "HIDDEN": {
+        "offset": "0x0C0",
+        "size": 16,
+        "access": "R",
+        "packing": "4 codes/word"
+      },
+      "BIAS": {
+        "offset": "0x100",
+        "size": 128,
+        "access": "RW",
+        "packing": "32 words, [15:0] int16, index = 16*(layer-1)+j"
+      },
+      "WEIGHT": {
+        "offset": "0x800",
+        "size": 2048,
+        "access": "RW",
+        "layout": "addr = base_l + 16*i + j; base_1=0, base_2=1024"
+      }
+    },
+    "busy_writes": "CPU writes to INPUT/BIAS/WEIGHT/CONFIG while BUSY are ignored",
+    "latency_target_cycles": 300
   }
 }

@@ -231,3 +231,36 @@ Section 3 "write data, already shifted to the byte lanes": the CPU replicates th
 store data on all byte lanes (SB: byte x4, SH: halfword x2) and `mem_wstrb` selects
 the lanes; slaves must use `mem_wstrb`. This is a superset of the shifted form and
 is the normative behaviour.
+
+## 14. Rev D — Deterministic tensor unit (DT-TPU), CR-001 — CURRENT PRODUCT DESIGN
+The SC-TPU (sections 5, 9-13) remains the documented *comparison design*; the
+product SoC uses the DT-TPU below. Bus, memory map, register OFFSETS, buffers,
+BIAS, START/STATUS/RESULT/CYCLES semantics, writes-while-BUSY rule, reset values
+and the A.2 clarifications are unchanged unless stated here.
+
+### 14.1 Arithmetic [BIT-EXACT]
+- Codes c in 0..255 as before; signed value q(c) = c - 128 in -128..127 (int8).
+- Layer l, neuron j: `acc_j = sum_{i<N_in} q(x_i) * q(W_ji)` exact (|acc| <= 2^20).
+- `Dp_j = acc_j + 128 * bias_j` (bias int16).
+- Hidden (layer 1): `u = floor(Dp_j * 2^s / 128)`; `h = clip(u, 0, 127)`; HIDDEN[j] = 128 + h.
+- Score (layer 2): SCORE[j] = Dp_j sign-extended to 32 bits; RESULT = argmax over j = 0..9, ties -> lowest index.
+- Equivalence: Dp_j / 2^14 = sum v_x v_w + bias/128 with v = q/128 — exactly the
+  expected value the SC-TPU estimates, so the same trained codes are used unchanged.
+- Internal widths must be sufficient for every legal input (document them).
+
+### 14.2 Dataflow
+NL = 16 neuron lanes, one input per cycle: in cycle i every lane j computes
+q(x_i) * q(W_ji) and accumulates. Layer 1 = 64 MAC cycles, layer 2 = 16 MAC cycles
+(lanes 10..15 padding, computed but ignored by argmax), plus pipeline latency,
+post-processing and argmax. The 16 weights of input row i are read in one cycle.
+
+### 14.3 Weight memory layout [BIT-EXACT] (changed)
+Byte address inside the weight RAM: `addr = base_l + 16*i + j`, base_1 = 0
+(i < 64: 0..1023), base_2 = 1024 (i < 16: 1024..1279). Word w = bytes 4w..4w+3,
+little-endian. (Implementation hint: 4 BSRAM banks of 32 bits, bank = w mod 4.)
+
+### 14.4 Register changes
+- CONFIG: [6:4] ACT_SHIFT (reset 0); [3:0] reserved: read 0, writes ignored.
+- PARAMS: [7:0] NL = 16, [15:8] inputs per cycle = 1, [19:16] reserved 0,
+  [23:20] TPU_KIND = 1 (deterministic), [31:24] version = 0x10.
+- CYCLES: rising edges with BUSY = 1 (unchanged definition). Target <= 300 cycles.
