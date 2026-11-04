@@ -19,3 +19,17 @@ Decisions for the user (manager defaults applied):
 
 ## G2 — Smoke tests and toolchain — recorded 2026-11-04
 All routes PASS except systems sources PARTIAL (see management/SMOKE_TESTS.md).
+
+## G3 — Preliminary design with first analyses — recorded 2026-11-04
+Done: RV32I core (44 tests x 4 bus configs, 176/176 PASS, re-run by manager), SC-TPU
+rev A (1454 inferences bit-exact), Python golden model + QAT (EV 95.0 %), variant
+studies (RNG modes 0/1/2, IL 4/8/16; L sweep K=4..10).
+Cross-discipline iteration: SW accuracy + SYS correlation + FPGA cost -> rev B (mode 2,
+phase-spaced seeds) -> SW found rev B defect (K=9 89.7 %, p=0.0015) -> rev C selected
+on validation data -> FPGA re-ran TPU + SoC on rev C.
+## G3b — Integrated design (rev C) — recorded 2026-11-04
+SoC: LUT4 5628/8640 (65 %), DFF 2803 (43 %), BSRAM 5/26, worst Fmax 47.46 MHz vs 29.7
+required (SIMULATION of P&R, 3 seeds); demo inference RESULT 7 correct, UART "7\n";
+bitstream built, NOT programmed.
+Decisions for the user (defaults applied): ADR-011 relaxes first-fetch bound to 40 cycles;
+REQ-TIM-005 PARTIAL accepted for V1.
