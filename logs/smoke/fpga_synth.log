@@ -1,0 +1,1183 @@
+# cmd: yowasp-yosys -l logs/smoke/fpga_synth.log -p "read_verilog design/rtl/common/smoke_counter.v; synth_gowin -top smoke_counter -json sim/smoke/build/smoke_counter.json; stat"
+
+ /----------------------------------------------------------------------------\
+ |  yosys -- Yosys Open SYnthesis Suite                                       |
+ |  Copyright (C) 2012 - 2026  Claire Xenia Wolf <claire@yosyshq.com>         |
+ |  Distributed under an ISC-like license, type "license" to see terms        |
+ \----------------------------------------------------------------------------/
+ Yosys 0.70 (git sha1 28ba3cb92, Release, Clang /workspace/YoWASP/yosys/wasi-sdk-33.0-x86_64-linux/share/cmake/../..//bin/clang++ 22.1.0)
+
+-- Running command `read_verilog design/rtl/common/smoke_counter.v; synth_gowin -top smoke_counter -json sim/smoke/build/smoke_counter.json; stat' --
+
+1. Executing Verilog-2005 frontend: design/rtl/common/smoke_counter.v
+Parsing Verilog input from `design/rtl/common/smoke_counter.v' to AST representation.
+Generating RTLIL representation for module `\smoke_counter'.
+Successfully finished Verilog frontend.
+
+2. Executing SYNTH_GOWIN pass.
+
+2.1. Executing Verilog-2005 frontend: /share/gowin/cells_sim.v
+Parsing Verilog input from `/share/gowin/cells_sim.v' to AST representation.
+Generating RTLIL representation for module `\LUT1'.
+Generating RTLIL representation for module `\LUT2'.
+Generating RTLIL representation for module `\LUT3'.
+Generating RTLIL representation for module `\LUT4'.
+Generating RTLIL representation for module `\__APICULA_LUT5'.
+Generating RTLIL representation for module `\__APICULA_LUT6'.
+Generating RTLIL representation for module `\__APICULA_LUT7'.
+Generating RTLIL representation for module `\__APICULA_LUT8'.
+Generating RTLIL representation for module `\MUX2'.
+Generating RTLIL representation for module `\MUX2_LUT5'.
+Generating RTLIL representation for module `\MUX2_LUT6'.
+Generating RTLIL representation for module `\MUX2_LUT7'.
+Generating RTLIL representation for module `\MUX2_LUT8'.
+Generating RTLIL representation for module `\DFF'.
+Generating RTLIL representation for module `\DFFE'.
+Generating RTLIL representation for module `\DFFS'.
+Generating RTLIL representation for module `\DFFSE'.
+Generating RTLIL representation for module `\DFFR'.
+Generating RTLIL representation for module `\DFFRE'.
+Generating RTLIL representation for module `\DFFP'.
+Generating RTLIL representation for module `\DFFPE'.
+Generating RTLIL representation for module `\DFFC'.
+Generating RTLIL representation for module `\DFFCE'.
+Generating RTLIL representation for module `\DFFN'.
+Generating RTLIL representation for module `\DFFNE'.
+Generating RTLIL representation for module `\DFFNS'.
+Generating RTLIL representation for module `\DFFNSE'.
+Generating RTLIL representation for module `\DFFNR'.
+Generating RTLIL representation for module `\DFFNRE'.
+Generating RTLIL representation for module `\DFFNP'.
+Generating RTLIL representation for module `\DFFNPE'.
+Generating RTLIL representation for module `\DFFNC'.
+Generating RTLIL representation for module `\DFFNCE'.
+Generating RTLIL representation for module `\DL'.
+Generating RTLIL representation for module `\DLN'.
+Generating RTLIL representation for module `\DLE'.
+Generating RTLIL representation for module `\DLNE'.
+Generating RTLIL representation for module `\DLC'.
+Generating RTLIL representation for module `\DLCE'.
+Generating RTLIL representation for module `\DLNC'.
+Generating RTLIL representation for module `\DLNCE'.
+Generating RTLIL representation for module `\DLP'.
+Generating RTLIL representation for module `\DLPE'.
+Generating RTLIL representation for module `\DLNP'.
+Generating RTLIL representation for module `\DLNPE'.
+Generating RTLIL representation for module `\VCC'.
+Generating RTLIL representation for module `\GND'.
+Generating RTLIL representation for module `\IBUF'.
+Generating RTLIL representation for module `\OBUF'.
+Generating RTLIL representation for module `\TBUF'.
+Generating RTLIL representation for module `\IOBUF'.
+Generating RTLIL representation for module `\ELVDS_OBUF'.
+Generating RTLIL representation for module `\TLVDS_OBUF'.
+Generating RTLIL representation for module `\OSER4'.
+Generating RTLIL representation for module `\OSER4_MEM'.
+Generating RTLIL representation for module `\OSER8'.
+Generating RTLIL representation for module `\OSER10'.
+Generating RTLIL representation for module `\OVIDEO'.
+Generating RTLIL representation for module `\OSER16'.
+Generating RTLIL representation for module `\IDES4'.
+Generating RTLIL representation for module `\IDES4_MEM'.
+Generating RTLIL representation for module `\IDES8'.
+Generating RTLIL representation for module `\IDES10'.
+Generating RTLIL representation for module `\IVIDEO'.
+Generating RTLIL representation for module `\IDES16'.
+Generating RTLIL representation for module `\IDDR'.
+Generating RTLIL representation for module `\IDDRC'.
+Generating RTLIL representation for module `\DQS'.
+Generating RTLIL representation for module `\ODDR'.
+Generating RTLIL representation for module `\ODDRC'.
+Generating RTLIL representation for module `\GSR'.
+Generating RTLIL representation for module `\BANDGAP'.
+Generating RTLIL representation for module `\ALU'.
+Generating RTLIL representation for module `\RAM16S1'.
+Generating RTLIL representation for module `\RAM16S2'.
+Generating RTLIL representation for module `\RAM16S4'.
+Generating RTLIL representation for module `\RAM16SDP1'.
+Generating RTLIL representation for module `\RAM16SDP2'.
+Generating RTLIL representation for module `\RAM16SDP4'.
+Generating RTLIL representation for module `\SP'.
+Generating RTLIL representation for module `\SPX9'.
+Generating RTLIL representation for module `\SDP'.
+Generating RTLIL representation for module `\SDPX9'.
+Generating RTLIL representation for module `\DP'.
+Generating RTLIL representation for module `\DPX9'.
+Generating RTLIL representation for module `\rPLL'.
+Generating RTLIL representation for module `\PLLVR'.
+Generating RTLIL representation for module `\OSC'.
+Generating RTLIL representation for module `\OSCZ'.
+Generating RTLIL representation for module `\OSCF'.
+Generating RTLIL representation for module `\OSCH'.
+Generating RTLIL representation for module `\OSCW'.
+Generating RTLIL representation for module `\OSCO'.
+Generating RTLIL representation for module `\EMCU'.
+Successfully finished Verilog frontend.
+
+2.2. Executing Verilog-2005 frontend: /share/gowin/cells_xtra_gw1n.v
+Parsing Verilog input from `/share/gowin/cells_xtra_gw1n.v' to AST representation.
+Generating RTLIL representation for module `\LUT5'.
+Generating RTLIL representation for module `\LUT6'.
+Generating RTLIL representation for module `\LUT7'.
+Generating RTLIL representation for module `\LUT8'.
+Generating RTLIL representation for module `\INV'.
+Generating RTLIL representation for module `\IODELAY'.
+Generating RTLIL representation for module `\IEM'.
+Generating RTLIL representation for module `\ROM16'.
+Generating RTLIL representation for module `\ROM'.
+Generating RTLIL representation for module `\ROMX9'.
+Generating RTLIL representation for module `\pROM'.
+Generating RTLIL representation for module `\pROMX9'.
+Generating RTLIL representation for module `\SDPB'.
+Generating RTLIL representation for module `\SDPX9B'.
+Generating RTLIL representation for module `\DPB'.
+Generating RTLIL representation for module `\DPX9B'.
+Generating RTLIL representation for module `\PADD18'.
+Generating RTLIL representation for module `\PADD9'.
+Generating RTLIL representation for module `\MULT9X9'.
+Generating RTLIL representation for module `\MULT18X18'.
+Generating RTLIL representation for module `\MULT36X36'.
+Generating RTLIL representation for module `\MULTALU36X18'.
+Generating RTLIL representation for module `\MULTADDALU18X18'.
+Generating RTLIL representation for module `\MULTALU18X18'.
+Generating RTLIL representation for module `\ALU54D'.
+Generating RTLIL representation for module `\BUFG'.
+Generating RTLIL representation for module `\BUFS'.
+Generating RTLIL representation for module `\PLL'.
+Generating RTLIL representation for module `\TLVDS_IBUF'.
+Generating RTLIL representation for module `\TLVDS_TBUF'.
+Generating RTLIL representation for module `\TLVDS_IOBUF'.
+Generating RTLIL representation for module `\ELVDS_IBUF'.
+Generating RTLIL representation for module `\ELVDS_TBUF'.
+Generating RTLIL representation for module `\ELVDS_IOBUF'.
+Generating RTLIL representation for module `\MIPI_IBUF'.
+Generating RTLIL representation for module `\MIPI_IBUF_HS'.
+Generating RTLIL representation for module `\MIPI_IBUF_LP'.
+Generating RTLIL representation for module `\MIPI_OBUF'.
+Generating RTLIL representation for module `\MIPI_OBUF_A'.
+Generating RTLIL representation for module `\ELVDS_IBUF_MIPI'.
+Generating RTLIL representation for module `\I3C_IOBUF'.
+Generating RTLIL representation for module `\CLKDIV'.
+Generating RTLIL representation for module `\DHCEN'.
+Generating RTLIL representation for module `\DLLDLY'.
+Generating RTLIL representation for module `\FLASH96K'.
+Generating RTLIL representation for module `\FLASH256K'.
+Generating RTLIL representation for module `\FLASH608K'.
+Generating RTLIL representation for module `\DCS'.
+Generating RTLIL representation for module `\DQCE'.
+Generating RTLIL representation for module `\CLKDIV2'.
+Generating RTLIL representation for module `\DHCENC'.
+Generating RTLIL representation for module `\FLASH64K'.
+Generating RTLIL representation for module `\FLASH64KZ'.
+Successfully finished Verilog frontend.
+
+2.3. Executing HIERARCHY pass (managing design hierarchy).
+
+2.3.1. Analyzing design hierarchy..
+Top module:  \smoke_counter
+
+2.3.2. Analyzing design hierarchy..
+Top module:  \smoke_counter
+Removed 0 unused modules.
+
+2.4. Executing PROC pass (convert processes to netlists).
+
+2.4.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+2.4.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
+Marked 1 switch rules as full_case in process $proc$design/rtl/common/smoke_counter.v:116$3 in module smoke_counter.
+Removed a total of 0 dead cases.
+
+2.4.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).
+Removed 1 redundant assignment.
+Promoted 5 assignments to connections.
+
+2.4.4. Executing PROC_INIT pass (extract init attributes).
+Found init rule in `\smoke_counter.$proc$design/rtl/common/smoke_counter.v:114$8'.
+  Set init value: \count = 24'000000000000000000000000
+Found init rule in `\smoke_counter.$proc$design/rtl/common/smoke_counter.v:96$7'.
+  Set init value: \sync_ff2 = 1'1
+Found init rule in `\smoke_counter.$proc$design/rtl/common/smoke_counter.v:95$6'.
+  Set init value: \sync_ff1 = 1'1
+
+2.4.5. Executing PROC_ARST pass (detect async resets in processes).
+
+2.4.6. Executing PROC_ROM pass (convert switches to ROMs).
+Converted 0 switches.
+<suppressed ~1 debug messages>
+
+2.4.7. Executing PROC_MUX pass (convert decision trees to multiplexers).
+Creating decoders for process `\smoke_counter.$proc$design/rtl/common/smoke_counter.v:114$8'.
+Creating decoders for process `\smoke_counter.$proc$design/rtl/common/smoke_counter.v:96$7'.
+Creating decoders for process `\smoke_counter.$proc$design/rtl/common/smoke_counter.v:95$6'.
+Creating decoders for process `\smoke_counter.$proc$design/rtl/common/smoke_counter.v:116$3'.
+     1/1: $0\count[23:0]
+Creating decoders for process `\smoke_counter.$proc$design/rtl/common/smoke_counter.v:98$1'.
+
+2.4.8. Executing PROC_DLATCH pass (convert process syncs to latches).
+
+2.4.9. Executing PROC_DFF pass (convert process syncs to FFs).
+Creating register for signal `\smoke_counter.\count' using process `\smoke_counter.$proc$design/rtl/common/smoke_counter.v:116$3'.
+  created $dff cell `$procdff$350' with positive edge clock.
+Creating register for signal `\smoke_counter.\sync_ff1' using process `\smoke_counter.$proc$design/rtl/common/smoke_counter.v:98$1'.
+  created $dff cell `$procdff$351' with positive edge clock.
+Creating register for signal `\smoke_counter.\sync_ff2' using process `\smoke_counter.$proc$design/rtl/common/smoke_counter.v:98$1'.
+  created $dff cell `$procdff$352' with positive edge clock.
+
+2.4.10. Executing PROC_MEMWR pass (convert process memory writes to cells).
+
+2.4.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Removing empty process `smoke_counter.$proc$design/rtl/common/smoke_counter.v:114$8'.
+Removing empty process `smoke_counter.$proc$design/rtl/common/smoke_counter.v:96$7'.
+Removing empty process `smoke_counter.$proc$design/rtl/common/smoke_counter.v:95$6'.
+Found and cleaned up 1 empty switch in `\smoke_counter.$proc$design/rtl/common/smoke_counter.v:116$3'.
+Removing empty process `smoke_counter.$proc$design/rtl/common/smoke_counter.v:116$3'.
+Removing empty process `smoke_counter.$proc$design/rtl/common/smoke_counter.v:98$1'.
+Cleaned up 1 empty switch.
+
+2.4.12. Executing OPT_EXPR pass (perform const folding).
+Optimizing module smoke_counter.
+
+2.5. Executing CHECK pass (checking for obvious problems).
+Checking module smoke_counter...
+Found and reported 0 problems.
+
+2.6. Executing FLATTEN pass (flatten design).
+
+2.7. Executing TRIBUF pass.
+
+2.8. Executing DEMINOUT pass (demote inout ports to input or output).
+
+2.9. Executing OPT_EXPR pass (perform const folding).
+Optimizing module smoke_counter.
+
+2.10. Executing CHECK pass (checking for obvious problems).
+Checking module smoke_counter...
+Found and reported 0 problems.
+
+2.11. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \smoke_counter..
+Removed 0 unused cells and 8 unused wires.
+<suppressed ~1 debug messages>
+
+2.12. Executing OPT pass (performing simple optimizations).
+
+2.12.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module smoke_counter.
+
+2.12.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\smoke_counter'.
+Computing hashes of 7 cells of `\smoke_counter'.
+Finding duplicate cells in `\smoke_counter'.
+Removed a total of 0 cells.
+
+2.12.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \smoke_counter..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~2 debug messages>
+
+2.12.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \smoke_counter.
+Performed a total of 0 changes.
+
+2.12.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\smoke_counter'.
+Computing hashes of 7 cells of `\smoke_counter'.
+Finding duplicate cells in `\smoke_counter'.
+Removed a total of 0 cells.
+
+2.12.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+2.12.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \smoke_counter..
+
+2.12.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module smoke_counter.
+
+2.12.9. Finished fast OPT passes. (There is nothing left to do.)
+
+2.13. Executing FSM pass (extract and optimize FSM).
+
+2.13.1. Executing FSM_DETECT pass (finding FSMs in design).
+
+2.13.2. Executing FSM_EXTRACT pass (extracting FSM from design).
+
+2.13.3. Executing FSM_OPT pass (simple optimizations of FSMs).
+
+2.13.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \smoke_counter..
+
+2.13.5. Executing FSM_OPT pass (simple optimizations of FSMs).
+
+2.13.6. Executing FSM_RECODE pass (re-assigning FSM state encoding).
+
+2.13.7. Executing FSM_INFO pass (dumping all available information on FSM cells).
+
+2.13.8. Executing FSM_MAP pass (mapping FSMs to basic logic).
+
+2.14. Executing OPT pass (performing simple optimizations).
+
+2.14.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module smoke_counter.
+
+2.14.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\smoke_counter'.
+Computing hashes of 7 cells of `\smoke_counter'.
+Finding duplicate cells in `\smoke_counter'.
+Removed a total of 0 cells.
+
+2.14.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \smoke_counter..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~2 debug messages>
+
+2.14.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \smoke_counter.
+Performed a total of 0 changes.
+
+2.14.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\smoke_counter'.
+Computing hashes of 7 cells of `\smoke_counter'.
+Finding duplicate cells in `\smoke_counter'.
+Removed a total of 0 cells.
+
+2.14.6. Executing OPT_DFF pass (perform DFF optimizations).
+Adding SRST signal on $procdff$350 ($dff) from module smoke_counter (D = $add$design/rtl/common/smoke_counter.v:120$4_Y, Q = \count, rval = 24'000000000000000000000000).
+
+2.14.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \smoke_counter..
+Removed 1 unused cells and 1 unused wires.
+<suppressed ~2 debug messages>
+
+2.14.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module smoke_counter.
+
+2.14.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+2.14.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \smoke_counter..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+
+2.14.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \smoke_counter.
+Performed a total of 0 changes.
+
+2.14.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\smoke_counter'.
+Computing hashes of 6 cells of `\smoke_counter'.
+Finding duplicate cells in `\smoke_counter'.
+Removed a total of 0 cells.
+
+2.14.13. Executing OPT_DFF pass (perform DFF optimizations).
+
+2.14.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \smoke_counter..
+
+2.14.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module smoke_counter.
+
+2.14.16. Finished fast OPT passes. (There is nothing left to do.)
+
+2.15. Executing WREDUCE pass (reducing word size of cells).
+Removed top 23 bits (of 24) from port B of cell smoke_counter.$add$design/rtl/common/smoke_counter.v:120$4 ($add).
+
+2.16. Executing PEEPOPT pass (run peephole optimizers).
+
+2.17. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \smoke_counter..
+
+2.18. Executing SHARE pass (SAT-based resource sharing).
+
+2.19. Executing TECHMAP pass (map to technology primitives).
+
+2.19.1. Executing Verilog-2005 frontend: /share/mul2dsp.v
+Parsing Verilog input from `/share/mul2dsp.v' to AST representation.
+Generating RTLIL representation for module `\_80_mul'.
+Generating RTLIL representation for module `\_90_soft_mul'.
+Successfully finished Verilog frontend.
+
+2.19.2. Continuing TECHMAP pass.
+No more expansions possible.
+<suppressed ~4 debug messages>
+
+2.20. Executing TECHMAP pass (map to technology primitives).
+
+2.20.1. Executing Verilog-2005 frontend: /share/mul2dsp.v
+Parsing Verilog input from `/share/mul2dsp.v' to AST representation.
+Generating RTLIL representation for module `\_80_mul'.
+Generating RTLIL representation for module `\_90_soft_mul'.
+Successfully finished Verilog frontend.
+
+2.20.2. Continuing TECHMAP pass.
+No more expansions possible.
+<suppressed ~4 debug messages>
+
+2.21. Executing TECHMAP pass (map to technology primitives).
+
+2.21.1. Executing Verilog-2005 frontend: /share/mul2dsp.v
+Parsing Verilog input from `/share/mul2dsp.v' to AST representation.
+Generating RTLIL representation for module `\_80_mul'.
+Generating RTLIL representation for module `\_90_soft_mul'.
+Successfully finished Verilog frontend.
+
+2.21.2. Continuing TECHMAP pass.
+No more expansions possible.
+<suppressed ~4 debug messages>
+
+2.22. Executing TECHMAP pass (map to technology primitives).
+
+2.22.1. Executing Verilog-2005 frontend: /share/mul2dsp.v
+Parsing Verilog input from `/share/mul2dsp.v' to AST representation.
+Generating RTLIL representation for module `\_80_mul'.
+Generating RTLIL representation for module `\_90_soft_mul'.
+Successfully finished Verilog frontend.
+
+2.22.2. Continuing TECHMAP pass.
+No more expansions possible.
+<suppressed ~4 debug messages>
+
+2.23. Executing TECHMAP pass (map to technology primitives).
+
+2.23.1. Executing Verilog-2005 frontend: /share/gowin/dsp_map.v
+Parsing Verilog input from `/share/gowin/dsp_map.v' to AST representation.
+Generating RTLIL representation for module `$__MUL9X9'.
+Generating RTLIL representation for module `$__MUL18X18'.
+Generating RTLIL representation for module `$__MUL36X36'.
+Successfully finished Verilog frontend.
+
+2.23.2. Continuing TECHMAP pass.
+No more expansions possible.
+<suppressed ~5 debug messages>
+
+2.24. Executing ALUMACC pass (create $alu and $macc cells).
+Extracting $alu and $macc cells in module smoke_counter:
+  creating $macc model for $add$design/rtl/common/smoke_counter.v:120$4 ($add).
+  creating $alu model for $macc $add$design/rtl/common/smoke_counter.v:120$4.
+  creating $alu cell for $add$design/rtl/common/smoke_counter.v:120$4: $auto$alumacc.cc:578:replace_alu$354
+  created 1 $alu and 0 $macc cells.
+
+2.25. Executing OPT pass (performing simple optimizations).
+
+2.25.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module smoke_counter.
+
+2.25.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\smoke_counter'.
+Computing hashes of 6 cells of `\smoke_counter'.
+Finding duplicate cells in `\smoke_counter'.
+Removed a total of 0 cells.
+
+2.25.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \smoke_counter..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+
+2.25.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \smoke_counter.
+Performed a total of 0 changes.
+
+2.25.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\smoke_counter'.
+Computing hashes of 6 cells of `\smoke_counter'.
+Finding duplicate cells in `\smoke_counter'.
+Removed a total of 0 cells.
+
+2.25.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+2.25.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \smoke_counter..
+
+2.25.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module smoke_counter.
+
+2.25.9. Finished fast OPT passes. (There is nothing left to do.)
+
+2.26. Executing MEMORY pass.
+
+2.26.1. Executing OPT_MEM pass (optimize memories).
+Performed a total of 0 transformations.
+
+2.26.2. Executing OPT_MEM_PRIORITY pass (removing unnecessary memory write priority relations).
+Performed a total of 0 transformations.
+
+2.26.3. Executing OPT_MEM_FEEDBACK pass (finding memory read-to-write feedback paths).
+
+2.26.4. Executing MEMORY_BMUX2ROM pass (converting muxes to ROMs).
+
+2.26.5. Executing MEMORY_DFF pass (merging $dff cells to $memrd).
+
+2.26.6. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \smoke_counter..
+
+2.26.7. Executing MEMORY_SHARE pass (consolidating $memrd/$memwr cells).
+
+2.26.8. Executing OPT_MEM_WIDEN pass (optimize memories where all ports are wide).
+Performed a total of 0 transformations.
+
+2.26.9. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \smoke_counter..
+
+2.26.10. Executing MEMORY_COLLECT pass (generating $mem cells).
+
+2.27. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \smoke_counter..
+
+2.28. Executing MEMORY_LIBMAP pass (mapping memories to cells).
+
+2.29. Executing TECHMAP pass (map to technology primitives).
+
+2.29.1. Executing Verilog-2005 frontend: /share/gowin/lutrams_map.v
+Parsing Verilog input from `/share/gowin/lutrams_map.v' to AST representation.
+Generating RTLIL representation for module `$__GOWIN_LUTRAM_'.
+Successfully finished Verilog frontend.
+
+2.29.2. Executing Verilog-2005 frontend: /share/gowin/brams_map.v
+Parsing Verilog input from `/share/gowin/brams_map.v' to AST representation.
+Generating RTLIL representation for module `$__GOWIN_SP_'.
+Generating RTLIL representation for module `$__GOWIN_DP_'.
+Generating RTLIL representation for module `$__GOWIN_SDP_'.
+Successfully finished Verilog frontend.
+
+2.29.3. Continuing TECHMAP pass.
+No more expansions possible.
+<suppressed ~6 debug messages>
+
+2.30. Executing OPT pass (performing simple optimizations).
+
+2.30.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module smoke_counter.
+
+2.30.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\smoke_counter'.
+Computing hashes of 6 cells of `\smoke_counter'.
+Finding duplicate cells in `\smoke_counter'.
+Removed a total of 0 cells.
+
+2.30.3. Executing OPT_DFF pass (perform DFF optimizations).
+
+2.30.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \smoke_counter..
+
+2.30.5. Finished fast OPT passes.
+
+2.31. Executing MEMORY_MAP pass (converting memories to logic and flip-flops).
+
+2.32. Executing OPT pass (performing simple optimizations).
+
+2.32.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module smoke_counter.
+
+2.32.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\smoke_counter'.
+Computing hashes of 6 cells of `\smoke_counter'.
+Finding duplicate cells in `\smoke_counter'.
+Removed a total of 0 cells.
+
+2.32.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \smoke_counter..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+
+2.32.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \smoke_counter.
+Performed a total of 0 changes.
+
+2.32.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\smoke_counter'.
+Computing hashes of 6 cells of `\smoke_counter'.
+Finding duplicate cells in `\smoke_counter'.
+Removed a total of 0 cells.
+
+2.32.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+2.32.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \smoke_counter..
+
+2.32.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module smoke_counter.
+
+2.32.9. Finished fast OPT passes. (There is nothing left to do.)
+
+2.33. Executing TECHMAP pass (map to technology primitives).
+
+2.33.1. Executing Verilog-2005 frontend: /share/techmap.v
+Parsing Verilog input from `/share/techmap.v' to AST representation.
+Generating RTLIL representation for module `\_90_simplemap_bool_ops'.
+Generating RTLIL representation for module `\_90_simplemap_reduce_ops'.
+Generating RTLIL representation for module `\_90_simplemap_logic_ops'.
+Generating RTLIL representation for module `\_90_simplemap_compare_ops'.
+Generating RTLIL representation for module `\_90_simplemap_various'.
+Generating RTLIL representation for module `\_90_simplemap_registers'.
+Generating RTLIL representation for module `\_90_shift_ops_shr_shl_sshl_sshr'.
+Generating RTLIL representation for module `\_90_shift_shiftx'.
+Generating RTLIL representation for module `\_90_fa'.
+Generating RTLIL representation for module `\_90_lcu_brent_kung'.
+Generating RTLIL representation for module `\_90_alu'.
+Generating RTLIL representation for module `\_90_macc'.
+Generating RTLIL representation for module `\_90_alumacc'.
+Generating RTLIL representation for module `$__div_mod_u'.
+Generating RTLIL representation for module `$__div_mod_trunc'.
+Generating RTLIL representation for module `\_90_div'.
+Generating RTLIL representation for module `\_90_mod'.
+Generating RTLIL representation for module `$__div_mod_floor'.
+Generating RTLIL representation for module `\_90_divfloor'.
+Generating RTLIL representation for module `\_90_modfloor'.
+Generating RTLIL representation for module `\_90_pow'.
+Generating RTLIL representation for module `\_90_demux'.
+Generating RTLIL representation for module `\_90_lut'.
+Generating RTLIL representation for module `$connect'.
+Generating RTLIL representation for module `$input_port'.
+Successfully finished Verilog frontend.
+
+2.33.2. Executing Verilog-2005 frontend: /share/gowin/arith_map.v
+Parsing Verilog input from `/share/gowin/arith_map.v' to AST representation.
+Generating RTLIL representation for module `\_80_gw1n_alu'.
+Successfully finished Verilog frontend.
+
+2.33.3. Continuing TECHMAP pass.
+Using template $paramod$79aa992f2eb7f354d4aaf651790713cf239111fa\_80_gw1n_alu for cells of type $alu.
+Using extmapper simplemap for cells of type $sdff.
+Using extmapper simplemap for cells of type $not.
+Using extmapper simplemap for cells of type $dff.
+Using extmapper simplemap for cells of type $xor.
+Using extmapper simplemap for cells of type $pos.
+No more expansions possible.
+<suppressed ~128 debug messages>
+
+2.34. Executing OPT pass (performing simple optimizations).
+
+2.34.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module smoke_counter.
+<suppressed ~72 debug messages>
+
+2.34.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\smoke_counter'.
+Computing hashes of 58 cells of `\smoke_counter'.
+Finding duplicate cells in `\smoke_counter'.
+Removed a total of 0 cells.
+
+2.34.3. Executing OPT_DFF pass (perform DFF optimizations).
+
+2.34.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \smoke_counter..
+Removed 1 unused cells and 40 unused wires.
+<suppressed ~2 debug messages>
+
+2.34.5. Finished fast OPT passes.
+
+2.35. Executing IOPADMAP pass (mapping inputs/outputs to IO-PAD cells).
+Mapping port smoke_counter.led_n using OBUF.
+Mapping port smoke_counter.btn_rst_n using IBUF.
+Mapping port smoke_counter.clk using IBUF.
+
+2.36. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \smoke_counter..
+
+2.37. Executing DFFLEGALIZE pass (convert FFs and LATCHes to types supported by the target).
+
+2.38. Executing TECHMAP pass (map to technology primitives).
+
+2.38.1. Executing Verilog-2005 frontend: /share/gowin/cells_map.v
+Parsing Verilog input from `/share/gowin/cells_map.v' to AST representation.
+Generating RTLIL representation for module `$_DFF_N_'.
+Generating RTLIL representation for module `$_DFF_P_'.
+Generating RTLIL representation for module `$_DFFE_PP_'.
+Generating RTLIL representation for module `$_DFFE_NP_'.
+Generating RTLIL representation for module `$_SDFF_PP0_'.
+Generating RTLIL representation for module `$_SDFF_NP0_'.
+Generating RTLIL representation for module `$_SDFFE_PP0P_'.
+Generating RTLIL representation for module `$_SDFFE_NP0P_'.
+Generating RTLIL representation for module `$_SDFF_PP1_'.
+Generating RTLIL representation for module `$_SDFF_NP1_'.
+Generating RTLIL representation for module `$_SDFFE_PP1P_'.
+Generating RTLIL representation for module `$_SDFFE_NP1P_'.
+Generating RTLIL representation for module `$_DFF_PP1_'.
+Generating RTLIL representation for module `$_DFF_NP1_'.
+Generating RTLIL representation for module `$_DFF_PP0_'.
+Generating RTLIL representation for module `$_DFF_NP0_'.
+Generating RTLIL representation for module `$_DFFE_PP1P_'.
+Generating RTLIL representation for module `$_DFFE_NP1P_'.
+Generating RTLIL representation for module `$_DFFE_PP0P_'.
+Generating RTLIL representation for module `$_DFFE_NP0P_'.
+Generating RTLIL representation for module `$lut'.
+Successfully finished Verilog frontend.
+
+2.38.2. Continuing TECHMAP pass.
+Using template $_SDFF_PP1_ for cells of type $_SDFF_PP1_.
+Using template $_SDFF_PP0_ for cells of type $_SDFF_PP0_.
+No more expansions possible.
+<suppressed ~49 debug messages>
+
+2.39. Executing TECHMAP pass (map to technology primitives).
+
+2.39.1. Executing Verilog-2005 frontend: /share/gowin/cells_latch.v
+Parsing Verilog input from `/share/gowin/cells_latch.v' to AST representation.
+Generating RTLIL representation for module `$_DLATCH_P_'.
+Generating RTLIL representation for module `$_DLATCH_N_'.
+Generating RTLIL representation for module `$_DLATCH_PP0_'.
+Generating RTLIL representation for module `$_DLATCH_NP0_'.
+Generating RTLIL representation for module `$_DLATCH_PP1_'.
+Generating RTLIL representation for module `$_DLATCH_NP1_'.
+Successfully finished Verilog frontend.
+
+2.39.2. Continuing TECHMAP pass.
+No more expansions possible.
+<suppressed ~8 debug messages>
+
+2.40. Executing OPT_EXPR pass (perform const folding).
+Optimizing module smoke_counter.
+
+2.41. Executing SIMPLEMAP pass (map simple cells to gate primitives).
+
+2.42. Executing SORT pass.
+
+2.43. Executing Verilog-2005 frontend: /share/abc9_model.v
+Parsing Verilog input from `/share/abc9_model.v' to AST representation.
+Generating RTLIL representation for module `$__ABC9_DELAY'.
+Generating RTLIL representation for module `$__ABC9_BARRIER'.
+Generating RTLIL representation for module `$__ABC9_SCC_BREAKER'.
+Generating RTLIL representation for module `$__DFF_N__$abc9_flop'.
+Generating RTLIL representation for module `$__DFF_P__$abc9_flop'.
+Successfully finished Verilog frontend.
+
+2.44. Executing ABC9 pass.
+
+2.44.1. Executing ABC9_OPS pass (helper functions for ABC9).
+
+2.44.2. Executing ABC9_OPS pass (helper functions for ABC9).
+
+2.44.3. Executing PROC pass (convert processes to netlists).
+
+2.44.3.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Found and cleaned up 1 empty switch in `$paramod\ALU\ALU_MODE=s32'00000000000000000000000000000010.$proc$/share/gowin/cells_sim.v:1064$799'.
+Cleaned up 1 empty switch.
+
+2.44.3.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
+Removed a total of 0 dead cases.
+
+2.44.3.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).
+Removed 0 redundant assignments.
+Promoted 4 assignments to connections.
+
+2.44.3.4. Executing PROC_INIT pass (extract init attributes).
+
+2.44.3.5. Executing PROC_ARST pass (detect async resets in processes).
+
+2.44.3.6. Executing PROC_ROM pass (convert switches to ROMs).
+Converted 0 switches.
+
+2.44.3.7. Executing PROC_MUX pass (convert decision trees to multiplexers).
+Creating decoders for process `$paramod\ALU\ALU_MODE=s32'00000000000000000000000000000010.$proc$/share/gowin/cells_sim.v:1064$799'.
+
+2.44.3.8. Executing PROC_DLATCH pass (convert process syncs to latches).
+No latch inferred for signal `$paramod\ALU\ALU_MODE=s32'00000000000000000000000000000010.\C' from process `$paramod\ALU\ALU_MODE=s32'00000000000000000000000000000010.$proc$/share/gowin/cells_sim.v:1064$799'.
+No latch inferred for signal `$paramod\ALU\ALU_MODE=s32'00000000000000000000000000000010.\S' from process `$paramod\ALU\ALU_MODE=s32'00000000000000000000000000000010.$proc$/share/gowin/cells_sim.v:1064$799'.
+
+2.44.3.9. Executing PROC_DFF pass (convert process syncs to FFs).
+
+2.44.3.10. Executing PROC_MEMWR pass (convert process memory writes to cells).
+
+2.44.3.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Removing empty process `$paramod\ALU\ALU_MODE=s32'00000000000000000000000000000010.$proc$/share/gowin/cells_sim.v:1064$799'.
+Cleaned up 0 empty switches.
+
+2.44.4. Executing SCC pass (detecting logic loops).
+Found 0 SCCs in module smoke_counter.
+Found 0 SCCs.
+
+2.44.5. Executing ABC9_OPS pass (helper functions for ABC9).
+
+2.44.6. Executing TECHMAP pass (map to technology primitives).
+
+2.44.6.1. Executing Verilog-2005 frontend: /share/techmap.v
+Parsing Verilog input from `/share/techmap.v' to AST representation.
+Generating RTLIL representation for module `\_90_simplemap_bool_ops'.
+Generating RTLIL representation for module `\_90_simplemap_reduce_ops'.
+Generating RTLIL representation for module `\_90_simplemap_logic_ops'.
+Generating RTLIL representation for module `\_90_simplemap_compare_ops'.
+Generating RTLIL representation for module `\_90_simplemap_various'.
+Generating RTLIL representation for module `\_90_simplemap_registers'.
+Generating RTLIL representation for module `\_90_shift_ops_shr_shl_sshl_sshr'.
+Generating RTLIL representation for module `\_90_shift_shiftx'.
+Generating RTLIL representation for module `\_90_fa'.
+Generating RTLIL representation for module `\_90_lcu_brent_kung'.
+Generating RTLIL representation for module `\_90_alu'.
+Generating RTLIL representation for module `\_90_macc'.
+Generating RTLIL representation for module `\_90_alumacc'.
+Generating RTLIL representation for module `$__div_mod_u'.
+Generating RTLIL representation for module `$__div_mod_trunc'.
+Generating RTLIL representation for module `\_90_div'.
+Generating RTLIL representation for module `\_90_mod'.
+Generating RTLIL representation for module `$__div_mod_floor'.
+Generating RTLIL representation for module `\_90_divfloor'.
+Generating RTLIL representation for module `\_90_modfloor'.
+Generating RTLIL representation for module `\_90_pow'.
+Generating RTLIL representation for module `\_90_demux'.
+Generating RTLIL representation for module `\_90_lut'.
+Generating RTLIL representation for module `$connect'.
+Generating RTLIL representation for module `$input_port'.
+Successfully finished Verilog frontend.
+
+2.44.6.2. Continuing TECHMAP pass.
+No more expansions possible.
+<suppressed ~231 debug messages>
+
+2.44.7. Executing OPT pass (performing simple optimizations).
+
+2.44.7.1. Executing OPT_EXPR pass (perform const folding).
+
+2.44.7.2. Executing OPT_MERGE pass (detect identical cells).
+Removed a total of 0 cells.
+
+2.44.7.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Removed 0 multiplexer ports.
+
+2.44.7.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+Performed a total of 0 changes.
+
+2.44.7.5. Executing OPT_MERGE pass (detect identical cells).
+Removed a total of 0 cells.
+
+2.44.7.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+2.44.7.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+
+2.44.7.8. Executing OPT_EXPR pass (perform const folding).
+
+2.44.7.9. Finished fast OPT passes. (There is nothing left to do.)
+
+2.44.8. Executing TECHMAP pass (map to technology primitives).
+
+2.44.8.1. Executing Verilog-2005 frontend: /share/abc9_map.v
+Parsing Verilog input from `/share/abc9_map.v' to AST representation.
+Lexer warning: The SystemVerilog keyword `bit' (at /share/abc9_map.v:35) is not recognized unless read_verilog is called with -sv!
+Generating RTLIL representation for module `$__ABC9_BARRIER_MAP'.
+Successfully finished Verilog frontend.
+
+2.44.8.2. Continuing TECHMAP pass.
+No more expansions possible.
+<suppressed ~3 debug messages>
+
+2.44.9. Executing Verilog-2005 frontend: /share/abc9_model.v
+Parsing Verilog input from `/share/abc9_model.v' to AST representation.
+Replacing existing blackbox module `$__ABC9_DELAY' at /share/abc9_model.v:2.1-7.10.
+Generating RTLIL representation for module `$__ABC9_DELAY'.
+Replacing existing blackbox module `$__ABC9_BARRIER' at /share/abc9_model.v:10.1-14.10.
+Generating RTLIL representation for module `$__ABC9_BARRIER'.
+Replacing existing blackbox module `$__ABC9_SCC_BREAKER' at /share/abc9_model.v:16.1-18.10.
+Generating RTLIL representation for module `$__ABC9_SCC_BREAKER'.
+Replacing existing module `$__DFF_N__$abc9_flop' at /share/abc9_model.v:21.1-27.10.
+Generating RTLIL representation for module `$__DFF_N__$abc9_flop'.
+Replacing existing module `$__DFF_P__$abc9_flop' at /share/abc9_model.v:30.1-36.10.
+Generating RTLIL representation for module `$__DFF_P__$abc9_flop'.
+Successfully finished Verilog frontend.
+
+2.44.10. Executing ABC9_OPS pass (helper functions for ABC9).
+<suppressed ~54 debug messages>
+
+2.44.11. Executing ABC9_OPS pass (helper functions for ABC9).
+
+2.44.12. Executing ABC9_OPS pass (helper functions for ABC9).
+<suppressed ~2 debug messages>
+
+2.44.13. Executing TECHMAP pass (map to technology primitives).
+
+2.44.13.1. Executing Verilog-2005 frontend: /share/techmap.v
+Parsing Verilog input from `/share/techmap.v' to AST representation.
+Generating RTLIL representation for module `\_90_simplemap_bool_ops'.
+Generating RTLIL representation for module `\_90_simplemap_reduce_ops'.
+Generating RTLIL representation for module `\_90_simplemap_logic_ops'.
+Generating RTLIL representation for module `\_90_simplemap_compare_ops'.
+Generating RTLIL representation for module `\_90_simplemap_various'.
+Generating RTLIL representation for module `\_90_simplemap_registers'.
+Generating RTLIL representation for module `\_90_shift_ops_shr_shl_sshl_sshr'.
+Generating RTLIL representation for module `\_90_shift_shiftx'.
+Generating RTLIL representation for module `\_90_fa'.
+Generating RTLIL representation for module `\_90_lcu_brent_kung'.
+Generating RTLIL representation for module `\_90_alu'.
+Generating RTLIL representation for module `\_90_macc'.
+Generating RTLIL representation for module `\_90_alumacc'.
+Generating RTLIL representation for module `$__div_mod_u'.
+Generating RTLIL representation for module `$__div_mod_trunc'.
+Generating RTLIL representation for module `\_90_div'.
+Generating RTLIL representation for module `\_90_mod'.
+Generating RTLIL representation for module `$__div_mod_floor'.
+Generating RTLIL representation for module `\_90_divfloor'.
+Generating RTLIL representation for module `\_90_modfloor'.
+Generating RTLIL representation for module `\_90_pow'.
+Generating RTLIL representation for module `\_90_demux'.
+Generating RTLIL representation for module `\_90_lut'.
+Generating RTLIL representation for module `$connect'.
+Generating RTLIL representation for module `$input_port'.
+Successfully finished Verilog frontend.
+
+2.44.13.2. Continuing TECHMAP pass.
+Using template $paramod\ALU\ALU_MODE=s32'00000000000000000000000000000010 for cells of type $paramod\ALU\ALU_MODE=s32'00000000000000000000000000000010.
+Using extmapper simplemap for cells of type $mux.
+Using extmapper simplemap for cells of type $xor.
+Using extmapper simplemap for cells of type $not.
+No more expansions possible.
+<suppressed ~240 debug messages>
+
+2.44.14. Executing OPT pass (performing simple optimizations).
+
+2.44.14.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module smoke_counter.
+
+2.44.14.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\smoke_counter'.
+Computing hashes of 14 cells of `\smoke_counter'.
+Finding duplicate cells in `\smoke_counter'.
+Removed a total of 0 cells.
+
+2.44.14.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \smoke_counter..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+
+2.44.14.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \smoke_counter.
+Performed a total of 0 changes.
+
+2.44.14.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\smoke_counter'.
+Computing hashes of 14 cells of `\smoke_counter'.
+Finding duplicate cells in `\smoke_counter'.
+Removed a total of 0 cells.
+
+2.44.14.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+2.44.14.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \smoke_counter..
+Removed 0 unused cells and 16 unused wires.
+<suppressed ~1 debug messages>
+
+2.44.14.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module smoke_counter.
+
+2.44.14.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+2.44.14.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \smoke_counter..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+
+2.44.14.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \smoke_counter.
+Performed a total of 0 changes.
+
+2.44.14.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\smoke_counter'.
+Computing hashes of 14 cells of `\smoke_counter'.
+Finding duplicate cells in `\smoke_counter'.
+Removed a total of 0 cells.
+
+2.44.14.13. Executing OPT_DFF pass (perform DFF optimizations).
+
+2.44.14.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \smoke_counter..
+
+2.44.14.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module smoke_counter.
+
+2.44.14.16. Finished fast OPT passes. (There is nothing left to do.)
+
+2.44.15. Executing AIGMAP pass (map logic to AIG).
+Module smoke_counter: replaced 0 cells with 0 new cells, skipped 117 cells.
+  not replaced 8 cell types:
+       7 $_NOT_
+       2 IBUF
+       2 DFFS
+      24 DFFR
+       6 OBUF
+      24 $paramod\ALU\ALU_MODE=s32'00000000000000000000000000000010
+      26 $paramod$__ABC9_DELAY\DELAY=32'00000000000000000000001001000000
+      26 $paramod$__ABC9_DELAY\DELAY=32'00000000000000000000000000111111
+
+2.44.15.1. Executing ABC9_OPS pass (helper functions for ABC9).
+
+2.44.15.2. Executing ABC9_OPS pass (helper functions for ABC9).
+
+2.44.15.3. Executing XAIGER2 backend.
+<suppressed ~230 debug messages>
+Extracted 137 AND gates and 0 wires from module `smoke_counter' to a netlist network with 136 inputs and 240 outputs.
+
+2.44.15.4. Executing ABC9_EXE pass (technology mapping using ABC9).
+
+2.44.15.5. Executing ABC9.
+Running ABC command: "/yosys-abc" -s -f <abc-temp-dir>/abc.script 2>&1
+
+2.44.15.6. Executing AIGER frontend.
+<suppressed ~10 debug messages>
+Removed 0 unused cells and 343 unused wires.
+
+2.44.15.7. Executing ABC_OPS_REINTEGRATE pass (reintegrate ABC mapped design into module).
+ABC RESULTS:              $lut cells:        8
+ABC RESULTS:   $paramod\ALU\ALU_MODE=s32'00000000000000000000000000000010 cells:       24
+ABC RESULTS:           input signals:       13
+ABC RESULTS:          output signals:        1
+<suppressed ~128 debug messages>
+Removing temp directory.
+
+2.44.16. Executing TECHMAP pass (map to technology primitives).
+
+2.44.16.1. Executing Verilog-2005 frontend: /share/abc9_unmap.v
+Parsing Verilog input from `/share/abc9_unmap.v' to AST representation.
+Generating RTLIL representation for module `$__DFF_x__$abc9_flop'.
+Generating RTLIL representation for module `$__ABC9_SCC_BREAKER'.
+Generating RTLIL representation for module `$__ABC9_BARRIER'.
+Successfully finished Verilog frontend.
+
+2.44.16.2. Continuing TECHMAP pass.
+Using template $paramod\ALU\ALU_MODE=s32'00000000000000000000000000000010 for cells of type $paramod\ALU\ALU_MODE=s32'00000000000000000000000000000010.
+No more expansions possible.
+<suppressed ~31 debug messages>
+Removed 0 unused cells and 400 unused wires.
+
+2.45. Executing TECHMAP pass (map to technology primitives).
+
+2.45.1. Executing Verilog-2005 frontend: /share/gowin/cells_map.v
+Parsing Verilog input from `/share/gowin/cells_map.v' to AST representation.
+Generating RTLIL representation for module `$_DFF_N_'.
+Generating RTLIL representation for module `$_DFF_P_'.
+Generating RTLIL representation for module `$_DFFE_PP_'.
+Generating RTLIL representation for module `$_DFFE_NP_'.
+Generating RTLIL representation for module `$_SDFF_PP0_'.
+Generating RTLIL representation for module `$_SDFF_NP0_'.
+Generating RTLIL representation for module `$_SDFFE_PP0P_'.
+Generating RTLIL representation for module `$_SDFFE_NP0P_'.
+Generating RTLIL representation for module `$_SDFF_PP1_'.
+Generating RTLIL representation for module `$_SDFF_NP1_'.
+Generating RTLIL representation for module `$_SDFFE_PP1P_'.
+Generating RTLIL representation for module `$_SDFFE_NP1P_'.
+Generating RTLIL representation for module `$_DFF_PP1_'.
+Generating RTLIL representation for module `$_DFF_NP1_'.
+Generating RTLIL representation for module `$_DFF_PP0_'.
+Generating RTLIL representation for module `$_DFF_NP0_'.
+Generating RTLIL representation for module `$_DFFE_PP1P_'.
+Generating RTLIL representation for module `$_DFFE_NP1P_'.
+Generating RTLIL representation for module `$_DFFE_PP0P_'.
+Generating RTLIL representation for module `$_DFFE_NP0P_'.
+Generating RTLIL representation for module `$lut'.
+Successfully finished Verilog frontend.
+
+2.45.2. Continuing TECHMAP pass.
+Using template $paramod$lut\WIDTH=32'00000000000000000000000000000001\LUT=2'01 for cells of type $lut.
+No more expansions possible.
+<suppressed ~42 debug messages>
+
+2.46. Executing OPT_LUT_INS pass (discard unused LUT inputs).
+Optimizing LUTs in smoke_counter.
+
+2.47. Executing HILOMAP pass (mapping to constant drivers).
+Removed 0 unused cells and 16 unused wires.
+
+2.48. Executing AUTONAME pass.
+Renamed 128 objects in module smoke_counter.
+<suppressed ~128 debug messages>
+
+2.49. Executing HIERARCHY pass (managing design hierarchy).
+Attribute `top' found on module `smoke_counter'. Setting top module to smoke_counter.
+
+2.49.1. Analyzing design hierarchy..
+Top module:  \smoke_counter
+
+2.49.2. Analyzing design hierarchy..
+Top module:  \smoke_counter
+Removed 0 unused modules.
+
+2.50. Printing statistics.
+
+=== smoke_counter ===
+
+        +----------Local Count, excluding submodules.
+        | 
+       67 wires
+       95 wire bits
+       67 public wires
+       95 public wire bits
+        3 ports
+        8 port bits
+       18 cells
+        1   GND
+        2   IBUF
+        8   LUT1
+        6   OBUF
+        1   VCC
+       50 submodules
+       24   ALU
+       24   DFFR
+        2   DFFS
+
+=== design hierarchy ===
+
+        +----------Count including submodules.
+        | 
+       18 smoke_counter
+
+        +----------Count including submodules.
+        | 
+       67 wires
+       95 wire bits
+       67 public wires
+       95 public wire bits
+        3 ports
+        8 port bits
+        - memories
+        - memory bits
+        - processes
+       18 cells
+        1   GND
+        2   IBUF
+        8   LUT1
+        6   OBUF
+        1   VCC
+       50 submodules
+       24   ALU
+       24   DFFR
+        2   DFFS
+
+2.51. Executing CHECK pass (checking for obvious problems).
+Checking module smoke_counter...
+Found and reported 0 problems.
+
+2.52. Executing JSON backend.
+
+3. Printing statistics.
+
+=== smoke_counter ===
+
+        +----------Local Count, excluding submodules.
+        | 
+       67 wires
+       95 wire bits
+       67 public wires
+       95 public wire bits
+        3 ports
+        8 port bits
+       68 cells
+       24   ALU
+       24   DFFR
+        2   DFFS
+        1   GND
+        2   IBUF
+        8   LUT1
+        6   OBUF
+        1   VCC
+
+End of script. Logfile hash: 13327593ce, time: 0.32s, user: 0.32s, system: 0.00s
+Yosys 0.70 (git sha1 28ba3cb92, Release, Clang /workspace/YoWASP/yosys/wasi-sdk-33.0-x86_64-linux/share/cmake/../..//bin/clang++ 22.1.0)
+Time spent: 43% 26x read_verilog (0 sec), 10% 1x abc9_exe (0 sec), ...

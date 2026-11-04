@@ -1,0 +1,26 @@
+# command: bash scripts/budgets/run_ubench.sh
+# date: 2026-11-04T03:05:39Z  revision: be4b802-dirty
+# yosys: Yosys 0.70 (git sha1 28ba3cb92, Release, Clang /workspace/YoWASP/yosys/wasi-sdk-33.0-x86_64-linux/share/cmake/../..//bin/clang++ 22.1.0)
+# nextpnr: "yowasp-nextpnr-himbaechel-gowin" -- Next Generation Place and Route (Version nextpnr-0.11.1)
+# apycula: Version: 0.32
+# picorv32.v: https://raw.githubusercontent.com/YosysHQ/picorv32/main/picorv32.v sha256=0836050971b3c6cdd28ac3b1e5719a67fb645161912bef1e472e63995ceb0622
+
+================ sc_nl16_il8_m0 (top=sc_ubench_top -set RNG_MODE 0) ================
+yosys exit=0
+  IOB:       8/    276     2%
+  LUT4:    2855/   8640    33%
+  MUX2_LUT5:     322/   4320     7%
+  MUX2_LUT6:     128/   2160     5%
+  MUX2_LUT7:      64/   1080     5%
+  MUX2_LUT8:      32/   1080     2%
+  ALU:    1758/   6480    27%
+  DFF:    1454/   6480    22%
+  RAM16SDP4:       0/    270     0%
+  BSRAM:       0/     26     0%
+  MULT18X18:       0/     20     0%
+  MULT9X9:       0/     40     0%
+  seed 1 nextpnr exit=0 :: Max frequency for clock 'u.clk': 55.73 MHz (PASS at 27.00 MHz)
+  seed 2 nextpnr exit=0 :: Max frequency for clock 'u.clk': 56.48 MHz (PASS at 27.00 MHz)
+  seed 3 nextpnr exit=0 :: Max frequency for clock 'u.clk': 52.36 MHz (PASS at 27.00 MHz)
+
+================ sc_nl16_il8_m1 (top=sc_ubench_top -set RNG_MODE 1) ================

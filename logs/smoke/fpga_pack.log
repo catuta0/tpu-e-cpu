@@ -1,0 +1,11 @@
+# cmd: gowin_pack -d GW1N-9C -o sim/smoke/build/smoke_counter.fs sim/smoke/build/smoke_counter_pnr.json
+PACK_EXIT=0
+# bitstream file:
+-rw-r--r-- 1 root root 2069320 Nov  4 03:05 sim/smoke/build/smoke_counter.fs
+size_bytes=2069320
+3c7d62eab9464094898d2a475b9c7c7f505eac6856b50c00d566869e218e5e71  sim/smoke/build/smoke_counter.fs
+# first 3 lines of the .fs (ASCII '0'/'1' bitstream text), cut to 80 chars:
+11111111111111111111111111111111111111111111111111111111111111111111111111111111
+1111111111111111
+1010010111000011
+lines=728

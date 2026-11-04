@@ -125,3 +125,85 @@ def period(seed: int = DEFAULT_SEED, limit: int = MAX_PERIOD + 1) -> int:
         if reg.next() == seed:
             return n
     return -1
+
+
+# ---------------------------------------------------------------------------
+# Leap-forward (multi-step) LFSR — ARCHITECTURE.md section 5.3, ADR-005
+# ---------------------------------------------------------------------------
+#
+# The SC-TPU advances every LFSR by 8 single steps per stream cycle so that
+# the 8-bit random number r (the low byte of the new state) consists of 8
+# fresh feedback bits (ADR-005). Because one step is a linear map over GF(2),
+# eight steps are also a linear map: every bit of the new state is the XOR of
+# a fixed subset of the bits of the old state. ``LEAP8_MASKS[b]`` is that subset
+# for new bit b (bit set at position p <=> old bit p takes part in the XOR).
+# The RTL may implement the 8-step network either as 8 chained copies of the
+# single-step logic or with these masks directly; both are bit-identical.
+
+#: Number of single LFSR steps per SC-TPU stream cycle (ARCHITECTURE.md 5.3).
+STEPS_PER_STREAM_CYCLE = 8
+
+
+def step_n(state: int, n: int) -> int:
+    """Advance ``state`` by ``n`` single steps (reference, ARCHITECTURE.md 5.3).
+
+    This is the literal definition of an n-step leap: ``n`` successive calls of
+    :func:`step`. It is deliberately slow and obviously correct; the test suite
+    compares the fast mask-based :func:`leap8` against it for every state.
+    """
+    for _ in range(n):
+        state = step(state)
+    return state
+
+
+def _leap_masks(n: int) -> tuple[int, ...]:
+    """Return the 16 GF(2) row masks of the n-step transition matrix.
+
+    Method: the transition is linear, so its matrix columns are the images of
+    the unit vectors. Column p = step_n(1 << p, n). Row b (new bit b) is then
+    the set of p whose column has bit b set. Note ``step`` rejects nothing here
+    because a unit vector is non-zero; linearity holds for the zero state too
+    (0 maps to 0), so the masks are valid for every state.
+    """
+    columns = [step_n(1 << p, n) for p in range(WIDTH)]
+    rows = []
+    for b in range(WIDTH):
+        m = 0
+        for p in range(WIDTH):
+            if (columns[p] >> b) & 1:
+                m |= 1 << p
+        rows.append(m)
+    return tuple(rows)
+
+
+#: Row masks of the 8-step leap-forward network (new bit b = parity(state & mask)).
+LEAP8_MASKS = _leap_masks(STEPS_PER_STREAM_CYCLE)
+
+
+def leap8(state: int) -> int:
+    """Advance ``state`` by 8 steps in one go (ARCHITECTURE.md 5.3, ADR-005).
+
+    Implements the unrolled XOR network with :data:`LEAP8_MASKS`. Equivalent to
+    ``step_n(state, 8)`` (checked exhaustively by the unit tests). Python's
+    ``int.bit_count`` gives the parity of each masked word.
+    """
+    out = 0
+    for b, mask in enumerate(LEAP8_MASKS):
+        out |= ((state & mask).bit_count() & 1) << b
+    return out
+
+
+def stream_r_sequence(seed: int, n_cycles: int) -> list[int]:
+    """Return the r values of ``n_cycles`` stream cycles starting from ``seed``.
+
+    ARCHITECTURE.md 5.3: one stream cycle advances the LFSR by 8 steps and uses
+    the low byte of the NEW state as r. The seed itself is therefore never used
+    as r; the first r is ``leap8(seed) & 0xFF`` (literal reading, see the
+    SW-01a handoff, ambiguity A2).
+    """
+    out = []
+    s = seed
+    for _ in range(n_cycles):
+        s = leap8(s)
+        out.append(s & 0xFF)
+    return out

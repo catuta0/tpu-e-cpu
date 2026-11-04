@@ -1,0 +1,4 @@
+# cmd: verilator --lint-only -Wall design/rtl/common/smoke_counter.v --top-module smoke_counter
+LINT_RTL_EXIT=0
+# cmd: verilator --lint-only -Wall --timing design/rtl/common/smoke_counter.v tests/smoke/tb_smoke_counter.v --top-module tb_smoke_counter
+LINT_TB_EXIT=0

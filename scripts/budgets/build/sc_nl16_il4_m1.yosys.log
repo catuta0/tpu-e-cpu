@@ -1,0 +1,2218 @@
+
+ /----------------------------------------------------------------------------\
+ |  yosys -- Yosys Open SYnthesis Suite                                       |
+ |  Copyright (C) 2012 - 2026  Claire Xenia Wolf <claire@yosyshq.com>         |
+ |  Distributed under an ISC-like license, type "license" to see terms        |
+ \----------------------------------------------------------------------------/
+ Yosys 0.70 (git sha1 28ba3cb92, Release, Clang /workspace/YoWASP/yosys/wasi-sdk-33.0-x86_64-linux/share/cmake/../..//bin/clang++ 22.1.0)
+
+-- Running command `read_verilog /home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v; chparam -set IL 4 -set AW 6 -set RNG_MODE 1 sc_array_ubench; synth_gowin -top sc_array_ubench -json /home/user/tpu-e-cpu/scripts/budgets/build/sc_nl16_il4_m1.json' --
+
+1. Executing Verilog-2005 frontend: /home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v
+Parsing Verilog input from `/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v' to AST representation.
+Generating RTLIL representation for module `\lfsr16_leap8'.
+Generating RTLIL representation for module `\sc_array_ubench'.
+Successfully finished Verilog frontend.
+Parameter \IL = 4
+Parameter \RNG_MODE = 1
+Parameter \AW = 6
+
+2. Executing AST frontend in derive mode using pre-parsed AST for module `\sc_array_ubench'.
+Parameter \IL = 4
+Parameter \RNG_MODE = 1
+Parameter \AW = 6
+Generating RTLIL representation for module `$paramod$cd0b9882a5a0cd73ccd233d065266ca18821f125\sc_array_ubench'.
+
+3. Executing SYNTH_GOWIN pass.
+
+3.1. Executing Verilog-2005 frontend: /share/gowin/cells_sim.v
+Parsing Verilog input from `/share/gowin/cells_sim.v' to AST representation.
+Generating RTLIL representation for module `\LUT1'.
+Generating RTLIL representation for module `\LUT2'.
+Generating RTLIL representation for module `\LUT3'.
+Generating RTLIL representation for module `\LUT4'.
+Generating RTLIL representation for module `\__APICULA_LUT5'.
+Generating RTLIL representation for module `\__APICULA_LUT6'.
+Generating RTLIL representation for module `\__APICULA_LUT7'.
+Generating RTLIL representation for module `\__APICULA_LUT8'.
+Generating RTLIL representation for module `\MUX2'.
+Generating RTLIL representation for module `\MUX2_LUT5'.
+Generating RTLIL representation for module `\MUX2_LUT6'.
+Generating RTLIL representation for module `\MUX2_LUT7'.
+Generating RTLIL representation for module `\MUX2_LUT8'.
+Generating RTLIL representation for module `\DFF'.
+Generating RTLIL representation for module `\DFFE'.
+Generating RTLIL representation for module `\DFFS'.
+Generating RTLIL representation for module `\DFFSE'.
+Generating RTLIL representation for module `\DFFR'.
+Generating RTLIL representation for module `\DFFRE'.
+Generating RTLIL representation for module `\DFFP'.
+Generating RTLIL representation for module `\DFFPE'.
+Generating RTLIL representation for module `\DFFC'.
+Generating RTLIL representation for module `\DFFCE'.
+Generating RTLIL representation for module `\DFFN'.
+Generating RTLIL representation for module `\DFFNE'.
+Generating RTLIL representation for module `\DFFNS'.
+Generating RTLIL representation for module `\DFFNSE'.
+Generating RTLIL representation for module `\DFFNR'.
+Generating RTLIL representation for module `\DFFNRE'.
+Generating RTLIL representation for module `\DFFNP'.
+Generating RTLIL representation for module `\DFFNPE'.
+Generating RTLIL representation for module `\DFFNC'.
+Generating RTLIL representation for module `\DFFNCE'.
+Generating RTLIL representation for module `\DL'.
+Generating RTLIL representation for module `\DLN'.
+Generating RTLIL representation for module `\DLE'.
+Generating RTLIL representation for module `\DLNE'.
+Generating RTLIL representation for module `\DLC'.
+Generating RTLIL representation for module `\DLCE'.
+Generating RTLIL representation for module `\DLNC'.
+Generating RTLIL representation for module `\DLNCE'.
+Generating RTLIL representation for module `\DLP'.
+Generating RTLIL representation for module `\DLPE'.
+Generating RTLIL representation for module `\DLNP'.
+Generating RTLIL representation for module `\DLNPE'.
+Generating RTLIL representation for module `\VCC'.
+Generating RTLIL representation for module `\GND'.
+Generating RTLIL representation for module `\IBUF'.
+Generating RTLIL representation for module `\OBUF'.
+Generating RTLIL representation for module `\TBUF'.
+Generating RTLIL representation for module `\IOBUF'.
+Generating RTLIL representation for module `\ELVDS_OBUF'.
+Generating RTLIL representation for module `\TLVDS_OBUF'.
+Generating RTLIL representation for module `\OSER4'.
+Generating RTLIL representation for module `\OSER4_MEM'.
+Generating RTLIL representation for module `\OSER8'.
+Generating RTLIL representation for module `\OSER10'.
+Generating RTLIL representation for module `\OVIDEO'.
+Generating RTLIL representation for module `\OSER16'.
+Generating RTLIL representation for module `\IDES4'.
+Generating RTLIL representation for module `\IDES4_MEM'.
+Generating RTLIL representation for module `\IDES8'.
+Generating RTLIL representation for module `\IDES10'.
+Generating RTLIL representation for module `\IVIDEO'.
+Generating RTLIL representation for module `\IDES16'.
+Generating RTLIL representation for module `\IDDR'.
+Generating RTLIL representation for module `\IDDRC'.
+Generating RTLIL representation for module `\DQS'.
+Generating RTLIL representation for module `\ODDR'.
+Generating RTLIL representation for module `\ODDRC'.
+Generating RTLIL representation for module `\GSR'.
+Generating RTLIL representation for module `\BANDGAP'.
+Generating RTLIL representation for module `\ALU'.
+Generating RTLIL representation for module `\RAM16S1'.
+Generating RTLIL representation for module `\RAM16S2'.
+Generating RTLIL representation for module `\RAM16S4'.
+Generating RTLIL representation for module `\RAM16SDP1'.
+Generating RTLIL representation for module `\RAM16SDP2'.
+Generating RTLIL representation for module `\RAM16SDP4'.
+Generating RTLIL representation for module `\SP'.
+Generating RTLIL representation for module `\SPX9'.
+Generating RTLIL representation for module `\SDP'.
+Generating RTLIL representation for module `\SDPX9'.
+Generating RTLIL representation for module `\DP'.
+Generating RTLIL representation for module `\DPX9'.
+Generating RTLIL representation for module `\rPLL'.
+Generating RTLIL representation for module `\PLLVR'.
+Generating RTLIL representation for module `\OSC'.
+Generating RTLIL representation for module `\OSCZ'.
+Generating RTLIL representation for module `\OSCF'.
+Generating RTLIL representation for module `\OSCH'.
+Generating RTLIL representation for module `\OSCW'.
+Generating RTLIL representation for module `\OSCO'.
+Generating RTLIL representation for module `\EMCU'.
+Successfully finished Verilog frontend.
+
+3.2. Executing Verilog-2005 frontend: /share/gowin/cells_xtra_gw1n.v
+Parsing Verilog input from `/share/gowin/cells_xtra_gw1n.v' to AST representation.
+Generating RTLIL representation for module `\LUT5'.
+Generating RTLIL representation for module `\LUT6'.
+Generating RTLIL representation for module `\LUT7'.
+Generating RTLIL representation for module `\LUT8'.
+Generating RTLIL representation for module `\INV'.
+Generating RTLIL representation for module `\IODELAY'.
+Generating RTLIL representation for module `\IEM'.
+Generating RTLIL representation for module `\ROM16'.
+Generating RTLIL representation for module `\ROM'.
+Generating RTLIL representation for module `\ROMX9'.
+Generating RTLIL representation for module `\pROM'.
+Generating RTLIL representation for module `\pROMX9'.
+Generating RTLIL representation for module `\SDPB'.
+Generating RTLIL representation for module `\SDPX9B'.
+Generating RTLIL representation for module `\DPB'.
+Generating RTLIL representation for module `\DPX9B'.
+Generating RTLIL representation for module `\PADD18'.
+Generating RTLIL representation for module `\PADD9'.
+Generating RTLIL representation for module `\MULT9X9'.
+Generating RTLIL representation for module `\MULT18X18'.
+Generating RTLIL representation for module `\MULT36X36'.
+Generating RTLIL representation for module `\MULTALU36X18'.
+Generating RTLIL representation for module `\MULTADDALU18X18'.
+Generating RTLIL representation for module `\MULTALU18X18'.
+Generating RTLIL representation for module `\ALU54D'.
+Generating RTLIL representation for module `\BUFG'.
+Generating RTLIL representation for module `\BUFS'.
+Generating RTLIL representation for module `\PLL'.
+Generating RTLIL representation for module `\TLVDS_IBUF'.
+Generating RTLIL representation for module `\TLVDS_TBUF'.
+Generating RTLIL representation for module `\TLVDS_IOBUF'.
+Generating RTLIL representation for module `\ELVDS_IBUF'.
+Generating RTLIL representation for module `\ELVDS_TBUF'.
+Generating RTLIL representation for module `\ELVDS_IOBUF'.
+Generating RTLIL representation for module `\MIPI_IBUF'.
+Generating RTLIL representation for module `\MIPI_IBUF_HS'.
+Generating RTLIL representation for module `\MIPI_IBUF_LP'.
+Generating RTLIL representation for module `\MIPI_OBUF'.
+Generating RTLIL representation for module `\MIPI_OBUF_A'.
+Generating RTLIL representation for module `\ELVDS_IBUF_MIPI'.
+Generating RTLIL representation for module `\I3C_IOBUF'.
+Generating RTLIL representation for module `\CLKDIV'.
+Generating RTLIL representation for module `\DHCEN'.
+Generating RTLIL representation for module `\DLLDLY'.
+Generating RTLIL representation for module `\FLASH96K'.
+Generating RTLIL representation for module `\FLASH256K'.
+Generating RTLIL representation for module `\FLASH608K'.
+Generating RTLIL representation for module `\DCS'.
+Generating RTLIL representation for module `\DQCE'.
+Generating RTLIL representation for module `\CLKDIV2'.
+Generating RTLIL representation for module `\DHCENC'.
+Generating RTLIL representation for module `\FLASH64K'.
+Generating RTLIL representation for module `\FLASH64KZ'.
+Successfully finished Verilog frontend.
+
+3.3. Executing HIERARCHY pass (managing design hierarchy).
+
+3.3.1. Analyzing design hierarchy..
+Top module:  \sc_array_ubench
+Used module:     \lfsr16_leap8
+Parameter \SEED = 16'1010110011100001
+
+3.3.2. Executing AST frontend in derive mode using pre-parsed AST for module `\lfsr16_leap8'.
+Parameter \SEED = 16'1010110011100001
+Generating RTLIL representation for module `$paramod\lfsr16_leap8\SEED=16'1010110011100001'.
+Parameter \SEED = 16'0111101001011100
+
+3.3.3. Executing AST frontend in derive mode using pre-parsed AST for module `\lfsr16_leap8'.
+Parameter \SEED = 16'0111101001011100
+Generating RTLIL representation for module `$paramod\lfsr16_leap8\SEED=16'0111101001011100'.
+
+3.3.4. Analyzing design hierarchy..
+Top module:  \sc_array_ubench
+Used module:     $paramod\lfsr16_leap8\SEED=16'1010110011100001
+Used module:     $paramod\lfsr16_leap8\SEED=16'0111101001011100
+
+3.3.5. Analyzing design hierarchy..
+Top module:  \sc_array_ubench
+Used module:     $paramod\lfsr16_leap8\SEED=16'1010110011100001
+Used module:     $paramod\lfsr16_leap8\SEED=16'0111101001011100
+Removing unused module `\lfsr16_leap8'.
+Removed 1 unused modules.
+
+3.4. Executing PROC pass (convert processes to netlists).
+
+3.4.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+3.4.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
+Marked 1 switch rules as full_case in process $proc$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:56$1698 in module $paramod\lfsr16_leap8\SEED=16'1010110011100001.
+Marked 16 switch rules as full_case in process $proc$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:149$1299 in module sc_array_ubench.
+Marked 1 switch rules as full_case in process $proc$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:56$1725 in module $paramod\lfsr16_leap8\SEED=16'0111101001011100.
+Removed a total of 0 dead cases.
+
+3.4.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).
+Removed 0 redundant assignments.
+Promoted 93 assignments to connections.
+
+3.4.4. Executing PROC_INIT pass (extract init attributes).
+
+3.4.5. Executing PROC_ARST pass (detect async resets in processes).
+
+3.4.6. Executing PROC_ROM pass (convert switches to ROMs).
+Converted 0 switches.
+<suppressed ~104 debug messages>
+
+3.4.7. Executing PROC_MUX pass (convert decision trees to multiplexers).
+Creating decoders for process `$paramod\lfsr16_leap8\SEED=16'1010110011100001.$proc$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:56$1698'.
+     1/1: $0\s[15:0]
+Creating decoders for process `$paramod\lfsr16_leap8\SEED=16'1010110011100001.$proc$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:50$1673'.
+Creating decoders for process `\sc_array_ubench.$proc$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:92$889'.
+     1/68: $0\x[31:0] [31:24]
+     2/68: $0\x[31:0] [23:16]
+     3/68: $0\x[31:0] [15:8]
+     4/68: $0\x[31:0] [7:0]
+     5/68: $0\w[511:0] [503:496]
+     6/68: $0\w[511:0] [495:488]
+     7/68: $0\w[511:0] [487:480]
+     8/68: $0\w[511:0] [479:472]
+     9/68: $0\w[511:0] [471:464]
+    10/68: $0\w[511:0] [463:456]
+    11/68: $0\w[511:0] [455:448]
+    12/68: $0\w[511:0] [447:440]
+    13/68: $0\w[511:0] [439:432]
+    14/68: $0\w[511:0] [431:424]
+    15/68: $0\w[511:0] [423:416]
+    16/68: $0\w[511:0] [415:408]
+    17/68: $0\w[511:0] [407:400]
+    18/68: $0\w[511:0] [399:392]
+    19/68: $0\w[511:0] [391:384]
+    20/68: $0\w[511:0] [383:376]
+    21/68: $0\w[511:0] [375:368]
+    22/68: $0\w[511:0] [367:360]
+    23/68: $0\w[511:0] [359:352]
+    24/68: $0\w[511:0] [351:344]
+    25/68: $0\w[511:0] [343:336]
+    26/68: $0\w[511:0] [335:328]
+    27/68: $0\w[511:0] [327:320]
+    28/68: $0\w[511:0] [319:312]
+    29/68: $0\w[511:0] [311:304]
+    30/68: $0\w[511:0] [303:296]
+    31/68: $0\w[511:0] [295:288]
+    32/68: $0\w[511:0] [287:280]
+    33/68: $0\w[511:0] [279:272]
+    34/68: $0\w[511:0] [271:264]
+    35/68: $0\w[511:0] [263:256]
+    36/68: $0\w[511:0] [255:248]
+    37/68: $0\w[511:0] [247:240]
+    38/68: $0\w[511:0] [239:232]
+    39/68: $0\w[511:0] [231:224]
+    40/68: $0\w[511:0] [223:216]
+    41/68: $0\w[511:0] [215:208]
+    42/68: $0\w[511:0] [207:200]
+    43/68: $0\w[511:0] [199:192]
+    44/68: $0\w[511:0] [191:184]
+    45/68: $0\w[511:0] [183:176]
+    46/68: $0\w[511:0] [175:168]
+    47/68: $0\w[511:0] [167:160]
+    48/68: $0\w[511:0] [159:152]
+    49/68: $0\w[511:0] [151:144]
+    50/68: $0\w[511:0] [143:136]
+    51/68: $0\w[511:0] [135:128]
+    52/68: $0\w[511:0] [127:120]
+    53/68: $0\w[511:0] [119:112]
+    54/68: $0\w[511:0] [111:104]
+    55/68: $0\w[511:0] [103:96]
+    56/68: $0\w[511:0] [95:88]
+    57/68: $0\w[511:0] [87:80]
+    58/68: $0\w[511:0] [79:72]
+    59/68: $0\w[511:0] [71:64]
+    60/68: $0\w[511:0] [63:56]
+    61/68: $0\w[511:0] [55:48]
+    62/68: $0\w[511:0] [47:40]
+    63/68: $0\w[511:0] [39:32]
+    64/68: $0\w[511:0] [31:24]
+    65/68: $0\w[511:0] [23:16]
+    66/68: $0\w[511:0] [15:8]
+    67/68: $0\w[511:0] [7:0]
+    68/68: $0\w[511:0] [511:504]
+Creating decoders for process `\sc_array_ubench.$proc$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:136$1038'.
+Creating decoders for process `\sc_array_ubench.$proc$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:149$1299'.
+     1/16: $0\acc[271:0] [271:255]
+     2/16: $0\acc[271:0] [254:238]
+     3/16: $0\acc[271:0] [237:221]
+     4/16: $0\acc[271:0] [220:204]
+     5/16: $0\acc[271:0] [203:187]
+     6/16: $0\acc[271:0] [186:170]
+     7/16: $0\acc[271:0] [169:153]
+     8/16: $0\acc[271:0] [152:136]
+     9/16: $0\acc[271:0] [135:119]
+    10/16: $0\acc[271:0] [118:102]
+    11/16: $0\acc[271:0] [101:85]
+    12/16: $0\acc[271:0] [84:68]
+    13/16: $0\acc[271:0] [67:51]
+    14/16: $0\acc[271:0] [50:34]
+    15/16: $0\acc[271:0] [33:17]
+    16/16: $0\acc[271:0] [16:0]
+Creating decoders for process `$paramod\lfsr16_leap8\SEED=16'0111101001011100.$proc$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:56$1725'.
+     1/1: $0\s[15:0]
+Creating decoders for process `$paramod\lfsr16_leap8\SEED=16'0111101001011100.$proc$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:50$1700'.
+
+3.4.8. Executing PROC_DLATCH pass (convert process syncs to latches).
+No latch inferred for signal `$paramod\lfsr16_leap8\SEED=16'1010110011100001.\n' from process `$paramod\lfsr16_leap8\SEED=16'1010110011100001.$proc$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:50$1673'.
+No latch inferred for signal `$paramod\lfsr16_leap8\SEED=16'1010110011100001.\t' from process `$paramod\lfsr16_leap8\SEED=16'1010110011100001.$proc$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:50$1673'.
+No latch inferred for signal `\sc_array_ubench.\i' from process `\sc_array_ubench.$proc$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:136$1038'.
+No latch inferred for signal `\sc_array_ubench.\bx' from process `\sc_array_ubench.$proc$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:136$1038'.
+No latch inferred for signal `\sc_array_ubench.\p' from process `\sc_array_ubench.$proc$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:136$1038'.
+No latch inferred for signal `\sc_array_ubench.\pc' from process `\sc_array_ubench.$proc$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:136$1038'.
+No latch inferred for signal `\sc_array_ubench.\j' from process `\sc_array_ubench.$proc$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:136$1038'.
+No latch inferred for signal `$paramod\lfsr16_leap8\SEED=16'0111101001011100.\n' from process `$paramod\lfsr16_leap8\SEED=16'0111101001011100.$proc$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:50$1700'.
+No latch inferred for signal `$paramod\lfsr16_leap8\SEED=16'0111101001011100.\t' from process `$paramod\lfsr16_leap8\SEED=16'0111101001011100.$proc$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:50$1700'.
+
+3.4.9. Executing PROC_DFF pass (convert process syncs to FFs).
+Creating register for signal `$paramod\lfsr16_leap8\SEED=16'1010110011100001.\s' using process `$paramod\lfsr16_leap8\SEED=16'1010110011100001.$proc$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:56$1698'.
+  created $dff cell `$procdff$1953' with positive edge clock.
+Creating register for signal `\sc_array_ubench.\w' using process `\sc_array_ubench.$proc$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:92$889'.
+  created $dff cell `$procdff$1954' with positive edge clock.
+Creating register for signal `\sc_array_ubench.\x' using process `\sc_array_ubench.$proc$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:92$889'.
+  created $dff cell `$procdff$1955' with positive edge clock.
+Creating register for signal `\sc_array_ubench.\k' using process `\sc_array_ubench.$proc$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:92$889'.
+  created $dff cell `$procdff$1956' with positive edge clock.
+Creating register for signal `\sc_array_ubench.\dout' using process `\sc_array_ubench.$proc$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:149$1299'.
+  created $dff cell `$procdff$1957' with positive edge clock.
+Creating register for signal `\sc_array_ubench.\acc' using process `\sc_array_ubench.$proc$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:149$1299'.
+  created $dff cell `$procdff$1958' with positive edge clock.
+Creating register for signal `\sc_array_ubench.\j' using process `\sc_array_ubench.$proc$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:149$1299'.
+  created $dff cell `$procdff$1959' with positive edge clock.
+Creating register for signal `$paramod\lfsr16_leap8\SEED=16'0111101001011100.\s' using process `$paramod\lfsr16_leap8\SEED=16'0111101001011100.$proc$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:56$1725'.
+  created $dff cell `$procdff$1960' with positive edge clock.
+
+3.4.10. Executing PROC_MEMWR pass (convert process memory writes to cells).
+
+3.4.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Found and cleaned up 2 empty switches in `$paramod\lfsr16_leap8\SEED=16'1010110011100001.$proc$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:56$1698'.
+Removing empty process `$paramod\lfsr16_leap8\SEED=16'1010110011100001.$proc$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:56$1698'.
+Removing empty process `$paramod\lfsr16_leap8\SEED=16'1010110011100001.$proc$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:50$1673'.
+Found and cleaned up 68 empty switches in `\sc_array_ubench.$proc$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:92$889'.
+Removing empty process `sc_array_ubench.$proc$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:92$889'.
+Removing empty process `sc_array_ubench.$proc$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:136$1038'.
+Found and cleaned up 32 empty switches in `\sc_array_ubench.$proc$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:149$1299'.
+Removing empty process `sc_array_ubench.$proc$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:149$1299'.
+Found and cleaned up 2 empty switches in `$paramod\lfsr16_leap8\SEED=16'0111101001011100.$proc$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:56$1725'.
+Removing empty process `$paramod\lfsr16_leap8\SEED=16'0111101001011100.$proc$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:56$1725'.
+Removing empty process `$paramod\lfsr16_leap8\SEED=16'0111101001011100.$proc$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:50$1700'.
+Cleaned up 104 empty switches.
+
+3.4.12. Executing OPT_EXPR pass (perform const folding).
+Optimizing module $paramod\lfsr16_leap8\SEED=16'1010110011100001.
+Optimizing module sc_array_ubench.
+<suppressed ~14 debug messages>
+Optimizing module $paramod\lfsr16_leap8\SEED=16'0111101001011100.
+
+3.5. Executing CHECK pass (checking for obvious problems).
+Checking module $paramod\lfsr16_leap8\SEED=16'1010110011100001...
+Checking module sc_array_ubench...
+Warning: Drivers conflicting with a constant 1'0 driver:
+    port Q[0] of cell $procdff$1959 ($dff)
+    port Q[1] of cell $procdff$1959 ($dff)
+    port Q[2] of cell $procdff$1959 ($dff)
+    port Q[3] of cell $procdff$1959 ($dff)
+    port Q[5] of cell $procdff$1959 ($dff)
+    port Q[6] of cell $procdff$1959 ($dff)
+    port Q[7] of cell $procdff$1959 ($dff)
+    port Q[8] of cell $procdff$1959 ($dff)
+    port Q[9] of cell $procdff$1959 ($dff)
+    port Q[10] of cell $procdff$1959 ($dff)
+    port Q[11] of cell $procdff$1959 ($dff)
+    port Q[12] of cell $procdff$1959 ($dff)
+    port Q[13] of cell $procdff$1959 ($dff)
+    port Q[14] of cell $procdff$1959 ($dff)
+    port Q[15] of cell $procdff$1959 ($dff)
+    port Q[16] of cell $procdff$1959 ($dff)
+    port Q[17] of cell $procdff$1959 ($dff)
+    port Q[18] of cell $procdff$1959 ($dff)
+    port Q[19] of cell $procdff$1959 ($dff)
+    port Q[20] of cell $procdff$1959 ($dff)
+    port Q[21] of cell $procdff$1959 ($dff)
+    port Q[22] of cell $procdff$1959 ($dff)
+    port Q[23] of cell $procdff$1959 ($dff)
+    port Q[24] of cell $procdff$1959 ($dff)
+    port Q[25] of cell $procdff$1959 ($dff)
+    port Q[26] of cell $procdff$1959 ($dff)
+    port Q[27] of cell $procdff$1959 ($dff)
+    port Q[28] of cell $procdff$1959 ($dff)
+    port Q[29] of cell $procdff$1959 ($dff)
+    port Q[30] of cell $procdff$1959 ($dff)
+    port Q[31] of cell $procdff$1959 ($dff)
+Warning: Drivers conflicting with a constant 1'1 driver:
+    port Q[4] of cell $procdff$1959 ($dff)
+Checking module $paramod\lfsr16_leap8\SEED=16'0111101001011100...
+Found and reported 2 problems.
+
+3.6. Executing FLATTEN pass (flatten design).
+Deleting now unused module $paramod\lfsr16_leap8\SEED=16'1010110011100001.
+Deleting now unused module $paramod\lfsr16_leap8\SEED=16'0111101001011100.
+<suppressed ~2 debug messages>
+
+3.7. Executing TRIBUF pass.
+
+3.8. Executing DEMINOUT pass (demote inout ports to input or output).
+
+3.9. Executing OPT_EXPR pass (perform const folding).
+Optimizing module sc_array_ubench.
+<suppressed ~17 debug messages>
+
+3.10. Executing CHECK pass (checking for obvious problems).
+Checking module sc_array_ubench...
+Warning: Drivers conflicting with a constant 1'0 driver:
+    port Q[0] of cell $procdff$1959 ($dff)
+    port Q[1] of cell $procdff$1959 ($dff)
+    port Q[2] of cell $procdff$1959 ($dff)
+    port Q[3] of cell $procdff$1959 ($dff)
+    port Q[5] of cell $procdff$1959 ($dff)
+    port Q[6] of cell $procdff$1959 ($dff)
+    port Q[7] of cell $procdff$1959 ($dff)
+    port Q[8] of cell $procdff$1959 ($dff)
+    port Q[9] of cell $procdff$1959 ($dff)
+    port Q[10] of cell $procdff$1959 ($dff)
+    port Q[11] of cell $procdff$1959 ($dff)
+    port Q[12] of cell $procdff$1959 ($dff)
+    port Q[13] of cell $procdff$1959 ($dff)
+    port Q[14] of cell $procdff$1959 ($dff)
+    port Q[15] of cell $procdff$1959 ($dff)
+    port Q[16] of cell $procdff$1959 ($dff)
+    port Q[17] of cell $procdff$1959 ($dff)
+    port Q[18] of cell $procdff$1959 ($dff)
+    port Q[19] of cell $procdff$1959 ($dff)
+    port Q[20] of cell $procdff$1959 ($dff)
+    port Q[21] of cell $procdff$1959 ($dff)
+    port Q[22] of cell $procdff$1959 ($dff)
+    port Q[23] of cell $procdff$1959 ($dff)
+    port Q[24] of cell $procdff$1959 ($dff)
+    port Q[25] of cell $procdff$1959 ($dff)
+    port Q[26] of cell $procdff$1959 ($dff)
+    port Q[27] of cell $procdff$1959 ($dff)
+    port Q[28] of cell $procdff$1959 ($dff)
+    port Q[29] of cell $procdff$1959 ($dff)
+    port Q[30] of cell $procdff$1959 ($dff)
+    port Q[31] of cell $procdff$1959 ($dff)
+Warning: Drivers conflicting with a constant 1'1 driver:
+    port Q[4] of cell $procdff$1959 ($dff)
+Found and reported 2 problems.
+
+3.11. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \sc_array_ubench..
+Removed 6 unused cells and 332 unused wires.
+<suppressed ~25 debug messages>
+
+3.12. Executing OPT pass (performing simple optimizations).
+
+3.12.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module sc_array_ubench.
+
+3.12.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\sc_array_ubench'.
+Computing hashes of 576 cells of `\sc_array_ubench'.
+Finding duplicate cells in `\sc_array_ubench'.
+Computing hashes of 560 cells of `\sc_array_ubench'.
+Finding duplicate cells in `\sc_array_ubench'.
+<suppressed ~48 debug messages>
+Removed a total of 16 cells.
+
+3.12.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \sc_array_ubench..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~190 debug messages>
+
+3.12.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \sc_array_ubench.
+Performed a total of 0 changes.
+
+3.12.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\sc_array_ubench'.
+Computing hashes of 560 cells of `\sc_array_ubench'.
+Finding duplicate cells in `\sc_array_ubench'.
+Removed a total of 0 cells.
+
+3.12.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+3.12.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \sc_array_ubench..
+Removed 0 unused cells and 16 unused wires.
+<suppressed ~1 debug messages>
+
+3.12.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module sc_array_ubench.
+
+3.12.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+3.12.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \sc_array_ubench..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~190 debug messages>
+
+3.12.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \sc_array_ubench.
+Performed a total of 0 changes.
+
+3.12.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\sc_array_ubench'.
+Computing hashes of 560 cells of `\sc_array_ubench'.
+Finding duplicate cells in `\sc_array_ubench'.
+Removed a total of 0 cells.
+
+3.12.13. Executing OPT_DFF pass (perform DFF optimizations).
+
+3.12.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \sc_array_ubench..
+
+3.12.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module sc_array_ubench.
+
+3.12.16. Finished fast OPT passes. (There is nothing left to do.)
+
+3.13. Executing FSM pass (extract and optimize FSM).
+
+3.13.1. Executing FSM_DETECT pass (finding FSMs in design).
+
+3.13.2. Executing FSM_EXTRACT pass (extracting FSM from design).
+
+3.13.3. Executing FSM_OPT pass (simple optimizations of FSMs).
+
+3.13.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \sc_array_ubench..
+
+3.13.5. Executing FSM_OPT pass (simple optimizations of FSMs).
+
+3.13.6. Executing FSM_RECODE pass (re-assigning FSM state encoding).
+
+3.13.7. Executing FSM_INFO pass (dumping all available information on FSM cells).
+
+3.13.8. Executing FSM_MAP pass (mapping FSMs to basic logic).
+
+3.14. Executing OPT pass (performing simple optimizations).
+
+3.14.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module sc_array_ubench.
+
+3.14.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\sc_array_ubench'.
+Computing hashes of 560 cells of `\sc_array_ubench'.
+Finding duplicate cells in `\sc_array_ubench'.
+Removed a total of 0 cells.
+
+3.14.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \sc_array_ubench..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~190 debug messages>
+
+3.14.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \sc_array_ubench.
+Performed a total of 0 changes.
+
+3.14.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\sc_array_ubench'.
+Computing hashes of 560 cells of `\sc_array_ubench'.
+Finding duplicate cells in `\sc_array_ubench'.
+Removed a total of 0 cells.
+
+3.14.6. Executing OPT_DFF pass (perform DFF optimizations).
+Adding SRST signal on $flatten\g_two.u_lx.$procdff$1953 ($dff) from module sc_array_ubench (D = $flatten\g_two.u_lx.$procmux$1727_Y, Q = \g_two.u_lx.s, rval = 16'1010110011100001).
+Adding EN signal on $auto$ff.cc:337:slice$1963 ($sdff) from module sc_array_ubench (D = { \g_two.u_lx.s [7:0] \g_two.u_lx.n [7:0] }, Q = \g_two.u_lx.s).
+Adding EN signal on $procdff$1954 ($dff) from module sc_array_ubench (D = \wdata, Q = \w [7:0]).
+Adding EN signal on $procdff$1954 ($dff) from module sc_array_ubench (D = \wdata, Q = \w [15:8]).
+Adding EN signal on $procdff$1954 ($dff) from module sc_array_ubench (D = \wdata, Q = \w [23:16]).
+Adding EN signal on $procdff$1954 ($dff) from module sc_array_ubench (D = \wdata, Q = \w [31:24]).
+Adding EN signal on $procdff$1954 ($dff) from module sc_array_ubench (D = \wdata, Q = \w [39:32]).
+Adding EN signal on $procdff$1954 ($dff) from module sc_array_ubench (D = \wdata, Q = \w [47:40]).
+Adding EN signal on $procdff$1954 ($dff) from module sc_array_ubench (D = \wdata, Q = \w [55:48]).
+Adding EN signal on $procdff$1954 ($dff) from module sc_array_ubench (D = \wdata, Q = \w [63:56]).
+Adding EN signal on $procdff$1954 ($dff) from module sc_array_ubench (D = \wdata, Q = \w [71:64]).
+Adding EN signal on $procdff$1954 ($dff) from module sc_array_ubench (D = \wdata, Q = \w [79:72]).
+Adding EN signal on $procdff$1954 ($dff) from module sc_array_ubench (D = \wdata, Q = \w [87:80]).
+Adding EN signal on $procdff$1954 ($dff) from module sc_array_ubench (D = \wdata, Q = \w [95:88]).
+Adding EN signal on $procdff$1954 ($dff) from module sc_array_ubench (D = \wdata, Q = \w [103:96]).
+Adding EN signal on $procdff$1954 ($dff) from module sc_array_ubench (D = \wdata, Q = \w [111:104]).
+Adding EN signal on $procdff$1954 ($dff) from module sc_array_ubench (D = \wdata, Q = \w [119:112]).
+Adding EN signal on $procdff$1954 ($dff) from module sc_array_ubench (D = \wdata, Q = \w [127:120]).
+Adding EN signal on $procdff$1954 ($dff) from module sc_array_ubench (D = \wdata, Q = \w [135:128]).
+Adding EN signal on $procdff$1954 ($dff) from module sc_array_ubench (D = \wdata, Q = \w [143:136]).
+Adding EN signal on $procdff$1954 ($dff) from module sc_array_ubench (D = \wdata, Q = \w [151:144]).
+Adding EN signal on $procdff$1954 ($dff) from module sc_array_ubench (D = \wdata, Q = \w [159:152]).
+Adding EN signal on $procdff$1954 ($dff) from module sc_array_ubench (D = \wdata, Q = \w [167:160]).
+Adding EN signal on $procdff$1954 ($dff) from module sc_array_ubench (D = \wdata, Q = \w [175:168]).
+Adding EN signal on $procdff$1954 ($dff) from module sc_array_ubench (D = \wdata, Q = \w [183:176]).
+Adding EN signal on $procdff$1954 ($dff) from module sc_array_ubench (D = \wdata, Q = \w [191:184]).
+Adding EN signal on $procdff$1954 ($dff) from module sc_array_ubench (D = \wdata, Q = \w [199:192]).
+Adding EN signal on $procdff$1954 ($dff) from module sc_array_ubench (D = \wdata, Q = \w [207:200]).
+Adding EN signal on $procdff$1954 ($dff) from module sc_array_ubench (D = \wdata, Q = \w [215:208]).
+Adding EN signal on $procdff$1954 ($dff) from module sc_array_ubench (D = \wdata, Q = \w [223:216]).
+Adding EN signal on $procdff$1954 ($dff) from module sc_array_ubench (D = \wdata, Q = \w [231:224]).
+Adding EN signal on $procdff$1954 ($dff) from module sc_array_ubench (D = \wdata, Q = \w [239:232]).
+Adding EN signal on $procdff$1954 ($dff) from module sc_array_ubench (D = \wdata, Q = \w [247:240]).
+Adding EN signal on $procdff$1954 ($dff) from module sc_array_ubench (D = \wdata, Q = \w [255:248]).
+Adding EN signal on $procdff$1954 ($dff) from module sc_array_ubench (D = \wdata, Q = \w [263:256]).
+Adding EN signal on $procdff$1954 ($dff) from module sc_array_ubench (D = \wdata, Q = \w [271:264]).
+Adding EN signal on $procdff$1954 ($dff) from module sc_array_ubench (D = \wdata, Q = \w [279:272]).
+Adding EN signal on $procdff$1954 ($dff) from module sc_array_ubench (D = \wdata, Q = \w [287:280]).
+Adding EN signal on $procdff$1954 ($dff) from module sc_array_ubench (D = \wdata, Q = \w [295:288]).
+Adding EN signal on $procdff$1954 ($dff) from module sc_array_ubench (D = \wdata, Q = \w [303:296]).
+Adding EN signal on $procdff$1954 ($dff) from module sc_array_ubench (D = \wdata, Q = \w [311:304]).
+Adding EN signal on $procdff$1954 ($dff) from module sc_array_ubench (D = \wdata, Q = \w [319:312]).
+Adding EN signal on $procdff$1954 ($dff) from module sc_array_ubench (D = \wdata, Q = \w [327:320]).
+Adding EN signal on $procdff$1954 ($dff) from module sc_array_ubench (D = \wdata, Q = \w [335:328]).
+Adding EN signal on $procdff$1954 ($dff) from module sc_array_ubench (D = \wdata, Q = \w [343:336]).
+Adding EN signal on $procdff$1954 ($dff) from module sc_array_ubench (D = \wdata, Q = \w [351:344]).
+Adding EN signal on $procdff$1954 ($dff) from module sc_array_ubench (D = \wdata, Q = \w [359:352]).
+Adding EN signal on $procdff$1954 ($dff) from module sc_array_ubench (D = \wdata, Q = \w [367:360]).
+Adding EN signal on $procdff$1954 ($dff) from module sc_array_ubench (D = \wdata, Q = \w [375:368]).
+Adding EN signal on $procdff$1954 ($dff) from module sc_array_ubench (D = \wdata, Q = \w [383:376]).
+Adding EN signal on $procdff$1954 ($dff) from module sc_array_ubench (D = \wdata, Q = \w [391:384]).
+Adding EN signal on $procdff$1954 ($dff) from module sc_array_ubench (D = \wdata, Q = \w [399:392]).
+Adding EN signal on $procdff$1954 ($dff) from module sc_array_ubench (D = \wdata, Q = \w [407:400]).
+Adding EN signal on $procdff$1954 ($dff) from module sc_array_ubench (D = \wdata, Q = \w [415:408]).
+Adding EN signal on $procdff$1954 ($dff) from module sc_array_ubench (D = \wdata, Q = \w [423:416]).
+Adding EN signal on $procdff$1954 ($dff) from module sc_array_ubench (D = \wdata, Q = \w [431:424]).
+Adding EN signal on $procdff$1954 ($dff) from module sc_array_ubench (D = \wdata, Q = \w [439:432]).
+Adding EN signal on $procdff$1954 ($dff) from module sc_array_ubench (D = \wdata, Q = \w [447:440]).
+Adding EN signal on $procdff$1954 ($dff) from module sc_array_ubench (D = \wdata, Q = \w [455:448]).
+Adding EN signal on $procdff$1954 ($dff) from module sc_array_ubench (D = \wdata, Q = \w [463:456]).
+Adding EN signal on $procdff$1954 ($dff) from module sc_array_ubench (D = \wdata, Q = \w [471:464]).
+Adding EN signal on $procdff$1954 ($dff) from module sc_array_ubench (D = \wdata, Q = \w [479:472]).
+Adding EN signal on $procdff$1954 ($dff) from module sc_array_ubench (D = \wdata, Q = \w [487:480]).
+Adding EN signal on $procdff$1954 ($dff) from module sc_array_ubench (D = \wdata, Q = \w [495:488]).
+Adding EN signal on $procdff$1954 ($dff) from module sc_array_ubench (D = \wdata, Q = \w [503:496]).
+Adding EN signal on $procdff$1954 ($dff) from module sc_array_ubench (D = \wdata, Q = \w [511:504]).
+Adding EN signal on $procdff$1955 ($dff) from module sc_array_ubench (D = \wdata, Q = \x [7:0]).
+Adding EN signal on $procdff$1955 ($dff) from module sc_array_ubench (D = \wdata, Q = \x [15:8]).
+Adding EN signal on $procdff$1955 ($dff) from module sc_array_ubench (D = \wdata, Q = \x [23:16]).
+Adding EN signal on $procdff$1955 ($dff) from module sc_array_ubench (D = \wdata, Q = \x [31:24]).
+Adding SRST signal on $procdff$1958 ($dff) from module sc_array_ubench (D = { $procmux$1868_Y $procmux$1873_Y $procmux$1878_Y $procmux$1883_Y $procmux$1888_Y $procmux$1893_Y $procmux$1898_Y $procmux$1903_Y $procmux$1908_Y $procmux$1913_Y $procmux$1918_Y $procmux$1923_Y $procmux$1928_Y $procmux$1933_Y $procmux$1938_Y $procmux$1943_Y }, Q = \acc, rval = 272'00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000).
+Adding EN signal on $auto$ff.cc:337:slice$2033 ($sdff) from module sc_array_ubench (D = { $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:152$1331_Y $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:152$1329_Y $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:152$1327_Y $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:152$1325_Y $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:152$1323_Y $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:152$1321_Y $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:152$1319_Y $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:152$1317_Y $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:152$1315_Y $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:152$1313_Y $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:152$1311_Y $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:152$1309_Y $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:152$1307_Y $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:152$1305_Y $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:152$1303_Y $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:152$1301_Y }, Q = \acc).
+Adding SRST signal on $flatten\g_two.u_lw.$procdff$1960 ($dff) from module sc_array_ubench (D = $flatten\g_two.u_lw.$procmux$1948_Y, Q = \g_two.u_lw.s, rval = 16'0111101001011100).
+Adding EN signal on $auto$ff.cc:337:slice$2035 ($sdff) from module sc_array_ubench (D = { \g_two.u_lw.s [7:0] \g_two.u_lw.n [7:0] }, Q = \g_two.u_lw.s).
+
+3.14.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \sc_array_ubench..
+Removed 104 unused cells and 23 unused wires.
+<suppressed ~105 debug messages>
+
+3.14.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module sc_array_ubench.
+
+3.14.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+3.14.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \sc_array_ubench..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+
+3.14.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \sc_array_ubench.
+Performed a total of 0 changes.
+
+3.14.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\sc_array_ubench'.
+Computing hashes of 522 cells of `\sc_array_ubench'.
+Finding duplicate cells in `\sc_array_ubench'.
+Removed a total of 0 cells.
+
+3.14.13. Executing OPT_DFF pass (perform DFF optimizations).
+
+3.14.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \sc_array_ubench..
+
+3.14.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module sc_array_ubench.
+
+3.14.16. Finished fast OPT passes. (There is nothing left to do.)
+
+3.15. Executing WREDUCE pass (reducing word size of cells).
+Removed top 5 bits (of 6) from port B of cell sc_array_ubench.$eq$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:94$892 ($eq).
+Removed top 4 bits (of 6) from port B of cell sc_array_ubench.$eq$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:94$894 ($eq).
+Removed top 4 bits (of 6) from port B of cell sc_array_ubench.$eq$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:94$896 ($eq).
+Removed top 3 bits (of 6) from port B of cell sc_array_ubench.$eq$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:94$898 ($eq).
+Removed top 3 bits (of 6) from port B of cell sc_array_ubench.$eq$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:94$900 ($eq).
+Removed top 3 bits (of 6) from port B of cell sc_array_ubench.$eq$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:94$902 ($eq).
+Removed top 3 bits (of 6) from port B of cell sc_array_ubench.$eq$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:94$904 ($eq).
+Removed top 2 bits (of 6) from port B of cell sc_array_ubench.$eq$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:94$906 ($eq).
+Removed top 2 bits (of 6) from port B of cell sc_array_ubench.$eq$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:94$908 ($eq).
+Removed top 2 bits (of 6) from port B of cell sc_array_ubench.$eq$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:94$910 ($eq).
+Removed top 2 bits (of 6) from port B of cell sc_array_ubench.$eq$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:94$912 ($eq).
+Removed top 2 bits (of 6) from port B of cell sc_array_ubench.$eq$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:94$914 ($eq).
+Removed top 2 bits (of 6) from port B of cell sc_array_ubench.$eq$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:94$916 ($eq).
+Removed top 2 bits (of 6) from port B of cell sc_array_ubench.$eq$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:94$918 ($eq).
+Removed top 2 bits (of 6) from port B of cell sc_array_ubench.$eq$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:94$920 ($eq).
+Removed top 1 bits (of 6) from port B of cell sc_array_ubench.$eq$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:94$922 ($eq).
+Removed top 1 bits (of 6) from port B of cell sc_array_ubench.$eq$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:94$924 ($eq).
+Removed top 1 bits (of 6) from port B of cell sc_array_ubench.$eq$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:94$926 ($eq).
+Removed top 1 bits (of 6) from port B of cell sc_array_ubench.$eq$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:94$928 ($eq).
+Removed top 1 bits (of 6) from port B of cell sc_array_ubench.$eq$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:94$930 ($eq).
+Removed top 1 bits (of 6) from port B of cell sc_array_ubench.$eq$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:94$932 ($eq).
+Removed top 1 bits (of 6) from port B of cell sc_array_ubench.$eq$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:94$934 ($eq).
+Removed top 1 bits (of 6) from port B of cell sc_array_ubench.$eq$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:94$936 ($eq).
+Removed top 1 bits (of 6) from port B of cell sc_array_ubench.$eq$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:94$938 ($eq).
+Removed top 1 bits (of 6) from port B of cell sc_array_ubench.$eq$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:94$940 ($eq).
+Removed top 1 bits (of 6) from port B of cell sc_array_ubench.$eq$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:94$942 ($eq).
+Removed top 1 bits (of 6) from port B of cell sc_array_ubench.$eq$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:94$944 ($eq).
+Removed top 1 bits (of 6) from port B of cell sc_array_ubench.$eq$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:94$946 ($eq).
+Removed top 1 bits (of 6) from port B of cell sc_array_ubench.$eq$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:94$948 ($eq).
+Removed top 1 bits (of 6) from port B of cell sc_array_ubench.$eq$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:94$950 ($eq).
+Removed top 1 bits (of 6) from port B of cell sc_array_ubench.$eq$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:94$952 ($eq).
+Removed top 2 bits (of 3) from port B of cell sc_array_ubench.$eq$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:96$1023 ($eq).
+Removed top 1 bits (of 3) from port B of cell sc_array_ubench.$eq$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:96$1028 ($eq).
+Removed top 1 bits (of 3) from port B of cell sc_array_ubench.$eq$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:96$1033 ($eq).
+Removed top 4 bits (of 5) from port A of cell sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1050 ($add).
+Removed top 4 bits (of 5) from port B of cell sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1050 ($add).
+Removed top 3 bits (of 5) from port Y of cell sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1050 ($add).
+Removed top 3 bits (of 5) from port A of cell sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1054 ($add).
+Removed top 4 bits (of 5) from port B of cell sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1054 ($add).
+Removed top 2 bits (of 5) from port Y of cell sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1054 ($add).
+Removed top 2 bits (of 5) from port A of cell sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1058 ($add).
+Removed top 4 bits (of 5) from port B of cell sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1058 ($add).
+Removed top 1 bits (of 5) from port Y of cell sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1058 ($add).
+Removed top 4 bits (of 5) from port A of cell sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1066 ($add).
+Removed top 4 bits (of 5) from port B of cell sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1066 ($add).
+Removed top 3 bits (of 5) from port Y of cell sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1066 ($add).
+Removed top 3 bits (of 5) from port A of cell sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1070 ($add).
+Removed top 4 bits (of 5) from port B of cell sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1070 ($add).
+Removed top 2 bits (of 5) from port Y of cell sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1070 ($add).
+Removed top 2 bits (of 5) from port A of cell sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1074 ($add).
+Removed top 4 bits (of 5) from port B of cell sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1074 ($add).
+Removed top 1 bits (of 5) from port Y of cell sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1074 ($add).
+Removed top 4 bits (of 5) from port A of cell sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1082 ($add).
+Removed top 4 bits (of 5) from port B of cell sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1082 ($add).
+Removed top 3 bits (of 5) from port Y of cell sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1082 ($add).
+Removed top 3 bits (of 5) from port A of cell sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1086 ($add).
+Removed top 4 bits (of 5) from port B of cell sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1086 ($add).
+Removed top 2 bits (of 5) from port Y of cell sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1086 ($add).
+Removed top 2 bits (of 5) from port A of cell sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1090 ($add).
+Removed top 4 bits (of 5) from port B of cell sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1090 ($add).
+Removed top 1 bits (of 5) from port Y of cell sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1090 ($add).
+Removed top 4 bits (of 5) from port A of cell sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1098 ($add).
+Removed top 4 bits (of 5) from port B of cell sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1098 ($add).
+Removed top 3 bits (of 5) from port Y of cell sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1098 ($add).
+Removed top 3 bits (of 5) from port A of cell sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1102 ($add).
+Removed top 4 bits (of 5) from port B of cell sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1102 ($add).
+Removed top 2 bits (of 5) from port Y of cell sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1102 ($add).
+Removed top 2 bits (of 5) from port A of cell sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1106 ($add).
+Removed top 4 bits (of 5) from port B of cell sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1106 ($add).
+Removed top 1 bits (of 5) from port Y of cell sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1106 ($add).
+Removed top 4 bits (of 5) from port A of cell sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1114 ($add).
+Removed top 4 bits (of 5) from port B of cell sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1114 ($add).
+Removed top 3 bits (of 5) from port Y of cell sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1114 ($add).
+Removed top 3 bits (of 5) from port A of cell sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1118 ($add).
+Removed top 4 bits (of 5) from port B of cell sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1118 ($add).
+Removed top 2 bits (of 5) from port Y of cell sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1118 ($add).
+Removed top 2 bits (of 5) from port A of cell sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1122 ($add).
+Removed top 4 bits (of 5) from port B of cell sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1122 ($add).
+Removed top 1 bits (of 5) from port Y of cell sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1122 ($add).
+Removed top 4 bits (of 5) from port A of cell sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1130 ($add).
+Removed top 4 bits (of 5) from port B of cell sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1130 ($add).
+Removed top 3 bits (of 5) from port Y of cell sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1130 ($add).
+Removed top 3 bits (of 5) from port A of cell sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1134 ($add).
+Removed top 4 bits (of 5) from port B of cell sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1134 ($add).
+Removed top 2 bits (of 5) from port Y of cell sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1134 ($add).
+Removed top 2 bits (of 5) from port A of cell sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1138 ($add).
+Removed top 4 bits (of 5) from port B of cell sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1138 ($add).
+Removed top 1 bits (of 5) from port Y of cell sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1138 ($add).
+Removed top 4 bits (of 5) from port A of cell sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1146 ($add).
+Removed top 4 bits (of 5) from port B of cell sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1146 ($add).
+Removed top 3 bits (of 5) from port Y of cell sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1146 ($add).
+Removed top 3 bits (of 5) from port A of cell sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1150 ($add).
+Removed top 4 bits (of 5) from port B of cell sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1150 ($add).
+Removed top 2 bits (of 5) from port Y of cell sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1150 ($add).
+Removed top 2 bits (of 5) from port A of cell sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1154 ($add).
+Removed top 4 bits (of 5) from port B of cell sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1154 ($add).
+Removed top 1 bits (of 5) from port Y of cell sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1154 ($add).
+Removed top 4 bits (of 5) from port A of cell sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1162 ($add).
+Removed top 4 bits (of 5) from port B of cell sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1162 ($add).
+Removed top 3 bits (of 5) from port Y of cell sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1162 ($add).
+Removed top 3 bits (of 5) from port A of cell sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1166 ($add).
+Removed top 4 bits (of 5) from port B of cell sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1166 ($add).
+Removed top 2 bits (of 5) from port Y of cell sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1166 ($add).
+Removed top 2 bits (of 5) from port A of cell sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1170 ($add).
+Removed top 4 bits (of 5) from port B of cell sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1170 ($add).
+Removed top 1 bits (of 5) from port Y of cell sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1170 ($add).
+Removed top 4 bits (of 5) from port A of cell sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1178 ($add).
+Removed top 4 bits (of 5) from port B of cell sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1178 ($add).
+Removed top 3 bits (of 5) from port Y of cell sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1178 ($add).
+Removed top 3 bits (of 5) from port A of cell sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1182 ($add).
+Removed top 4 bits (of 5) from port B of cell sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1182 ($add).
+Removed top 2 bits (of 5) from port Y of cell sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1182 ($add).
+Removed top 2 bits (of 5) from port A of cell sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1186 ($add).
+Removed top 4 bits (of 5) from port B of cell sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1186 ($add).
+Removed top 1 bits (of 5) from port Y of cell sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1186 ($add).
+Removed top 4 bits (of 5) from port A of cell sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1194 ($add).
+Removed top 4 bits (of 5) from port B of cell sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1194 ($add).
+Removed top 3 bits (of 5) from port Y of cell sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1194 ($add).
+Removed top 3 bits (of 5) from port A of cell sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1198 ($add).
+Removed top 4 bits (of 5) from port B of cell sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1198 ($add).
+Removed top 2 bits (of 5) from port Y of cell sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1198 ($add).
+Removed top 2 bits (of 5) from port A of cell sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1202 ($add).
+Removed top 4 bits (of 5) from port B of cell sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1202 ($add).
+Removed top 1 bits (of 5) from port Y of cell sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1202 ($add).
+Removed top 4 bits (of 5) from port A of cell sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1210 ($add).
+Removed top 4 bits (of 5) from port B of cell sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1210 ($add).
+Removed top 3 bits (of 5) from port Y of cell sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1210 ($add).
+Removed top 3 bits (of 5) from port A of cell sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1214 ($add).
+Removed top 4 bits (of 5) from port B of cell sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1214 ($add).
+Removed top 2 bits (of 5) from port Y of cell sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1214 ($add).
+Removed top 2 bits (of 5) from port A of cell sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1218 ($add).
+Removed top 4 bits (of 5) from port B of cell sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1218 ($add).
+Removed top 1 bits (of 5) from port Y of cell sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1218 ($add).
+Removed top 4 bits (of 5) from port A of cell sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1226 ($add).
+Removed top 4 bits (of 5) from port B of cell sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1226 ($add).
+Removed top 3 bits (of 5) from port Y of cell sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1226 ($add).
+Removed top 3 bits (of 5) from port A of cell sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1230 ($add).
+Removed top 4 bits (of 5) from port B of cell sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1230 ($add).
+Removed top 2 bits (of 5) from port Y of cell sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1230 ($add).
+Removed top 2 bits (of 5) from port A of cell sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1234 ($add).
+Removed top 4 bits (of 5) from port B of cell sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1234 ($add).
+Removed top 1 bits (of 5) from port Y of cell sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1234 ($add).
+Removed top 4 bits (of 5) from port A of cell sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1242 ($add).
+Removed top 4 bits (of 5) from port B of cell sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1242 ($add).
+Removed top 3 bits (of 5) from port Y of cell sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1242 ($add).
+Removed top 3 bits (of 5) from port A of cell sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1246 ($add).
+Removed top 4 bits (of 5) from port B of cell sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1246 ($add).
+Removed top 2 bits (of 5) from port Y of cell sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1246 ($add).
+Removed top 2 bits (of 5) from port A of cell sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1250 ($add).
+Removed top 4 bits (of 5) from port B of cell sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1250 ($add).
+Removed top 1 bits (of 5) from port Y of cell sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1250 ($add).
+Removed top 4 bits (of 5) from port A of cell sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1258 ($add).
+Removed top 4 bits (of 5) from port B of cell sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1258 ($add).
+Removed top 3 bits (of 5) from port Y of cell sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1258 ($add).
+Removed top 3 bits (of 5) from port A of cell sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1262 ($add).
+Removed top 4 bits (of 5) from port B of cell sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1262 ($add).
+Removed top 2 bits (of 5) from port Y of cell sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1262 ($add).
+Removed top 2 bits (of 5) from port A of cell sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1266 ($add).
+Removed top 4 bits (of 5) from port B of cell sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1266 ($add).
+Removed top 1 bits (of 5) from port Y of cell sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1266 ($add).
+Removed top 4 bits (of 5) from port A of cell sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1274 ($add).
+Removed top 4 bits (of 5) from port B of cell sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1274 ($add).
+Removed top 3 bits (of 5) from port Y of cell sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1274 ($add).
+Removed top 3 bits (of 5) from port A of cell sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1278 ($add).
+Removed top 4 bits (of 5) from port B of cell sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1278 ($add).
+Removed top 2 bits (of 5) from port Y of cell sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1278 ($add).
+Removed top 2 bits (of 5) from port A of cell sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1282 ($add).
+Removed top 4 bits (of 5) from port B of cell sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1282 ($add).
+Removed top 1 bits (of 5) from port Y of cell sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1282 ($add).
+Removed top 4 bits (of 5) from port A of cell sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1290 ($add).
+Removed top 4 bits (of 5) from port B of cell sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1290 ($add).
+Removed top 3 bits (of 5) from port Y of cell sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1290 ($add).
+Removed top 3 bits (of 5) from port A of cell sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1294 ($add).
+Removed top 4 bits (of 5) from port B of cell sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1294 ($add).
+Removed top 2 bits (of 5) from port Y of cell sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1294 ($add).
+Removed top 2 bits (of 5) from port A of cell sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1298 ($add).
+Removed top 4 bits (of 5) from port B of cell sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1298 ($add).
+Removed top 1 bits (of 5) from port Y of cell sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1298 ($add).
+Removed top 13 bits (of 17) from port B of cell sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:152$1301 ($add).
+Removed top 13 bits (of 17) from port B of cell sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:152$1303 ($add).
+Removed top 13 bits (of 17) from port B of cell sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:152$1305 ($add).
+Removed top 13 bits (of 17) from port B of cell sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:152$1307 ($add).
+Removed top 13 bits (of 17) from port B of cell sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:152$1309 ($add).
+Removed top 13 bits (of 17) from port B of cell sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:152$1311 ($add).
+Removed top 13 bits (of 17) from port B of cell sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:152$1313 ($add).
+Removed top 13 bits (of 17) from port B of cell sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:152$1315 ($add).
+Removed top 13 bits (of 17) from port B of cell sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:152$1317 ($add).
+Removed top 13 bits (of 17) from port B of cell sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:152$1319 ($add).
+Removed top 13 bits (of 17) from port B of cell sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:152$1321 ($add).
+Removed top 13 bits (of 17) from port B of cell sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:152$1323 ($add).
+Removed top 13 bits (of 17) from port B of cell sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:152$1325 ($add).
+Removed top 13 bits (of 17) from port B of cell sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:152$1327 ($add).
+Removed top 13 bits (of 17) from port B of cell sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:152$1329 ($add).
+Removed top 13 bits (of 17) from port B of cell sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:152$1331 ($add).
+Removed top 27 bits (of 32) from port B of cell sc_array_ubench.$mul$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:154$1332 ($mul).
+Removed top 23 bits (of 32) from port Y of cell sc_array_ubench.$mul$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:154$1332 ($mul).
+Removed top 22 bits (of 32) from port B of cell sc_array_ubench.$shiftx$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:154$1334 ($shiftx).
+Removed top 3 bits (of 5) from wire sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1050_Y.
+Removed top 2 bits (of 5) from wire sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1054_Y.
+Removed top 3 bits (of 5) from wire sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1066_Y.
+Removed top 2 bits (of 5) from wire sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1070_Y.
+Removed top 1 bits (of 80) from wire sc_array_ubench.pc.
+Removed top 3 bits (of 5) from wire sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1082_Y.
+Removed top 2 bits (of 5) from wire sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1086_Y.
+Removed top 3 bits (of 5) from wire sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1098_Y.
+Removed top 2 bits (of 5) from wire sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1102_Y.
+Removed top 3 bits (of 5) from wire sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1114_Y.
+Removed top 2 bits (of 5) from wire sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1118_Y.
+Removed top 3 bits (of 5) from wire sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1130_Y.
+Removed top 2 bits (of 5) from wire sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1134_Y.
+Removed top 3 bits (of 5) from wire sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1146_Y.
+Removed top 2 bits (of 5) from wire sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1150_Y.
+Removed top 3 bits (of 5) from wire sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1162_Y.
+Removed top 2 bits (of 5) from wire sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1166_Y.
+Removed top 3 bits (of 5) from wire sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1178_Y.
+Removed top 2 bits (of 5) from wire sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1182_Y.
+Removed top 3 bits (of 5) from wire sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1194_Y.
+Removed top 2 bits (of 5) from wire sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1198_Y.
+Removed top 3 bits (of 5) from wire sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1210_Y.
+Removed top 2 bits (of 5) from wire sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1214_Y.
+Removed top 3 bits (of 5) from wire sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1226_Y.
+Removed top 2 bits (of 5) from wire sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1230_Y.
+Removed top 3 bits (of 5) from wire sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1242_Y.
+Removed top 2 bits (of 5) from wire sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1246_Y.
+Removed top 3 bits (of 5) from wire sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1258_Y.
+Removed top 2 bits (of 5) from wire sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1262_Y.
+Removed top 3 bits (of 5) from wire sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1274_Y.
+Removed top 2 bits (of 5) from wire sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1278_Y.
+Removed top 3 bits (of 5) from wire sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1290_Y.
+Removed top 2 bits (of 5) from wire sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1294_Y.
+Removed top 23 bits (of 32) from wire sc_array_ubench.$add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:154$1333_Y.
+
+3.16. Executing PEEPOPT pass (run peephole optimizers).
+right shiftmul pattern in sc_array_ubench: shift=$shiftx$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:154$1334, mul=$mul$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:154$1332
+shiftpow2 pattern in sc_array_ubench: shift=$shiftx$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:154$1334, index=\sel, stride=32, width=17, ways=16
+
+3.17. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \sc_array_ubench..
+Removed 1 unused cells and 35 unused wires.
+<suppressed ~2 debug messages>
+
+3.18. Executing SHARE pass (SAT-based resource sharing).
+
+3.19. Executing TECHMAP pass (map to technology primitives).
+
+3.19.1. Executing Verilog-2005 frontend: /share/mul2dsp.v
+Parsing Verilog input from `/share/mul2dsp.v' to AST representation.
+Generating RTLIL representation for module `\_80_mul'.
+Generating RTLIL representation for module `\_90_soft_mul'.
+Successfully finished Verilog frontend.
+
+3.19.2. Continuing TECHMAP pass.
+No more expansions possible.
+<suppressed ~4 debug messages>
+
+3.20. Executing TECHMAP pass (map to technology primitives).
+
+3.20.1. Executing Verilog-2005 frontend: /share/mul2dsp.v
+Parsing Verilog input from `/share/mul2dsp.v' to AST representation.
+Generating RTLIL representation for module `\_80_mul'.
+Generating RTLIL representation for module `\_90_soft_mul'.
+Successfully finished Verilog frontend.
+
+3.20.2. Continuing TECHMAP pass.
+No more expansions possible.
+<suppressed ~4 debug messages>
+
+3.21. Executing TECHMAP pass (map to technology primitives).
+
+3.21.1. Executing Verilog-2005 frontend: /share/mul2dsp.v
+Parsing Verilog input from `/share/mul2dsp.v' to AST representation.
+Generating RTLIL representation for module `\_80_mul'.
+Generating RTLIL representation for module `\_90_soft_mul'.
+Successfully finished Verilog frontend.
+
+3.21.2. Continuing TECHMAP pass.
+No more expansions possible.
+<suppressed ~4 debug messages>
+
+3.22. Executing TECHMAP pass (map to technology primitives).
+
+3.22.1. Executing Verilog-2005 frontend: /share/mul2dsp.v
+Parsing Verilog input from `/share/mul2dsp.v' to AST representation.
+Generating RTLIL representation for module `\_80_mul'.
+Generating RTLIL representation for module `\_90_soft_mul'.
+Successfully finished Verilog frontend.
+
+3.22.2. Continuing TECHMAP pass.
+No more expansions possible.
+<suppressed ~4 debug messages>
+
+3.23. Executing TECHMAP pass (map to technology primitives).
+
+3.23.1. Executing Verilog-2005 frontend: /share/gowin/dsp_map.v
+Parsing Verilog input from `/share/gowin/dsp_map.v' to AST representation.
+Generating RTLIL representation for module `$__MUL9X9'.
+Generating RTLIL representation for module `$__MUL18X18'.
+Generating RTLIL representation for module `$__MUL36X36'.
+Successfully finished Verilog frontend.
+
+3.23.2. Continuing TECHMAP pass.
+No more expansions possible.
+<suppressed ~5 debug messages>
+
+3.24. Executing ALUMACC pass (create $alu and $macc cells).
+Extracting $alu and $macc cells in module sc_array_ubench:
+  creating $macc model for $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1050 ($add).
+  creating $macc model for $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1054 ($add).
+  creating $macc model for $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1058 ($add).
+  creating $macc model for $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1066 ($add).
+  creating $macc model for $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1070 ($add).
+  creating $macc model for $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1074 ($add).
+  creating $macc model for $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1082 ($add).
+  creating $macc model for $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1086 ($add).
+  creating $macc model for $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1090 ($add).
+  creating $macc model for $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1098 ($add).
+  creating $macc model for $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1102 ($add).
+  creating $macc model for $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1106 ($add).
+  creating $macc model for $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1114 ($add).
+  creating $macc model for $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1118 ($add).
+  creating $macc model for $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1122 ($add).
+  creating $macc model for $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1130 ($add).
+  creating $macc model for $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1134 ($add).
+  creating $macc model for $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1138 ($add).
+  creating $macc model for $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1146 ($add).
+  creating $macc model for $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1150 ($add).
+  creating $macc model for $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1154 ($add).
+  creating $macc model for $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1162 ($add).
+  creating $macc model for $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1166 ($add).
+  creating $macc model for $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1170 ($add).
+  creating $macc model for $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1178 ($add).
+  creating $macc model for $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1182 ($add).
+  creating $macc model for $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1186 ($add).
+  creating $macc model for $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1194 ($add).
+  creating $macc model for $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1198 ($add).
+  creating $macc model for $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1202 ($add).
+  creating $macc model for $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1210 ($add).
+  creating $macc model for $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1214 ($add).
+  creating $macc model for $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1218 ($add).
+  creating $macc model for $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1226 ($add).
+  creating $macc model for $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1230 ($add).
+  creating $macc model for $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1234 ($add).
+  creating $macc model for $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1242 ($add).
+  creating $macc model for $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1246 ($add).
+  creating $macc model for $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1250 ($add).
+  creating $macc model for $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1258 ($add).
+  creating $macc model for $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1262 ($add).
+  creating $macc model for $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1266 ($add).
+  creating $macc model for $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1274 ($add).
+  creating $macc model for $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1278 ($add).
+  creating $macc model for $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1282 ($add).
+  creating $macc model for $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1290 ($add).
+  creating $macc model for $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1294 ($add).
+  creating $macc model for $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1298 ($add).
+  creating $macc model for $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:152$1301 ($add).
+  creating $macc model for $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:152$1303 ($add).
+  creating $macc model for $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:152$1305 ($add).
+  creating $macc model for $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:152$1307 ($add).
+  creating $macc model for $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:152$1309 ($add).
+  creating $macc model for $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:152$1311 ($add).
+  creating $macc model for $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:152$1313 ($add).
+  creating $macc model for $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:152$1315 ($add).
+  creating $macc model for $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:152$1317 ($add).
+  creating $macc model for $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:152$1319 ($add).
+  creating $macc model for $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:152$1321 ($add).
+  creating $macc model for $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:152$1323 ($add).
+  creating $macc model for $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:152$1325 ($add).
+  creating $macc model for $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:152$1327 ($add).
+  creating $macc model for $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:152$1329 ($add).
+  creating $macc model for $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:152$1331 ($add).
+  merging $macc model for $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1298 into $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:152$1331.
+  merging $macc model for $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1294 into $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:152$1331.
+  merging $macc model for $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1290 into $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:152$1331.
+  merging $macc model for $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1282 into $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:152$1329.
+  merging $macc model for $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1278 into $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:152$1329.
+  merging $macc model for $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1274 into $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:152$1329.
+  merging $macc model for $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1266 into $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:152$1327.
+  merging $macc model for $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1262 into $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:152$1327.
+  merging $macc model for $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1258 into $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:152$1327.
+  merging $macc model for $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1250 into $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:152$1325.
+  merging $macc model for $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1246 into $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:152$1325.
+  merging $macc model for $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1242 into $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:152$1325.
+  merging $macc model for $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1234 into $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:152$1323.
+  merging $macc model for $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1230 into $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:152$1323.
+  merging $macc model for $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1226 into $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:152$1323.
+  merging $macc model for $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1218 into $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:152$1321.
+  merging $macc model for $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1214 into $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:152$1321.
+  merging $macc model for $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1210 into $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:152$1321.
+  merging $macc model for $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1202 into $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:152$1319.
+  merging $macc model for $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1198 into $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:152$1319.
+  merging $macc model for $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1194 into $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:152$1319.
+  merging $macc model for $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1186 into $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:152$1317.
+  merging $macc model for $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1182 into $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:152$1317.
+  merging $macc model for $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1178 into $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:152$1317.
+  merging $macc model for $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1170 into $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:152$1315.
+  merging $macc model for $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1166 into $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:152$1315.
+  merging $macc model for $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1162 into $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:152$1315.
+  merging $macc model for $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1154 into $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:152$1313.
+  merging $macc model for $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1150 into $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:152$1313.
+  merging $macc model for $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1146 into $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:152$1313.
+  merging $macc model for $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1138 into $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:152$1311.
+  merging $macc model for $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1134 into $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:152$1311.
+  merging $macc model for $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1130 into $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:152$1311.
+  merging $macc model for $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1122 into $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:152$1309.
+  merging $macc model for $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1118 into $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:152$1309.
+  merging $macc model for $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1114 into $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:152$1309.
+  merging $macc model for $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1106 into $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:152$1307.
+  merging $macc model for $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1102 into $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:152$1307.
+  merging $macc model for $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1098 into $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:152$1307.
+  merging $macc model for $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1090 into $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:152$1305.
+  merging $macc model for $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1086 into $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:152$1305.
+  merging $macc model for $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1082 into $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:152$1305.
+  merging $macc model for $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1074 into $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:152$1303.
+  merging $macc model for $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1070 into $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:152$1303.
+  merging $macc model for $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1066 into $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:152$1303.
+  merging $macc model for $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1058 into $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:152$1301.
+  merging $macc model for $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1054 into $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:152$1301.
+  merging $macc model for $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:143$1050 into $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:152$1301.
+  creating $macc cell for $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:152$1301: $auto$alumacc.cc:427:replace_macc$2072
+  creating $macc cell for $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:152$1303: $auto$alumacc.cc:427:replace_macc$2073
+  creating $macc cell for $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:152$1305: $auto$alumacc.cc:427:replace_macc$2074
+  creating $macc cell for $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:152$1307: $auto$alumacc.cc:427:replace_macc$2075
+  creating $macc cell for $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:152$1309: $auto$alumacc.cc:427:replace_macc$2076
+  creating $macc cell for $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:152$1311: $auto$alumacc.cc:427:replace_macc$2077
+  creating $macc cell for $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:152$1313: $auto$alumacc.cc:427:replace_macc$2078
+  creating $macc cell for $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:152$1315: $auto$alumacc.cc:427:replace_macc$2079
+  creating $macc cell for $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:152$1317: $auto$alumacc.cc:427:replace_macc$2080
+  creating $macc cell for $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:152$1319: $auto$alumacc.cc:427:replace_macc$2081
+  creating $macc cell for $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:152$1321: $auto$alumacc.cc:427:replace_macc$2082
+  creating $macc cell for $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:152$1323: $auto$alumacc.cc:427:replace_macc$2083
+  creating $macc cell for $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:152$1325: $auto$alumacc.cc:427:replace_macc$2084
+  creating $macc cell for $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:152$1327: $auto$alumacc.cc:427:replace_macc$2085
+  creating $macc cell for $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:152$1329: $auto$alumacc.cc:427:replace_macc$2086
+  creating $macc cell for $add$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:152$1331: $auto$alumacc.cc:427:replace_macc$2087
+  creating $alu model for $lt$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:138$1039 ($lt): new $alu
+  creating $alu model for $lt$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:138$1040 ($lt): new $alu
+  creating $alu model for $lt$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:138$1041 ($lt): new $alu
+  creating $alu model for $lt$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:138$1042 ($lt): new $alu
+  creating $alu model for $lt$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:142$1043 ($lt): new $alu
+  creating $alu model for $lt$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:142$1047 ($lt): new $alu
+  creating $alu model for $lt$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:142$1051 ($lt): new $alu
+  creating $alu model for $lt$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:142$1055 ($lt): new $alu
+  creating $alu model for $lt$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:142$1059 ($lt): new $alu
+  creating $alu model for $lt$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:142$1063 ($lt): new $alu
+  creating $alu model for $lt$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:142$1067 ($lt): new $alu
+  creating $alu model for $lt$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:142$1071 ($lt): new $alu
+  creating $alu model for $lt$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:142$1075 ($lt): new $alu
+  creating $alu model for $lt$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:142$1079 ($lt): new $alu
+  creating $alu model for $lt$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:142$1083 ($lt): new $alu
+  creating $alu model for $lt$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:142$1087 ($lt): new $alu
+  creating $alu model for $lt$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:142$1091 ($lt): new $alu
+  creating $alu model for $lt$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:142$1095 ($lt): new $alu
+  creating $alu model for $lt$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:142$1099 ($lt): new $alu
+  creating $alu model for $lt$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:142$1103 ($lt): new $alu
+  creating $alu model for $lt$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:142$1107 ($lt): new $alu
+  creating $alu model for $lt$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:142$1111 ($lt): new $alu
+  creating $alu model for $lt$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:142$1115 ($lt): new $alu
+  creating $alu model for $lt$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:142$1119 ($lt): new $alu
+  creating $alu model for $lt$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:142$1123 ($lt): new $alu
+  creating $alu model for $lt$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:142$1127 ($lt): new $alu
+  creating $alu model for $lt$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:142$1131 ($lt): new $alu
+  creating $alu model for $lt$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:142$1135 ($lt): new $alu
+  creating $alu model for $lt$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:142$1139 ($lt): new $alu
+  creating $alu model for $lt$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:142$1143 ($lt): new $alu
+  creating $alu model for $lt$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:142$1147 ($lt): new $alu
+  creating $alu model for $lt$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:142$1151 ($lt): new $alu
+  creating $alu model for $lt$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:142$1155 ($lt): new $alu
+  creating $alu model for $lt$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:142$1159 ($lt): new $alu
+  creating $alu model for $lt$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:142$1163 ($lt): new $alu
+  creating $alu model for $lt$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:142$1167 ($lt): new $alu
+  creating $alu model for $lt$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:142$1171 ($lt): new $alu
+  creating $alu model for $lt$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:142$1175 ($lt): new $alu
+  creating $alu model for $lt$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:142$1179 ($lt): new $alu
+  creating $alu model for $lt$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:142$1183 ($lt): new $alu
+  creating $alu model for $lt$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:142$1187 ($lt): new $alu
+  creating $alu model for $lt$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:142$1191 ($lt): new $alu
+  creating $alu model for $lt$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:142$1195 ($lt): new $alu
+  creating $alu model for $lt$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:142$1199 ($lt): new $alu
+  creating $alu model for $lt$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:142$1203 ($lt): new $alu
+  creating $alu model for $lt$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:142$1207 ($lt): new $alu
+  creating $alu model for $lt$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:142$1211 ($lt): new $alu
+  creating $alu model for $lt$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:142$1215 ($lt): new $alu
+  creating $alu model for $lt$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:142$1219 ($lt): new $alu
+  creating $alu model for $lt$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:142$1223 ($lt): new $alu
+  creating $alu model for $lt$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:142$1227 ($lt): new $alu
+  creating $alu model for $lt$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:142$1231 ($lt): new $alu
+  creating $alu model for $lt$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:142$1235 ($lt): new $alu
+  creating $alu model for $lt$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:142$1239 ($lt): new $alu
+  creating $alu model for $lt$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:142$1243 ($lt): new $alu
+  creating $alu model for $lt$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:142$1247 ($lt): new $alu
+  creating $alu model for $lt$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:142$1251 ($lt): new $alu
+  creating $alu model for $lt$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:142$1255 ($lt): new $alu
+  creating $alu model for $lt$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:142$1259 ($lt): new $alu
+  creating $alu model for $lt$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:142$1263 ($lt): new $alu
+  creating $alu model for $lt$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:142$1267 ($lt): new $alu
+  creating $alu model for $lt$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:142$1271 ($lt): new $alu
+  creating $alu model for $lt$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:142$1275 ($lt): new $alu
+  creating $alu model for $lt$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:142$1279 ($lt): new $alu
+  creating $alu model for $lt$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:142$1283 ($lt): new $alu
+  creating $alu model for $lt$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:142$1287 ($lt): new $alu
+  creating $alu model for $lt$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:142$1291 ($lt): new $alu
+  creating $alu model for $lt$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:142$1295 ($lt): new $alu
+  creating $alu cell for $lt$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:142$1295: $auto$alumacc.cc:578:replace_alu$2156
+  creating $alu cell for $lt$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:142$1291: $auto$alumacc.cc:578:replace_alu$2161
+  creating $alu cell for $lt$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:142$1287: $auto$alumacc.cc:578:replace_alu$2166
+  creating $alu cell for $lt$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:142$1283: $auto$alumacc.cc:578:replace_alu$2171
+  creating $alu cell for $lt$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:142$1279: $auto$alumacc.cc:578:replace_alu$2176
+  creating $alu cell for $lt$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:142$1275: $auto$alumacc.cc:578:replace_alu$2181
+  creating $alu cell for $lt$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:142$1271: $auto$alumacc.cc:578:replace_alu$2186
+  creating $alu cell for $lt$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:142$1267: $auto$alumacc.cc:578:replace_alu$2191
+  creating $alu cell for $lt$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:142$1263: $auto$alumacc.cc:578:replace_alu$2196
+  creating $alu cell for $lt$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:142$1259: $auto$alumacc.cc:578:replace_alu$2201
+  creating $alu cell for $lt$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:142$1255: $auto$alumacc.cc:578:replace_alu$2206
+  creating $alu cell for $lt$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:142$1251: $auto$alumacc.cc:578:replace_alu$2211
+  creating $alu cell for $lt$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:142$1247: $auto$alumacc.cc:578:replace_alu$2216
+  creating $alu cell for $lt$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:142$1243: $auto$alumacc.cc:578:replace_alu$2221
+  creating $alu cell for $lt$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:142$1239: $auto$alumacc.cc:578:replace_alu$2226
+  creating $alu cell for $lt$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:142$1235: $auto$alumacc.cc:578:replace_alu$2231
+  creating $alu cell for $lt$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:142$1231: $auto$alumacc.cc:578:replace_alu$2236
+  creating $alu cell for $lt$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:142$1227: $auto$alumacc.cc:578:replace_alu$2241
+  creating $alu cell for $lt$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:142$1223: $auto$alumacc.cc:578:replace_alu$2246
+  creating $alu cell for $lt$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:142$1219: $auto$alumacc.cc:578:replace_alu$2251
+  creating $alu cell for $lt$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:142$1215: $auto$alumacc.cc:578:replace_alu$2256
+  creating $alu cell for $lt$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:142$1211: $auto$alumacc.cc:578:replace_alu$2261
+  creating $alu cell for $lt$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:142$1207: $auto$alumacc.cc:578:replace_alu$2266
+  creating $alu cell for $lt$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:142$1203: $auto$alumacc.cc:578:replace_alu$2271
+  creating $alu cell for $lt$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:142$1199: $auto$alumacc.cc:578:replace_alu$2276
+  creating $alu cell for $lt$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:142$1195: $auto$alumacc.cc:578:replace_alu$2281
+  creating $alu cell for $lt$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:142$1191: $auto$alumacc.cc:578:replace_alu$2286
+  creating $alu cell for $lt$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:142$1187: $auto$alumacc.cc:578:replace_alu$2291
+  creating $alu cell for $lt$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:142$1183: $auto$alumacc.cc:578:replace_alu$2296
+  creating $alu cell for $lt$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:142$1179: $auto$alumacc.cc:578:replace_alu$2301
+  creating $alu cell for $lt$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:142$1175: $auto$alumacc.cc:578:replace_alu$2306
+  creating $alu cell for $lt$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:142$1171: $auto$alumacc.cc:578:replace_alu$2311
+  creating $alu cell for $lt$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:142$1167: $auto$alumacc.cc:578:replace_alu$2316
+  creating $alu cell for $lt$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:142$1163: $auto$alumacc.cc:578:replace_alu$2321
+  creating $alu cell for $lt$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:142$1159: $auto$alumacc.cc:578:replace_alu$2326
+  creating $alu cell for $lt$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:142$1155: $auto$alumacc.cc:578:replace_alu$2331
+  creating $alu cell for $lt$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:142$1151: $auto$alumacc.cc:578:replace_alu$2336
+  creating $alu cell for $lt$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:142$1147: $auto$alumacc.cc:578:replace_alu$2341
+  creating $alu cell for $lt$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:142$1143: $auto$alumacc.cc:578:replace_alu$2346
+  creating $alu cell for $lt$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:142$1139: $auto$alumacc.cc:578:replace_alu$2351
+  creating $alu cell for $lt$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:142$1135: $auto$alumacc.cc:578:replace_alu$2356
+  creating $alu cell for $lt$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:142$1131: $auto$alumacc.cc:578:replace_alu$2361
+  creating $alu cell for $lt$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:142$1127: $auto$alumacc.cc:578:replace_alu$2366
+  creating $alu cell for $lt$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:142$1123: $auto$alumacc.cc:578:replace_alu$2371
+  creating $alu cell for $lt$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:142$1119: $auto$alumacc.cc:578:replace_alu$2376
+  creating $alu cell for $lt$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:142$1115: $auto$alumacc.cc:578:replace_alu$2381
+  creating $alu cell for $lt$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:142$1111: $auto$alumacc.cc:578:replace_alu$2386
+  creating $alu cell for $lt$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:142$1107: $auto$alumacc.cc:578:replace_alu$2391
+  creating $alu cell for $lt$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:142$1103: $auto$alumacc.cc:578:replace_alu$2396
+  creating $alu cell for $lt$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:142$1099: $auto$alumacc.cc:578:replace_alu$2401
+  creating $alu cell for $lt$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:142$1095: $auto$alumacc.cc:578:replace_alu$2406
+  creating $alu cell for $lt$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:142$1091: $auto$alumacc.cc:578:replace_alu$2411
+  creating $alu cell for $lt$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:142$1087: $auto$alumacc.cc:578:replace_alu$2416
+  creating $alu cell for $lt$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:142$1083: $auto$alumacc.cc:578:replace_alu$2421
+  creating $alu cell for $lt$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:142$1079: $auto$alumacc.cc:578:replace_alu$2426
+  creating $alu cell for $lt$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:142$1075: $auto$alumacc.cc:578:replace_alu$2431
+  creating $alu cell for $lt$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:142$1071: $auto$alumacc.cc:578:replace_alu$2436
+  creating $alu cell for $lt$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:142$1067: $auto$alumacc.cc:578:replace_alu$2441
+  creating $alu cell for $lt$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:142$1063: $auto$alumacc.cc:578:replace_alu$2446
+  creating $alu cell for $lt$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:142$1059: $auto$alumacc.cc:578:replace_alu$2451
+  creating $alu cell for $lt$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:142$1055: $auto$alumacc.cc:578:replace_alu$2456
+  creating $alu cell for $lt$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:142$1051: $auto$alumacc.cc:578:replace_alu$2461
+  creating $alu cell for $lt$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:142$1047: $auto$alumacc.cc:578:replace_alu$2466
+  creating $alu cell for $lt$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:142$1043: $auto$alumacc.cc:578:replace_alu$2471
+  creating $alu cell for $lt$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:138$1042: $auto$alumacc.cc:578:replace_alu$2476
+  creating $alu cell for $lt$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:138$1041: $auto$alumacc.cc:578:replace_alu$2481
+  creating $alu cell for $lt$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:138$1040: $auto$alumacc.cc:578:replace_alu$2486
+  creating $alu cell for $lt$/home/user/tpu-e-cpu/scripts/budgets/ubench/sc_array_ubench.v:138$1039: $auto$alumacc.cc:578:replace_alu$2491
+  created 68 $alu and 16 $macc cells.
+
+3.25. Executing OPT pass (performing simple optimizations).
+
+3.25.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module sc_array_ubench.
+
+3.25.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\sc_array_ubench'.
+Computing hashes of 589 cells of `\sc_array_ubench'.
+Finding duplicate cells in `\sc_array_ubench'.
+Removed a total of 0 cells.
+
+3.25.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \sc_array_ubench..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+
+3.25.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \sc_array_ubench.
+Performed a total of 0 changes.
+
+3.25.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\sc_array_ubench'.
+Computing hashes of 589 cells of `\sc_array_ubench'.
+Finding duplicate cells in `\sc_array_ubench'.
+Removed a total of 0 cells.
+
+3.25.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+3.25.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \sc_array_ubench..
+Removed 48 unused cells and 100 unused wires.
+<suppressed ~49 debug messages>
+
+3.25.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module sc_array_ubench.
+
+3.25.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+3.25.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \sc_array_ubench..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+
+3.25.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \sc_array_ubench.
+Performed a total of 0 changes.
+
+3.25.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\sc_array_ubench'.
+Computing hashes of 541 cells of `\sc_array_ubench'.
+Finding duplicate cells in `\sc_array_ubench'.
+Removed a total of 0 cells.
+
+3.25.13. Executing OPT_DFF pass (perform DFF optimizations).
+
+3.25.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \sc_array_ubench..
+
+3.25.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module sc_array_ubench.
+
+3.25.16. Finished fast OPT passes. (There is nothing left to do.)
+
+3.26. Executing MEMORY pass.
+
+3.26.1. Executing OPT_MEM pass (optimize memories).
+Performed a total of 0 transformations.
+
+3.26.2. Executing OPT_MEM_PRIORITY pass (removing unnecessary memory write priority relations).
+Performed a total of 0 transformations.
+
+3.26.3. Executing OPT_MEM_FEEDBACK pass (finding memory read-to-write feedback paths).
+
+3.26.4. Executing MEMORY_BMUX2ROM pass (converting muxes to ROMs).
+
+3.26.5. Executing MEMORY_DFF pass (merging $dff cells to $memrd).
+
+3.26.6. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \sc_array_ubench..
+
+3.26.7. Executing MEMORY_SHARE pass (consolidating $memrd/$memwr cells).
+
+3.26.8. Executing OPT_MEM_WIDEN pass (optimize memories where all ports are wide).
+Performed a total of 0 transformations.
+
+3.26.9. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \sc_array_ubench..
+
+3.26.10. Executing MEMORY_COLLECT pass (generating $mem cells).
+
+3.27. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \sc_array_ubench..
+
+3.28. Executing MEMORY_LIBMAP pass (mapping memories to cells).
+
+3.29. Executing TECHMAP pass (map to technology primitives).
+
+3.29.1. Executing Verilog-2005 frontend: /share/gowin/lutrams_map.v
+Parsing Verilog input from `/share/gowin/lutrams_map.v' to AST representation.
+Generating RTLIL representation for module `$__GOWIN_LUTRAM_'.
+Successfully finished Verilog frontend.
+
+3.29.2. Executing Verilog-2005 frontend: /share/gowin/brams_map.v
+Parsing Verilog input from `/share/gowin/brams_map.v' to AST representation.
+Generating RTLIL representation for module `$__GOWIN_SP_'.
+Generating RTLIL representation for module `$__GOWIN_DP_'.
+Generating RTLIL representation for module `$__GOWIN_SDP_'.
+Successfully finished Verilog frontend.
+
+3.29.3. Continuing TECHMAP pass.
+No more expansions possible.
+<suppressed ~6 debug messages>
+
+3.30. Executing OPT pass (performing simple optimizations).
+
+3.30.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module sc_array_ubench.
+<suppressed ~61 debug messages>
+
+3.30.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\sc_array_ubench'.
+Computing hashes of 541 cells of `\sc_array_ubench'.
+Finding duplicate cells in `\sc_array_ubench'.
+Removed a total of 0 cells.
+
+3.30.3. Executing OPT_DFF pass (perform DFF optimizations).
+
+3.30.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \sc_array_ubench..
+
+3.30.5. Finished fast OPT passes.
+
+3.31. Executing MEMORY_MAP pass (converting memories to logic and flip-flops).
+
+3.32. Executing OPT pass (performing simple optimizations).
+
+3.32.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module sc_array_ubench.
+
+3.32.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\sc_array_ubench'.
+Computing hashes of 541 cells of `\sc_array_ubench'.
+Finding duplicate cells in `\sc_array_ubench'.
+Removed a total of 0 cells.
+
+3.32.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \sc_array_ubench..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+
+3.32.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \sc_array_ubench.
+Performed a total of 0 changes.
+
+3.32.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\sc_array_ubench'.
+Computing hashes of 541 cells of `\sc_array_ubench'.
+Finding duplicate cells in `\sc_array_ubench'.
+Removed a total of 0 cells.
+
+3.32.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+3.32.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \sc_array_ubench..
+
+3.32.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module sc_array_ubench.
+
+3.32.9. Finished fast OPT passes. (There is nothing left to do.)
+
+3.33. Executing TECHMAP pass (map to technology primitives).
+
+3.33.1. Executing Verilog-2005 frontend: /share/techmap.v
+Parsing Verilog input from `/share/techmap.v' to AST representation.
+Generating RTLIL representation for module `\_90_simplemap_bool_ops'.
+Generating RTLIL representation for module `\_90_simplemap_reduce_ops'.
+Generating RTLIL representation for module `\_90_simplemap_logic_ops'.
+Generating RTLIL representation for module `\_90_simplemap_compare_ops'.
+Generating RTLIL representation for module `\_90_simplemap_various'.
+Generating RTLIL representation for module `\_90_simplemap_registers'.
+Generating RTLIL representation for module `\_90_shift_ops_shr_shl_sshl_sshr'.
+Generating RTLIL representation for module `\_90_shift_shiftx'.
+Generating RTLIL representation for module `\_90_fa'.
+Generating RTLIL representation for module `\_90_lcu_brent_kung'.
+Generating RTLIL representation for module `\_90_alu'.
+Generating RTLIL representation for module `\_90_macc'.
+Generating RTLIL representation for module `\_90_alumacc'.
+Generating RTLIL representation for module `$__div_mod_u'.
+Generating RTLIL representation for module `$__div_mod_trunc'.
+Generating RTLIL representation for module `\_90_div'.
+Generating RTLIL representation for module `\_90_mod'.
+Generating RTLIL representation for module `$__div_mod_floor'.
+Generating RTLIL representation for module `\_90_divfloor'.
+Generating RTLIL representation for module `\_90_modfloor'.
+Generating RTLIL representation for module `\_90_pow'.
+Generating RTLIL representation for module `\_90_demux'.
+Generating RTLIL representation for module `\_90_lut'.
+Generating RTLIL representation for module `$connect'.
+Generating RTLIL representation for module `$input_port'.
+Successfully finished Verilog frontend.
+
+3.33.2. Executing Verilog-2005 frontend: /share/gowin/arith_map.v
+Parsing Verilog input from `/share/gowin/arith_map.v' to AST representation.
+Generating RTLIL representation for module `\_80_gw1n_alu'.
+Successfully finished Verilog frontend.
+
+3.33.3. Continuing TECHMAP pass.
+Using extmapper simplemap for cells of type $not.
+Using template $paramod$a1bc51c02ce12ac21eb18988e83292af48ed7d72\_80_gw1n_alu for cells of type $alu.
+Using extmapper maccmap for cells of type $macc_v2.
+  add \acc [271:255] (17 bits, unsigned)
+  add \p [60] (1 bits, unsigned)
+  add \p [61] (1 bits, unsigned)
+  add \p [62] (1 bits, unsigned)
+  add \p [63] (1 bits, unsigned)
+  packed 2 (2) bits / 2 words into adder tree
+  add \acc [254:238] (17 bits, unsigned)
+  add \p [56] (1 bits, unsigned)
+  add \p [57] (1 bits, unsigned)
+  add \p [58] (1 bits, unsigned)
+  add \p [59] (1 bits, unsigned)
+  packed 2 (2) bits / 2 words into adder tree
+  add \acc [237:221] (17 bits, unsigned)
+  add \p [52] (1 bits, unsigned)
+  add \p [53] (1 bits, unsigned)
+  add \p [54] (1 bits, unsigned)
+  add \p [55] (1 bits, unsigned)
+  packed 2 (2) bits / 2 words into adder tree
+  add \acc [220:204] (17 bits, unsigned)
+  add \p [48] (1 bits, unsigned)
+  add \p [49] (1 bits, unsigned)
+  add \p [50] (1 bits, unsigned)
+  add \p [51] (1 bits, unsigned)
+  packed 2 (2) bits / 2 words into adder tree
+  add \acc [203:187] (17 bits, unsigned)
+  add \p [44] (1 bits, unsigned)
+  add \p [45] (1 bits, unsigned)
+  add \p [46] (1 bits, unsigned)
+  add \p [47] (1 bits, unsigned)
+  packed 2 (2) bits / 2 words into adder tree
+  add \acc [186:170] (17 bits, unsigned)
+  add \p [40] (1 bits, unsigned)
+  add \p [41] (1 bits, unsigned)
+  add \p [42] (1 bits, unsigned)
+  add \p [43] (1 bits, unsigned)
+  packed 2 (2) bits / 2 words into adder tree
+  add \acc [169:153] (17 bits, unsigned)
+  add \p [36] (1 bits, unsigned)
+  add \p [37] (1 bits, unsigned)
+  add \p [38] (1 bits, unsigned)
+  add \p [39] (1 bits, unsigned)
+  packed 2 (2) bits / 2 words into adder tree
+  add \acc [152:136] (17 bits, unsigned)
+  add \p [32] (1 bits, unsigned)
+  add \p [33] (1 bits, unsigned)
+  add \p [34] (1 bits, unsigned)
+  add \p [35] (1 bits, unsigned)
+  packed 2 (2) bits / 2 words into adder tree
+  add \acc [135:119] (17 bits, unsigned)
+  add \p [28] (1 bits, unsigned)
+  add \p [29] (1 bits, unsigned)
+  add \p [30] (1 bits, unsigned)
+  add \p [31] (1 bits, unsigned)
+  packed 2 (2) bits / 2 words into adder tree
+  add \acc [118:102] (17 bits, unsigned)
+  add \p [24] (1 bits, unsigned)
+  add \p [25] (1 bits, unsigned)
+  add \p [26] (1 bits, unsigned)
+  add \p [27] (1 bits, unsigned)
+  packed 2 (2) bits / 2 words into adder tree
+  add \acc [101:85] (17 bits, unsigned)
+  add \p [20] (1 bits, unsigned)
+  add \p [21] (1 bits, unsigned)
+  add \p [22] (1 bits, unsigned)
+  add \p [23] (1 bits, unsigned)
+  packed 2 (2) bits / 2 words into adder tree
+  add \acc [84:68] (17 bits, unsigned)
+  add \p [16] (1 bits, unsigned)
+  add \p [17] (1 bits, unsigned)
+  add \p [18] (1 bits, unsigned)
+  add \p [19] (1 bits, unsigned)
+  packed 2 (2) bits / 2 words into adder tree
+  add \acc [67:51] (17 bits, unsigned)
+  add \p [12] (1 bits, unsigned)
+  add \p [13] (1 bits, unsigned)
+  add \p [14] (1 bits, unsigned)
+  add \p [15] (1 bits, unsigned)
+  packed 2 (2) bits / 2 words into adder tree
+  add \acc [50:34] (17 bits, unsigned)
+  add \p [8] (1 bits, unsigned)
+  add \p [9] (1 bits, unsigned)
+  add \p [10] (1 bits, unsigned)
+  add \p [11] (1 bits, unsigned)
+  packed 2 (2) bits / 2 words into adder tree
+  add \acc [33:17] (17 bits, unsigned)
+  add \p [4] (1 bits, unsigned)
+  add \p [5] (1 bits, unsigned)
+  add \p [6] (1 bits, unsigned)
+  add \p [7] (1 bits, unsigned)
+  packed 2 (2) bits / 2 words into adder tree
+  add \acc [16:0] (17 bits, unsigned)
+  add \p [0] (1 bits, unsigned)
+  add \p [1] (1 bits, unsigned)
+  add \p [2] (1 bits, unsigned)
+  add \p [3] (1 bits, unsigned)
+  packed 2 (2) bits / 2 words into adder tree
+Using extmapper simplemap for cells of type $bmux.
+Using extmapper simplemap for cells of type $sdffe.
+Using extmapper simplemap for cells of type $dffe.
+Using extmapper simplemap for cells of type $logic_not.
+Using extmapper simplemap for cells of type $logic_and.
+Using extmapper simplemap for cells of type $eq.
+Using extmapper simplemap for cells of type $xor.
+Using extmapper simplemap for cells of type $logic_or.
+Using extmapper simplemap for cells of type $dff.
+Using template $paramod\_90_fa\WIDTH=32'00000000000000000000000000010001 for cells of type $fa.
+Using template $paramod$3bb72ad0665cdca279bbc49ed6a39f403f16497f\_80_gw1n_alu for cells of type $alu.
+Using extmapper simplemap for cells of type $pos.
+Using extmapper simplemap for cells of type $or.
+Using extmapper simplemap for cells of type $and.
+No more expansions possible.
+<suppressed ~1923 debug messages>
+
+3.34. Executing OPT pass (performing simple optimizations).
+
+3.34.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module sc_array_ubench.
+<suppressed ~3539 debug messages>
+
+3.34.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\sc_array_ubench'.
+Computing hashes of 4044 cells of `\sc_array_ubench'.
+Finding duplicate cells in `\sc_array_ubench'.
+Computing hashes of 3808 cells of `\sc_array_ubench'.
+Finding duplicate cells in `\sc_array_ubench'.
+Computing hashes of 3667 cells of `\sc_array_ubench'.
+Finding duplicate cells in `\sc_array_ubench'.
+Computing hashes of 3622 cells of `\sc_array_ubench'.
+Finding duplicate cells in `\sc_array_ubench'.
+<suppressed ~1266 debug messages>
+Removed a total of 422 cells.
+
+3.34.3. Executing OPT_DFF pass (perform DFF optimizations).
+
+3.34.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \sc_array_ubench..
+Removed 1120 unused cells and 3226 unused wires.
+<suppressed ~1121 debug messages>
+
+3.34.5. Finished fast OPT passes.
+
+3.35. Executing IOPADMAP pass (mapping inputs/outputs to IO-PAD cells).
+Mapping port sc_array_ubench.clk using IBUF.
+Mapping port sc_array_ubench.rst using IBUF.
+Mapping port sc_array_ubench.we using IBUF.
+Mapping port sc_array_ubench.xwe using IBUF.
+Mapping port sc_array_ubench.addr using IBUF.
+Mapping port sc_array_ubench.wdata using IBUF.
+Mapping port sc_array_ubench.start using IBUF.
+Mapping port sc_array_ubench.run using IBUF.
+Mapping port sc_array_ubench.clr using IBUF.
+Mapping port sc_array_ubench.sel using IBUF.
+Mapping port sc_array_ubench.dout using OBUF.
+
+3.36. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \sc_array_ubench..
+Removed 0 unused cells and 4 unused wires.
+<suppressed ~1 debug messages>
+
+3.37. Executing DFFLEGALIZE pass (convert FFs and LATCHes to types supported by the target).
+
+3.38. Executing TECHMAP pass (map to technology primitives).
+
+3.38.1. Executing Verilog-2005 frontend: /share/gowin/cells_map.v
+Parsing Verilog input from `/share/gowin/cells_map.v' to AST representation.
+Generating RTLIL representation for module `$_DFF_N_'.
+Generating RTLIL representation for module `$_DFF_P_'.
+Generating RTLIL representation for module `$_DFFE_PP_'.
+Generating RTLIL representation for module `$_DFFE_NP_'.
+Generating RTLIL representation for module `$_SDFF_PP0_'.
+Generating RTLIL representation for module `$_SDFF_NP0_'.
+Generating RTLIL representation for module `$_SDFFE_PP0P_'.
+Generating RTLIL representation for module `$_SDFFE_NP0P_'.
+Generating RTLIL representation for module `$_SDFF_PP1_'.
+Generating RTLIL representation for module `$_SDFF_NP1_'.
+Generating RTLIL representation for module `$_SDFFE_PP1P_'.
+Generating RTLIL representation for module `$_SDFFE_NP1P_'.
+Generating RTLIL representation for module `$_DFF_PP1_'.
+Generating RTLIL representation for module `$_DFF_NP1_'.
+Generating RTLIL representation for module `$_DFF_PP0_'.
+Generating RTLIL representation for module `$_DFF_NP0_'.
+Generating RTLIL representation for module `$_DFFE_PP1P_'.
+Generating RTLIL representation for module `$_DFFE_NP1P_'.
+Generating RTLIL representation for module `$_DFFE_PP0P_'.
+Generating RTLIL representation for module `$_DFFE_NP0P_'.
+Generating RTLIL representation for module `$lut'.
+Successfully finished Verilog frontend.
+
+3.38.2. Continuing TECHMAP pass.
+Using template $_DFF_P_ for cells of type $_DFF_P_.
+Using template $_SDFFE_PP1P_ for cells of type $_SDFFE_PP1P_.
+Using template $_SDFFE_PP0P_ for cells of type $_SDFFE_PP0P_.
+Using template $_DFFE_PP_ for cells of type $_DFFE_PP_.
+No more expansions possible.
+<suppressed ~888 debug messages>
+
+3.39. Executing TECHMAP pass (map to technology primitives).
+
+3.39.1. Executing Verilog-2005 frontend: /share/gowin/cells_latch.v
+Parsing Verilog input from `/share/gowin/cells_latch.v' to AST representation.
+Generating RTLIL representation for module `$_DLATCH_P_'.
+Generating RTLIL representation for module `$_DLATCH_N_'.
+Generating RTLIL representation for module `$_DLATCH_PP0_'.
+Generating RTLIL representation for module `$_DLATCH_NP0_'.
+Generating RTLIL representation for module `$_DLATCH_PP1_'.
+Generating RTLIL representation for module `$_DLATCH_NP1_'.
+Successfully finished Verilog frontend.
+
+3.39.2. Continuing TECHMAP pass.
+No more expansions possible.
+<suppressed ~8 debug messages>
+
+3.40. Executing OPT_EXPR pass (perform const folding).
+Optimizing module sc_array_ubench.
+
+3.41. Executing SIMPLEMAP pass (map simple cells to gate primitives).
+
+3.42. Executing SORT pass.
+
+3.43. Executing Verilog-2005 frontend: /share/abc9_model.v
+Parsing Verilog input from `/share/abc9_model.v' to AST representation.
+Generating RTLIL representation for module `$__ABC9_DELAY'.
+Generating RTLIL representation for module `$__ABC9_BARRIER'.
+Generating RTLIL representation for module `$__ABC9_SCC_BREAKER'.
+Generating RTLIL representation for module `$__DFF_N__$abc9_flop'.
+Generating RTLIL representation for module `$__DFF_P__$abc9_flop'.
+Successfully finished Verilog frontend.
+
+3.44. Executing ABC9 pass.
+
+3.44.1. Executing ABC9_OPS pass (helper functions for ABC9).
+
+3.44.2. Executing ABC9_OPS pass (helper functions for ABC9).
+
+3.44.3. Executing PROC pass (convert processes to netlists).
+
+3.44.3.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Found and cleaned up 1 empty switch in `$paramod\ALU\ALU_MODE=s32'00000000000000000000000000000010.$proc$/share/gowin/cells_sim.v:1064$11829'.
+Cleaned up 1 empty switch.
+
+3.44.3.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
+Removed a total of 0 dead cases.
+
+3.44.3.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).
+Removed 0 redundant assignments.
+Promoted 4 assignments to connections.
+
+3.44.3.4. Executing PROC_INIT pass (extract init attributes).
+
+3.44.3.5. Executing PROC_ARST pass (detect async resets in processes).
+
+3.44.3.6. Executing PROC_ROM pass (convert switches to ROMs).
+Converted 0 switches.
+
+3.44.3.7. Executing PROC_MUX pass (convert decision trees to multiplexers).
+Creating decoders for process `$paramod\ALU\ALU_MODE=s32'00000000000000000000000000000010.$proc$/share/gowin/cells_sim.v:1064$11829'.
+
+3.44.3.8. Executing PROC_DLATCH pass (convert process syncs to latches).
+No latch inferred for signal `$paramod\ALU\ALU_MODE=s32'00000000000000000000000000000010.\C' from process `$paramod\ALU\ALU_MODE=s32'00000000000000000000000000000010.$proc$/share/gowin/cells_sim.v:1064$11829'.
+No latch inferred for signal `$paramod\ALU\ALU_MODE=s32'00000000000000000000000000000010.\S' from process `$paramod\ALU\ALU_MODE=s32'00000000000000000000000000000010.$proc$/share/gowin/cells_sim.v:1064$11829'.
+
+3.44.3.9. Executing PROC_DFF pass (convert process syncs to FFs).
+
+3.44.3.10. Executing PROC_MEMWR pass (convert process memory writes to cells).
+
+3.44.3.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Removing empty process `$paramod\ALU\ALU_MODE=s32'00000000000000000000000000000010.$proc$/share/gowin/cells_sim.v:1064$11829'.
+Cleaned up 0 empty switches.
+
+3.44.4. Executing SCC pass (detecting logic loops).
+Found 0 SCCs in module sc_array_ubench.
+Found 0 SCCs.
+
+3.44.5. Executing ABC9_OPS pass (helper functions for ABC9).
+
+3.44.6. Executing TECHMAP pass (map to technology primitives).
+
+3.44.6.1. Executing Verilog-2005 frontend: /share/techmap.v
+Parsing Verilog input from `/share/techmap.v' to AST representation.
+Generating RTLIL representation for module `\_90_simplemap_bool_ops'.
+Generating RTLIL representation for module `\_90_simplemap_reduce_ops'.
+Generating RTLIL representation for module `\_90_simplemap_logic_ops'.
+Generating RTLIL representation for module `\_90_simplemap_compare_ops'.
+Generating RTLIL representation for module `\_90_simplemap_various'.
+Generating RTLIL representation for module `\_90_simplemap_registers'.
+Generating RTLIL representation for module `\_90_shift_ops_shr_shl_sshl_sshr'.
+Generating RTLIL representation for module `\_90_shift_shiftx'.
+Generating RTLIL representation for module `\_90_fa'.
+Generating RTLIL representation for module `\_90_lcu_brent_kung'.
+Generating RTLIL representation for module `\_90_alu'.
+Generating RTLIL representation for module `\_90_macc'.
+Generating RTLIL representation for module `\_90_alumacc'.
+Generating RTLIL representation for module `$__div_mod_u'.
+Generating RTLIL representation for module `$__div_mod_trunc'.
+Generating RTLIL representation for module `\_90_div'.
+Generating RTLIL representation for module `\_90_mod'.
+Generating RTLIL representation for module `$__div_mod_floor'.
+Generating RTLIL representation for module `\_90_divfloor'.
+Generating RTLIL representation for module `\_90_modfloor'.
+Generating RTLIL representation for module `\_90_pow'.
+Generating RTLIL representation for module `\_90_demux'.
+Generating RTLIL representation for module `\_90_lut'.
+Generating RTLIL representation for module `$connect'.
+Generating RTLIL representation for module `$input_port'.
+Successfully finished Verilog frontend.
+
+3.44.6.2. Continuing TECHMAP pass.
+No more expansions possible.
+<suppressed ~231 debug messages>
+
+3.44.7. Executing OPT pass (performing simple optimizations).
+
+3.44.7.1. Executing OPT_EXPR pass (perform const folding).
+
+3.44.7.2. Executing OPT_MERGE pass (detect identical cells).
+Removed a total of 0 cells.
+
+3.44.7.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Removed 0 multiplexer ports.
+
+3.44.7.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+Performed a total of 0 changes.
+
+3.44.7.5. Executing OPT_MERGE pass (detect identical cells).
+Removed a total of 0 cells.
+
+3.44.7.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+3.44.7.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+
+3.44.7.8. Executing OPT_EXPR pass (perform const folding).
+
+3.44.7.9. Finished fast OPT passes. (There is nothing left to do.)
+
+3.44.8. Executing TECHMAP pass (map to technology primitives).
+
+3.44.8.1. Executing Verilog-2005 frontend: /share/abc9_map.v
+Parsing Verilog input from `/share/abc9_map.v' to AST representation.
+Lexer warning: The SystemVerilog keyword `bit' (at /share/abc9_map.v:35) is not recognized unless read_verilog is called with -sv!
+Generating RTLIL representation for module `$__ABC9_BARRIER_MAP'.
+Successfully finished Verilog frontend.
+
+3.44.8.2. Continuing TECHMAP pass.
+No more expansions possible.
+<suppressed ~3 debug messages>
+
+3.44.9. Executing Verilog-2005 frontend: /share/abc9_model.v
+Parsing Verilog input from `/share/abc9_model.v' to AST representation.
+Replacing existing blackbox module `$__ABC9_DELAY' at /share/abc9_model.v:2.1-7.10.
+Generating RTLIL representation for module `$__ABC9_DELAY'.
+Replacing existing blackbox module `$__ABC9_BARRIER' at /share/abc9_model.v:10.1-14.10.
+Generating RTLIL representation for module `$__ABC9_BARRIER'.
+Replacing existing blackbox module `$__ABC9_SCC_BREAKER' at /share/abc9_model.v:16.1-18.10.
+Generating RTLIL representation for module `$__ABC9_SCC_BREAKER'.
+Replacing existing module `$__DFF_N__$abc9_flop' at /share/abc9_model.v:21.1-27.10.
+Generating RTLIL representation for module `$__DFF_N__$abc9_flop'.
+Replacing existing module `$__DFF_P__$abc9_flop' at /share/abc9_model.v:30.1-36.10.
+Generating RTLIL representation for module `$__DFF_P__$abc9_flop'.
+Successfully finished Verilog frontend.
+
+3.44.10. Executing ABC9_OPS pass (helper functions for ABC9).
+<suppressed ~2019 debug messages>
+
+3.44.11. Executing ABC9_OPS pass (helper functions for ABC9).
+
+3.44.12. Executing ABC9_OPS pass (helper functions for ABC9).
+<suppressed ~2 debug messages>
+
+3.44.13. Executing TECHMAP pass (map to technology primitives).
+
+3.44.13.1. Executing Verilog-2005 frontend: /share/techmap.v
+Parsing Verilog input from `/share/techmap.v' to AST representation.
+Generating RTLIL representation for module `\_90_simplemap_bool_ops'.
+Generating RTLIL representation for module `\_90_simplemap_reduce_ops'.
+Generating RTLIL representation for module `\_90_simplemap_logic_ops'.
+Generating RTLIL representation for module `\_90_simplemap_compare_ops'.
+Generating RTLIL representation for module `\_90_simplemap_various'.
+Generating RTLIL representation for module `\_90_simplemap_registers'.
+Generating RTLIL representation for module `\_90_shift_ops_shr_shl_sshl_sshr'.
+Generating RTLIL representation for module `\_90_shift_shiftx'.
+Generating RTLIL representation for module `\_90_fa'.
+Generating RTLIL representation for module `\_90_lcu_brent_kung'.
+Generating RTLIL representation for module `\_90_alu'.
+Generating RTLIL representation for module `\_90_macc'.
+Generating RTLIL representation for module `\_90_alumacc'.
+Generating RTLIL representation for module `$__div_mod_u'.
+Generating RTLIL representation for module `$__div_mod_trunc'.
+Generating RTLIL representation for module `\_90_div'.
+Generating RTLIL representation for module `\_90_mod'.
+Generating RTLIL representation for module `$__div_mod_floor'.
+Generating RTLIL representation for module `\_90_divfloor'.
+Generating RTLIL representation for module `\_90_modfloor'.
+Generating RTLIL representation for module `\_90_pow'.
+Generating RTLIL representation for module `\_90_demux'.
+Generating RTLIL representation for module `\_90_lut'.
+Generating RTLIL representation for module `$connect'.
+Generating RTLIL representation for module `$input_port'.
+Successfully finished Verilog frontend.
+
+3.44.13.2. Continuing TECHMAP pass.
+Using template $paramod\ALU\ALU_MODE=s32'00000000000000000000000000000010 for cells of type $paramod\ALU\ALU_MODE=s32'00000000000000000000000000000010.
+Using extmapper simplemap for cells of type $mux.
+Using extmapper simplemap for cells of type $xor.
+Using extmapper simplemap for cells of type $not.
+No more expansions possible.
+<suppressed ~240 debug messages>
+
+3.44.14. Executing OPT pass (performing simple optimizations).
+
+3.44.14.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module sc_array_ubench.
+
+3.44.14.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\sc_array_ubench'.
+Computing hashes of 14 cells of `\sc_array_ubench'.
+Finding duplicate cells in `\sc_array_ubench'.
+Removed a total of 0 cells.
+
+3.44.14.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \sc_array_ubench..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+
+3.44.14.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \sc_array_ubench.
+Performed a total of 0 changes.
+
+3.44.14.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\sc_array_ubench'.
+Computing hashes of 14 cells of `\sc_array_ubench'.
+Finding duplicate cells in `\sc_array_ubench'.
+Removed a total of 0 cells.
+
+3.44.14.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+3.44.14.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \sc_array_ubench..
+Removed 0 unused cells and 16 unused wires.
+<suppressed ~1 debug messages>
+
+3.44.14.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module sc_array_ubench.
+
+3.44.14.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+3.44.14.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \sc_array_ubench..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+
+3.44.14.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \sc_array_ubench.
+Performed a total of 0 changes.
+
+3.44.14.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\sc_array_ubench'.
+Computing hashes of 14 cells of `\sc_array_ubench'.
+Finding duplicate cells in `\sc_array_ubench'.
+Removed a total of 0 cells.
+
+3.44.14.13. Executing OPT_DFF pass (perform DFF optimizations).
+
+3.44.14.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \sc_array_ubench..
+
+3.44.14.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module sc_array_ubench.
+
+3.44.14.16. Finished fast OPT passes. (There is nothing left to do.)
+
+3.44.15. Executing AIGMAP pass (map logic to AIG).
+Module sc_array_ubench: replaced 513 cells with 3249 new cells, skipped 4048 cells.
+  replaced 3 cell types:
+     255 $_MUX_
+     114 $_OR_
+     144 $_XOR_
+  not replaced 12 cell types:
+     100 $_AND_
+     206 $_NOT_
+       2 $scopeinfo
+      17 DFF
+      25 IBUF
+     544 DFFE
+      17 DFFSE
+     287 DFFRE
+      17 OBUF
+     816 $paramod\ALU\ALU_MODE=s32'00000000000000000000000000000010
+     865 $paramod$__ABC9_DELAY\DELAY=32'00000000000000000000001001000000
+    1152 $paramod$__ABC9_DELAY\DELAY=32'00000000000000000000000000111111
+
+3.44.15.1. Executing ABC9_OPS pass (helper functions for ABC9).
+
+3.44.15.2. Executing ABC9_OPS pass (helper functions for ABC9).
+
+3.44.15.3. Executing XAIGER2 backend.
+<suppressed ~7490 debug messages>
+Extracted 5993 AND gates and 0 wires from module `sc_array_ubench' to a netlist network with 4581 inputs and 8222 outputs.
+
+3.44.15.4. Executing ABC9_EXE pass (technology mapping using ABC9).
+
+3.44.15.5. Executing ABC9.
+Running ABC command: "/yosys-abc" -s -f <abc-temp-dir>/abc.script 2>&1
+
+3.44.15.6. Executing AIGER frontend.
+<suppressed ~10 debug messages>
+Removed 2681 unused cells and 14561 unused wires.
+
+3.44.15.7. Executing ABC_OPS_REINTEGRATE pass (reintegrate ABC mapped design into module).
+ABC RESULTS:              $lut cells:      353
+ABC RESULTS:   $paramod\ALU\ALU_MODE=s32'00000000000000000000000000000010 cells:      816
+ABC RESULTS:           input signals:       76
+ABC RESULTS:          output signals:        1
+<suppressed ~3873 debug messages>
+Removing temp directory.
+
+3.44.16. Executing TECHMAP pass (map to technology primitives).
+
+3.44.16.1. Executing Verilog-2005 frontend: /share/abc9_unmap.v
+Parsing Verilog input from `/share/abc9_unmap.v' to AST representation.
+Generating RTLIL representation for module `$__DFF_x__$abc9_flop'.
+Generating RTLIL representation for module `$__ABC9_SCC_BREAKER'.
+Generating RTLIL representation for module `$__ABC9_BARRIER'.
+Successfully finished Verilog frontend.
+
+3.44.16.2. Continuing TECHMAP pass.
+Using template $paramod\ALU\ALU_MODE=s32'00000000000000000000000000000010 for cells of type $paramod\ALU\ALU_MODE=s32'00000000000000000000000000000010.
+No more expansions possible.
+<suppressed ~823 debug messages>
+Removed 62 unused cells and 13358 unused wires.
+
+3.45. Executing TECHMAP pass (map to technology primitives).
+
+3.45.1. Executing Verilog-2005 frontend: /share/gowin/cells_map.v
+Parsing Verilog input from `/share/gowin/cells_map.v' to AST representation.
+Generating RTLIL representation for module `$_DFF_N_'.
+Generating RTLIL representation for module `$_DFF_P_'.
+Generating RTLIL representation for module `$_DFFE_PP_'.
+Generating RTLIL representation for module `$_DFFE_NP_'.
+Generating RTLIL representation for module `$_SDFF_PP0_'.
+Generating RTLIL representation for module `$_SDFF_NP0_'.
+Generating RTLIL representation for module `$_SDFFE_PP0P_'.
+Generating RTLIL representation for module `$_SDFFE_NP0P_'.
+Generating RTLIL representation for module `$_SDFF_PP1_'.
+Generating RTLIL representation for module `$_SDFF_NP1_'.
+Generating RTLIL representation for module `$_SDFFE_PP1P_'.
+Generating RTLIL representation for module `$_SDFFE_NP1P_'.
+Generating RTLIL representation for module `$_DFF_PP1_'.
+Generating RTLIL representation for module `$_DFF_NP1_'.
+Generating RTLIL representation for module `$_DFF_PP0_'.
+Generating RTLIL representation for module `$_DFF_NP0_'.
+Generating RTLIL representation for module `$_DFFE_PP1P_'.
+Generating RTLIL representation for module `$_DFFE_NP1P_'.
+Generating RTLIL representation for module `$_DFFE_PP0P_'.
+Generating RTLIL representation for module `$_DFFE_NP0P_'.
+Generating RTLIL representation for module `$lut'.
+Successfully finished Verilog frontend.
+
+3.45.2. Continuing TECHMAP pass.
+Using template $paramod$lut\WIDTH=32'00000000000000000000000000000010\LUT=4'1001 for cells of type $lut.
+Using template $paramod$288d8d2d1d8d5f69e3594b85c2e453e191cd42d7$lut for cells of type $lut.
+Using template $paramod$f47100f43f23af594b85e75587f92a705175e1cd$lut for cells of type $lut.
+Using template $paramod$lut\WIDTH=32'00000000000000000000000000000010\LUT=4'1110 for cells of type $lut.
+Using template $paramod$fd904e9e35cfd343a9df248824bd3f1408724879$lut for cells of type $lut.
+Using template $paramod$e49f6e3576ef1a6d2f58c54414dbb786af8cc869$lut for cells of type $lut.
+Using template $paramod$b45e5cb971154e30a797eecb0461619c3eeae12d$lut for cells of type $lut.
+Using template $paramod$8b24407096beec47292ddeb1567a058197a320b9$lut for cells of type $lut.
+Using template $paramod$8fd8efe0a495790cc9ddc97266933ea8a8cd7b45$lut for cells of type $lut.
+Using template $paramod$e239c80ed79b5a8451681fe5c06c49632ba73ede$lut for cells of type $lut.
+Using template $paramod$38f9bf4dd2329347b8471f0a98443dd323386889$lut for cells of type $lut.
+Using template $paramod$891d17c049ef97ffbed57a5d4edf3f9e83d4f776$lut for cells of type $lut.
+Using template $paramod$ddc6f4fe74ed36832c5cee6594285c38523f3d9c$lut for cells of type $lut.
+Using template $paramod$19457468c03b53ec09024ada785c6816b7d0407d$lut for cells of type $lut.
+Using template $paramod$lut\WIDTH=32'00000000000000000000000000000011\LUT=8'11100100 for cells of type $lut.
+Using template $paramod$lut\WIDTH=32'00000000000000000000000000000011\LUT=8'11001010 for cells of type $lut.
+Using template $paramod$6bf2caa40fb1acb49d1a3518d072e0f81faf3832$lut for cells of type $lut.
+Using template $paramod$658b9ed803f0d3d335616d3858b53e0a2522f1e8$lut for cells of type $lut.
+Using template $paramod$272652f6c6fbe9a75eff76e45cc7e2788835518b$lut for cells of type $lut.
+Using template $paramod$a5516fc31d1e552de2435200bb732b4d4ad63a9c$lut for cells of type $lut.
+Using template $paramod$5e9374f44a27c3f8a1c38af244ec43ceb4fb8d4f$lut for cells of type $lut.
+Using template $paramod$e51a8a571bee774247b38f52d6e85fd62ae52cea$lut for cells of type $lut.
+Using template $paramod$101238f3d8d49ab12a9b49a2f01cd503b26e9c61$lut for cells of type $lut.
+Using template $paramod$f9813472aa48e533b3838c6f2316dc2e78c66111$lut for cells of type $lut.
+Using template $paramod$8e44661def013b6bf9fe6f8b049ef2c838d749f9$lut for cells of type $lut.
+Using template $paramod$d6ca727e39f31d51d29072e0f33aa09c65e37336$lut for cells of type $lut.
+Using template $paramod$6e238df02989b317f10820a22773676e71120644$lut for cells of type $lut.
+Using template $paramod$47a8214374025465e226fa66bee690ff33268a25$lut for cells of type $lut.
+Using template $paramod$c28a8b7ce0535d090c4cfb52e9c74affd52b110c$lut for cells of type $lut.
+Using template $paramod$30305e55a780880b9c824fe3509a4d981acb0f2b$lut for cells of type $lut.
+Using template $paramod$364c9ffbffac467d60dfec81bba4e18476c15602$lut for cells of type $lut.
+Using template $paramod$6d6beead1425af15cf78b27fd9b11b41b5d4bce8$lut for cells of type $lut.
+Using template $paramod$571404c0889eaf57f492cb5e37f8acb5df5852f9$lut for cells of type $lut.
+Using template $paramod$f5c97e291c8b48d9f1b4239d871ab7639e5a24ac$lut for cells of type $lut.
+Using template $paramod$e8c1c5a527b5dfd56746085998c37b18e6d2f76b$lut for cells of type $lut.
+Using template $paramod$2627546ff54c6aaa841197a4b7b55d1a2ce641a8$lut for cells of type $lut.
+Using template $paramod$9664483609d9e726df9697364de1aad825ad3979$lut for cells of type $lut.
+Using template $paramod$9c8c8fc9ab068d05356801ab4e8089a57a10a237$lut for cells of type $lut.
+Using template $paramod$b0921904cd0556b160571789093bb927ff74536c$lut for cells of type $lut.
+Using template $paramod$b01945e1d74f5dd2f9f9e24aabea77f177e313f6$lut for cells of type $lut.
+Using template $paramod$d882975c9383f338b70fc9ac6b4bb6068d39b94c$lut for cells of type $lut.
+Using template $paramod$7c7d027637b8596035915f5c297c8bc6f8248bb4$lut for cells of type $lut.
+Using template $paramod$8711c37d5d0cc0d3233a810b761cb81e1a327efd$lut for cells of type $lut.
+No more expansions possible.
+<suppressed ~981 debug messages>
+
+3.46. Executing OPT_LUT_INS pass (discard unused LUT inputs).
+Optimizing LUTs in sc_array_ubench.
+  Optimizing lut $abc$38065$lut$aiger38064$4602.genblk1.genblk1.genblk1.genblk1.genblk1.lut1 (4 -> 3)
+  Optimizing lut $abc$38065$lut$aiger38064$4692.genblk1.genblk1.genblk1.genblk1.genblk1.lut1 (4 -> 3)
+  Optimizing lut $abc$38065$lut$aiger38064$4664.genblk1.genblk1.genblk1.genblk1.genblk1.lut1 (4 -> 0)
+  Optimizing lut $abc$38065$lut$aiger38064$5339.genblk1.genblk1.genblk1.genblk1.genblk1.lut1 (4 -> 0)
+  Optimizing lut $abc$38065$lut$aiger38064$5007.genblk1.genblk1.genblk1.genblk1.genblk1.lut1 (4 -> 3)
+  Optimizing lut $abc$38065$lut$aiger38064$4934.genblk1.genblk1.genblk1.genblk1.genblk1.lut1 (4 -> 0)
+  Optimizing lut $abc$38065$lut$aiger38064$4889.genblk1.genblk1.genblk1.genblk1.genblk1.lut1 (4 -> 0)
+  Optimizing lut $abc$38065$lut$aiger38064$4709.genblk1.genblk1.genblk1.genblk1.genblk1.lut1 (4 -> 0)
+  Optimizing lut $abc$38065$lut$aiger38064$5322.genblk1.genblk1.genblk1.genblk1.genblk1.lut1 (4 -> 3)
+  Optimizing lut $abc$38065$lut$aiger38064$5294.genblk1.genblk1.genblk1.genblk1.genblk1.lut1 (4 -> 0)
+  Optimizing lut $abc$38065$lut$aiger38064$5277.genblk1.genblk1.genblk1.genblk1.genblk1.lut1 (4 -> 3)
+  Optimizing lut $abc$38065$lut$aiger38064$5069.genblk1.genblk1.genblk1.genblk1.genblk1.lut1 (4 -> 0)
+  Optimizing lut $abc$38065$lut$aiger38064$5052.genblk1.genblk1.genblk1.genblk1.genblk1.lut1 (4 -> 3)
+  Optimizing lut $abc$38065$lut$aiger38064$5024.genblk1.genblk1.genblk1.genblk1.genblk1.lut1 (4 -> 0)
+  Optimizing lut $abc$38065$lut$aiger38064$4979.genblk1.genblk1.genblk1.genblk1.genblk1.lut1 (4 -> 0)
+  Optimizing lut $abc$38065$lut$aiger38064$4962.genblk1.genblk1.genblk1.genblk1.genblk1.lut1 (4 -> 3)
+  Optimizing lut $abc$38065$lut$aiger38064$4917.genblk1.genblk1.genblk1.genblk1.genblk1.lut1 (4 -> 3)
+  Optimizing lut $abc$38065$lut$aiger38064$4872.genblk1.genblk1.genblk1.genblk1.genblk1.lut1 (4 -> 3)
+  Optimizing lut $abc$38065$lut$aiger38064$4844.genblk1.genblk1.genblk1.genblk1.genblk1.lut1 (4 -> 0)
+  Optimizing lut $abc$38065$lut$aiger38064$4827.genblk1.genblk1.genblk1.genblk1.genblk1.lut1 (4 -> 3)
+  Optimizing lut $abc$38065$lut$aiger38064$4799.genblk1.genblk1.genblk1.genblk1.genblk1.lut1 (4 -> 0)
+  Optimizing lut $abc$38065$lut$aiger38064$4782.genblk1.genblk1.genblk1.genblk1.genblk1.lut1 (4 -> 3)
+  Optimizing lut $abc$38065$lut$aiger38064$4647.genblk1.genblk1.genblk1.genblk1.genblk1.lut1 (4 -> 3)
+  Optimizing lut $abc$38065$lut$aiger38064$4619.genblk1.genblk1.genblk1.genblk1.genblk1.lut1 (4 -> 0)
+
+3.47. Executing HILOMAP pass (mapping to constant drivers).
+Removed 0 unused cells and 1095 unused wires.
+
+3.48. Executing AUTONAME pass.
+Renamed 4242 objects in module sc_array_ubench.
+<suppressed ~4242 debug messages>
+
+3.49. Executing HIERARCHY pass (managing design hierarchy).
+Attribute `top' found on module `sc_array_ubench'. Setting top module to sc_array_ubench.
+
+3.49.1. Analyzing design hierarchy..
+Top module:  \sc_array_ubench
+
+3.49.2. Analyzing design hierarchy..
+Top module:  \sc_array_ubench
+Removed 0 unused modules.
+
+3.50. Printing statistics.
+
+=== sc_array_ubench ===
+
+        +----------Local Count, excluding submodules.
+        | 
+     2058 wires
+     3301 wire bits
+     2058 public wires
+     3301 public wire bits
+       11 ports
+       42 port bits
+      531 cells
+        2   $scopeinfo
+        1   GND
+       25   IBUF
+       12   LUT1
+       34   LUT2
+       39   LUT3
+      334   LUT4
+       66   MUX2_LUT5
+       17   OBUF
+        1   VCC
+     1681 submodules
+      816   ALU
+       17   DFF
+      544   DFFE
+      287   DFFRE
+       17   DFFSE
+
+=== design hierarchy ===
+
+        +----------Count including submodules.
+        | 
+      531 sc_array_ubench
+
+        +----------Count including submodules.
+        | 
+     2058 wires
+     3301 wire bits
+     2058 public wires
+     3301 public wire bits
+       11 ports
+       42 port bits
+        - memories
+        - memory bits
+        - processes
+      531 cells
+        2   $scopeinfo
+        1   GND
+       25   IBUF
+       12   LUT1
+       34   LUT2
+       39   LUT3
+      334   LUT4
+       66   MUX2_LUT5
+       17   OBUF
+        1   VCC
+     1681 submodules
+      816   ALU
+       17   DFF
+      544   DFFE
+      287   DFFRE
+       17   DFFSE
+
+3.51. Executing CHECK pass (checking for obvious problems).
+Checking module sc_array_ubench...
+Found and reported 0 problems.
+
+3.52. Executing JSON backend.
+
+Warnings: 2 unique messages, 4 total
+End of script. Logfile hash: 8feb8e2060, time: 1.57s, user: 1.57s, system: 0.00s
+Yosys 0.70 (git sha1 28ba3cb92, Release, Clang /workspace/YoWASP/yosys/wasi-sdk-33.0-x86_64-linux/share/cmake/../..//bin/clang++ 22.1.0)
+Time spent: 17% 1x abc9_exe (0 sec), 14% 26x read_verilog (0 sec), ...

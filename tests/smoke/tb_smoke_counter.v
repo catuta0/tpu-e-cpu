@@ -58,9 +58,9 @@ module tb_smoke_counter;
     // Negative self-test of the testbench itself: a deliberately WRONG
     // expected value (999) must make the run end in TEST FAILED + $fatal.
     // Used once by scripts/smoke_fpga.sh to prove the checker can fail.
-    localparam integer EXP_KNOWN  = N_KNOWN - SYNC_LAT + 1;
+    localparam [23:0]  EXP_KNOWN  = N_KNOWN[23:0] - SYNC_LAT[23:0] + 24'd1;
 `else
-    localparam integer EXP_KNOWN  = N_KNOWN - SYNC_LAT;   // = 998 (CALCULATION)
+    localparam [23:0]  EXP_KNOWN  = N_KNOWN[23:0] - SYNC_LAT[23:0];   // = 998 (CALCULATION)
 `endif
 
     // -------------------------------------------------------------------------
@@ -75,20 +75,20 @@ module tb_smoke_counter;
     integer errors = 0;           // number of failed checks
     integer checks = 0;           // number of checks executed
 
-    // Free-running clock.
-    always #(T_HALF_NS) clk = ~clk;
+    // Free-running clock (non-blocking update: no race with DUT processes).
+    always #(T_HALF_NS) clk <= ~clk;
 
     // Default configuration = what is synthesised for the board.
     smoke_counter #(.WIDTH(24), .NUM_LEDS(6)) u_dut24 (
         .clk      (clk),
-        .btn_s1_n (btn24_n),
+        .btn_rst_n (btn24_n),
         .led_n    (led24_n)
     );
 
     // Small instance to observe wrap-around quickly.
     smoke_counter #(.WIDTH(4), .NUM_LEDS(4)) u_dut4 (
         .clk      (clk),
-        .btn_s1_n (btn4_n),
+        .btn_rst_n (btn4_n),
         .led_n    (led4_n)
     );
 

@@ -38,19 +38,23 @@
 //   changes WHICH button resets the design - no electrical risk. To be checked
 //   against the official schematic PDF (dl.sipeed.com, not reachable here).
 //
-// PORT NAMES (proposal for the SoC; INTERFACES.json did not exist at ST-FPGA-01)
+// PORT NAMES (match management/INTERFACES.json rev A "top_ports", FROZEN at G1)
 //   clk          27 MHz oscillator input
-//   btn_s1_n     button S1, active-low (used as reset by smoke_counter / SoC)
-//   btn_s2_n     button S2, active-low (spare)
+//   btn_rst_n    button S1, active-low -> 2-FF synchroniser -> internal rst
 //   led_n[5:0]   LEDs 1..6, active-low
 //   uart_tx      FPGA -> BL702 USB-UART bridge (FPGA output)
-//   uart_rx      BL702 -> FPGA (FPGA input)
+//   uart_rx      BL702 -> FPGA (FPGA input; "unused in rev A")
+//   btn_s2_n     button S2, active-low - NOT in INTERFACES.json; constrained
+//                here only as a documented spare (harmless, see below). Note
+//                from the Apicula chipdb: pin 4 is dual-purpose JTAGSEL_N.
 //
-// UNUSED CONSTRAINTS: nextpnr-himbaechel-gowin (0.11.1) only WARNS about a
-// constraint whose port is not in the netlist, it does not abort (verified by
-// ST-FPGA-01: smoke_counter has no btn_s2_n/uart_tx/uart_rx ports; see
-// logs/smoke/fpga_pnr.log). Therefore this single file can be shared by the
-// smoke test and the SoC without editing.
+// UNUSED CONSTRAINTS: nextpnr-himbaechel-gowin (0.11.1) does NOT abort on a
+// constraint whose port is not in the netlist; it prints only
+// "Info: Cell <name> not found" (verified in ST-FPGA-01: smoke_counter has no
+// btn_s2_n/uart_tx/uart_rx ports; see logs/smoke/fpga_pnr.log). Therefore this
+// single file can be shared by the smoke test and the SoC without editing.
+// Flip side: a TYPO in a port name is also only an Info line -> always check
+// the placed pins with scripts/pnr_pin_report.py (logs/smoke/fpga_pins.log).
 // =============================================================================
 
 // ---- 27 MHz clock ----------------------------------------------------------
@@ -58,8 +62,8 @@ IO_LOC  "clk" 52;
 IO_PORT "clk" IO_TYPE=LVCMOS33 PULL_MODE=UP;
 
 // ---- Push-buttons (active-low, bank 3 = 1.8 V) ------------------------------
-IO_LOC  "btn_s1_n" 3;
-IO_PORT "btn_s1_n" IO_TYPE=LVCMOS18 PULL_MODE=UP;
+IO_LOC  "btn_rst_n" 3;   // S1 (S1/S2 <-> pin 3/4 mapping: ASSUMPTION, see header)
+IO_PORT "btn_rst_n" IO_TYPE=LVCMOS18 PULL_MODE=UP;
 IO_LOC  "btn_s2_n" 4;
 IO_PORT "btn_s2_n" IO_TYPE=LVCMOS18 PULL_MODE=UP;
 

@@ -15,9 +15,10 @@
 //   on the board LEDs so that, if the bitstream were ever loaded (NOT done in
 //   this project phase), the LEDs would visibly count in binary.
 //
-// INTERFACES (top-level ports; names match design/constraints/tangnano9k.cst)
+// INTERFACES (top-level ports; names match management/INTERFACES.json rev A
+//             "top_ports" and design/constraints/tangnano9k.cst)
 //   clk       in   27 MHz board oscillator (crystal oscillator -> FPGA pin 52).
-//   btn_s1_n  in   Push-button S1, ACTIVE-LOW (pressed = 0; the CST enables
+//   btn_rst_n in   Push-button S1, ACTIVE-LOW (pressed = 0; the CST enables
 //                  the internal pull-up so a released button reads 1).
 //                  Asynchronous to clk -> passed through a 2-FF synchroniser
 //                  and used as a SYNCHRONOUS, active-high internal reset.
@@ -29,7 +30,7 @@
 //                  shows the counter MSB.
 //
 // TIMING / LATENCY (cycle-exact; this is what the testbench checks)
-//   Let edge #1 be the first rising clk edge after btn_s1_n goes 1 (release).
+//   Let edge #1 be the first rising clk edge after btn_rst_n goes 1 (release).
 //     edge #1 : sync_ff1 samples "released" (0); sync_ff2 still 1; the counter
 //               sees rst=1 -> count stays 0.
 //     edge #2 : sync_ff2 becomes 0, but the counter still sampled rst=1 at this
@@ -55,8 +56,10 @@
 //   * GW1NR-9 registers power up to their INIT value (0 unless stated). The
 //     synchroniser is initialised to "reset asserted" (2'b11) so that, after
 //     FPGA configuration, the counter is held in reset until the synchroniser
-//     has observed the (released) button for 2 clock edges. Yosys maps the
-//     initial value onto the Gowin DFF INIT attribute (DFFS/DFFSE cells).
+//     has observed the (released) button for 2 clock edges. Verified in the
+//     ST-FPGA-01 netlist: Yosys maps both synchroniser flops to Gowin DFFS
+//     cells (INIT=1'b1 by default) with their SET input tied to GND, and the
+//     24 counter flops to DFFR (synchronous reset) cells.
 //   * Button contact bounce is irrelevant here: every bounce simply re-asserts
 //     the reset, and the counter restarts from 0 after the final release.
 //
@@ -72,14 +75,14 @@ module smoke_counter #(
     parameter integer NUM_LEDS = 6    // number of MSBs shown on LEDs
 ) (
     input  wire                clk,       // 27 MHz board clock
-    input  wire                btn_s1_n,  // S1 push-button, active-low, async
+    input  wire                btn_rst_n, // S1 push-button, active-low, async
     output wire [NUM_LEDS-1:0] led_n      // LEDs, active-low
 );
 
     // -------------------------------------------------------------------------
     // Reset synchroniser (2 flip-flops)
     // -------------------------------------------------------------------------
-    // WHY: btn_s1_n is a mechanical button, fully asynchronous to clk. Using it
+    // WHY: btn_rst_n is a mechanical button, fully asynchronous to clk. Using it
     // directly as a reset could violate setup/hold of the counter flip-flops
     // and make different counter bits leave reset in different cycles
     // (metastability / reset-release skew). Two flip-flops in series give the
@@ -93,7 +96,7 @@ module smoke_counter #(
     reg sync_ff2 = 1'b1;  // second stage: clean synchronous reset
 
     always @(posedge clk) begin
-        sync_ff1 <= ~btn_s1_n;  // pressed (0) -> request reset (1)
+        sync_ff1 <= ~btn_rst_n;  // pressed (0) -> request reset (1)
         sync_ff2 <= sync_ff1;   // re-time; adds the 2nd edge of latency
     end
 
@@ -127,9 +130,12 @@ module smoke_counter #(
     assign led_n = ~count[WIDTH-1 -: NUM_LEDS];
 
     // -------------------------------------------------------------------------
-    // Elaboration-time parameter check (simulation only; ignored by synthesis)
+    // Elaboration-time parameter check (simulation only)
     // -------------------------------------------------------------------------
-    // synthesis translate_off
+    // Yosys read_verilog predefines the macro SYNTHESIS, so this block is not
+    // seen by synthesis (portable replacement for the legacy
+    // "synthesis translate_off" comment, which Yosys 0.70 warns about).
+`ifndef SYNTHESIS
     initial begin
         if (NUM_LEDS < 1 || NUM_LEDS > WIDTH) begin
             $display("ERROR: smoke_counter: need 1 <= NUM_LEDS (%0d) <= WIDTH (%0d)",
@@ -137,7 +143,7 @@ module smoke_counter #(
             $finish;
         end
     end
-    // synthesis translate_on
+`endif
 
 endmodule
 

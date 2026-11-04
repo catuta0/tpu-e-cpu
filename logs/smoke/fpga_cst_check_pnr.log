@@ -1,0 +1,151 @@
+# cmd: yowasp-nextpnr-himbaechel-gowin --json sim/smoke/build/cst_all_ports_top.json --write sim/smoke/build/cst_all_ports_top_pnr.json --device GW1NR-LV9QN88PC6/I5 --vopt family=GW1N-9C --vopt cst=design/constraints/tangnano9k.cst --freq 27 --seed 1 --threads 1
+Info: Using uarch 'gowin' for device 'GW1NR-LV9QN88PC6/I5'
+
+Info: Cell O_psram_ck[0] not found
+Info: Cell O_psram_ck[1] not found
+Info: Cell O_psram_ck_n[0] not found
+Info: Cell O_psram_ck_n[1] not found
+Info: Cell O_psram_cs_n[0] not found
+Info: Cell O_psram_cs_n[1] not found
+Info: Cell O_psram_reset_n[0] not found
+Info: Cell O_psram_reset_n[1] not found
+Info: Cell IO_psram_dq[0] not found
+Info: Cell IO_psram_dq[1] not found
+Info: Cell IO_psram_dq[2] not found
+Info: Cell IO_psram_dq[3] not found
+Info: Cell IO_psram_dq[4] not found
+Info: Cell IO_psram_dq[5] not found
+Info: Cell IO_psram_dq[6] not found
+Info: Cell IO_psram_dq[7] not found
+Info: Cell IO_psram_dq[8] not found
+Info: Cell IO_psram_dq[9] not found
+Info: Cell IO_psram_dq[10] not found
+Info: Cell IO_psram_dq[11] not found
+Info: Cell IO_psram_dq[12] not found
+Info: Cell IO_psram_dq[13] not found
+Info: Cell IO_psram_dq[14] not found
+Info: Cell IO_psram_dq[15] not found
+Info: Cell IO_psram_rwds[0] not found
+Info: Cell IO_psram_rwds[1] not found
+Info: Reading constraints...
+Info: Create constant nets...
+Info: Modify LUTs...
+Info: Pack IOBs...
+Info: Pack I3C IOs...
+Info: Pack MIPI IOs...
+Info: Pack diff IOBs...
+Info: Pack FFs into IO cells...
+Info: Pack IODELAY...
+Info: Pack Input Edge Monitors...
+Info: Pack IO logic...
+Info: Pack DESER16 logic...
+Info: Pack GSR...
+Info: Pack HCLK cells...
+Info: Pack DLLDLYs...
+Info: Pack wide LUTs...
+Info: Packed MUX2_LUT8:0, MUX2_LU7:0, MUX2_LUT6:0, MUX2_LUT5:0
+Info: Pack ALUs...
+Info: Pack SSRAMs...
+Info: Constrained 0 LUTFF pairs.
+Info: Pack PLL...
+Info: Pack ADC...
+Info: Pack BSRAMs...
+Info: Pack DSP...
+Info: Pack INV...
+Info: Pack buffered nets...
+Info: Pack EMCU and UserFlash cells...
+Info: Pack UserFlash cells...
+Info: Pack DQCE cells...
+Info: Pack DCS cells...
+Info: Checksum: 0xbf2789f6
+
+Info: Device utilisation:
+Info: 	                 VCC:       1/      1   100%
+Info: 	                 IOB:      11/    276     3%
+Info: 	                LUT4:       0/   8640     0%
+Info: 	              OSER16:       0/     80     0%
+Info: 	              IDES16:       0/     80     0%
+Info: 	            IOLOGICI:       0/    276     0%
+Info: 	            IOLOGICO:       0/    276     0%
+Info: 	           MUX2_LUT5:       0/   4320     0%
+Info: 	           MUX2_LUT6:       0/   2160     0%
+Info: 	           MUX2_LUT7:       0/   1080     0%
+Info: 	           MUX2_LUT8:       0/   1080     0%
+Info: 	                 ALU:       0/   6480     0%
+Info: 	                 GND:       1/      1   100%
+Info: 	                 DFF:       3/   6480     0%
+Info: 	           RAM16SDP4:       0/    270     0%
+Info: 	               BSRAM:       0/     26     0%
+Info: 	              ALU54D:       0/     10     0%
+Info: 	     MULTADDALU18X18:       0/     10     0%
+Info: 	        MULTALU18X18:       0/     10     0%
+Info: 	        MULTALU36X18:       0/     10     0%
+Info: 	           MULT36X36:       0/      5     0%
+Info: 	           MULT18X18:       0/     20     0%
+Info: 	             MULT9X9:       0/     40     0%
+Info: 	              PADD18:       0/     20     0%
+Info: 	               PADD9:       0/     40     0%
+Info: 	                 GSR:       1/      1   100%
+Info: 	                 OSC:       0/      1     0%
+Info: 	                rPLL:       0/      2     0%
+Info: 	           FLASH608K:       0/      1     0%
+Info: 	                BUFG:       0/     22     0%
+Info: 	                DQCE:       0/     24     0%
+Info: 	                 DCS:       0/      8     0%
+Info: 	               DHCEN:       0/     24     0%
+Info: 	              CLKDIV:       0/      8     0%
+Info: 	             CLKDIV2:       0/     16     0%
+Info: 	           MIPI_IBUF:       0/     22     0%
+Info: 	           MIPI_OBUF:       0/     20     0%
+
+Info: Running custom HCLK placer...
+Info: Placed 0 cells based on constraints.
+Info: Creating initial analytic placement for 3 cells, random placement wirelen = 339.
+Info:     at initial placer iter 0, wirelen = 155
+Info:     at initial placer iter 1, wirelen = 155
+Info:     at initial placer iter 2, wirelen = 155
+Info:     at initial placer iter 3, wirelen = 155
+Info: Running main analytical placer, max placement attempts per cell = 10000.
+Info:     at iteration #1, type DFF: wirelen solved = 155, spread = 155, legal = 159; time = 0.01s
+Info: HeAP Placer Time: 0.05s
+Info:   of which solving equations: 0.00s
+Info:   of which spreading cells: 0.00s
+Info:   of which strict legalisation: 0.00s
+
+Info: Running simulated annealing placer for refinement.
+Info:   at iteration #1: temp = 0.000000, timing cost = 0, wirelen = 159
+Info:   at iteration #2: temp = 0.000000, timing cost = 0, wirelen = 157 
+Info: SA placement time 0.00s
+
+Info: No Fmax available; no interior timing paths found in design.
+Info: Checksum: 0x8fd8fc3b
+Info: Routing globals...
+Info:     'clk_IBUF_I_O' net was routed using global resources only.
+
+Info: Routing..
+Info: Setting up routing queue.
+Info: Routing 16 arcs.
+Info:            |   (re-)routed arcs  |   delta    | remaining|       time spent     |
+Info:    IterCnt |  w/ripup   wo/ripup |  w/r  wo/r |      arcs| batch(sec) total(sec)|
+Info:         16 |        0         16 |    0    16 |         0|       0.01       0.01|
+Info: Routing complete.
+Info: Router1 time 0.01s
+Info: Checksum: 0x62721a82
+
+Info: No Fmax available; no interior timing paths found in design.
+
+Info: Program finished normally.
+# cmd: python scripts/pnr_pin_report.py sim/smoke/build/cst_all_ports_top_pnr.json GW1N-9C QFN88P
+btn_rst_n[0]   X1Y0/IOBA      IOT2A    pin   3  IO_TYPE=LVCMOS18 PULL_MODE=UP
+btn_s2_n[0]    X0Y4/IOBA      IOL5A    pin   4  IO_TYPE=LVCMOS18 PULL_MODE=UP (dual-purpose: JTAGSEL_N,LPLL_T_IN)
+clk[0]         X46Y16/IOBA    IOR17A   pin  52  IO_TYPE=LVCMOS33 PULL_MODE=UP (dual-purpose: GCLKT_3)
+led_n[0]       X0Y14/IOBA     IOL15A   pin  10  IO_TYPE=LVCMOS18 PULL_MODE=NONE (dual-purpose: GCLKT_6)
+led_n[1]       X0Y15/IOBB     IOL16B   pin  11  IO_TYPE=LVCMOS18 PULL_MODE=NONE
+led_n[2]       X0Y20/IOBB     IOL21B   pin  13  IO_TYPE=LVCMOS18 PULL_MODE=NONE
+led_n[3]       X0Y21/IOBB     IOL22B   pin  14  IO_TYPE=LVCMOS18 PULL_MODE=NONE
+led_n[4]       X0Y24/IOBB     IOL25B   pin  15  IO_TYPE=LVCMOS18 PULL_MODE=NONE
+led_n[5]       X0Y25/IOBB     IOL26B   pin  16  IO_TYPE=LVCMOS18 PULL_MODE=NONE
+uart_rx[0]     X1Y28/IOBB     IOB2B    pin  18  IO_TYPE=LVCMOS33 PULL_MODE=UP
+uart_tx[0]     X1Y28/IOBA     IOB2A    pin  17  IO_TYPE=LVCMOS33 PULL_MODE=UP
+# cmd: gowin_pack -d GW1N-9C -o sim/smoke/build/cst_all_ports_top.fs sim/smoke/build/cst_all_ports_top_pnr.json
+PACK_CST_TOP_EXIT=0

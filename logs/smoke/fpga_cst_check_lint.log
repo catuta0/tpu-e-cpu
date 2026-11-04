@@ -1,0 +1,2 @@
+# cmd: verilator --lint-only -Wall tests/smoke/cst_all_ports_top.v --top-module cst_all_ports_top
+LINT_CST_TOP_EXIT=0

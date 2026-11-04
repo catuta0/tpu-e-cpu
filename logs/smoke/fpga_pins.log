@@ -1,0 +1,9 @@
+# cmd: python scripts/pnr_pin_report.py sim/smoke/build/smoke_counter_pnr.json GW1N-9C QFN88P
+btn_rst_n[0]   X1Y0/IOBA      IOT2A    pin   3  IO_TYPE=LVCMOS18 PULL_MODE=UP
+clk[0]         X46Y16/IOBA    IOR17A   pin  52  IO_TYPE=LVCMOS33 PULL_MODE=UP (dual-purpose: GCLKT_3)
+led_n[0]       X0Y14/IOBA     IOL15A   pin  10  IO_TYPE=LVCMOS18 PULL_MODE=NONE (dual-purpose: GCLKT_6)
+led_n[1]       X0Y15/IOBB     IOL16B   pin  11  IO_TYPE=LVCMOS18 PULL_MODE=NONE
+led_n[2]       X0Y20/IOBB     IOL21B   pin  13  IO_TYPE=LVCMOS18 PULL_MODE=NONE
+led_n[3]       X0Y21/IOBB     IOL22B   pin  14  IO_TYPE=LVCMOS18 PULL_MODE=NONE
+led_n[4]       X0Y24/IOBB     IOL25B   pin  15  IO_TYPE=LVCMOS18 PULL_MODE=NONE
+led_n[5]       X0Y25/IOBB     IOL26B   pin  16  IO_TYPE=LVCMOS18 PULL_MODE=NONE

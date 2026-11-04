@@ -1,0 +1,6 @@
+# ST-FPGA-01 tool versions  2026-11-04T03:05:52+00:00  input revision: be4b802-dirty
+verilator : Verilator 5.020 2024-01-01 rev (Debian 5.020-1)
+iverilog  : Icarus Verilog version 12.0 (stable) ()
+yosys     : Yosys 0.70 (git sha1 28ba3cb92, Release, Clang /workspace/YoWASP/yosys/wasi-sdk-33.0-x86_64-linux/share/cmake/../..//bin/clang++ 22.1.0)
+nextpnr   : "yowasp-nextpnr-himbaechel-gowin" -- Next Generation Place and Route (Version nextpnr-0.11.1)
+apycula   : Version: 0.32

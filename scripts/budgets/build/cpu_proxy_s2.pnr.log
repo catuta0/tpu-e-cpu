@@ -1,0 +1,34 @@
+Info: Using uarch 'gowin' for device 'GW1NR-LV9QN88PC6/I5'
+
+Info: Cell O_psram_ck[0] not found
+Info: Cell O_psram_ck[1] not found
+Info: Cell O_psram_ck_n[0] not found
+Info: Cell O_psram_ck_n[1] not found
+Info: Cell O_psram_cs_n[0] not found
+Info: Cell O_psram_cs_n[1] not found
+Info: Cell O_psram_reset_n[0] not found
+Info: Cell O_psram_reset_n[1] not found
+Info: Cell IO_psram_dq[0] not found
+Info: Cell IO_psram_dq[1] not found
+Info: Cell IO_psram_dq[2] not found
+Info: Cell IO_psram_dq[3] not found
+Info: Cell IO_psram_dq[4] not found
+Info: Cell IO_psram_dq[5] not found
+Info: Cell IO_psram_dq[6] not found
+Info: Cell IO_psram_dq[7] not found
+Info: Cell IO_psram_dq[8] not found
+Info: Cell IO_psram_dq[9] not found
+Info: Cell IO_psram_dq[10] not found
+Info: Cell IO_psram_dq[11] not found
+Info: Cell IO_psram_dq[12] not found
+Info: Cell IO_psram_dq[13] not found
+Info: Cell IO_psram_dq[14] not found
+Info: Cell IO_psram_dq[15] not found
+Info: Cell IO_psram_rwds[0] not found
+Info: Cell IO_psram_rwds[1] not found
+Info: Reading constraints...
+Info: Create constant nets...
+Info: Modify LUTs...
+Info: Pack IOBs...
+ERROR: Unconstrained IO:led_n_OBUF_O_5
+0 warnings, 1 error
