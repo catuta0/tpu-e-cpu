@@ -1,0 +1,4 @@
+99c99
+<         sync_ff1 <= ~btn_rst_n;  // pressed (0) -> request reset (1)
+---
+>         sync_ff1 <= btn_rst_n;  // pressed (0) -> request reset (1)

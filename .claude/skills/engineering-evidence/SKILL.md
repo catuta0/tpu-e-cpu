@@ -34,4 +34,6 @@ performed · Numerical findings (labelled) · Assumptions · Errors · Open
 decisions · Next actions.
 
 ## Lessons learned (updated during the run)
-- (none yet)
+- Under `set -e`, a logged `X_EXIT=$?` after a command can only be 0: capture with `cmd || rc=$?` (ST-REV-01 R-004).
+- Testbenches must be mutation-checked: a TB that passes a mutated design proves little (ST-REV-01 R-001/R-002).
+- Stamp logs with the revision actually used; re-run after committing if the stamp is `-dirty`.

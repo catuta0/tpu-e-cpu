@@ -1,0 +1,4 @@
+104c104
+<     wire rst = sync_ff2;
+---
+>     reg sync_ff3 = 1'b1; always @(posedge clk) sync_ff3 <= sync_ff2; wire rst = sync_ff3;

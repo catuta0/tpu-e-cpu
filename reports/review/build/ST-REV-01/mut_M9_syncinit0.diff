@@ -1,0 +1,6 @@
+95,96c95,96
+<     reg sync_ff1 = 1'b1;  // first stage: may go metastable, never used directly
+<     reg sync_ff2 = 1'b1;  // second stage: clean synchronous reset
+---
+>     reg sync_ff1 = 1'b0;  // first stage: may go metastable, never used directly
+>     reg sync_ff2 = 1'b0;  // second stage: clean synchronous reset

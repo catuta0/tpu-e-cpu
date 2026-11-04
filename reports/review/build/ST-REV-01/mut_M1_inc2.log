@@ -1,0 +1,26 @@
+tb_smoke_counter: ST-FPGA-01 known-answer test start
+PASS: TC0 24-bit count held in reset : got 0x000000 (0), expected 0x000000 (0)
+PASS: TC0 4-bit count held in reset : got 0x000000 (0), expected 0x000000 (0)
+PASS: TC0 24-bit LEDs all off in reset : got 0x00003f (63), expected 0x00003f (63)
+PASS: TC1 edge 1 after release (sync stage 1) : got 0x000000 (0), expected 0x000000 (0)
+PASS: TC1 edge 2 after release (sync stage 2) : got 0x000000 (0), expected 0x000000 (0)
+FAIL: TC1 edge 3 after release (first increment) : got 0x000002 (2), expected 0x000001 (1)
+FAIL: TC1 KNOWN ANSWER: count after 1000 edges : got 0x0007cc (1996), expected 0x0003e6 (998)
+PASS: TC1 LEDs after 1000 edges (top bits 0 -> all off) : got 0x00003f (63), expected 0x00003f (63)
+FAIL: TC2 count at 2^18+1 edges : got 0x07fffe (524286), expected 0x03ffff (262143)
+FAIL: TC2 LEDs at 0x03FFFF (all off) : got 0x00003e (62), expected 0x00003f (63)
+FAIL: TC2 count at 2^18+2 edges : got 0x080000 (524288), expected 0x040000 (262144)
+FAIL: TC2 LEDs at 0x040000 (LED1 = led_n[0] on) : got 0x00003d (61), expected 0x00003e (62)
+FAIL: TC3 edge 1 after press (still counting) : got 0x080002 (524290), expected 0x040001 (262145)
+FAIL: TC3 edge 2 after press (still counting) : got 0x080004 (524292), expected 0x040002 (262146)
+PASS: TC3 edge 3 after press (cleared) : got 0x000000 (0), expected 0x000000 (0)
+PASS: TC3 edge 4 after press (held) : got 0x000000 (0), expected 0x000000 (0)
+FAIL: TC4 4-bit count after 17 edges (=15) : got 0x00000e (14), expected 0x00000f (15)
+FAIL: TC4 4-bit LEDs at 15 (all on) : got 0x000001 (1), expected 0x000000 (0)
+PASS: TC4 4-bit WRAP 15 -> 0 after 18 edges : got 0x000000 (0), expected 0x000000 (0)
+PASS: TC4 4-bit LEDs at 0 (all off) : got 0x00000f (15), expected 0x00000f (15)
+FAIL: TC4 4-bit count after 19 edges (=1) : got 0x000002 (2), expected 0x000001 (1)
+tb_smoke_counter: 21 checks, 11 errors
+TEST FAILED
+FATAL: /home/user/tpu-e-cpu/tests/smoke/tb_smoke_counter.v:226: 11 check(s) failed
+       Time: 9700438000  Scope: tb_smoke_counter

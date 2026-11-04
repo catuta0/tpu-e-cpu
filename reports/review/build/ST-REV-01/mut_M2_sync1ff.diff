@@ -1,0 +1,4 @@
+104c104
+<     wire rst = sync_ff2;
+---
+>     wire rst = sync_ff1;

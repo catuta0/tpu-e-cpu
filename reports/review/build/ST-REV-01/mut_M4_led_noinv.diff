@@ -1,0 +1,4 @@
+130c130
+<     assign led_n = ~count[WIDTH-1 -: NUM_LEDS];
+---
+>     assign led_n = count[WIDTH-1 -: NUM_LEDS];

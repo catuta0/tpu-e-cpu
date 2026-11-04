@@ -455,7 +455,7 @@ class SCEngine:
         L = self.L
         n_cycles = N_TILES_TOTAL * L
         self.rx, self.rw = rng_streams(mode, n_cycles)
-        table = np.empty((N_TILES_TOTAL, IL, 256, 256), np.int32)
+        table = np.empty((N_TILES_TOTAL, IL, 256, 256), np.int16)  # counts <= L <= 1024
         for g in range(N_TILES_TOTAL):
             for i in range(IL):
                 a = self.rx[i, g * L:(g + 1) * L].astype(np.int64)

@@ -1,0 +1,4 @@
+130c130
+<     assign led_n = ~count[WIDTH-1 -: NUM_LEDS];
+---
+>     assign led_n = (NUM_LEDS==6) ? {~count[WIDTH-2], ~count[WIDTH-1], ~count[WIDTH-3 -: NUM_LEDS-2]} : ~count[WIDTH-1 -: NUM_LEDS];

@@ -66,7 +66,7 @@ N_TEST = 360
 N_VAL = 288
 K_TRAIN_NOISE = 8  #: L = 256, the CONFIG.LOG2_L reset value (5.4)
 
-HPARAMS = {"epochs": 200, "batch": 32, "lr": 0.01, "lr_final": 0.0005,
+HPARAMS = {"epochs": 300, "batch": 32, "lr": 0.005, "lr_final": 0.0002,
            "beta1": 0.9, "beta2": 0.999, "eps": 1e-8}
 
 

@@ -6,7 +6,7 @@
 | ST-SYS-01 | Sources + budget smoke | systems-engineer | PARTIAL |
 | ST-DOC-01 | IEEEtran smoke | documentation-engineer | PASS |
 | ST-MGR-01 | Manager LaTeX page | manager | PASS |
-| ST-REV-01 | Reviewer smoke (re-check counter) | independent-reviewer | TODO |
+| ST-REV-01 | Reviewer smoke | independent-reviewer | PASS |
 | REQ-01 | Requirements + budgets | systems-engineer | RUNNING |
 | SW-01a/b | Golden model+training / assembler+ISS | software-engineer x2 | RUNNING |
 | RTL-CPU | RV32I CPU + TB | fpga-engineer | TODO |

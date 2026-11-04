@@ -1,0 +1,4 @@
+120c120
+<             count <= count + {{(WIDTH-1){1'b0}}, 1'b1}; // +1, wraps mod 2**WIDTH
+---
+>             count <= (&count) ? count : count + 1'b1; // +1, wraps mod 2**WIDTH

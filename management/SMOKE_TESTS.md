@@ -7,7 +7,7 @@
 | ST-SYS-01 | systems-engineer | web search, Python | UART divider 234.375 -> 234, +0.16 % | **PARTIAL**: calculation PASS; primary datasheets unreachable (proxy 403 / host not allowed) -> device values ASSUMPTION, being re-sourced from the Apicula/nextpnr chip database | logs/smoke/sys_uart.log, management/SOURCES.md |
 | ST-DOC-01 | documentation-engineer | TeX Live 2023, IEEEtran, latexmk, matplotlib 3.11.2 | 1 page, 0 undefined refs, 2 bib entries | **PASS** | logs/smoke/doc_latex.log |
 | ST-MGR-01 | manager | pdfTeX 1.40.25 | 1 page | **PASS** | logs/smoke/manager_latex.log |
-| ST-REV-01 | independent-reviewer | — | re-run counter TB independently | pending | — |
+| ST-REV-01 | independent-reviewer | Icarus 12.0, Verilator 5.020 | hand-derived 998; TB must fail on mutants | **PASS** (re-run TEST PASSED; 9/11 mutants killed; 2 MINOR TB-coverage findings R-001/R-002 accepted for the smoke design only) | reports/review/ST-REV-01.md |
 
 MCP visibility: every specialist reported the session GitHub MCP tools visible via ToolSearch
 (mcp__github__actions_get/list/run_trigger); the plugin GitHub MCP server failed (proxy 403).

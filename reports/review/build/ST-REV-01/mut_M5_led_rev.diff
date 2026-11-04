@@ -1,0 +1,4 @@
+130c130
+<     assign led_n = ~count[WIDTH-1 -: NUM_LEDS];
+---
+>     genvar gi; generate for (gi=0; gi<NUM_LEDS; gi=gi+1) begin: g_rev assign led_n[gi] = ~count[WIDTH-1-gi]; end endgenerate
