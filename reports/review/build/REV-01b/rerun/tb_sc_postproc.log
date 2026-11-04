@@ -1,0 +1,9 @@
+# rev 54ad7b4 cmd: iverilog -g2005 -Wall design/rtl/tpu/sc_postproc.v tests/tpu/tb_sc_postproc.v ; vvp 
+PASS: TC1 DIRECTED GRID 11760 vectors (2 layers x K 4..10 x s 0..7 x 7 acc x 15 bias)
+PASS: TC2 NEAR-THRESHOLD 1568 vectors
+PASS: TC3 RANDOM 40000 vectors
+INFO: coverage: B floor!=trunc (negative non-integer) 8114, clip-low 26950, clip-high 25157, in-range 1221, u==0 367, u==127 42, u==128 193
+INFO: vectors checked = 53328, mismatches = 0
+TEST PASSED
+tests/tpu/tb_sc_postproc.v:255: $finish called at 533435000 (1ps)
+SIM_EXIT=0

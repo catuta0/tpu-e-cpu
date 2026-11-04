@@ -131,3 +131,210 @@ Info:   at iteration #10: temp = 0.000000, timing cost = 158, wirelen = 45721
 Info:   at iteration #15: temp = 0.000000, timing cost = 160, wirelen = 44430
 Info:   at iteration #20: temp = 0.000000, timing cost = 147, wirelen = 43635
 Info:   at iteration #25: temp = 0.000000, timing cost = 146, wirelen = 43387
+Info:   at iteration #30: temp = 0.000000, timing cost = 146, wirelen = 43266
+Info:   at iteration #32: temp = 0.000000, timing cost = 146, wirelen = 43253 
+Info: SA placement time 29.07s
+
+Info: Max frequency for clock 'u_bus.clk': 62.21 MHz (PASS at 27.00 MHz)
+
+Info: Slack histogram:
+Info:  legend: * represents 20 endpoint(s)
+Info:          + represents [1,20) endpoint(s)
+Info: [ 20962,  21741) |+
+Info: [ 21741,  22520) |+
+Info: [ 22520,  23299) |+
+Info: [ 23299,  24078) |**+
+Info: [ 24078,  24857) |****+
+Info: [ 24857,  25636) |***+
+Info: [ 25636,  26415) |*+
+Info: [ 26415,  27194) |*+
+Info: [ 27194,  27973) |*+
+Info: [ 27973,  28752) |*+
+Info: [ 28752,  29531) |**+
+Info: [ 29531,  30310) |*******+
+Info: [ 30310,  31089) |***********************************+
+Info: [ 31089,  31868) |*******************+
+Info: [ 31868,  32647) |****************+
+Info: [ 32647,  33426) |*****************+
+Info: [ 33426,  34205) |******************+
+Info: [ 34205,  34984) |********************+
+Info: [ 34984,  35763) |**************************+
+Info: [ 35763,  36542) |************************************************************ 
+Info: Checksum: 0x74e85ac0
+Info: Routing globals...
+Info:     'u_bus.clk' net was routed using global resources only.
+Info:     'u_tpu.reg_rdata_q_DFFRE_Q_10_D_LUT4_F_I1_LUT3_F_I1[2]' is routed using segments.
+Info:     'u_tpu.ctl_b_raddr[4]' is routed using segments.
+Info:     'u_cpu.state_DFF_Q_1_D_LUT3_F_I2_LUT3_F_I2_LUT4_F_I2_LUT2_I1_F_LUT4_I1_F[2]' is routed using segments.
+Info:     'u_cpu.alu_q_DFFRE_Q_17_D_LUT2_F_I1_LUT4_F_I3_ALU_SUM_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_SUM_LUT4_I3_F_LUT4_F_I3[0]' is routed using segments.
+Info:     'u_tpu.score_DFFRE_Q_128_D_LUT3_F_I2_LUT2_F_I1_LUT2_I1_F[1]' is routed using segments.
+Info:     'u_tpu.cfg_k[0]' is routed using segments.
+Info:     'u_tpu.pp_in_idx[2]' is routed using segments.
+Info:     'u_cpu.state_DFF_Q_1_D_LUT3_F_I2_LUT3_I2_F_LUT4_F_2_I1_LUT4_I2_I3_LUT3_I2_F' is routed using segments.
+Info:     'u_cpu.alu_q_DFFRE_Q_17_D_LUT2_F_I1_LUT4_F_I3_ALU_SUM_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_SUM_LUT4_I3_F[0]' is routed using segments.
+Info:     'u_cpu.state[5]' is routed using segments.
+Info:     'mem_instr_LUT4_I2_I3_LUT4_F_I3_LUT4_I3_F_LUT4_I3_F[2]' is routed using segments.
+Info:     'mem_instr_LUT4_I2_I3_LUT2_I1_F[2]' is routed using segments.
+Info:     'u_tpu.score_DFFRE_Q_304_D_LUT3_F_I2[1]' is routed using segments.
+Info:     'u_cpu.state_DFF_Q_1_D_LUT3_F_I2_LUT3_I2_F_LUT4_F_2_I1_LUT4_I2_F_LUT4_I2_F' is routed using segments.
+Info:     'u_tpu.acc_DFFRE_Q_169_D_LUT4_F_I3_LUT3_F_I2_LUT4_F_I3' is routed using segments.
+Info:     'u_tpu.acc_DFFRE_Q_169_D_LUT4_F_I3_LUT3_F_I2_LUT4_F_I2' is routed using segments.
+Info:     'mem_instr_LUT3_I2_1_F_LUT2_I1_1_F[1]' is routed using segments.
+Info:     'u_cpu.alu_q_DFFRE_Q_17_D_LUT2_F_I1_LUT4_F_I3_ALU_SUM_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_SUM_LUT3_F_I2[0]' is routed using segments.
+Info:     'u_cpu.alu_q_DFFRE_Q_17_D_LUT2_F_I1_LUT4_F_I3[0]' is routed using segments.
+Info:     'u_cpu.alu_q_DFFRE_Q_17_D_LUT2_F_I1_LUT4_F_I3_ALU_SUM_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_SUM_LUT3_I2_F_LUT4_F_I1[0]' is routed using segments.
+Info:     'u_periph.ready_q_LUT3_I0_F_LUT3_I2_F' is routed using segments.
+Info:     'u_tpu.pp_out_hcode[3]' is routed using segments.
+Info:     'mem_wdata[0]' is routed using segments.
+Info:     'u_tpu.score_DFFRE_Q_281_D_LUT3_F_I2[1]' is routed using segments.
+Info:     'u_tpu.score_DFFRE_Q_40_D_LUT3_F_I2[1]' is routed using segments.
+Info:     'mem_instr_LUT4_I2_F[2]' is routed using segments.
+Info:     'u_tpu.cfg_k[2]' is routed using segments.
+Info:     'u_tpu.cfg_k[3]' is routed using segments.
+Info:     'u_tpu.score_DFFRE_Q_130_D_LUT3_F_I2_LUT2_F_I1_LUT2_I1_F[1]' is routed using segments.
+Info:     'u_cpu.alu_q_DFFRE_Q_17_D_LUT2_F_I1_LUT4_F_I3[1]' is routed using segments.
+Info:     'u_cpu.alu_q_DFFRE_Q_17_D_LUT2_F_I1_LUT4_F_I3_ALU_SUM_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_I0_LUT2_I0_F[0]' is routed using segments.
+Info:     'u_cpu.state_DFF_Q_1_D_LUT3_F_I2_LUT3_I2_F_LUT4_F_2_I2_LUT4_I3_I0_LUT3_I1_I2_LUT4_I3_F_LUT3_I2_F_LUT2_F_I1_LUT4_I3_I2_LUT4_I2_I0_LUT2_I0_F_LUT2_I1_F[3]' is routed using segments.
+Info:     'mem_wdata[3]' is routed using segments.
+Info:     'u_tpu.pp_out_hcode[1]' is routed using segments.
+Info:     'u_tpu.score_DFFRE_Q_120_D_LUT3_F_I2[1]' is routed using segments.
+Info:     'u_tpu.score_DFFRE_Q_214_D_LUT3_F_I2[1]' is routed using segments.
+Info:     'u_tpu.ctl_x_raddr[1]' is routed using segments.
+Info:     'u_tpu.score_DFFRE_Q_142_D_LUT3_F_I1_LUT2_F_I1_LUT2_I1_F[1]' is routed using segments.
+Info:     'u_cpu.alu_q_DFFRE_Q_17_D_LUT2_F_I1_LUT4_F_I3_ALU_SUM_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_SUM_LUT4_I3_F_LUT4_F_I3[1]' is routed using segments.
+Info:     'u_cpu.state[0]' is routed using segments.
+Info:     'u_cpu.state_DFF_Q_1_D_LUT3_F_I2_LUT3_F_I2_LUT4_F_I2_LUT2_I1_F_LUT4_I1_F[0]' is routed using segments.
+Info:     'u_cpu.alu_q_DFFRE_Q_17_D_LUT2_F_I1_LUT4_F_I3_ALU_SUM_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_I0_LUT2_I0_F_LUT3_F_1_I2[1]' is routed using segments.
+Info:     'u_cpu.alu_q_DFFRE_Q_17_D_LUT2_F_I1_LUT4_F_I3_ALU_SUM_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_CIN_ALU_COUT_SUM_LUT3_F_I2_LUT4_F_I2[3]' is routed using segments.
+Info:     'u_cpu.d_funct3_DFFRE_Q_1_D_LUT3_I1_F[0]' is routed using segments.
+Info:     'u_tpu.reg_rdata_q_DFFRE_Q_25_D_LUT3_F_I1[3]' is routed using segments.
+Info:     'u_tpu.pp_out_hcode[2]' is routed using segments.
+Info:     'u_tpu.pp_out_hcode[5]' is routed using segments.
+Info:     'u_tpu.pp_out_hcode[6]' is routed using segments.
+Info:     'u_tpu.acc_DFFRE_Q_237_D_LUT4_F_I3_LUT4_F_I3_LUT2_F_1_I1' is routed using segments.
+Info:     'u_tpu.acc_DFFRE_Q_33_D_LUT4_F_I3_LUT3_F_I2_LUT2_F_I1' is routed using segments.
+Info:     'u_tpu.acc_DFFRE_Q_33_D_LUT4_F_I3_LUT4_F_I3_LUT4_F_I3' is routed using segments.
+
+Info: Routing..
+Info: Setting up routing queue.
+Info: Routing 24873 arcs.
+Info:            |   (re-)routed arcs  |   delta    | remaining|       time spent     |
+Info:    IterCnt |  w/ripup   wo/ripup |  w/r  wo/r |      arcs| batch(sec) total(sec)|
+Info:       1000 |       56        943 |   56   943 |     23934|       1.30       1.30|
+Info:       2000 |       90       1909 |   34   966 |     22971|       0.95       2.25|
+Info:       3000 |      142       2760 |   52   851 |     22047|       0.65       2.90|
+Info:       4000 |      146       3289 |    4   529 |     21051|       0.23       3.13|
+Info:       5000 |      162       4176 |   16   887 |     20069|       0.66       3.79|
+Info:       6000 |      171       5128 |    9   952 |     19084|       0.43       4.22|
+Info:       7000 |      172       6083 |    1   955 |     18085|       0.71       4.93|
+Info:       8000 |      173       7024 |    1   941 |     17086|       0.70       5.63|
+Info:       9000 |      176       7968 |    3   944 |     16089|       0.81       6.44|
+Info:      10000 |      181       8913 |    5   945 |     15094|       0.76       7.20|
+Info:      11000 |      190       9837 |    9   924 |     14105|       0.78       7.98|
+Info:      12000 |      198      10774 |    8   937 |     13115|       0.88       8.86|
+Info:      13000 |      210      11701 |   12   927 |     12127|       1.00       9.86|
+Info:      14000 |      227      12616 |   17   915 |     11149|       1.14      11.00|
+Info:      15000 |      253      13538 |   26   922 |     10183|       1.22      12.22|
+Info:      16000 |      294      14439 |   41   901 |      9233|       1.22      13.44|
+Info:      17000 |      335      15342 |   41   903 |      8282|       1.22      14.66|
+Info:      18000 |      384      16243 |   49   901 |      7405|       1.31      15.97|
+Info:      19000 |      456      17125 |   72   882 |      6499|       1.63      17.60|
+Info:      20000 |      543      17978 |   87   853 |      5615|       1.61      19.21|
+Info:      21000 |      661      18805 |  118   827 |      4772|       1.97      21.18|
+Info:      22000 |      810      19613 |  149   808 |      3963|       2.11      23.30|
+Info:      23000 |      979      20401 |  169   788 |      3218|       2.42      25.71|
+Info:      24000 |     1163      21184 |  184   783 |      2477|       2.31      28.02|
+Info:      25000 |     1373      21939 |  210   755 |      1799|       2.73      30.75|
+Info:      26000 |     1654      22626 |  281   687 |      1191|       3.20      33.95|
+Info:      27000 |     1921      23326 |  267   700 |       586|       2.93      36.88|
+Info:      27979 |     2177      24019 |  256   693 |         0|       3.45      40.33|
+Info: Routing complete.
+Info: Router1 time 40.33s
+Info: Checksum: 0x8f72ed54
+
+Info: Critical path report for clock 'u_bus.clk' (posedge -> posedge):
+Info:       type curr  total name
+Info:   clk-to-q  0.46  0.46 Source u_cpu.in_decode_DFF_Q.Q
+Info:    routing  2.27  2.73 Net u_cpu.alu_q_DFFRE_Q_17_D_LUT2_F_I1_LUT4_F_I3_ALU_SUM_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_SUM_LUT3_I2_F_LUT4_F_I1[0] (26,19) -> (24,19)
+Info:                          Sink u_cpu.state_DFF_Q_1_D_LUT3_F_I2_LUT3_I2_F_LUT4_F_2_I2_LUT4_I3_I0_LUT3_I1_I2_LUT4_I3_F_LUT3_I2_F_LUT2_F_I1_LUT2_F_I1_LUT4_I2_F_LUT4_F_1.I1
+Info:                          Defined in:
+Info:                               /share/gowin/cells_map.v:130.20-130.21
+Info:      logic  1.10  3.83 Source u_cpu.state_DFF_Q_1_D_LUT3_F_I2_LUT3_I2_F_LUT4_F_2_I2_LUT4_I3_I0_LUT3_I1_I2_LUT4_I3_F_LUT3_I2_F_LUT2_F_I1_LUT2_F_I1_LUT4_I2_F_LUT4_F_1.F
+Info:    routing  1.37  5.20 Net u_cpu.state_DFF_Q_1_D_LUT3_F_I2_LUT3_I2_F_LUT4_F_2_I2_LUT4_I3_I0_LUT3_I1_I2_LUT4_I3_F_LUT3_I2_F_LUT2_F_I1_LUT2_F_I1_LUT4_I2_F[3] (24,19) -> (27,21)
+Info:                          Sink u_cpu.state_DFF_Q_1_D_LUT3_F_I2_LUT3_I2_F_LUT4_F_2_I2_LUT4_I3_I0_LUT3_I1_I2_LUT4_I3_F_LUT3_I2_F_LUT2_F_I1_LUT2_F_I1_LUT4_I2_F_LUT4_I3.I3
+Info:                          Defined in:
+Info:                               /share/gowin/cells_map.v:130.20-130.21
+Info:      logic  0.62  5.82 Source u_cpu.state_DFF_Q_1_D_LUT3_F_I2_LUT3_I2_F_LUT4_F_2_I2_LUT4_I3_I0_LUT3_I1_I2_LUT4_I3_F_LUT3_I2_F_LUT2_F_I1_LUT2_F_I1_LUT4_I2_F_LUT4_I3.F
+Info:    routing  0.89  6.71 Net u_cpu.alu_q_DFFRE_Q_17_D_LUT2_F_I1_LUT4_F_I3_ALU_SUM_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_I1_LUT2_F_I1_LUT3_F_I1[2] (27,21) -> (28,22)
+Info:                          Sink u_cpu.state_DFF_Q_1_D_LUT3_F_I2_LUT3_I2_F_LUT4_F_2_I2_LUT4_I3_I0_LUT3_I1_I2_LUT4_I3_F_LUT3_I2_F_LUT2_F_I1_LUT2_F_I1_LUT4_I2_F_LUT4_F_1_I2_LUT2_I0_F_LUT3_I2_1_F_LUT4_I2.I3
+Info:                          Defined in:
+Info:                               /share/gowin/cells_map.v:130.20-130.21
+Info:      logic  0.62  7.34 Source u_cpu.state_DFF_Q_1_D_LUT3_F_I2_LUT3_I2_F_LUT4_F_2_I2_LUT4_I3_I0_LUT3_I1_I2_LUT4_I3_F_LUT3_I2_F_LUT2_F_I1_LUT2_F_I1_LUT4_I2_F_LUT4_F_1_I2_LUT2_I0_F_LUT3_I2_1_F_LUT4_I2.F
+Info:    routing  0.41  7.75 Net u_cpu.ir_DFFRE_Q_8_D_LUT3_I1_F_LUT4_I2_F_LUT4_F_I0[2] (28,22) -> (29,22)
+Info:                          Sink u_cpu.alu_q_DFFRE_Q_17_D_LUT2_F_I1_LUT4_F_I3_ALU_SUM_COUT_ALU_CIN_SUM_LUT4_I3_F_LUT4_F_1_I3_LUT4_F.I2
+Info:                          Defined in:
+Info:                               /share/gowin/cells_map.v:130.20-130.21
+Info:      logic  0.82  8.57 Source u_cpu.alu_q_DFFRE_Q_17_D_LUT2_F_I1_LUT4_F_I3_ALU_SUM_COUT_ALU_CIN_SUM_LUT4_I3_F_LUT4_F_1_I3_LUT4_F.F
+Info:    routing  0.41  8.98 Net u_cpu.alu_q_DFFRE_Q_17_D_LUT2_F_I1_LUT4_F_I3_ALU_SUM_COUT_ALU_CIN_SUM_LUT4_I3_F_LUT4_F_1_I3[3] (29,22) -> (29,23)
+Info:                          Sink u_cpu.alu_q_DFFRE_Q_17_D_LUT2_F_I1_LUT4_F_I3_ALU_SUM_COUT_ALU_CIN_SUM_LUT4_I3_F_LUT4_F_1.I3
+Info:                          Defined in:
+Info:                               /share/gowin/cells_map.v:130.20-130.21
+Info:      logic  0.62  9.61 Source u_cpu.alu_q_DFFRE_Q_17_D_LUT2_F_I1_LUT4_F_I3_ALU_SUM_COUT_ALU_CIN_SUM_LUT4_I3_F_LUT4_F_1.F
+Info:    routing  0.89  10.50 Net u_cpu.alu_q_DFFRE_Q_17_D_LUT2_F_I1_LUT4_F_I3_ALU_SUM_COUT_ALU_CIN_SUM_LUT4_I3_F[1] (29,23) -> (31,23)
+Info:                          Sink u_cpu.alu_q_DFFRE_Q_17_D_LUT2_F_I1_LUT4_F_I3_ALU_SUM_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_SUM_LUT4_I0_F_LUT4_F.I1
+Info:                          Defined in:
+Info:                               /share/gowin/cells_map.v:130.20-130.21
+Info:      logic  1.10  11.60 Source u_cpu.alu_q_DFFRE_Q_17_D_LUT2_F_I1_LUT4_F_I3_ALU_SUM_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_SUM_LUT4_I0_F_LUT4_F.F
+Info:    routing  1.37  12.97 Net u_cpu.alu_q_DFFRE_Q_17_D_LUT2_F_I1_LUT4_F_I3_ALU_SUM_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_SUM_LUT4_I0_F[3] (31,23) -> (33,20)
+Info:                          Sink u_cpu.alu_q_DFFRE_Q_17_D_LUT2_F_I1_LUT4_F_I3_ALU_SUM_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_SUM_LUT4_I1_I3_LUT4_F_1.I3
+Info:                          Defined in:
+Info:                               /share/gowin/cells_map.v:130.20-130.21
+Info:      logic  0.62  13.59 Source u_cpu.alu_q_DFFRE_Q_17_D_LUT2_F_I1_LUT4_F_I3_ALU_SUM_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_SUM_LUT4_I1_I3_LUT4_F_1.F
+Info:    routing  1.60  15.19 Net u_cpu.alu_q_DFFRE_Q_17_D_LUT2_F_I1_LUT4_F_I3_ALU_SUM_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_SUM_LUT4_I1_I3[2] (33,20) -> (36,16)
+Info:                          Sink u_cpu.alu_q_DFFRE_Q_17_D_LUT2_F_I1_LUT4_F_I3_ALU_SUM_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_SUM_LUT4_I1.I2
+Info:                          Defined in:
+Info:                               /share/gowin/cells_map.v:130.20-130.21
+Info:      logic  0.82  16.02 Source u_cpu.alu_q_DFFRE_Q_17_D_LUT2_F_I1_LUT4_F_I3_ALU_SUM_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_SUM_LUT4_I1.F
+Info:    routing  1.45  17.47 Net u_cpu.alu_q_DFFRE_Q_17_D_LUT2_F_I1_LUT4_F_I3_ALU_SUM_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_COUT_ALU_CIN_SUM_LUT4_I1_F[3] (36,16) -> (35,20)
+Info:                          Sink cpu_dbg_pc_DFFRE_Q_8_D_LUT4_F_I3_LUT4_F_1.I3
+Info:                          Defined in:
+Info:                               /share/gowin/cells_map.v:130.20-130.21
+Info:      logic  0.62  18.09 Source cpu_dbg_pc_DFFRE_Q_8_D_LUT4_F_I3_LUT4_F_1.F
+Info:    routing  0.41  18.50 Net cpu_dbg_pc_DFFRE_Q_8_D_LUT4_F_I3[3] (35,20) -> (35,20)
+Info:                          Sink cpu_dbg_pc_DFFRE_Q_8_D_LUT4_F.I3
+Info:                          Defined in:
+Info:                               /share/gowin/cells_map.v:130.20-130.21
+Info:      logic  0.62  19.13 Source cpu_dbg_pc_DFFRE_Q_8_D_LUT4_F.F
+Info:    routing  0.00  19.13 Net cpu_dbg_pc_DFFRE_Q_8_D (35,20) -> (35,20)
+Info:                          Sink cpu_dbg_pc_DFFRE_Q_8.D
+Info:      setup  0.40  19.53 Source cpu_dbg_pc_DFFRE_Q_8.D
+Info: 8.45 ns logic, 11.08 ns routing
+
+Info: Max frequency for clock 'u_bus.clk': 51.21 MHz (PASS at 27.00 MHz)
+
+Info: Slack histogram:
+Info:  legend: * represents 14 endpoint(s)
+Info:          + represents [1,14) endpoint(s)
+Info: [ 17511,  18446) |*+
+Info: [ 18446,  19381) |+
+Info: [ 19381,  20316) | 
+Info: [ 20316,  21251) |**+
+Info: [ 21251,  22186) |*******+
+Info: [ 22186,  23121) |*****+
+Info: [ 23121,  24056) |**+
+Info: [ 24056,  24991) |+
+Info: [ 24991,  25926) |*+
+Info: [ 25926,  26861) |+
+Info: [ 26861,  27796) |**+
+Info: [ 27796,  28731) |******+
+Info: [ 28731,  29666) |****************+
+Info: [ 29666,  30601) |******+
+Info: [ 30601,  31536) |***********+
+Info: [ 31536,  32471) |*************************************+
+Info: [ 32471,  33406) |************************************************************ 
+Info: [ 33406,  34341) |***********************************************+
+Info: [ 34341,  35276) |***************************+
+Info: [ 35276,  36211) |***+
+
+Info: Program finished normally.
+PNR_EXIT=0

@@ -1,1 +1,4 @@
 # REV-01b rerun rev 54ad7b4 2026-11-04T13:29:44+00:00; Icarus Verilog version 12.0 (stable) ()
+tb_sc_lfsr8: TEST PASSED SIM_EXIT=0
+tb_sc_postproc: TEST PASSED SIM_EXIT=0
+tb_sc_lane_array: TEST PASSED SIM_EXIT=0
