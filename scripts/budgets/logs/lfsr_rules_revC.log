@@ -1,0 +1,34 @@
+# command: python3 scripts/budgets/lfsr_rules_revC.py
+# input revision: 7537c02-dirty; python 3.13.18
+# label: CALCULATION (exhaustive walk of the m-sequence)
+period from 0xACE1: 65535 -> MAXIMAL
+rev C formula == ARCHITECTURE.md 12 table: X True, W True
+rev C formula == INTERFACES.json rev C table: X True, W True
+rev B S(4096 i) == ARCHITECTURE.md 11 table: X True, W True
+S(32768) = 0xF9DE (spec: 0xF9DE); INTERFACES seed_w = 0xF9DE
+[rev C mode 2 (= rev A mode 2, candidate C0)]
+  X seeds: 0xACE1 0xE93B 0x2595 0x61EF 0x9E49 0xDAA3 0x16FD 0x5357
+  W seeds: 0x7A5C 0xA5C3 0xD12A 0xFC91 0x27F8 0x535F 0x7EC6 0xAA2D
+  min pairwise stream-cycle lag among 16 generators = 321 (X0-W3); next 541 (X4-X6)
+  X_i-W_i stream-cycle lags: 26829, 28145, 3406, 12607, 13583, 11304, 24748, 22808
+  R1 (no translated operand-pair streams): SATISFIED
+  R2 direct violations 0, swapped violations 0 -> SATISFIED
+[rev B mode 2 (candidate C1, superseded)]
+  X seeds: 0xACE1 0x357B 0x6F4D 0xEAD3 0x0348 0x70BC 0xB617 0xC223
+  W seeds: 0xF9DE 0x71EC 0xAA39 0x520B 0x9DB1 0xF251 0x5D8E 0x91AB
+  min pairwise stream-cycle lag among 16 generators = 512 (W0-W1); next 512 (W1-W2)
+  X_i-W_i stream-cycle lags: 4096, 4096, 4096, 4096, 4096, 4096, 4096, 4096
+  R1 (no translated operand-pair streams): VIOLATED on 28 of 28 lane pairs
+  R2 direct violations 28, swapped violations 36 -> VIOLATED
+[modes 0/1, rev B/C pair 0xACE1 / 0xF9DE]
+  X->W offset 32768 single steps = 4096 stream cycles; self-swap |2D| mod 65535 = 1 -> R2 VIOLATED (accepted, ADR-010 D-B); R1 not applicable (one pair)
+  (rev A pair 0xACE1 / 0x7A5C for reference: self-swap |2D| = 29481 -> R2 SATISFIED)
+stream cycles per inference (10 tiles x 2^K) vs state period 65535, bit-sequence wrap 8192, rev C min lag 321:
+  K= 4:    160 cycles = 0.002 state periods; no overlap
+  K= 5:    320 cycles = 0.005 state periods; no overlap
+  K= 6:    640 cycles = 0.010 state periods; > 321: lagged copies of other generators overlap in time (allowed by R1/R2)
+  K= 7:   1280 cycles = 0.020 state periods; > 321: lagged copies of other generators overlap in time (allowed by R1/R2)
+  K= 8:   2560 cycles = 0.039 state periods; > 321: lagged copies of other generators overlap in time (allowed by R1/R2)
+  K= 9:   5120 cycles = 0.078 state periods; > 321: lagged copies of other generators overlap in time (allowed by R1/R2)
+  K=10:  10240 cycles = 0.156 state periods; > 321: lagged copies of other generators overlap in time (allowed by R1/R2); > 8192: each generator re-uses its own bit sequence shifted by 1 bit (7-of-8 shared bits at lag 8192)
+ALL SELF-CHECKS PASSED

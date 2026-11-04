@@ -1,0 +1,48 @@
+# command: python3 scripts/budgets/achieved_vs_budget.py
+# input revision: 7537c02-dirty; python 3.13.18
+# budget = CALCULATION (BUDGETS.md issue 1); achieved = SIMULATION (tool / simulation logs); deviation = CALCULATION
+SoC nwl utilisation (seeds 1..3 identical): LUT4 5628, ALU 1976, DFF 2803, RAM16SDP4 16, BSRAM 5
+TPU stand-alone nwl: IL8 m2 4572 LUT4 / 2669 DFF; IL8 m1 4461 / 2445; IL4 m1 3542; IL16 m1 6322 LUT4 (wrapper ~100 LUT / ~100 FF, ASSUMPTION)
+CPU in-context (core + RAM wrapper): 957 LUT4 / 126 DFF
+Fmax SoC nwl seeds [51.98, 47.46, 51.21]; CPU [62.46, 53.26, 55.74]; TPU IL8 m2 nwl [64.28, 64.24, 60.43] MHz
+CYCLES(K=8) = 2928 = 10*2^8 + 368 (SIMULATION, tb_sc_tpu_mode2 D8; all K in RTL-TPU)
+SoC demo: START->RESULT read 2948 cycles, BUSY 2928, CPU-side overhead 20 cycles (no input loading in the demo); first fetch at cycle 31
+CPU aggregate CPI (0 wait states, 44 tests): 28206 / 6667 = 4.231 (budget ASSUMPTION 'CPI ~4-6', BUDGETS 3: inside the range)
+SoC demo CPI = (5441 - 31 CLEAR) / 981 = 5.51
+
+| name | budget (CALC) | achieved (SIM) | unit | deviation % | flag | note |
+|---|---|---|---|---|---|---|
+| SoC LUT4 vs issue-1 baseline (mode 1, LUT-RAM regfile) | 5735 | 5628 | LUT4 | -1.9 |  |  |
+| SoC DFF vs issue-1 baseline | 2489 | 2803 | FF | +12.6 | >10% |  |
+| SoC LUT4 vs as-built-config budget (5735+112-256) | 5591 | 5628 | LUT4 | +0.7 |  |  |
+| SoC DFF vs as-built-config budget (2489+224) | 2713 | 2803 | FF | +3.3 |  |  |
+| SoC RAM16SDP4 vs as-built-config budget (56-32) | 24 | 16 | cell | -33.3 | >10% | SCORE (8 cells) implemented in FFs instead of LUT-RAM |
+| SoC BSRAM vs issue-1 baseline | 3 | 5 | block | +66.7 | >10% | regfile option taken (+2) |
+| SoC BSRAM vs as-built-config budget (3+2) | 5 | 5 | block | +0.0 |  |  |
+| SoC LUT4 vs issue-1 worst case | 6703 | 5628 | LUT4 | -16.0 | >10% | below worst case |
+| TPU LUT4 (mode 2) minus wrapper vs budget 2830+790+112 | 3732 | 4472 | LUT4 | +19.8 | >10% |  |
+| TPU DFF (mode 2) minus wrapper vs budget 1409+347+224 | 1980 | 2569 | FF | +29.7 | >10% |  |
+| TPU-other LUT4 (TPU - array 2830 - mode-2 112 - wrapper) vs 790 | 790 | 1530 | LUT4 | +93.7 | >10% | array share taken from the bench: attribution ASSUMPTION |
+| RNG mode 1->2 delta LUT4 (nwl) | 112 | 111 | LUT4 | -0.9 |  |  |
+| RNG mode 1->2 delta DFF (nwl) | 224 | 224 | FF | +0.0 |  |  |
+| IL 8->4 delta LUT4 (nwl, mode 1) | -1408 | -919 | LUT4 | -34.7 | >10% |  |
+| IL 8->16 delta LUT4 (nwl, mode 1) | 2426 | 1861 | LUT4 | -23.3 | >10% | IL16: no legal placement |
+| CPU LUT4 in-context vs proxy budget 1940 | 1940 | 957 | LUT4 | -50.7 | >10% |  |
+| CPU DFF in-context vs proxy budget 600 | 600 | 126 | FF | -79.0 | >10% |  |
+| SoC worst-seed Fmax vs budget min over paths (P1 52.12) | 52.12 | 47.46 | MHz | -8.9 |  | critical path moved from P1 (SC MAC) to P3 (CPU) |
+| P1 SC MAC path delay (TPU alone, worst seed) vs 19.19 ns | 19.19 | 16.55 | ns | -13.8 | >10% |  |
+| P3 CPU path delay (CPU alone, worst seed) vs 10.95 ns | 10.95 | 18.78 | ns | +71.5 | >10% |  |
+| P3 CPU path delay (in SoC, worst seed) vs 10.95 ns | 10.95 | 21.07 | ns | +92.4 | >10% |  |
+| CYCLES K=4 (10*2^K+368 vs 10*2^K+409) | 569 | 528 | cycles | -7.2 |  |  |
+| CYCLES K=8 (10*2^K+368 vs 10*2^K+409) | 2969 | 2928 | cycles | -1.4 |  |  |
+| CYCLES K=10 (10*2^K+368 vs 10*2^K+409) | 10649 | 10608 | cycles | -0.4 |  |  |
+| fixed overhead per inference (const term) | 409 | 368 | cycles | -10.0 | >10% | argmax/start/done folded into post-processing; tile load 33 not 36 |
+| throughput K=8 | 9094 | 9221 | inf/s | +1.4 |  |  |
+| accuracy K=8 mode 0 (prelim rev A -> rev C) | 65.56 | 81.94 | % | +25.0 | >10% |  |
+| accuracy K=8 mode 1 (prelim rev A -> rev C) | 91.11 | 89.17 | % | -2.1 |  |  |
+| accuracy K=8 mode 2 (prelim rev A -> rev C) | 94.44 | 94.44 | % | +0.0 |  |  |
+| EV accuracy | 95 | 95 | % | +0.0 |  |  |
+| layer-1 SC noise K=8 mode 2, ensemble RMS vs bound sqrt(64/256) | 0.5 | 0.4887 | v | -2.3 |  |  |
+| layer-1 SC noise K=8 mode 2, deployed seeds vs bound | 0.5 | 0.3528 | v | -29.4 | >10% |  |
+| layer-2 SC noise K=8 mode 2 (lanes 0..9), ensemble vs bound sqrt(16/256) | 0.25 | 0.1912 | v | -23.5 | >10% |  |
+| layer-2 SC noise K=8 mode 2 (lanes 0..9), deployed vs bound | 0.25 | 0.1982 | v | -20.7 | >10% |  |

@@ -130,3 +130,11 @@ now justified by an explicit rule and validation evidence instead of by accident
   listed as a limitation.
 - Synthesis flow fixed to `synth_gowin -nowidelut` (5628 vs 6130 LUT4, worst Fmax
   47.46 vs 42.80 MHz, SIMULATION of P&R, 3 seeds).
+
+## ADR-012 — Rulings on REQ-02 open decisions
+- OD-R2-1: REQ-SYS-007 slave response <= 4 cycles in general; exception: TPU reads/
+  writes of INPUT/BIAS/WEIGHT while the TPU is loading a tile may take <= 40 cycles
+  (measured max 35, SIMULATION). The bus has no timeout, so this affects only latency.
+  To be applied to REQUIREMENTS.md by the systems-engineer in the status-matrix step.
+- OD-11: accuracy thresholds of REQ-AI-003..006 confirmed as written in REQ-01/REQ-02.
+- OD-16: network access to vendor hosts remains a user decision (GATES.md).
