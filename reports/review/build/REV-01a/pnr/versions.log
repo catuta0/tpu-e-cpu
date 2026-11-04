@@ -3,3 +3,4 @@ Yosys 0.70 (git sha1 28ba3cb92, Release, Clang /workspace/YoWASP/yosys/wasi-sdk-
 "yowasp-nextpnr-himbaechel-gowin" -- Next Generation Place and Route (Version nextpnr-0.11.1)
 SYNTH done 2026-11-04T13:22:43+00:00
 PNR s1 done 2026-11-04T13:26:15+00:00
+PNR s2 done 2026-11-04T13:29:27+00:00

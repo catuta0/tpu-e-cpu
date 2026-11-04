@@ -891,7 +891,7 @@ the CPU: instruction register, decoder and next-state logic, ALU operand
 selection, the 32-bit carry chain and the program counter. The SC-TPU alone
 reaches 60.43\,MHz.
 % evidence: reports/fpga/soc/soc_impl.md (Fmax per seed, critical path); reports/fpga/soc/critical_path_nwl.txt; requirements/BUDGETS.md sec. 5 (P3 vs P1); reports/fpga/tpu/variants.md (il8_m2_nwl worst 60.43 MHz)
-Of the geometry variants, $\IL=4$ fits easily but doubles the latency, while
+Of the geometry variants, $\IL=4$ fits easily but needs 1.9 times the cycles (5498 at $K=8$), while
 $\IL=16$ (73--77\,\% LUT4, carry-heavy) found no legal placement on any
 attempted seed, which shows that the practical placement limit for such a
 design can lie below the 85\,\% rule.

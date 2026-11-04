@@ -1,0 +1,16 @@
+# DOC-02 engineering report build, input rev fab802e (HEAD now 54ad7b4; evidence files unchanged since fab802e: git diff fab802e HEAD touches only DOC-02 outputs, reviewer build tree, management/EXECUTION_METRICS.md, scripts/make_release.sh)
+# cmd: cd reports/engineering && latexmk -C && latexmk -pdf -interaction=nonstopmode -halt-on-error main.tex
+LATEXMK_EXIT=0
+Output written on main.pdf (16 pages, 604532 bytes).
+# grep undefined/Overfull/Error/Warning in main.log:
+none
+# Underfull (informational): 1
+Pages:           16
+Page size:       595.276 x 841.89 pts (A4)
+# printed placeholder check (pending G4 / Pending review):
+160:Requirement status matrix: pending G4.
+1907:Pending. The independent review REV-01 (reports/review/REVIEW_A_cpu_soc.md for CPU
+11d9a9efd70bfbd4be71d4d5dac0e67760349e139fe2c76c3bed6061a68a2a93  main.tex
+4929ecbcdcac833e9456138dcb4b8c15e0a56ec8f2100cf6b1d823092baa54dd  status_matrix.tex
+8847e531d504a6e975a84b3c73fea470ce6628a68e247e0c319967499cdd2700  main.pdf
+b579a181ab4f901fc9fae1c26e84452949c0a33bafaa62424e4d0d9f352e458f  MANUAL.md

@@ -1,5 +1,5 @@
 # Fdb version 4
-["pdflatex"] 1793798828.58858 "main.tex" "main.pdf" "main" 1793798829.25659 0
+["pdflatex"] 1793798943.57372 "main.tex" "main.pdf" "main" 1793798944.13907 0
   "../figures/article_acc_vs_k.pdf" 1793798078.84747 38894 763c44961da2f21cc69f4f1f7aaa78cc ""
   "../figures/article_revBC.pdf" 1793798079.58747 19723 5f30bf35b9c83eb7f64f8526c9bf21fe ""
   "../figures/article_rms_vs_k.pdf" 1793798079.32347 33636 7c7874205333cf6bc351da1552c20242 ""
@@ -159,10 +159,10 @@
   "/usr/share/texmf/web2c/texmf.cnf" 1707919699 40399 f2c302f7d2af602abb742093540a5834 ""
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1793760646.62886 128028 f533b797fba58d231669ea19e894e23e ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1793760666 6800791 acb8ec7db04bc2f5d035a9ab7b393943 ""
-  "main.aux" 1793798829.15951 16308 d90289b55f7d4d2a94a214186560d1d3 "pdflatex"
-  "main.out" 1793798829.15951 6012 1dc390890626c12567c411a26c61ac06 "pdflatex"
+  "main.aux" 1793798944.03152 16308 d90289b55f7d4d2a94a214186560d1d3 "pdflatex"
+  "main.out" 1793798944.03152 6012 1dc390890626c12567c411a26c61ac06 "pdflatex"
   "main.tex" 1793798828.48124 65124 4426af16e21d74917247c8bdf1b9db78 ""
-  "main.toc" 1793798829.15951 3171 60f43e1dcd97e6789f5be583510efade "pdflatex"
+  "main.toc" 1793798944.03152 3171 60f43e1dcd97e6789f5be583510efade "pdflatex"
   "status_matrix.tex" 1793798481.38902 1118 78c110a6e0516507f8461bdb7a54dbd4 ""
   (generated)
   "main.aux"

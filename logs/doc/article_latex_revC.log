@@ -1,17 +1,15 @@
-# DOC-02 article build, input rev fab802e (HEAD now 99ee941-dirty; only management/EXECUTION_METRICS.md, scripts/make_release.sh changed since fab802e)
+# DOC-02 article build (final), input rev fab802e (HEAD now 54ad7b4; evidence files unchanged since fab802e)
 # cmd: cd reports/article && latexmk -C && latexmk -pdf -interaction=nonstopmode -halt-on-error main.tex
 LATEXMK_EXIT=0
-Latexmk, John Collins, 31 Jan. 2024. Version 4.83
-Output written on main.pdf (8 pages, 420177 bytes).
+Output written on main.pdf (8 pages, 420211 bytes).
 # grep undefined/Overfull/Error/Warning in main.log:
 none
-# Underfull (informational):
-5
+# Underfull (informational): 5
+# BibTeX warnings: 0
 bibitems: 18
 Pages:           8
 Page size:       612 x 792 pts (letter)
-# TBD markers printed:
-0
-8f1f54fc931f1cbd120d796720a535f259b053ef296fad67b5f4d50c512170f7  main.tex
-2003e0786421913c93e1be2c9b331fd5b172010456b15cf1b7290134703749d4  main.pdf
+# TBD markers printed: 0
+649a542f05c7a091d7366e23fbbeaa847a77ab95866a4aae4a4dee7f3f9b6753  main.tex
+a94ec8e986494341d34df50537712286d7bf63fc9622e4f4129a7c31f1721a64  main.pdf
 619768f52e8aaf438cfa6cbab4d922a61d14b74dd3d0697496c7241c3efdf72f  refs.bib
